@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 Statistical Reasoning | Statistical Thinking</title>
+  <meta name="description" content="Statistical reasoning from an elementary point of view" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 Statistical Reasoning | Statistical Thinking" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Statistical reasoning from an elementary point of view" />
+  <meta name="github-repo" content="wgfoote/book-stat-thinking" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 Statistical Reasoning | Statistical Thinking" />
+  
+  <meta name="twitter:description" content="Statistical reasoning from an elementary point of view" />
+  
+
+<meta name="author" content="Bill Foote" />
+
+
+<meta name="date" content="2020-08-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="the-many-faces-of-data.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="libs/vis-4.20.1/vis.css" rel="stylesheet" />
+<script src="libs/vis-4.20.1/vis.min.js"></script>
+<script src="libs/visNetwork-binding-2.0.9/visNetwork.js"></script>
+<link href="libs/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<script src="libs/plotly-binding-4.9.2/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<script src="libs/viz-0.3/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.1/grViz.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Statistical Thinking</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preliminaries</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#the-basic-problem"><i class="fa fa-check"></i><b>1.1</b> The basic problem</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#analytics"><i class="fa fa-check"></i><b>1.2</b> Analytics</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#readiness-for-statistical-thinking"><i class="fa fa-check"></i><b>1.3</b> Readiness for statistical thinking</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#solve-this-riddle"><i class="fa fa-check"></i><b>1.3.1</b> Solve this riddle</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#join-these-sets"><i class="fa fa-check"></i><b>1.3.2</b> Join these sets</a></li>
+<li class="chapter" data-level="1.3.3" data-path="index.html"><a href="index.html#partition-this-board"><i class="fa fa-check"></i><b>1.3.3</b> Partition this board</a></li>
+<li class="chapter" data-level="1.3.4" data-path="index.html"><a href="index.html#calculate-this-expression"><i class="fa fa-check"></i><b>1.3.4</b> Calculate this expression</a></li>
+<li class="chapter" data-level="1.3.5" data-path="index.html"><a href="index.html#solve-this-equation"><i class="fa fa-check"></i><b>1.3.5</b> Solve this equation</a></li>
+<li class="chapter" data-level="1.3.6" data-path="index.html"><a href="index.html#summation-calculations"><i class="fa fa-check"></i><b>1.3.6</b> Summation calculations</a></li>
+<li class="chapter" data-level="1.3.7" data-path="index.html"><a href="index.html#weighted-average"><i class="fa fa-check"></i><b>1.3.7</b> Weighted average</a></li>
+<li class="chapter" data-level="1.3.8" data-path="index.html"><a href="index.html#linear-coefficients"><i class="fa fa-check"></i><b>1.3.8</b> Linear coefficients</a></li>
+<li class="chapter" data-level="1.3.9" data-path="index.html"><a href="index.html#linear-simultaneous-equations"><i class="fa fa-check"></i><b>1.3.9</b> Linear simultaneous equations</a></li>
+<li class="chapter" data-level="1.3.10" data-path="index.html"><a href="index.html#elasticity-a-little-light-calculus"><i class="fa fa-check"></i><b>1.3.10</b> Elasticity: a little light calculus</a></li>
+<li class="chapter" data-level="1.3.11" data-path="index.html"><a href="index.html#area-under-a-curve"><i class="fa fa-check"></i><b>1.3.11</b> Area under a curve</a></li>
+<li class="chapter" data-level="1.3.12" data-path="index.html"><a href="index.html#next-steps"><i class="fa fa-check"></i><b>1.3.12</b> Next steps?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#chapter-outline"><i class="fa fa-check"></i><b>1.4</b> Chapter outline</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html"><i class="fa fa-check"></i><b>2</b> Statistical Reasoning</a><ul>
+<li class="chapter" data-level="2.1" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#welcome-to-statistical-reasoning"><i class="fa fa-check"></i><b>2.1</b> Welcome to Statistical Reasoning</a></li>
+<li class="chapter" data-level="2.2" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#why-do-we-reason-statistically"><i class="fa fa-check"></i><b>2.2</b> Why do we reason statistically?</a></li>
+<li class="chapter" data-level="2.3" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#what-is-statistical-reasoning"><i class="fa fa-check"></i><b>2.3</b> What is statistical reasoning?</a></li>
+<li class="chapter" data-level="2.4" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#lets-learn-some-more-from-this-example"><i class="fa fa-check"></i><b>2.4</b> Let’s learn some more from this example:</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#why"><i class="fa fa-check"></i><b>2.4.1</b> Why?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#digging-deeper"><i class="fa fa-check"></i><b>2.5</b> Digging deeper</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#learn-by-doing-this"><i class="fa fa-check"></i><b>2.5.1</b> Learn by doing this</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#what-is-the-conceptual-framework-of-statistical-reasoning"><i class="fa fa-check"></i><b>2.6</b> What is the conceptual framework of statistical reasoning?</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#learn-by-doing"><i class="fa fa-check"></i><b>2.6.1</b> Learn by doing</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#infer"><i class="fa fa-check"></i><b>2.7</b> Infer</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#deductive-reasoning-conclusion-guaranteed"><i class="fa fa-check"></i><b>2.7.1</b> Deductive reasoning: conclusion guaranteed</a></li>
+<li class="chapter" data-level="2.7.2" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#inductive-reasoning-comclusion-not-guaranteed"><i class="fa fa-check"></i><b>2.7.2</b> Inductive reasoning: comclusion not guaranteed</a></li>
+<li class="chapter" data-level="2.7.3" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#abductive-reasoning-taking-your-best-shot"><i class="fa fa-check"></i><b>2.7.3</b> Abductive reasoning: taking your best shot</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#critical-thinking"><i class="fa fa-check"></i><b>2.8</b> Critical thinking</a></li>
+<li class="chapter" data-level="2.9" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#try-this"><i class="fa fa-check"></i><b>2.9</b> Try this</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html"><i class="fa fa-check"></i><b>3</b> The many faces of data</a><ul>
+<li class="chapter" data-level="3.1" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#learning-outomes"><i class="fa fa-check"></i><b>3.1</b> Learning outomes</a></li>
+<li class="chapter" data-level="3.2" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#march-on"><i class="fa fa-check"></i><b>3.2</b> March on</a></li>
+<li class="chapter" data-level="3.3" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#air-pollution-and-birth-outcomes"><i class="fa fa-check"></i><b>3.3</b> Air pollution and birth outcomes</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#classifying-data-types"><i class="fa fa-check"></i><b>3.3.1</b> Classifying data types</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#something-a-bit-more-complicated"><i class="fa fa-check"></i><b>3.4</b> Something a bit more complicated</a></li>
+<li class="chapter" data-level="3.5" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#what-have-we-learned"><i class="fa fa-check"></i><b>3.5</b> What have we learned?</a></li>
+<li class="chapter" data-level="3.6" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#review-these-scenarios"><i class="fa fa-check"></i><b>3.6</b> Review these scenarios</a></li>
+<li class="chapter" data-level="3.7" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#try-this-1"><i class="fa fa-check"></i><b>3.7</b> Try this</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html"><i class="fa fa-check"></i><b>4</b> First Steps in Exploring Data</a><ul>
+<li class="chapter" data-level="4.1" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#learning-objectives"><i class="fa fa-check"></i><b>4.1</b> Learning objectives</a></li>
+<li class="chapter" data-level="4.2" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#business-context"><i class="fa fa-check"></i><b>4.2</b> Business context</a></li>
+<li class="chapter" data-level="4.3" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#bullets"><i class="fa fa-check"></i><b>4.3</b> Bullets</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#what-did-we-do"><i class="fa fa-check"></i><b>4.3.1</b> What did we do?</a></li>
+<li class="chapter" data-level="4.3.2" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#what-can-we-say"><i class="fa fa-check"></i><b>4.3.2</b> What can we say?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#incidents-and-accidents"><i class="fa fa-check"></i><b>4.4</b> Incidents and accidents</a></li>
+<li class="chapter" data-level="4.5" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#where-do-we-go-from-here"><i class="fa fa-check"></i><b>4.5</b> Where do we go from here?</a></li>
+<li class="chapter" data-level="4.6" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#resources"><i class="fa fa-check"></i><b>4.6</b> Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="tendency.html"><a href="tendency.html"><i class="fa fa-check"></i><b>5</b> Tendency</a><ul>
+<li class="chapter" data-level="5.1" data-path="tendency.html"><a href="tendency.html#learning-outcomes"><i class="fa fa-check"></i><b>5.1</b> Learning outcomes</a></li>
+<li class="chapter" data-level="5.2" data-path="tendency.html"><a href="tendency.html#the-best-we-have"><i class="fa fa-check"></i><b>5.2</b> The best we have</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="tendency.html"><a href="tendency.html#square-those-errors"><i class="fa fa-check"></i><b>5.2.1</b> Square those errors</a></li>
+<li class="chapter" data-level="5.2.2" data-path="tendency.html"><a href="tendency.html#absolutely"><i class="fa fa-check"></i><b>5.2.2</b> Absolutely!</a></li>
+<li class="chapter" data-level="5.2.3" data-path="tendency.html"><a href="tendency.html#quantiles-anyone"><i class="fa fa-check"></i><b>5.2.3</b> Quantiles anyone?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="tendency.html"><a href="tendency.html#procedures"><i class="fa fa-check"></i><b>5.3</b> Procedures</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="tendency.html"><a href="tendency.html#mean"><i class="fa fa-check"></i><b>5.3.1</b> Mean</a></li>
+<li class="chapter" data-level="5.3.2" data-path="tendency.html"><a href="tendency.html#median"><i class="fa fa-check"></i><b>5.3.2</b> Median</a></li>
+<li class="chapter" data-level="5.3.3" data-path="tendency.html"><a href="tendency.html#mode"><i class="fa fa-check"></i><b>5.3.3</b> Mode</a></li>
+<li class="chapter" data-level="5.3.4" data-path="tendency.html"><a href="tendency.html#percentile-and-quantile"><i class="fa fa-check"></i><b>5.3.4</b> Percentile and quantile</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="tendency.html"><a href="tendency.html#always-problems"><i class="fa fa-check"></i><b>5.4</b> Always problems</a></li>
+<li class="chapter" data-level="5.5" data-path="tendency.html"><a href="tendency.html#visualizing-with-tukeys-box"><i class="fa fa-check"></i><b>5.5</b> Visualizing with Tukey’s box</a></li>
+<li class="chapter" data-level="5.6" data-path="tendency.html"><a href="tendency.html#what-have-we-gotten-to-so-far"><i class="fa fa-check"></i><b>5.6</b> What have we gotten to so far?</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="deviation.html"><a href="deviation.html"><i class="fa fa-check"></i><b>6</b> Deviation</a><ul>
+<li class="chapter" data-level="6.1" data-path="deviation.html"><a href="deviation.html#learning-outcomes-1"><i class="fa fa-check"></i><b>6.1</b> Learning outcomes</a></li>
+<li class="chapter" data-level="6.2" data-path="deviation.html"><a href="deviation.html#rev-up-the-deuce"><i class="fa fa-check"></i><b>6.2</b> Rev up the deuce</a></li>
+<li class="chapter" data-level="6.3" data-path="deviation.html"><a href="deviation.html#blinded-by-the-light"><i class="fa fa-check"></i><b>6.3</b> Blinded by the light</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="deviation.html"><a href="deviation.html#whats-a-sample-again"><i class="fa fa-check"></i><b>6.3.1</b> What’s a sample? (again)</a></li>
+<li class="chapter" data-level="6.3.2" data-path="deviation.html"><a href="deviation.html#standard-deviation"><i class="fa fa-check"></i><b>6.3.2</b> 1. Standard deviation</a></li>
+<li class="chapter" data-level="6.3.3" data-path="deviation.html"><a href="deviation.html#robust-measures"><i class="fa fa-check"></i><b>6.3.3</b> 2. Robust measures</a></li>
+<li class="chapter" data-level="6.3.4" data-path="deviation.html"><a href="deviation.html#correlation"><i class="fa fa-check"></i><b>6.3.4</b> 3. Correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="deviation.html"><a href="deviation.html#the-tails-have-it"><i class="fa fa-check"></i><b>6.4</b> The tails have it!</a></li>
+<li class="chapter" data-level="6.5" data-path="deviation.html"><a href="deviation.html#how-can-we-use-all-of-this"><i class="fa fa-check"></i><b>6.5</b> How can we use all of this?</a></li>
+<li class="chapter" data-level="6.6" data-path="deviation.html"><a href="deviation.html#problems-always-problems"><i class="fa fa-check"></i><b>6.6</b> Problems, always problems</a></li>
+<li class="chapter" data-level="6.7" data-path="deviation.html"><a href="deviation.html#what-have-we-learned-1"><i class="fa fa-check"></i><b>6.7</b> What have we learned?</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="binomial-distribution.html"><a href="binomial-distribution.html"><i class="fa fa-check"></i><b>7</b> Binomial Distribution</a><ul>
+<li class="chapter" data-level="7.1" data-path="binomial-distribution.html"><a href="binomial-distribution.html#what-is-a-probability-distribution"><i class="fa fa-check"></i><b>7.1</b> What is a probability distribution?</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="binomial-distribution.html"><a href="binomial-distribution.html#discrete-or-continuous"><i class="fa fa-check"></i><b>7.1.1</b> Discrete or continuous?</a></li>
+<li class="chapter" data-level="7.1.2" data-path="binomial-distribution.html"><a href="binomial-distribution.html#examples-of-distributions"><i class="fa fa-check"></i><b>7.1.2</b> Examples of distributions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="imagine-this.html"><a href="imagine-this.html"><i class="fa fa-check"></i><b>8</b> Imagine this</a></li>
+<li class="chapter" data-level="9" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html"><i class="fa fa-check"></i><b>9</b> What’s a binomial?</a><ul>
+<li class="chapter" data-level="9.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#then-there-were-two"><i class="fa fa-check"></i><b>9.1</b> Then there were two</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#how-often"><i class="fa fa-check"></i><b>9.1.1</b> How often?</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#being-binomial"><i class="fa fa-check"></i><b>9.2</b> Being binomial</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#consumer-goods-r-us"><i class="fa fa-check"></i><b>9.2.1</b> Consumer goods ‘r’ us</a></li>
+<li class="chapter" data-level="9.2.2" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#whats-a-binomial-1"><i class="fa fa-check"></i><b>9.2.2</b> What’s a binomial?</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#whats-a-combination"><i class="fa fa-check"></i><b>9.3</b> What’s a combination?</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#for-a-simple-example"><i class="fa fa-check"></i><b>9.3.1</b> For a simple example</a></li>
+<li class="chapter" data-level="9.3.2" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#we-have-to-start-with-permutation-first"><i class="fa fa-check"></i><b>9.3.2</b> We have to start with permutation first</a></li>
+<li class="chapter" data-level="9.3.3" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#start-with-a-abcde-letters-in-a-text-to-your-friend."><i class="fa fa-check"></i><b>9.3.3</b> Start with <span class="math inline">\(A = \{a,b,c,d,e\}\)</span> letters in a text to your friend.</a></li>
+<li class="chapter" data-level="9.3.4" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#find-the-number-of-3-letter-words-you-can-form-from-a-list-of-5-letters."><i class="fa fa-check"></i><b>9.3.4</b> Find the number of 3 letter words you can form from a list of 5 letters.</a></li>
+<li class="chapter" data-level="9.3.5" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#what-about-combinations"><i class="fa fa-check"></i><b>9.3.5</b> What about combinations?</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#combinations-from-permutations"><i class="fa fa-check"></i><b>9.4</b> Combinations from permutations</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#try-these-combinations-and-permutations"><i class="fa fa-check"></i><b>9.4.1</b> Try these: combinations and permutations</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#so-how-do-we-use-the-binomial-process"><i class="fa fa-check"></i><b>9.5</b> So how do we use the binomial process?</a></li>
+<li class="chapter" data-level="9.6" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#try-this-binomial-distribution"><i class="fa fa-check"></i><b>9.6</b> Try this: binomial distribution</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#try-another"><i class="fa fa-check"></i><b>9.6.1</b> Try another</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#what-does-a-graph-of-the-binomial-look-like"><i class="fa fa-check"></i><b>9.7</b> What does a graph of the binomial look like?</a></li>
+<li class="chapter" data-level="9.8" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#binomial-statistics"><i class="fa fa-check"></i><b>9.8</b> Binomial statistics</a><ul>
+<li class="chapter" data-level="9.8.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#try-this-2"><i class="fa fa-check"></i><b>9.8.1</b> Try this</a></li>
+</ul></li>
+<li class="chapter" data-level="9.9" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#short-exercises"><i class="fa fa-check"></i><b>9.9</b> Short exercises</a></li>
+<li class="chapter" data-level="9.10" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#binomial-barrels"><i class="fa fa-check"></i><b>9.10</b> Binomial barrels</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="poisson-distribution.html"><a href="poisson-distribution.html"><i class="fa fa-check"></i><b>10</b> Poisson Distribution</a><ul>
+<li class="chapter" data-level="10.1" data-path="poisson-distribution.html"><a href="poisson-distribution.html#imagine-this-1"><i class="fa fa-check"></i><b>10.1</b> Imagine this</a></li>
+<li class="chapter" data-level="10.2" data-path="poisson-distribution.html"><a href="poisson-distribution.html#lets-calculate"><i class="fa fa-check"></i><b>10.2</b> Let’s calculate</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="poisson-distribution.html"><a href="poisson-distribution.html#try-this-3"><i class="fa fa-check"></i><b>10.2.1</b> Try this</a></li>
+<li class="chapter" data-level="10.2.2" data-path="poisson-distribution.html"><a href="poisson-distribution.html#results"><i class="fa fa-check"></i><b>10.2.2</b> Results</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="poisson-distribution.html"><a href="poisson-distribution.html#some-mercifully-short-exercises"><i class="fa fa-check"></i><b>10.3</b> Some (mercifully) short exercises</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="poisson-distribution.html"><a href="poisson-distribution.html#not-so-short-exercises"><i class="fa fa-check"></i><b>10.3.1</b> Not so short exercises</a></li>
+<li class="chapter" data-level="10.3.2" data-path="poisson-distribution.html"><a href="poisson-distribution.html#answers"><i class="fa fa-check"></i><b>10.3.2</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html"><i class="fa fa-check"></i><b>11</b> How likely is that?</a><ul>
+<li class="chapter" data-level="11.1" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#learning-outcomes-2"><i class="fa fa-check"></i><b>11.1</b> Learning outcomes</a></li>
+<li class="chapter" data-level="11.2" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#invitation-to-a-formal"><i class="fa fa-check"></i><b>11.2</b> Invitation to a formal</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#a-bit-of-english"><i class="fa fa-check"></i><b>11.2.1</b> A bit of English</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#dress-down-a-bit"><i class="fa fa-check"></i><b>11.3</b> Dress down a bit</a></li>
+<li class="chapter" data-level="11.4" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#try-another-1"><i class="fa fa-check"></i><b>11.4</b> Try another</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#what-does-the-event-space-look-like"><i class="fa fa-check"></i><b>11.4.1</b> What does the event space look like?</a></li>
+<li class="chapter" data-level="11.4.2" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#what-is"><i class="fa fa-check"></i><b>11.4.2</b> What is…</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#law-of-conditional-probability-bayes"><i class="fa fa-check"></i><b>11.5</b> Law of Conditional Probability (Bayes)</a></li>
+<li class="chapter" data-level="11.6" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#practice-1"><i class="fa fa-check"></i><b>11.6</b> Practice 1</a></li>
+<li class="chapter" data-level="11.7" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#practice-2"><i class="fa fa-check"></i><b>11.7</b> Practice 2</a></li>
+<li class="chapter" data-level="11.8" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#nothing-is-random"><i class="fa fa-check"></i><b>11.8</b> Nothing is random!</a><ul>
+<li class="chapter" data-level="11.8.1" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#suppose-20-of-the-people-in-a-city-prefer-pepsi-cola-as-their-soft-drink-of-choice."><i class="fa fa-check"></i><b>11.8.1</b> Suppose 20% of the people in a city prefer Pepsi-Cola as their soft drink of choice.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="confidence-intervals.html"><a href="confidence-intervals.html"><i class="fa fa-check"></i><b>12</b> Confidence Intervals</a><ul>
+<li class="chapter" data-level="12.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#imagine-this-2"><i class="fa fa-check"></i><b>12.1</b> Imagine this…</a></li>
+<li class="chapter" data-level="12.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#objectives"><i class="fa fa-check"></i><b>12.2</b> Objectives</a></li>
+<li class="chapter" data-level="12.3" data-path="confidence-intervals.html"><a href="confidence-intervals.html#try-this-4"><i class="fa fa-check"></i><b>12.3</b> Try this</a></li>
+<li class="chapter" data-level="12.4" data-path="confidence-intervals.html"><a href="confidence-intervals.html#what-about-the-sample-standard-deviation"><i class="fa fa-check"></i><b>12.4</b> What about the sample standard deviation?</a></li>
+<li class="chapter" data-level="12.5" data-path="confidence-intervals.html"><a href="confidence-intervals.html#explore-a-bit-further"><i class="fa fa-check"></i><b>12.5</b> Explore a bit further</a></li>
+<li class="chapter" data-level="12.6" data-path="confidence-intervals.html"><a href="confidence-intervals.html#confidence-interval-1-known-population-standard-deviation"><i class="fa fa-check"></i><b>12.6</b> Confidence interval ##1: known population standard deviation</a></li>
+<li class="chapter" data-level="12.7" data-path="confidence-intervals.html"><a href="confidence-intervals.html#our-procedure"><i class="fa fa-check"></i><b>12.7</b> Our procedure</a></li>
+<li class="chapter" data-level="12.8" data-path="confidence-intervals.html"><a href="confidence-intervals.html#on-to-the-unknown"><i class="fa fa-check"></i><b>12.8</b> On to the unknown</a></li>
+<li class="chapter" data-level="12.9" data-path="confidence-intervals.html"><a href="confidence-intervals.html#by-the-way-who-is-student"><i class="fa fa-check"></i><b>12.9</b> By the way, who is Student?</a></li>
+<li class="chapter" data-level="12.10" data-path="confidence-intervals.html"><a href="confidence-intervals.html#our-procedure-1"><i class="fa fa-check"></i><b>12.10</b> Our procedure</a></li>
+<li class="chapter" data-level="12.11" data-path="confidence-intervals.html"><a href="confidence-intervals.html#exercises"><i class="fa fa-check"></i><b>12.11</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html"><i class="fa fa-check"></i><b>13</b> More Inference: Hypothesis Testing</a><ul>
+<li class="chapter" data-level="13.1" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#imagine-this-3"><i class="fa fa-check"></i><b>13.1</b> Imagine this</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#two-errors-are-possible"><i class="fa fa-check"></i><b>13.1.1</b> Two errors are possible</a></li>
+<li class="chapter" data-level="13.1.2" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#control-is-probability"><i class="fa fa-check"></i><b>13.1.2</b> Control is probability</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#on-to-the-unknown-1"><i class="fa fa-check"></i><b>13.2</b> On to the unknown</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#by-the-way-who-is-student-1"><i class="fa fa-check"></i><b>13.2.1</b> By the way, who is Student?</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#on-with-our-story"><i class="fa fa-check"></i><b>13.3</b> On with our story…</a></li>
+<li class="chapter" data-level="13.4" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#what-about-two-shifts"><i class="fa fa-check"></i><b>13.4</b> What about two shifts?</a></li>
+<li class="chapter" data-level="13.5" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#exercises-1"><i class="fa fa-check"></i><b>13.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>14</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="14.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#the-perfect-relationship"><i class="fa fa-check"></i><b>14.1</b> The perfect relationship</a></li>
+<li class="chapter" data-level="14.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#linear-regression"><i class="fa fa-check"></i><b>14.2</b> Linear regression</a></li>
+<li class="chapter" data-level="14.3" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#ordinary-least-squares"><i class="fa fa-check"></i><b>14.3</b> Ordinary least squares</a></li>
+<li class="chapter" data-level="14.4" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#residual-interests"><i class="fa fa-check"></i><b>14.4</b> Residual interests</a></li>
+<li class="chapter" data-level="14.5" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#a-dash-of-calculus"><i class="fa fa-check"></i><b>14.5</b> A dash of calculus</a></li>
+<li class="chapter" data-level="14.6" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#now-for-the-residuals"><i class="fa fa-check"></i><b>14.6</b> Now for the residuals</a></li>
+<li class="chapter" data-level="14.7" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#have-some-confidence"><i class="fa fa-check"></i><b>14.7</b> Have some confidence</a></li>
+<li class="chapter" data-level="14.8" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#central-to-our-discussion"><i class="fa fa-check"></i><b>14.8</b> Central to our discussion</a></li>
+<li class="chapter" data-level="14.9" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#on-to-the-unknown-2"><i class="fa fa-check"></i><b>14.9</b> On to the unknown</a></li>
+<li class="chapter" data-level="14.10" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#by-the-way-who-is-student-2"><i class="fa fa-check"></i><b>14.10</b> By the way, who is Student?</a></li>
+<li class="chapter" data-level="14.11" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#in-all-confidence-forecasting-for-fun-and"><i class="fa fa-check"></i><b>14.11</b> In all confidence: forecasting for fun and …</a></li>
+<li class="chapter" data-level="14.12" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#how-confident-are-we-in-our-estimates"><i class="fa fa-check"></i><b>14.12</b> How confident are we in our estimates?</a></li>
+<li class="chapter" data-level="14.13" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#next-lets-hypothesize"><i class="fa fa-check"></i><b>14.13</b> Next let’s hypothesize</a></li>
+<li class="chapter" data-level="14.14" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#yet-another-school-of-thought"><i class="fa fa-check"></i><b>14.14</b> Yet another school of thought</a></li>
+<li class="chapter" data-level="14.15" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#summary-of-simple-linear-regression-estimation"><i class="fa fa-check"></i><b>14.15</b> Summary of simple linear regression estimation</a></li>
+<li class="chapter" data-level="14.16" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#how-good-a-fit"><i class="fa fa-check"></i><b>14.16</b> How good a fit?</a></li>
+<li class="chapter" data-level="14.17" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#lets-build-more-statistics"><i class="fa fa-check"></i><b>14.17</b> Let’s build more statistics!</a></li>
+<li class="chapter" data-level="14.18" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#analyze-this"><i class="fa fa-check"></i><b>14.18</b> Analyze this …</a></li>
+<li class="chapter" data-level="14.19" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#two-samples-same-population"><i class="fa fa-check"></i><b>14.19</b> Two samples – same population?</a></li>
+<li class="chapter" data-level="14.20" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#anything-abnormal"><i class="fa fa-check"></i><b>14.20</b> Anything abnormal?</a></li>
+<li class="chapter" data-level="14.21" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#exercises-2"><i class="fa fa-check"></i><b>14.21</b> Exercises</a><ul>
+<li class="chapter" data-level="14.21.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#us-house-of-representatives-seats-and-unemployment"><i class="fa fa-check"></i><b>14.21.1</b> US House of Representatives seats and unemployment</a></li>
+<li class="chapter" data-level="14.21.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#peruvian-anchovies"><i class="fa fa-check"></i><b>14.21.2</b> Peruvian anchovies</a></li>
+<li class="chapter" data-level="14.21.3" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#bronx-corn"><i class="fa fa-check"></i><b>14.21.3</b> Bronx corn</a></li>
+<li class="chapter" data-level="14.21.4" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#consumption-and-disposable-income"><i class="fa fa-check"></i><b>14.21.4</b> Consumption and disposable income</a></li>
+</ul></li>
+<li class="chapter" data-level="14.22" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#references"><i class="fa fa-check"></i><b>14.22</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="quantile-regression.html"><a href="quantile-regression.html"><i class="fa fa-check"></i><b>15</b> Quantile regression</a><ul>
+<li class="chapter" data-level="15.1" data-path="quantile-regression.html"><a href="quantile-regression.html#what-is-it"><i class="fa fa-check"></i><b>15.1</b> What is it?</a></li>
+<li class="chapter" data-level="15.2" data-path="quantile-regression.html"><a href="quantile-regression.html#an-example"><i class="fa fa-check"></i><b>15.2</b> An example</a></li>
+<li class="chapter" data-level="15.3" data-path="quantile-regression.html"><a href="quantile-regression.html#even-in-ggplot2"><i class="fa fa-check"></i><b>15.3</b> Even in ggplot2</a></li>
+<li class="chapter" data-level="15.4" data-path="quantile-regression.html"><a href="quantile-regression.html#interpretations"><i class="fa fa-check"></i><b>15.4</b> Interpretations</a></li>
+<li class="chapter" data-level="15.5" data-path="quantile-regression.html"><a href="quantile-regression.html#exercises-3"><i class="fa fa-check"></i><b>15.5</b> Exercises</a><ul>
+<li class="chapter" data-level="15.5.1" data-path="quantile-regression.html"><a href="quantile-regression.html#us-house-of-representatives-seats-and-unemployment-1"><i class="fa fa-check"></i><b>15.5.1</b> US House of Representatives seats and unemployment</a></li>
+<li class="chapter" data-level="15.5.2" data-path="quantile-regression.html"><a href="quantile-regression.html#peruvian-anchovies-1"><i class="fa fa-check"></i><b>15.5.2</b> Peruvian anchovies</a></li>
+<li class="chapter" data-level="15.5.3" data-path="quantile-regression.html"><a href="quantile-regression.html#bronx-corn-1"><i class="fa fa-check"></i><b>15.5.3</b> Bronx corn</a></li>
+<li class="chapter" data-level="15.5.4" data-path="quantile-regression.html"><a href="quantile-regression.html#consumption-and-disposable-income-1"><i class="fa fa-check"></i><b>15.5.4</b> Consumption and disposable income</a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="quantile-regression.html"><a href="quantile-regression.html#references-1"><i class="fa fa-check"></i><b>15.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>16</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="16.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#the-more-perfect-relationship"><i class="fa fa-check"></i><b>16.1</b> The more perfect relationship</a></li>
+<li class="chapter" data-level="16.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#arrays-and-you"><i class="fa fa-check"></i><b>16.2</b> Arrays and You</a><ul>
+<li class="chapter" data-level="16.2.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#running-a-regression"><i class="fa fa-check"></i><b>16.2.1</b> Running a regression</a></li>
+<li class="chapter" data-level="16.2.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#more-about-residuals"><i class="fa fa-check"></i><b>16.2.2</b> More about residuals</a></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#more-array-work"><i class="fa fa-check"></i><b>16.3</b> More Array Work</a></li>
+<li class="chapter" data-level="16.4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#exercising-the-model"><i class="fa fa-check"></i><b>16.4</b> Exercising the model</a><ul>
+<li class="chapter" data-level="16.4.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#exercise-1-housing-market-determinants"><i class="fa fa-check"></i><b>16.4.1</b> Exercise 1: housing market determinants</a></li>
+<li class="chapter" data-level="16.4.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#exercise-2-risk-driver-model-using-regression-analysis"><i class="fa fa-check"></i><b>16.4.2</b> Exercise 2: risk driver model using regression analysis</a></li>
+<li class="chapter" data-level="16.4.3" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#exercise-3-commercial-loan-projection-using-regression"><i class="fa fa-check"></i><b>16.4.3</b> Exercise 3: commercial loan projection using regression</a></li>
+<li class="chapter" data-level="16.4.4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#work-flow"><i class="fa fa-check"></i><b>16.4.4</b> Work Flow</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="binary-regression.html"><a href="binary-regression.html"><i class="fa fa-check"></i><b>17</b> Binary Regression</a><ul>
+<li class="chapter" data-level="17.1" data-path="binary-regression.html"><a href="binary-regression.html#what-is-binary-risk-analysis"><i class="fa fa-check"></i><b>17.1</b> What is Binary Risk Analysis?</a></li>
+<li class="chapter" data-level="17.2" data-path="binary-regression.html"><a href="binary-regression.html#an-expository-simulation"><i class="fa fa-check"></i><b>17.2</b> An expository simulation</a></li>
+<li class="chapter" data-level="17.3" data-path="binary-regression.html"><a href="binary-regression.html#enter-the-discrete-decision-maker"><i class="fa fa-check"></i><b>17.3</b> Enter the discrete decision maker</a></li>
+<li class="chapter" data-level="17.4" data-path="binary-regression.html"><a href="binary-regression.html#the-odds-are"><i class="fa fa-check"></i><b>17.4</b> The odds are …</a></li>
+<li class="chapter" data-level="17.5" data-path="binary-regression.html"><a href="binary-regression.html#predict-now"><i class="fa fa-check"></i><b>17.5</b> Predict now …</a></li>
+<li class="chapter" data-level="17.6" data-path="binary-regression.html"><a href="binary-regression.html#a-deposit"><i class="fa fa-check"></i><b>17.6</b> A deposit</a></li>
+<li class="chapter" data-level="17.7" data-path="binary-regression.html"><a href="binary-regression.html#references-2"><i class="fa fa-check"></i><b>17.7</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="time-series-analysis.html"><a href="time-series-analysis.html"><i class="fa fa-check"></i><b>18</b> Time Series Analysis</a><ul>
+<li class="chapter" data-level="18.1" data-path="time-series-analysis.html"><a href="time-series-analysis.html#preliminaries-1"><i class="fa fa-check"></i><b>18.1</b> Preliminaries</a></li>
+<li class="chapter" data-level="18.2" data-path="time-series-analysis.html"><a href="time-series-analysis.html#where-do-we-start"><i class="fa fa-check"></i><b>18.2</b> Where do we start?</a></li>
+<li class="chapter" data-level="18.3" data-path="time-series-analysis.html"><a href="time-series-analysis.html#autoregressive-processes"><i class="fa fa-check"></i><b>18.3</b> Autoregressive processes</a></li>
+<li class="chapter" data-level="18.4" data-path="time-series-analysis.html"><a href="time-series-analysis.html#moving-average-processes"><i class="fa fa-check"></i><b>18.4</b> Moving average processes</a></li>
+<li class="chapter" data-level="18.5" data-path="time-series-analysis.html"><a href="time-series-analysis.html#takeaways"><i class="fa fa-check"></i><b>18.5</b> Takeaways</a></li>
+<li class="chapter" data-level="18.6" data-path="time-series-analysis.html"><a href="time-series-analysis.html#references-3"><i class="fa fa-check"></i><b>18.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html"><i class="fa fa-check"></i><b>19</b> Bootstrapping Estimates</a><ul>
+<li class="chapter" data-level="19.1" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#imagine"><i class="fa fa-check"></i><b>19.1</b> Imagine</a></li>
+<li class="chapter" data-level="19.2" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#tools"><i class="fa fa-check"></i><b>19.2</b> Tools</a></li>
+<li class="chapter" data-level="19.3" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#d-p-q-runif"><i class="fa fa-check"></i><b>19.3</b> <code>[d p q r]unif</code></a></li>
+<li class="chapter" data-level="19.4" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#permutations-with-sample"><i class="fa fa-check"></i><b>19.4</b> Permutations with <code>sample()</code></a></li>
+<li class="chapter" data-level="19.5" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#resampling-with-sample"><i class="fa fa-check"></i><b>19.5</b> Resampling with <code>sample()</code></a></li>
+<li class="chapter" data-level="19.6" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#expected-shortfall-test"><i class="fa fa-check"></i><b>19.6</b> Expected shortfall test</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/wgfoote/book-stat-thinking" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Statistical Thinking</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="statistical-reasoning" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> Statistical Reasoning</h1>
+<div id="welcome-to-statistical-reasoning" class="section level2">
+<h2><span class="header-section-number">2.1</span> Welcome to Statistical Reasoning</h2>
+<p>You very likely realize that you have been thinking statistically all your like. Try these questions on for size. Have you ever thought or uttered these statements?</p>
+<ul>
+<li><p>I probably have!</p></li>
+<li><p>On average classes here are very hard!</p></li>
+<li><p>How often can I skip a meeting before they fire me?</p></li>
+<li><p>How sure am I that I will get promoted?</p></li>
+</ul>
+<p>If you have ever made (or thought) statements and questions like these, you are <em>de facto</em> thinking statistically. This sort of reasoning starts from the gathering of cases, observations, and through classifying, measuring, deliberation, forming new concepts and hypotheses, and framing our tolerance for error to test hypotheses, we arrive at a claim about whatever we think then is true or false (probably: because we admit we might be wrong or refutable!). Through this process, and it is ongoing, we discriminate our subjective opinions from objective knowledge that a claim is true or not. That is the core of evidence-based critical thinking.</p>
+</div>
+<div id="why-do-we-reason-statistically" class="section level2">
+<h2><span class="header-section-number">2.2</span> Why do we reason statistically?</h2>
+<p>Consider that:</p>
+<ul>
+<li><p>We very well know our exprerience of ignorance</p></li>
+<li><p>We are often prone to error (and try to learn from our mistakes!)</p></li>
+<li><p>We still have to make assertions of all sorts when we decide to act on anything</p></li>
+</ul>
+<p>The ground of statistical reasoning is that we experience both necessities and contingencies. Some experiences are so direct they are known certainly, without a doubt, and might not even be subject to further revision. An example of a necessity is our experience of health: if we do not eat, we will eventually, and necessarily become very ill. Other experiences are contingent, that is, they depend on the fulfillment of conditions to exist. An example of a contingency comes from our inability to exhaustively enumerate every type and instance of an act. Will I pass this course? Maybe, probably, possibly, even credibly, but not certainly.</p>
+<p>One test of necessity versus contingency in an act or being is thus certainty. Are there further questions and conditions? Then we have contingency. Statistics and statistical thinking is all about what we probably know is true or not. Getting to this affirmation we must pass through stages of presentation of data and understanding for inference. Only then do we perform the conscious act of affirmation. After that it is up to the decision maker to execute the imperative of a judgment.</p>
+</div>
+<div id="what-is-statistical-reasoning" class="section level2">
+<h2><span class="header-section-number">2.3</span> What is statistical reasoning?</h2>
+<p>Statistical reasoning is a process for <strong>generating knowledge under uncertainty</strong>.</p>
+<ul>
+<li><p>a <strong>process</strong> has inputs, activities (including decisions), and outputs, so what are the inputs, operations, results?</p></li>
+<li><p>To <strong>generate</strong> something is to develop (i.e, specify, design) and implement (i.e., build, test, operate, update) something, so what would we develop and implement?</p></li>
+<li><p><strong>Under uncertqainty</strong> means possibly, maybe, and more exacting, probably</p></li>
+</ul>
+<p><strong>Knowledge</strong> is not just</p>
+<ul>
+<li><p>taking a look: knowing <strong>about</strong> some_thing_ or action</p></li>
+<li><p>understanding: describing, explaining, knowing <strong>how</strong></p></li>
+</ul>
+<p>These are components of knowledge, but we want results, we want a <strong>judgement</strong> that is reasonable after weighing the pros and cons and consulting our priorities! Our definition of knowledge is formally <strong>justified true belief</strong> <a href="http://www.perseus.tufts.edu/hopper/text?doc=Perseus%3Atext%3A1999.01.0172%3Atext%3DTheaet.%3Asection%3D210a">see Plato’s <em>Theaetetus 210a-b</em> for details!</a>):</p>
+<ul>
+<li><p>A truth-claim and certitude that something is or not (probably),</p></li>
+<li><p>That is based on available evidence against justified true belief</p></li>
+<li><p>as well as relevant methodology</p></li>
+</ul>
+<p>Knowledge thus includes truth-claims that we are aware of this or that and might even understand how they came about.</p>
+<ul>
+<li><p>Above all knowledge is an assertion and thus we can expect the judgment (assertion or claim) to be justified (warranted) or not depending on the evidence.</p></li>
+<li><p>Judgment is a conscious activity based on meaning: thus something that can be thought about, deliberated, doubted, entertained as a hypothesis, and believed to be true.</p></li>
+<li><p>We move from knowing about (description and explanation) to knowing how (using a conceptual framework) to knowing that something is TRUE or FALSE (what any proposition is).</p></li>
+<li><p>With uncertainty about the future we append **probably* TRUE or FALSE.</p></li>
+</ul>
+<p>Note that your <em>opinion</em> is not <em>knowledge</em>. Beliefs are to be ever challenged by evidence, inquiry, investigation, and the discovering of new relationships and systems. Opinion, true or not, is relative to you. Knowledge moves from something just relative to you to the real relationships among things other than you and your brilliant ideas. Having said this, opinion is still a valuable entree into any investigation and may even be part of the data collection you use to investigate a question, a doubt, an hypothesis, or a belief.</p>
+</div>
+<div id="lets-learn-some-more-from-this-example" class="section level2">
+<h2><span class="header-section-number">2.4</span> Let’s learn some more from this example:</h2>
+<p>Overall for the purposes of statistical reasoning there are always three broad components of knowledge and a product:</p>
+<ol style="list-style-type: decimal">
+<li><p>Data collection: results in observations, data, imagination, memory, perception</p></li>
+<li><p>Data analysis: results in description and explanation including logic, relations, classification, association, measurement, hypothesis formation, testing in the presence of potential error</p></li>
+<li><p>Results: the product is an affirmation based on an inference that something is or is not backed by 1 and 2</p></li>
+</ol>
+<p>Suppose that we have data on the incomes of 1000 U.S. families in 2009.</p>
+<ul>
+<li><p>This data can be summarized by finding the average family income and the spread of these family incomes above and below the average.</p></li>
+<li><p>The data also can be depicted by constructing a table, chart, or graph of the number or proportion of
+families in each income class or subsetted (filtered) by state of household residence.</p></li>
+<li><p>We propose to test our concept of the level of the family income in the US overall.</p></li>
+</ul>
+<p>Is this last statement descriptive or inferential?",</p>
+<ol style="list-style-type: decimal">
+<li><p>It is explanatory because it calculates the proportion of families in each income class.</p></li>
+<li><p>It is descriptive because of the calculate of average family income.</p></li>
+<li><p>It is inferential because we can test whether family income in the US is above the average</p></li>
+</ol>
+<br>
+<button onclick="showText('myDIV1')">show / hide</button>
+<div id="myDIV1" style="display:none;">
+<p><br></p>
+<p>Answer:</p>
+<ol start="3" style="list-style-type: decimal">
+<li>It is inferential because we can test whether family income in the US is above the average</li>
+</ol>
+</div>
+<p><br></p>
+<p>Now suppose we test our hypothesis that family income in the state of Nebraska is less than average family income in the U.S.</p>
+<ul>
+<li><p>We find a non-negligible and significant difference with a probability that we are wrong about our conclusion is only 1%. We believe that 1% is tolerable.</p></li>
+<li><p>Based on our data, our methodology, our tolerance for error, we affirm that family income in Nebraska is less than the average family income in the U.S.</p></li>
+</ul>
+<p>Is this last statement knowledge or just your considered opinion?</p>
+<ol style="list-style-type: decimal">
+<li><p>It is considered opinion.</p></li>
+<li><p>It is knowledge.</p></li>
+<li><p>It is neither.</p></li>
+</ol>
+<br>
+<button onclick="showText('myDIV2')">show / hide</button>
+<div id="myDIV2" style="display:none;">
+<p><br></p>
+<p>Answer:</p>
+<p>Not 1: Ask if the final result is verified in the data, nut just your conceptual framework.</p>
+<p>Not 3: Try again!</p>
+<p>The correct answer is 2.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>The result derives from a set of facts, and using relevant methodology, along with an allowance for begin wrong, thus verifiable as objectively as possible.</li>
+</ol>
+</div>
+<p><br></p>
+<p>Now suppose we wake up in 10 years and collect more data, use an improved methodology, a lower tolerance for error, and eventually affirm that we were wrong about.</p>
+<p>We conclude we are wrong in 10 years. Does this invalidate our conclusions 10 years ago necessarily?</p>
+<ol style="list-style-type: decimal">
+<li><p>Yes, because the conclusion 10 years ago was, from today’s point of view, just considered opinion.</p></li>
+<li><p>No, knowledge can change from time to time. In fact the conclusions of prior years are new data for a new investigation and in this case a new judgment about average family income.</p></li>
+<li><p>It is neither.</p></li>
+</ol>
+<br>
+<button onclick="showText('myDIV3')">show / hide</button>
+<div id="myDIV3" style="display:none;">
+<p><br></p>
+<p>Answer:</p>
+<ol start="2" style="list-style-type: decimal">
+<li>The result 10 years ago derived from a set of facts, and using relevant methodology, along with an allowance for begin wrong, thus verifiable as objectively as possible. Circumstances change and so might our inferences and thus our judgments.</li>
+</ol>
+<p>Not 1: What it only an opinion then? Why? Wasn’t it verified in the data and thus a justified true belief?</p>
+<p>Certainly not 3.</p>
+</div>
+<p><br></p>
+<div id="why" class="section level3">
+<h3><span class="header-section-number">2.4.1</span> Why?</h3>
+<p>We have both descriptions and explanations through inferences of the sample of family incomes. We do have</p>
+<ul>
+<li><p>knowledge about family incomes</p></li>
+<li><p>knowledge of the relationships of family incomes as explanatory above and below an average</p></li>
+</ul>
+<p>This is the domain of descriptive statistics. However,</p>
+<ul>
+<li><p>We might even be able to affirm with probability that family incomes are far or not far above the average income</p></li>
+<li><p>Since these conclusions are subject to error, we also would have to indicate the probability of error.</p></li>
+</ul>
+<p>These statements belong to the domain of statistical inference. This domain pushes us to an affirmation that family income in one subset of the data is less than average family income in the U.S. This affirmation is built on a bridge from data to judgment using a conceptual framework and tolerance for error.</p>
+</div>
+</div>
+<div id="digging-deeper" class="section level2">
+<h2><span class="header-section-number">2.5</span> Digging deeper</h2>
+<div id="learn-by-doing-this" class="section level3">
+<h3><span class="header-section-number">2.5.1</span> Learn by doing this</h3>
+<p>You work for as an intern for a research department of a real estate developer.</p>
+<p>Which is the best example of knowledge?</p>
+<ol style="list-style-type: decimal">
+<li><p>50 observations of a group of business analysts,</p></li>
+<li><p>The steps analysts take to perform a task,</p></li>
+<li><p>Most of the time between 40-50% of the analysts show up for work on time.</p></li>
+</ol>
+<br>
+<button onclick="showText('myDIV4')">show / hide</button>
+<div id="myDIV4" style="display:none;">
+<p><br></p>
+<ol start="3" style="list-style-type: decimal">
+<li>You have made a probable assetion. From your and other points of view this is an example of justified true belief – knowledge.</li>
+</ol>
+</div>
+<p><br></p>
+</div>
+</div>
+<div id="what-is-the-conceptual-framework-of-statistical-reasoning" class="section level2">
+<h2><span class="header-section-number">2.6</span> What is the conceptual framework of statistical reasoning?</h2>
+<p>If you answered “Most of the time between 40-50% of the analysts show up for work on time” you have it right. How do you know though?</p>
+<ul>
+<li><p>We gather data sampled from a group, here a population of analysts. This data is what we record as the experience of a particular attribute of analysts’ behavior: on time arrival to work.</p></li>
+<li><p>There is a key question hidden in the sentence: what proportion of analysts “…show up for work on time…”? The proportion can be measured. This leads to understanding the attribute of on-time arrival of analysts.</p></li>
+<li><p>We hedge our bets with a <strong>claim</strong> that a range of possible analyst outcomes and a probabalistic statement: the spread or range is between 40-50/% “most of the time.” we might try to hone our idea of uncertainty with odds that an analyst will arrive on-time.</p></li>
+</ul>
+<p>Here are some of the components of everyday statistical reasoning:</p>
+<ul>
+<li><p>You have a question about that, when answered, supports a decision</p></li>
+<li><p>Given the context of the business decision you identify the population and collect a sample of data from the population</p></li>
+<li><p>You try to understand the data by exploring averages, ranges, and frequencies of low, medium, and high values of data; you might transform the data into ratios, proportions, percent changes, etc.</p></li>
+<li><p>Then you set a margin of error that you might be wrong about inferring behavior of the population using a limited sample of data from the population; using the error you estimate the range of acceptable aggregated results</p></li>
+<li><p>Finally, you make a judgment about the behavior of the population based on the probable range of behavioral outcomes measured in the sample,</p></li>
+</ul>
+<div id="learn-by-doing" class="section level3">
+<h3><span class="header-section-number">2.6.1</span> Learn by doing</h3>
+<p>Here is a conceptual framework we can follow to generate knowledge to support a decision.</p>
+<p>The decision maker</p>
+<ul>
+<li><p>Poses a business question</p></li>
+<li><p>Sets a tolerance for error</p></li>
+</ul>
+<p>The analyst uses relevant methodology</p>
+<ul>
+<li><p>In consultation with the decision maker chooses a population and agrees to risk tolerance</p></li>
+<li><p>Explores the data</p></li>
+<li><p>Infers a range of tolerable answers</p></li>
+</ul>
+<p>The decision maker then</p>
+<ul>
+<li>Affirms as probably true the range of tolerable answers</li>
+</ul>
+<div id="htmlwidget-29b6d2466969ea31307a" style="width:100%;height:300px;" class="visNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-29b6d2466969ea31307a">{"x":{"nodes":{"id":[1,2,3,4],"group":["A0","A","B","C"],"value":[75,100,20,40],"label":["decision maker","population","sample","probability"],"title":["<p>Online marketing executive <br> must decide what courses to develop<\/p>","<p>What proportion of <br> sophomore business students <br> like statistics?<\/p>","<p>Explore the 50 responses<\/p>","<p>Set tolerance for error at 5% and <br> infer range of acceptable <br> proportion statistics<\/p>"]},"edges":{"from":[1,2,3,4],"to":[2,3,4,1],"value":[6,7,4,5],"title":["<p>assess <br> market<\/p>","<p>draw 50 sample responses <br> from population<\/p>","<p>aggregate data into a statistic: <br> 20% of the sample like statistics<\/p>","<p>We conclude: <br> we are 95% sure that <br> between 18% and                      22% of the population <br> like statistics.<\/p>"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot"},"manipulation":{"enabled":false},"groups":{"A0":{"shape":"triangle","icon":{"code":"f007","size":75,"color":"purple"}},"A":{"shape":"box","icon":{"code":"f0c8","size":100,"color":"#2B7CE9"}},"B":{"shape":"circle","color":"red"},"useDefaultGroups":true,"C":{"shape":"ellipse","color":"lightgreen"}},"edges":{"arrows":{"to":{"enabled":true,"scaleFactor":0.5}}},"layout":{"randomSeed":1012}},"groups":["A0","A","B","C"],"width":"100%","height":"300px","idselection":{"enabled":false},"byselection":{"enabled":false},"main":null,"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","iconsRedraw":true},"evals":[],"jsHooks":[]}</script>
+<p>Hover over the nodes and edges of this network diagram to answer the following question:</p>
+<p>What is the sequence of nodes to support the decision maker?</p>
+<ol style="list-style-type: decimal">
+<li><p>Business question(s), Data exploration, Decision maker, Provisional conclusion</p></li>
+<li><p>Draw sample, Aggregate data, Provisionally conclude, Make decision</p></li>
+<li><p>Assess decision, Pose business questions, Explore sample data, Infer population bevavior, Make decision</p></li>
+<li><p>Set margin of error, Draw sample, Explore data, Make decision</p></li>
+</ol>
+<br>
+<button onclick="showText('myDIV5')">show / hide</button>
+<div id="myDIV5" style="display:none;">
+<p><br></p>
+<p>Answer:</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Start with the decision maker and her decision. Get to the relevand questions. Gather and explore some useful data. Indicate tolerance for error and infer behavior – usually an inductive conclusion. Offer recommendations to the decision maker.</li>
+</ol>
+</div>
+<p><br></p>
+</div>
+</div>
+<div id="infer" class="section level2">
+<h2><span class="header-section-number">2.7</span> Infer</h2>
+<p>A large part of the mechanics of statistical thinking is to formulate and make inferences, that is, judgments of fact and value. Reasoning is the process of using existing knowledge to draw conclusions, make predictions, or construct explanations.</p>
+<p>To make an inference is to reach a conclusion. There are three types of conclusions:</p>
+<ul>
+<li><p>A conclusion that is guaranteed, certain, immutable (unless some fact might change)</p></li>
+<li><p>A conclusion that is likely (probable) and which might be altered with new data</p></li>
+<li><p>A conclusion that is likely or guessed explanation of facts</p></li>
+</ul>
+<p>The first is classic, logical, deduction. The second is how we generalize from particular examples, samples, otherwise known as induction. The third is how we formulate hypotheses, known as abduction.</p>
+<div id="deductive-reasoning-conclusion-guaranteed" class="section level3">
+<h3><span class="header-section-number">2.7.1</span> Deductive reasoning: conclusion guaranteed</h3>
+<p>Deductive reasoning starts with the assertion of a general rule and proceeds from there to a guaranteed specific conclusion. If the original assertions are true, then the conclusion must also be true. For example, math is deductive:</p>
+<ul>
+<li>If <span class="math inline">\(x=4\)</span></li>
+<li>And if <span class="math inline">\(y=1\)</span></li>
+<li>Then <span class="math inline">\(2x+y=9\)</span></li>
+</ul>
+<p>In this example, it is a logical necessity that <span class="math inline">\(2x+y=9\)</span> must equal 9, only if, that is, conditional on, both <span class="math inline">\(x=4\)</span> and <span class="math inline">\(y=1\)</span>. As a matter of fact, formal, symbolic logic uses a language that looks rather like the mathematical equality above, complete with its own operators and syntax. But a deductive syllogism (think of it as a plain-English version of a math equality) can be expressed in ordinary language.</p>
+<p>In the syllogism above, the first two statements, the propositions or premises, lead logically to the third statement, the conclusion. Here is another example:</p>
+<ul>
+<li><p>A video streaming technology ought to be funded if it has been used successfully to educate adults.</p></li>
+<li><p>Hybrid open classrooms are being used to educate adults successfully in more than 70 new educational environments.</p></li>
+<li><p>Hybrid (sunchronous and asynchronous) classrooms and video streaming technology should be funded.</p></li>
+</ul>
+<p>The conclusion to fund both classrooms and technology follows the truth of the success of both treatments to educate adults successfully.</p>
+<p>Here is an example of a false conclusion reached through a correct deductive process.</p>
+<ul>
+<li><p>There is no such thing as drought in the midwest.</p></li>
+<li><p>North Dakota is in the mid-West.</p></li>
+<li><p>North Dakota does not have to plan for a drought.</p></li>
+</ul>
+<p>In the example above, though the inferential process itself is valid, the conclusion is false because the premise is questionable, thus this deduction cannot guarantee a necessary true conclusion, Here is the general pattern of deductive reasoning, again with an example.</p>
+<p>A bag contains objects. Deduction would be:</p>
+<ul>
+<li><p>[MAJOR] All objects (O) from the bag are rotini (R) (if: O in the bag are R is TRUE)</p></li>
+<li><p>[MINOR] I drew this object (O) from the bag (if: an O happens)</p></li>
+<li><p>[CONCLUSION] The object (O) must be rotini (R) (then: O must be R)</p></li>
+</ul>
+<p>Some might argue that there is no new knowledge through logical deduction. Their idea is that if conclusions contain the terms of the premise, then there is nothing new in the conclusion. This is a view held for example by John Stuart Mill. We might counter that with the idea that the process of deduction itself uncovered the truths contained in the premises. The deduction thus does add something: a reformed and rearranged set of terms from the premises into a new premise, the conclusion.</p>
+</div>
+<div id="inductive-reasoning-comclusion-not-guaranteed" class="section level3">
+<h3><span class="header-section-number">2.7.2</span> Inductive reasoning: comclusion not guaranteed</h3>
+<p>Inductive reasoning begins with observations that are specific and limited in scope, and proceeds to a generalized conclusion that is likely, but not certain, in light of accumulated evidence. You could say that inductive reasoning moves from the specific to the general. Much scientific research is carried out by the inductive method: gathering evidence, seeking patterns, and forming a hypothesis or theory to explain what is seen.</p>
+<p>Conclusions reached by the inductive method are not logical necessities; no amount of inductive evidence guarantees the conclusion. This is because there is no way to know that all the possible evidence has been gathered, and that there exists no further bit of unobserved evidence that might invalidate my hypothesis. Thus, while the newspapers might report the conclusions of scientific research as absolutes, scientific literature itself uses more cautious language, the language of inductively reached, probable conclusions.</p>
+<p>Here is an example of inductive reasoning using the objects in the bag example again and for comparison.</p>
+<ul>
+<li><p>[MAJOR] An object is drawn from the bag (O)</p></li>
+<li><p>[MINOR] I drew a rotini from the bag (R)</p></li>
+<li><p>[CONCLUSION] All objects in the bag are rotini (maybe) (then: O in the bag are probably R)</p></li>
+</ul>
+<p>Because inductive conclusions are not logical necessities, inductive arguments are not simply true. Rather, they are cogent: that is, the evidence seems complete, relevant, and generally convincing, and the conclusion is therefore probably true. Nor are inductive arguments simply false; rather, they are not cogent. We thus have a new category in our reasoning arsenal: true or false from deduction, cogency from induction.</p>
+<p>It is an important difference from deductive reasoning that, while inductive reasoning cannot yield an absolutely certain conclusion, it can actually increase human knowledge. It can make predictions about future events or as-yet unobserved phenomena.</p>
+<p>For example, Albert Einstein observed the movement of a pocket compass when he was five years old and became fascinated with the idea that something invisible in the space around the compass needle was causing it to move. This observation, combined with additional observations (of moving trains, for example) and the results of logical and mathematical tools (deduction), resulted in a rule that fit his observations and could predict events that were as yet unobserved.</p>
+</div>
+<div id="abductive-reasoning-taking-your-best-shot" class="section level3">
+<h3><span class="header-section-number">2.7.3</span> Abductive reasoning: taking your best shot</h3>
+<p>Abductive reasoning begins with whatever information you have on hand. When you reason this way you take that information and abduce (from the Latin <em>aducere</em> to lead from) a probable explanation. The problem is that our information is nearly always incomplete. It might be not only incomplete but also not very credible or useful in explaining anything.</p>
+<p>Examples of abduction reasoning include medical diagnoses, identification of assailants, the success of a never before seen product in a completely new and unknown market, the validity of any test results when test reported are bribed. Here is the way <strong>abduction</strong> works.</p>
+<ul>
+<li><p>Given a result (I have a high fever, focus groups would buy the product, test results are better than ever), and</p></li>
+<li><p>given a set of symptoms, observations from a focus group, test results</p></li>
+<li><p>what is the diagnosis, the pattern, the outcomes that would best explain most of them?</p></li>
+</ul>
+<p>Likewise, when jurors hear evidence in a criminal case, they must consider whether the prosecution or the defense has the best explanation to cover all the points of evidence. While there may be no certainty about their verdict, since there may exist additional evidence that was not admitted in the case, they make their best guess based on what they know.</p>
+<p>While cogent inductive reasoning requires that the evidence that might shed light on the subject be fairly complete, whether positive or negative, abductive reasoning is characterized by lack of completeness, either in the evidence, or in the explanation, or both. A patient may be unconscious or fail to report every symptom, for example, resulting in incomplete evidence, or a doctor may arrive at a diagnosis that fails to explain several of the symptoms. Still, she must reach the best diagnosis she can.</p>
+<p>Back to the objects in a bag again, here is abduction.</p>
+<ul>
+<li><p>[MAJOR] All objects in the bag are rotini (maybe) (guest: O in the bag are R)</p></li>
+<li><p>[MINOR] I drew a rotini (find: R)</p></li>
+<li><p>[CONCLUSION] An object (maybe) was draw from this bag (then O from the bag)</p></li>
+</ul>
+<p>The abductive process can be creative, intuitive, even revolutionary. Einstein’s work, for example, was not just inductive and deductive, but involved a creative leap of imagination and visualization that scarcely seemed warranted by the mere observation of moving trains and falling elevators. In fact, so much of Einstein’s work was done as a <em>hought experiment</em>. We are pretty sure that he never experimentally dropped an elevator. Many of his peers discredited his abductive explanations as the workings of an unbalanced mind. Nevertheless, he appears to have been right - until now his remarkable conclusions about space-time continue to be verified experimentally.</p>
+</div>
+</div>
+<div id="critical-thinking" class="section level2">
+<h2><span class="header-section-number">2.8</span> Critical thinking</h2>
+<p>What is thinking? We have already defined <strong>knowledge</strong> as <em>justified true belief</em>. Thinking is the process of getting to a belief that is both true and justified. The process yields tables of experiences as data and frameworks and methodologies to understand the relationships, credibility, completeness, sufficiency, and relevance of the data to the problem at hand.</p>
+<p>Why critical? The origin of the word critical is from the Greek verb <strong>kritein</strong> which means <em>to judge</em>. In its root sense then, when we are critical, we are judging. But the very act of judging is built on, depends on, acts of experience and understanding (or lack thereof!). A judgment occurs at the nexus of what is weighed, pro and con, raised from acts of understanding data in the light of premisses, scenarios, and hypotheses. New judgments then become new data to be experienced, understood, and weighed into new judgments. Some new judgments derive from new data that shows that previous judgment are probably not justifiable, and thus should not be believed.</p>
+<p>Every judgment of what probably is (true) or is not (false) is then justified by solid understanding of relevent, and sufficient, experiences. The error of past data, understanding, and judgment occurs when any of these artifacts are no longer relevant, sufficient, complete (enough), or any longer reasonable, thus no longer justified. Most of our knowledge is belief about what we are very confident to be probably true or not true. Confidence and probability can be used hand in hand. Highly confident means also a low tolerance for error. We know what is or is not probably in any case, but overlaying an interpretation confidence and error fills out a picture of belief, as well as justification of judgments.</p>
+<p>So, then we might summarize that so-called critical thinking is the development of justified true beliefs subjective to tolerances for error and processes for the correction of error all in the context of experience and understanding.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> That’s statistical reasoning in a nutshell from experienced observation through model inquiries onto judgments of what probably is or is not, support decisions to commit.</p>
+</div>
+<div id="try-this" class="section level2">
+<h2><span class="header-section-number">2.9</span> Try this</h2>
+<p>From everyday life, work, school, leisure formulate a question. For example if you work in finance, key business questions would include the following:</p>
+<ol style="list-style-type: decimal">
+<li><p>How do we measure the interactions of risk and return in multiple markets?</p></li>
+<li><p>Given the interactions of risk and return in assets and liabilities, what is the combination of assets and liabilities that return the highest value for the risk?</p></li>
+<li><p>Given this combination (a portfolio) what is amount of capital needed to support the portfolio?</p></li>
+<li><p>Given risk tolerances and thresholds for loss, how much cash should be held on the balance sheet?</p></li>
+</ol>
+<p>There are only two decisions at the highest levels of consideration in finance:</p>
+<ol style="list-style-type: decimal">
+<li><p>Investment in claims to risky cash flows, and</p></li>
+<li><p>Financing those investments.</p></li>
+</ol>
+<p>You can identify questions in your own life and work and link decisions to those questions. Having done that use deduction, induction, and abduction to formulate conclusions based on premises, constraints, observations, beliefs, assumptions.</p>
+
+<script>
+function showText(y) {
+    var x = document.getElementById(y);
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+</script>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Here is a resource to define and implement <a href="https://hbswk.hbs.edu/archive/the-path-to-critical-thinking">critical thinking processes.</a>.<a href="statistical-reasoning.html#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="the-many-faces-of-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["book-stat-thinking.pdf", "book-stat-thinking.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

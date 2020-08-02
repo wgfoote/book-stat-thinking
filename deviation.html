@@ -1,0 +1,1939 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 Deviation | Statistical Thinking</title>
+  <meta name="description" content="Statistical reasoning from an elementary point of view" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 Deviation | Statistical Thinking" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Statistical reasoning from an elementary point of view" />
+  <meta name="github-repo" content="wgfoote/book-stat-thinking" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Deviation | Statistical Thinking" />
+  
+  <meta name="twitter:description" content="Statistical reasoning from an elementary point of view" />
+  
+
+<meta name="author" content="Bill Foote" />
+
+
+<meta name="date" content="2020-08-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="tendency.html"/>
+<link rel="next" href="binomial-distribution.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="libs/vis-4.20.1/vis.css" rel="stylesheet" />
+<script src="libs/vis-4.20.1/vis.min.js"></script>
+<script src="libs/visNetwork-binding-2.0.9/visNetwork.js"></script>
+<link href="libs/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<script src="libs/plotly-binding-4.9.2/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<script src="libs/viz-0.3/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.1/grViz.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Statistical Thinking</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preliminaries</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#the-basic-problem"><i class="fa fa-check"></i><b>1.1</b> The basic problem</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#analytics"><i class="fa fa-check"></i><b>1.2</b> Analytics</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#readiness-for-statistical-thinking"><i class="fa fa-check"></i><b>1.3</b> Readiness for statistical thinking</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#solve-this-riddle"><i class="fa fa-check"></i><b>1.3.1</b> Solve this riddle</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#join-these-sets"><i class="fa fa-check"></i><b>1.3.2</b> Join these sets</a></li>
+<li class="chapter" data-level="1.3.3" data-path="index.html"><a href="index.html#partition-this-board"><i class="fa fa-check"></i><b>1.3.3</b> Partition this board</a></li>
+<li class="chapter" data-level="1.3.4" data-path="index.html"><a href="index.html#calculate-this-expression"><i class="fa fa-check"></i><b>1.3.4</b> Calculate this expression</a></li>
+<li class="chapter" data-level="1.3.5" data-path="index.html"><a href="index.html#solve-this-equation"><i class="fa fa-check"></i><b>1.3.5</b> Solve this equation</a></li>
+<li class="chapter" data-level="1.3.6" data-path="index.html"><a href="index.html#summation-calculations"><i class="fa fa-check"></i><b>1.3.6</b> Summation calculations</a></li>
+<li class="chapter" data-level="1.3.7" data-path="index.html"><a href="index.html#weighted-average"><i class="fa fa-check"></i><b>1.3.7</b> Weighted average</a></li>
+<li class="chapter" data-level="1.3.8" data-path="index.html"><a href="index.html#linear-coefficients"><i class="fa fa-check"></i><b>1.3.8</b> Linear coefficients</a></li>
+<li class="chapter" data-level="1.3.9" data-path="index.html"><a href="index.html#linear-simultaneous-equations"><i class="fa fa-check"></i><b>1.3.9</b> Linear simultaneous equations</a></li>
+<li class="chapter" data-level="1.3.10" data-path="index.html"><a href="index.html#elasticity-a-little-light-calculus"><i class="fa fa-check"></i><b>1.3.10</b> Elasticity: a little light calculus</a></li>
+<li class="chapter" data-level="1.3.11" data-path="index.html"><a href="index.html#area-under-a-curve"><i class="fa fa-check"></i><b>1.3.11</b> Area under a curve</a></li>
+<li class="chapter" data-level="1.3.12" data-path="index.html"><a href="index.html#next-steps"><i class="fa fa-check"></i><b>1.3.12</b> Next steps?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#chapter-outline"><i class="fa fa-check"></i><b>1.4</b> Chapter outline</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html"><i class="fa fa-check"></i><b>2</b> Statistical Reasoning</a><ul>
+<li class="chapter" data-level="2.1" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#welcome-to-statistical-reasoning"><i class="fa fa-check"></i><b>2.1</b> Welcome to Statistical Reasoning</a></li>
+<li class="chapter" data-level="2.2" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#why-do-we-reason-statistically"><i class="fa fa-check"></i><b>2.2</b> Why do we reason statistically?</a></li>
+<li class="chapter" data-level="2.3" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#what-is-statistical-reasoning"><i class="fa fa-check"></i><b>2.3</b> What is statistical reasoning?</a></li>
+<li class="chapter" data-level="2.4" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#lets-learn-some-more-from-this-example"><i class="fa fa-check"></i><b>2.4</b> Let’s learn some more from this example:</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#why"><i class="fa fa-check"></i><b>2.4.1</b> Why?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#digging-deeper"><i class="fa fa-check"></i><b>2.5</b> Digging deeper</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#learn-by-doing-this"><i class="fa fa-check"></i><b>2.5.1</b> Learn by doing this</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#what-is-the-conceptual-framework-of-statistical-reasoning"><i class="fa fa-check"></i><b>2.6</b> What is the conceptual framework of statistical reasoning?</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#learn-by-doing"><i class="fa fa-check"></i><b>2.6.1</b> Learn by doing</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#infer"><i class="fa fa-check"></i><b>2.7</b> Infer</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#deductive-reasoning-conclusion-guaranteed"><i class="fa fa-check"></i><b>2.7.1</b> Deductive reasoning: conclusion guaranteed</a></li>
+<li class="chapter" data-level="2.7.2" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#inductive-reasoning-comclusion-not-guaranteed"><i class="fa fa-check"></i><b>2.7.2</b> Inductive reasoning: comclusion not guaranteed</a></li>
+<li class="chapter" data-level="2.7.3" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#abductive-reasoning-taking-your-best-shot"><i class="fa fa-check"></i><b>2.7.3</b> Abductive reasoning: taking your best shot</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#critical-thinking"><i class="fa fa-check"></i><b>2.8</b> Critical thinking</a></li>
+<li class="chapter" data-level="2.9" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#try-this"><i class="fa fa-check"></i><b>2.9</b> Try this</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html"><i class="fa fa-check"></i><b>3</b> The many faces of data</a><ul>
+<li class="chapter" data-level="3.1" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#learning-outomes"><i class="fa fa-check"></i><b>3.1</b> Learning outomes</a></li>
+<li class="chapter" data-level="3.2" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#march-on"><i class="fa fa-check"></i><b>3.2</b> March on</a></li>
+<li class="chapter" data-level="3.3" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#air-pollution-and-birth-outcomes"><i class="fa fa-check"></i><b>3.3</b> Air pollution and birth outcomes</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#classifying-data-types"><i class="fa fa-check"></i><b>3.3.1</b> Classifying data types</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#something-a-bit-more-complicated"><i class="fa fa-check"></i><b>3.4</b> Something a bit more complicated</a></li>
+<li class="chapter" data-level="3.5" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#what-have-we-learned"><i class="fa fa-check"></i><b>3.5</b> What have we learned?</a></li>
+<li class="chapter" data-level="3.6" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#review-these-scenarios"><i class="fa fa-check"></i><b>3.6</b> Review these scenarios</a></li>
+<li class="chapter" data-level="3.7" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#try-this-1"><i class="fa fa-check"></i><b>3.7</b> Try this</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html"><i class="fa fa-check"></i><b>4</b> First Steps in Exploring Data</a><ul>
+<li class="chapter" data-level="4.1" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#learning-objectives"><i class="fa fa-check"></i><b>4.1</b> Learning objectives</a></li>
+<li class="chapter" data-level="4.2" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#business-context"><i class="fa fa-check"></i><b>4.2</b> Business context</a></li>
+<li class="chapter" data-level="4.3" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#bullets"><i class="fa fa-check"></i><b>4.3</b> Bullets</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#what-did-we-do"><i class="fa fa-check"></i><b>4.3.1</b> What did we do?</a></li>
+<li class="chapter" data-level="4.3.2" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#what-can-we-say"><i class="fa fa-check"></i><b>4.3.2</b> What can we say?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#incidents-and-accidents"><i class="fa fa-check"></i><b>4.4</b> Incidents and accidents</a></li>
+<li class="chapter" data-level="4.5" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#where-do-we-go-from-here"><i class="fa fa-check"></i><b>4.5</b> Where do we go from here?</a></li>
+<li class="chapter" data-level="4.6" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#resources"><i class="fa fa-check"></i><b>4.6</b> Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="tendency.html"><a href="tendency.html"><i class="fa fa-check"></i><b>5</b> Tendency</a><ul>
+<li class="chapter" data-level="5.1" data-path="tendency.html"><a href="tendency.html#learning-outcomes"><i class="fa fa-check"></i><b>5.1</b> Learning outcomes</a></li>
+<li class="chapter" data-level="5.2" data-path="tendency.html"><a href="tendency.html#the-best-we-have"><i class="fa fa-check"></i><b>5.2</b> The best we have</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="tendency.html"><a href="tendency.html#square-those-errors"><i class="fa fa-check"></i><b>5.2.1</b> Square those errors</a></li>
+<li class="chapter" data-level="5.2.2" data-path="tendency.html"><a href="tendency.html#absolutely"><i class="fa fa-check"></i><b>5.2.2</b> Absolutely!</a></li>
+<li class="chapter" data-level="5.2.3" data-path="tendency.html"><a href="tendency.html#quantiles-anyone"><i class="fa fa-check"></i><b>5.2.3</b> Quantiles anyone?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="tendency.html"><a href="tendency.html#procedures"><i class="fa fa-check"></i><b>5.3</b> Procedures</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="tendency.html"><a href="tendency.html#mean"><i class="fa fa-check"></i><b>5.3.1</b> Mean</a></li>
+<li class="chapter" data-level="5.3.2" data-path="tendency.html"><a href="tendency.html#median"><i class="fa fa-check"></i><b>5.3.2</b> Median</a></li>
+<li class="chapter" data-level="5.3.3" data-path="tendency.html"><a href="tendency.html#mode"><i class="fa fa-check"></i><b>5.3.3</b> Mode</a></li>
+<li class="chapter" data-level="5.3.4" data-path="tendency.html"><a href="tendency.html#percentile-and-quantile"><i class="fa fa-check"></i><b>5.3.4</b> Percentile and quantile</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="tendency.html"><a href="tendency.html#always-problems"><i class="fa fa-check"></i><b>5.4</b> Always problems</a></li>
+<li class="chapter" data-level="5.5" data-path="tendency.html"><a href="tendency.html#visualizing-with-tukeys-box"><i class="fa fa-check"></i><b>5.5</b> Visualizing with Tukey’s box</a></li>
+<li class="chapter" data-level="5.6" data-path="tendency.html"><a href="tendency.html#what-have-we-gotten-to-so-far"><i class="fa fa-check"></i><b>5.6</b> What have we gotten to so far?</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="deviation.html"><a href="deviation.html"><i class="fa fa-check"></i><b>6</b> Deviation</a><ul>
+<li class="chapter" data-level="6.1" data-path="deviation.html"><a href="deviation.html#learning-outcomes-1"><i class="fa fa-check"></i><b>6.1</b> Learning outcomes</a></li>
+<li class="chapter" data-level="6.2" data-path="deviation.html"><a href="deviation.html#rev-up-the-deuce"><i class="fa fa-check"></i><b>6.2</b> Rev up the deuce</a></li>
+<li class="chapter" data-level="6.3" data-path="deviation.html"><a href="deviation.html#blinded-by-the-light"><i class="fa fa-check"></i><b>6.3</b> Blinded by the light</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="deviation.html"><a href="deviation.html#whats-a-sample-again"><i class="fa fa-check"></i><b>6.3.1</b> What’s a sample? (again)</a></li>
+<li class="chapter" data-level="6.3.2" data-path="deviation.html"><a href="deviation.html#standard-deviation"><i class="fa fa-check"></i><b>6.3.2</b> 1. Standard deviation</a></li>
+<li class="chapter" data-level="6.3.3" data-path="deviation.html"><a href="deviation.html#robust-measures"><i class="fa fa-check"></i><b>6.3.3</b> 2. Robust measures</a></li>
+<li class="chapter" data-level="6.3.4" data-path="deviation.html"><a href="deviation.html#correlation"><i class="fa fa-check"></i><b>6.3.4</b> 3. Correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="deviation.html"><a href="deviation.html#the-tails-have-it"><i class="fa fa-check"></i><b>6.4</b> The tails have it!</a></li>
+<li class="chapter" data-level="6.5" data-path="deviation.html"><a href="deviation.html#how-can-we-use-all-of-this"><i class="fa fa-check"></i><b>6.5</b> How can we use all of this?</a></li>
+<li class="chapter" data-level="6.6" data-path="deviation.html"><a href="deviation.html#problems-always-problems"><i class="fa fa-check"></i><b>6.6</b> Problems, always problems</a></li>
+<li class="chapter" data-level="6.7" data-path="deviation.html"><a href="deviation.html#what-have-we-learned-1"><i class="fa fa-check"></i><b>6.7</b> What have we learned?</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="binomial-distribution.html"><a href="binomial-distribution.html"><i class="fa fa-check"></i><b>7</b> Binomial Distribution</a><ul>
+<li class="chapter" data-level="7.1" data-path="binomial-distribution.html"><a href="binomial-distribution.html#what-is-a-probability-distribution"><i class="fa fa-check"></i><b>7.1</b> What is a probability distribution?</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="binomial-distribution.html"><a href="binomial-distribution.html#discrete-or-continuous"><i class="fa fa-check"></i><b>7.1.1</b> Discrete or continuous?</a></li>
+<li class="chapter" data-level="7.1.2" data-path="binomial-distribution.html"><a href="binomial-distribution.html#examples-of-distributions"><i class="fa fa-check"></i><b>7.1.2</b> Examples of distributions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="imagine-this.html"><a href="imagine-this.html"><i class="fa fa-check"></i><b>8</b> Imagine this</a></li>
+<li class="chapter" data-level="9" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html"><i class="fa fa-check"></i><b>9</b> What’s a binomial?</a><ul>
+<li class="chapter" data-level="9.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#then-there-were-two"><i class="fa fa-check"></i><b>9.1</b> Then there were two</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#how-often"><i class="fa fa-check"></i><b>9.1.1</b> How often?</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#being-binomial"><i class="fa fa-check"></i><b>9.2</b> Being binomial</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#consumer-goods-r-us"><i class="fa fa-check"></i><b>9.2.1</b> Consumer goods ‘r’ us</a></li>
+<li class="chapter" data-level="9.2.2" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#whats-a-binomial-1"><i class="fa fa-check"></i><b>9.2.2</b> What’s a binomial?</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#whats-a-combination"><i class="fa fa-check"></i><b>9.3</b> What’s a combination?</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#for-a-simple-example"><i class="fa fa-check"></i><b>9.3.1</b> For a simple example</a></li>
+<li class="chapter" data-level="9.3.2" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#we-have-to-start-with-permutation-first"><i class="fa fa-check"></i><b>9.3.2</b> We have to start with permutation first</a></li>
+<li class="chapter" data-level="9.3.3" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#start-with-a-abcde-letters-in-a-text-to-your-friend."><i class="fa fa-check"></i><b>9.3.3</b> Start with <span class="math inline">\(A = \{a,b,c,d,e\}\)</span> letters in a text to your friend.</a></li>
+<li class="chapter" data-level="9.3.4" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#find-the-number-of-3-letter-words-you-can-form-from-a-list-of-5-letters."><i class="fa fa-check"></i><b>9.3.4</b> Find the number of 3 letter words you can form from a list of 5 letters.</a></li>
+<li class="chapter" data-level="9.3.5" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#what-about-combinations"><i class="fa fa-check"></i><b>9.3.5</b> What about combinations?</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#combinations-from-permutations"><i class="fa fa-check"></i><b>9.4</b> Combinations from permutations</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#try-these-combinations-and-permutations"><i class="fa fa-check"></i><b>9.4.1</b> Try these: combinations and permutations</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#so-how-do-we-use-the-binomial-process"><i class="fa fa-check"></i><b>9.5</b> So how do we use the binomial process?</a></li>
+<li class="chapter" data-level="9.6" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#try-this-binomial-distribution"><i class="fa fa-check"></i><b>9.6</b> Try this: binomial distribution</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#try-another"><i class="fa fa-check"></i><b>9.6.1</b> Try another</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#what-does-a-graph-of-the-binomial-look-like"><i class="fa fa-check"></i><b>9.7</b> What does a graph of the binomial look like?</a></li>
+<li class="chapter" data-level="9.8" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#binomial-statistics"><i class="fa fa-check"></i><b>9.8</b> Binomial statistics</a><ul>
+<li class="chapter" data-level="9.8.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#try-this-2"><i class="fa fa-check"></i><b>9.8.1</b> Try this</a></li>
+</ul></li>
+<li class="chapter" data-level="9.9" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#short-exercises"><i class="fa fa-check"></i><b>9.9</b> Short exercises</a></li>
+<li class="chapter" data-level="9.10" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#binomial-barrels"><i class="fa fa-check"></i><b>9.10</b> Binomial barrels</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="poisson-distribution.html"><a href="poisson-distribution.html"><i class="fa fa-check"></i><b>10</b> Poisson Distribution</a><ul>
+<li class="chapter" data-level="10.1" data-path="poisson-distribution.html"><a href="poisson-distribution.html#imagine-this-1"><i class="fa fa-check"></i><b>10.1</b> Imagine this</a></li>
+<li class="chapter" data-level="10.2" data-path="poisson-distribution.html"><a href="poisson-distribution.html#lets-calculate"><i class="fa fa-check"></i><b>10.2</b> Let’s calculate</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="poisson-distribution.html"><a href="poisson-distribution.html#try-this-3"><i class="fa fa-check"></i><b>10.2.1</b> Try this</a></li>
+<li class="chapter" data-level="10.2.2" data-path="poisson-distribution.html"><a href="poisson-distribution.html#results"><i class="fa fa-check"></i><b>10.2.2</b> Results</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="poisson-distribution.html"><a href="poisson-distribution.html#some-mercifully-short-exercises"><i class="fa fa-check"></i><b>10.3</b> Some (mercifully) short exercises</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="poisson-distribution.html"><a href="poisson-distribution.html#not-so-short-exercises"><i class="fa fa-check"></i><b>10.3.1</b> Not so short exercises</a></li>
+<li class="chapter" data-level="10.3.2" data-path="poisson-distribution.html"><a href="poisson-distribution.html#answers"><i class="fa fa-check"></i><b>10.3.2</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html"><i class="fa fa-check"></i><b>11</b> How likely is that?</a><ul>
+<li class="chapter" data-level="11.1" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#learning-outcomes-2"><i class="fa fa-check"></i><b>11.1</b> Learning outcomes</a></li>
+<li class="chapter" data-level="11.2" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#invitation-to-a-formal"><i class="fa fa-check"></i><b>11.2</b> Invitation to a formal</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#a-bit-of-english"><i class="fa fa-check"></i><b>11.2.1</b> A bit of English</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#dress-down-a-bit"><i class="fa fa-check"></i><b>11.3</b> Dress down a bit</a></li>
+<li class="chapter" data-level="11.4" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#try-another-1"><i class="fa fa-check"></i><b>11.4</b> Try another</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#what-does-the-event-space-look-like"><i class="fa fa-check"></i><b>11.4.1</b> What does the event space look like?</a></li>
+<li class="chapter" data-level="11.4.2" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#what-is"><i class="fa fa-check"></i><b>11.4.2</b> What is…</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#law-of-conditional-probability-bayes"><i class="fa fa-check"></i><b>11.5</b> Law of Conditional Probability (Bayes)</a></li>
+<li class="chapter" data-level="11.6" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#practice-1"><i class="fa fa-check"></i><b>11.6</b> Practice 1</a></li>
+<li class="chapter" data-level="11.7" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#practice-2"><i class="fa fa-check"></i><b>11.7</b> Practice 2</a></li>
+<li class="chapter" data-level="11.8" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#nothing-is-random"><i class="fa fa-check"></i><b>11.8</b> Nothing is random!</a><ul>
+<li class="chapter" data-level="11.8.1" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#suppose-20-of-the-people-in-a-city-prefer-pepsi-cola-as-their-soft-drink-of-choice."><i class="fa fa-check"></i><b>11.8.1</b> Suppose 20% of the people in a city prefer Pepsi-Cola as their soft drink of choice.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="confidence-intervals.html"><a href="confidence-intervals.html"><i class="fa fa-check"></i><b>12</b> Confidence Intervals</a><ul>
+<li class="chapter" data-level="12.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#imagine-this-2"><i class="fa fa-check"></i><b>12.1</b> Imagine this…</a></li>
+<li class="chapter" data-level="12.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#objectives"><i class="fa fa-check"></i><b>12.2</b> Objectives</a></li>
+<li class="chapter" data-level="12.3" data-path="confidence-intervals.html"><a href="confidence-intervals.html#try-this-4"><i class="fa fa-check"></i><b>12.3</b> Try this</a></li>
+<li class="chapter" data-level="12.4" data-path="confidence-intervals.html"><a href="confidence-intervals.html#what-about-the-sample-standard-deviation"><i class="fa fa-check"></i><b>12.4</b> What about the sample standard deviation?</a></li>
+<li class="chapter" data-level="12.5" data-path="confidence-intervals.html"><a href="confidence-intervals.html#explore-a-bit-further"><i class="fa fa-check"></i><b>12.5</b> Explore a bit further</a></li>
+<li class="chapter" data-level="12.6" data-path="confidence-intervals.html"><a href="confidence-intervals.html#confidence-interval-1-known-population-standard-deviation"><i class="fa fa-check"></i><b>12.6</b> Confidence interval ##1: known population standard deviation</a></li>
+<li class="chapter" data-level="12.7" data-path="confidence-intervals.html"><a href="confidence-intervals.html#our-procedure"><i class="fa fa-check"></i><b>12.7</b> Our procedure</a></li>
+<li class="chapter" data-level="12.8" data-path="confidence-intervals.html"><a href="confidence-intervals.html#on-to-the-unknown"><i class="fa fa-check"></i><b>12.8</b> On to the unknown</a></li>
+<li class="chapter" data-level="12.9" data-path="confidence-intervals.html"><a href="confidence-intervals.html#by-the-way-who-is-student"><i class="fa fa-check"></i><b>12.9</b> By the way, who is Student?</a></li>
+<li class="chapter" data-level="12.10" data-path="confidence-intervals.html"><a href="confidence-intervals.html#our-procedure-1"><i class="fa fa-check"></i><b>12.10</b> Our procedure</a></li>
+<li class="chapter" data-level="12.11" data-path="confidence-intervals.html"><a href="confidence-intervals.html#exercises"><i class="fa fa-check"></i><b>12.11</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html"><i class="fa fa-check"></i><b>13</b> More Inference: Hypothesis Testing</a><ul>
+<li class="chapter" data-level="13.1" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#imagine-this-3"><i class="fa fa-check"></i><b>13.1</b> Imagine this</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#two-errors-are-possible"><i class="fa fa-check"></i><b>13.1.1</b> Two errors are possible</a></li>
+<li class="chapter" data-level="13.1.2" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#control-is-probability"><i class="fa fa-check"></i><b>13.1.2</b> Control is probability</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#on-to-the-unknown-1"><i class="fa fa-check"></i><b>13.2</b> On to the unknown</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#by-the-way-who-is-student-1"><i class="fa fa-check"></i><b>13.2.1</b> By the way, who is Student?</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#on-with-our-story"><i class="fa fa-check"></i><b>13.3</b> On with our story…</a></li>
+<li class="chapter" data-level="13.4" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#what-about-two-shifts"><i class="fa fa-check"></i><b>13.4</b> What about two shifts?</a></li>
+<li class="chapter" data-level="13.5" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#exercises-1"><i class="fa fa-check"></i><b>13.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>14</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="14.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#the-perfect-relationship"><i class="fa fa-check"></i><b>14.1</b> The perfect relationship</a></li>
+<li class="chapter" data-level="14.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#linear-regression"><i class="fa fa-check"></i><b>14.2</b> Linear regression</a></li>
+<li class="chapter" data-level="14.3" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#ordinary-least-squares"><i class="fa fa-check"></i><b>14.3</b> Ordinary least squares</a></li>
+<li class="chapter" data-level="14.4" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#residual-interests"><i class="fa fa-check"></i><b>14.4</b> Residual interests</a></li>
+<li class="chapter" data-level="14.5" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#a-dash-of-calculus"><i class="fa fa-check"></i><b>14.5</b> A dash of calculus</a></li>
+<li class="chapter" data-level="14.6" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#now-for-the-residuals"><i class="fa fa-check"></i><b>14.6</b> Now for the residuals</a></li>
+<li class="chapter" data-level="14.7" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#have-some-confidence"><i class="fa fa-check"></i><b>14.7</b> Have some confidence</a></li>
+<li class="chapter" data-level="14.8" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#central-to-our-discussion"><i class="fa fa-check"></i><b>14.8</b> Central to our discussion</a></li>
+<li class="chapter" data-level="14.9" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#on-to-the-unknown-2"><i class="fa fa-check"></i><b>14.9</b> On to the unknown</a></li>
+<li class="chapter" data-level="14.10" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#by-the-way-who-is-student-2"><i class="fa fa-check"></i><b>14.10</b> By the way, who is Student?</a></li>
+<li class="chapter" data-level="14.11" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#in-all-confidence-forecasting-for-fun-and"><i class="fa fa-check"></i><b>14.11</b> In all confidence: forecasting for fun and …</a></li>
+<li class="chapter" data-level="14.12" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#how-confident-are-we-in-our-estimates"><i class="fa fa-check"></i><b>14.12</b> How confident are we in our estimates?</a></li>
+<li class="chapter" data-level="14.13" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#next-lets-hypothesize"><i class="fa fa-check"></i><b>14.13</b> Next let’s hypothesize</a></li>
+<li class="chapter" data-level="14.14" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#yet-another-school-of-thought"><i class="fa fa-check"></i><b>14.14</b> Yet another school of thought</a></li>
+<li class="chapter" data-level="14.15" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#summary-of-simple-linear-regression-estimation"><i class="fa fa-check"></i><b>14.15</b> Summary of simple linear regression estimation</a></li>
+<li class="chapter" data-level="14.16" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#how-good-a-fit"><i class="fa fa-check"></i><b>14.16</b> How good a fit?</a></li>
+<li class="chapter" data-level="14.17" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#lets-build-more-statistics"><i class="fa fa-check"></i><b>14.17</b> Let’s build more statistics!</a></li>
+<li class="chapter" data-level="14.18" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#analyze-this"><i class="fa fa-check"></i><b>14.18</b> Analyze this …</a></li>
+<li class="chapter" data-level="14.19" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#two-samples-same-population"><i class="fa fa-check"></i><b>14.19</b> Two samples – same population?</a></li>
+<li class="chapter" data-level="14.20" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#anything-abnormal"><i class="fa fa-check"></i><b>14.20</b> Anything abnormal?</a></li>
+<li class="chapter" data-level="14.21" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#exercises-2"><i class="fa fa-check"></i><b>14.21</b> Exercises</a><ul>
+<li class="chapter" data-level="14.21.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#us-house-of-representatives-seats-and-unemployment"><i class="fa fa-check"></i><b>14.21.1</b> US House of Representatives seats and unemployment</a></li>
+<li class="chapter" data-level="14.21.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#peruvian-anchovies"><i class="fa fa-check"></i><b>14.21.2</b> Peruvian anchovies</a></li>
+<li class="chapter" data-level="14.21.3" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#bronx-corn"><i class="fa fa-check"></i><b>14.21.3</b> Bronx corn</a></li>
+<li class="chapter" data-level="14.21.4" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#consumption-and-disposable-income"><i class="fa fa-check"></i><b>14.21.4</b> Consumption and disposable income</a></li>
+</ul></li>
+<li class="chapter" data-level="14.22" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#references"><i class="fa fa-check"></i><b>14.22</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="quantile-regression.html"><a href="quantile-regression.html"><i class="fa fa-check"></i><b>15</b> Quantile regression</a><ul>
+<li class="chapter" data-level="15.1" data-path="quantile-regression.html"><a href="quantile-regression.html#what-is-it"><i class="fa fa-check"></i><b>15.1</b> What is it?</a></li>
+<li class="chapter" data-level="15.2" data-path="quantile-regression.html"><a href="quantile-regression.html#an-example"><i class="fa fa-check"></i><b>15.2</b> An example</a></li>
+<li class="chapter" data-level="15.3" data-path="quantile-regression.html"><a href="quantile-regression.html#even-in-ggplot2"><i class="fa fa-check"></i><b>15.3</b> Even in ggplot2</a></li>
+<li class="chapter" data-level="15.4" data-path="quantile-regression.html"><a href="quantile-regression.html#interpretations"><i class="fa fa-check"></i><b>15.4</b> Interpretations</a></li>
+<li class="chapter" data-level="15.5" data-path="quantile-regression.html"><a href="quantile-regression.html#exercises-3"><i class="fa fa-check"></i><b>15.5</b> Exercises</a><ul>
+<li class="chapter" data-level="15.5.1" data-path="quantile-regression.html"><a href="quantile-regression.html#us-house-of-representatives-seats-and-unemployment-1"><i class="fa fa-check"></i><b>15.5.1</b> US House of Representatives seats and unemployment</a></li>
+<li class="chapter" data-level="15.5.2" data-path="quantile-regression.html"><a href="quantile-regression.html#peruvian-anchovies-1"><i class="fa fa-check"></i><b>15.5.2</b> Peruvian anchovies</a></li>
+<li class="chapter" data-level="15.5.3" data-path="quantile-regression.html"><a href="quantile-regression.html#bronx-corn-1"><i class="fa fa-check"></i><b>15.5.3</b> Bronx corn</a></li>
+<li class="chapter" data-level="15.5.4" data-path="quantile-regression.html"><a href="quantile-regression.html#consumption-and-disposable-income-1"><i class="fa fa-check"></i><b>15.5.4</b> Consumption and disposable income</a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="quantile-regression.html"><a href="quantile-regression.html#references-1"><i class="fa fa-check"></i><b>15.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>16</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="16.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#the-more-perfect-relationship"><i class="fa fa-check"></i><b>16.1</b> The more perfect relationship</a></li>
+<li class="chapter" data-level="16.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#arrays-and-you"><i class="fa fa-check"></i><b>16.2</b> Arrays and You</a><ul>
+<li class="chapter" data-level="16.2.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#running-a-regression"><i class="fa fa-check"></i><b>16.2.1</b> Running a regression</a></li>
+<li class="chapter" data-level="16.2.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#more-about-residuals"><i class="fa fa-check"></i><b>16.2.2</b> More about residuals</a></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#more-array-work"><i class="fa fa-check"></i><b>16.3</b> More Array Work</a></li>
+<li class="chapter" data-level="16.4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#exercising-the-model"><i class="fa fa-check"></i><b>16.4</b> Exercising the model</a><ul>
+<li class="chapter" data-level="16.4.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#exercise-1-housing-market-determinants"><i class="fa fa-check"></i><b>16.4.1</b> Exercise 1: housing market determinants</a></li>
+<li class="chapter" data-level="16.4.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#exercise-2-risk-driver-model-using-regression-analysis"><i class="fa fa-check"></i><b>16.4.2</b> Exercise 2: risk driver model using regression analysis</a></li>
+<li class="chapter" data-level="16.4.3" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#exercise-3-commercial-loan-projection-using-regression"><i class="fa fa-check"></i><b>16.4.3</b> Exercise 3: commercial loan projection using regression</a></li>
+<li class="chapter" data-level="16.4.4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#work-flow"><i class="fa fa-check"></i><b>16.4.4</b> Work Flow</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="binary-regression.html"><a href="binary-regression.html"><i class="fa fa-check"></i><b>17</b> Binary Regression</a><ul>
+<li class="chapter" data-level="17.1" data-path="binary-regression.html"><a href="binary-regression.html#what-is-binary-risk-analysis"><i class="fa fa-check"></i><b>17.1</b> What is Binary Risk Analysis?</a></li>
+<li class="chapter" data-level="17.2" data-path="binary-regression.html"><a href="binary-regression.html#an-expository-simulation"><i class="fa fa-check"></i><b>17.2</b> An expository simulation</a></li>
+<li class="chapter" data-level="17.3" data-path="binary-regression.html"><a href="binary-regression.html#enter-the-discrete-decision-maker"><i class="fa fa-check"></i><b>17.3</b> Enter the discrete decision maker</a></li>
+<li class="chapter" data-level="17.4" data-path="binary-regression.html"><a href="binary-regression.html#the-odds-are"><i class="fa fa-check"></i><b>17.4</b> The odds are …</a></li>
+<li class="chapter" data-level="17.5" data-path="binary-regression.html"><a href="binary-regression.html#predict-now"><i class="fa fa-check"></i><b>17.5</b> Predict now …</a></li>
+<li class="chapter" data-level="17.6" data-path="binary-regression.html"><a href="binary-regression.html#a-deposit"><i class="fa fa-check"></i><b>17.6</b> A deposit</a></li>
+<li class="chapter" data-level="17.7" data-path="binary-regression.html"><a href="binary-regression.html#references-2"><i class="fa fa-check"></i><b>17.7</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="time-series-analysis.html"><a href="time-series-analysis.html"><i class="fa fa-check"></i><b>18</b> Time Series Analysis</a><ul>
+<li class="chapter" data-level="18.1" data-path="time-series-analysis.html"><a href="time-series-analysis.html#preliminaries-1"><i class="fa fa-check"></i><b>18.1</b> Preliminaries</a></li>
+<li class="chapter" data-level="18.2" data-path="time-series-analysis.html"><a href="time-series-analysis.html#where-do-we-start"><i class="fa fa-check"></i><b>18.2</b> Where do we start?</a></li>
+<li class="chapter" data-level="18.3" data-path="time-series-analysis.html"><a href="time-series-analysis.html#autoregressive-processes"><i class="fa fa-check"></i><b>18.3</b> Autoregressive processes</a></li>
+<li class="chapter" data-level="18.4" data-path="time-series-analysis.html"><a href="time-series-analysis.html#moving-average-processes"><i class="fa fa-check"></i><b>18.4</b> Moving average processes</a></li>
+<li class="chapter" data-level="18.5" data-path="time-series-analysis.html"><a href="time-series-analysis.html#takeaways"><i class="fa fa-check"></i><b>18.5</b> Takeaways</a></li>
+<li class="chapter" data-level="18.6" data-path="time-series-analysis.html"><a href="time-series-analysis.html#references-3"><i class="fa fa-check"></i><b>18.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html"><i class="fa fa-check"></i><b>19</b> Bootstrapping Estimates</a><ul>
+<li class="chapter" data-level="19.1" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#imagine"><i class="fa fa-check"></i><b>19.1</b> Imagine</a></li>
+<li class="chapter" data-level="19.2" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#tools"><i class="fa fa-check"></i><b>19.2</b> Tools</a></li>
+<li class="chapter" data-level="19.3" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#d-p-q-runif"><i class="fa fa-check"></i><b>19.3</b> <code>[d p q r]unif</code></a></li>
+<li class="chapter" data-level="19.4" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#permutations-with-sample"><i class="fa fa-check"></i><b>19.4</b> Permutations with <code>sample()</code></a></li>
+<li class="chapter" data-level="19.5" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#resampling-with-sample"><i class="fa fa-check"></i><b>19.5</b> Resampling with <code>sample()</code></a></li>
+<li class="chapter" data-level="19.6" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#expected-shortfall-test"><i class="fa fa-check"></i><b>19.6</b> Expected shortfall test</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/wgfoote/book-stat-thinking" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Statistical Thinking</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="deviation" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Deviation</h1>
+<div id="learning-outcomes-1" class="section level2">
+<h2><span class="header-section-number">6.1</span> Learning outcomes</h2>
+<ol style="list-style-type: decimal">
+<li><p>Using various measures of deviation from a tendency, calculate average scales of data</p></li>
+<li><p>Identify the applicability of each deviation measure to answer business questions.</p></li>
+<li><p>Formulate and explanation an interpretation of deviation measure results to answer business questions.</p></li>
+</ol>
+<p>Deviation, distance, variation, scale, redisual, and even error are very similar concepts. They form the backbone of statistics because they measure how far away actual data is from our model, our supposition, our hypothesis, our belief of where we would like to think the data is. And of course there are lot ways to compute distance and deviation.</p>
+<p>We just computed several locations, trends, averages, percentiles, even quartiles with a box! Each of these are our peculiar mental image of where we think the data ought to be, at least most of the time. The rest of the time data is, where data happens to be when we stumble on it. Getting to an understanding of scale and distance and deviation we had to form a belief, calculate an average, build a trend. Now we move on to a more complete story of any particular data stream.</p>
+</div>
+<div id="rev-up-the-deuce" class="section level2">
+<h2><span class="header-section-number">6.2</span> Rev up the deuce</h2>
+<p>This is where we will start, again. This time we are going to mix it up a bit. We are back at our car auction in New Jersey. We have heard enough about price and now we want to know why price might vary. One explanation from our far-reaching understanding of economic choice is that we might be buying car quality. One measure of quality is how many miles the previoius owner drove the car. We read odometers to get that data. We now have two sets (vectors) of data. Each observation is a pair of two observations for each car: price and miles.</p>
+<table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+i
+</th>
+<th style="text-align:center;">
+price
+</th>
+<th style="text-align:center;">
+miles
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;font-weight: bold;color: blue !important;">
+12500
+</td>
+<td style="text-align:center;font-weight: bold;color: blue !important;">
+43521
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;font-weight: bold;color: blue !important;">
+13350
+</td>
+<td style="text-align:center;font-weight: bold;color: blue !important;">
+31002
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;font-weight: bold;color: blue !important;">
+14600
+</td>
+<td style="text-align:center;font-weight: bold;color: blue !important;">
+18868
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;font-weight: bold;color: blue !important;">
+15750
+</td>
+<td style="text-align:center;font-weight: bold;color: blue !important;">
+12339
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;font-weight: bold;color: blue !important;">
+17500
+</td>
+<td style="text-align:center;font-weight: bold;color: blue !important;">
+9997
+</td>
+</tr>
+</tbody>
+</table>
+<p>We can set up three ways of thinking about our car data:</p>
+<ol style="list-style-type: decimal">
+<li><p>Price (<span class="math inline">\(Y_i\)</span>) variations on their own: <span class="math inline">\(Y_i=\bar{Y}+e_i\)</span></p></li>
+<li><p>Miles (<span class="math inline">\(X_i\)</span>) variations on their own: <span class="math inline">\(X_i=\bar{X}+e_i\)</span></p></li>
+<li><p>Price dependency on miles: <span class="math inline">\(Y_i=b_0+b_1X_i+e_i\)</span></p></li>
+</ol>
+<p>To put all of these models together on one graph we can plot each of the 5 points on a scatter plot like so:</p>
+<div id="htmlwidget-21f99c53014bc77a2162" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-21f99c53014bc77a2162">{"x":{"data":[{"x":[43521,31002,18868,12339,9997],"y":[12500,13350,14600,15750,17500],"text":["miles: 43521<br />price: 12500","miles: 31002<br />price: 13350","miles: 18868<br />price: 14600","miles: 12339<br />price: 15750","miles:  9997<br />price: 17500"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,255,1)","opacity":1,"size":11.3385826771654,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,255,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.2283105022831,"r":7.30593607305936,"b":40.1826484018265,"l":54.7945205479452},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[8320.8,45197.2],"tickmode":"array","ticktext":["10000","20000","30000","40000","NA"],"tickvals":[10000,20000,30000,40000],"categoryorder":"array","categoryarray":["10000","20000","30000","40000","NA"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"miles","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[12250,17750],"tickmode":"array","ticktext":["NA","13000","14000","15000","16000","17000","NA"],"tickvals":[13000,14000,15000,16000,17000],"categoryorder":"array","categoryarray":["NA","13000","14000","15000","16000","17000","NA"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"price","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"8f40745f79b5":{"x":{},"y":{},"type":"scatter"}},"cur_data":"8f40745f79b5","visdat":{"8f40745f79b5":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>Let’s look at the Y-axis, price first and draw a horizontal line to depict the arithmetic average of price (<span class="math inline">\(Y_i\)</span>). Then draw error bars from each data point to this line all in the Y-direction.</p>
+<p><div id="htmlwidget-c5a79a305e7e8512617a" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c5a79a305e7e8512617a">{"x":{"data":[{"x":[43521,31002,18868,12339,9997],"y":[12500,13350,14600,15750,17500],"text":["miles: 43521<br />price: 12500","miles: 31002<br />price: 13350","miles: 18868<br />price: 14600","miles: 12339<br />price: 15750","miles:  9997<br />price: 17500"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,255,1)","opacity":1,"size":11.3385826771654,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,255,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[8320.8,45197.2],"y":[14740,14740],"text":"yintercept: 14740","type":"scatter","mode":"lines","line":{"width":5.66929133858268,"color":"rgba(255,0,0,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[43521,43521,null,31002,31002,null,18868,18868,null,12339,12339,null,9997,9997],"y":[12500,14740,null,13350,14740,null,14600,14740,null,15750,14740,null,17500,14740],"text":["miles: 43521<br />price: 12500<br />miles: 43521<br />Y_bar: 14740<br />miles: 43521<br />price: 12500","miles: 43521<br />price: 12500<br />miles: 43521<br />Y_bar: 14740<br />miles: 43521<br />price: 12500",null,"miles: 31002<br />price: 13350<br />miles: 31002<br />Y_bar: 14740<br />miles: 31002<br />price: 13350","miles: 31002<br />price: 13350<br />miles: 31002<br />Y_bar: 14740<br />miles: 31002<br />price: 13350",null,"miles: 18868<br />price: 14600<br />miles: 18868<br />Y_bar: 14740<br />miles: 18868<br />price: 14600","miles: 18868<br />price: 14600<br />miles: 18868<br />Y_bar: 14740<br />miles: 18868<br />price: 14600",null,"miles: 12339<br />price: 15750<br />miles: 12339<br />Y_bar: 14740<br />miles: 12339<br />price: 15750","miles: 12339<br />price: 15750<br />miles: 12339<br />Y_bar: 14740<br />miles: 12339<br />price: 15750",null,"miles:  9997<br />price: 17500<br />miles:  9997<br />Y_bar: 14740<br />miles:  9997<br />price: 17500","miles:  9997<br />price: 17500<br />miles:  9997<br />Y_bar: 14740<br />miles:  9997<br />price: 17500"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(0,0,0,0.3)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.2283105022831,"r":7.30593607305936,"b":40.1826484018265,"l":54.7945205479452},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[8320.8,45197.2],"tickmode":"array","ticktext":["10000","20000","30000","40000","NA"],"tickvals":[10000,20000,30000,40000],"categoryorder":"array","categoryarray":["10000","20000","30000","40000","NA"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"miles","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[12250,17750],"tickmode":"array","ticktext":["NA","13000","14000","15000","16000","17000","NA"],"tickvals":[13000,14000,15000,16000,17000],"categoryorder":"array","categoryarray":["NA","13000","14000","15000","16000","17000","NA"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"price","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"8f4033585c":{"x":{},"y":{},"type":"scatter"},"8f4019e77097":{"yintercept":{}},"8f40338657f3":{"x":{},"y":{},"xend":{},"yend":{},"x.1":{},"y.1":{}}},"cur_data":"8f4033585c","visdat":{"8f4033585c":["function (y) ","x"],"8f4019e77097":["function (y) ","x"],"8f40338657f3":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+This so looks like the error bar plot we generated before where now miles seems to act like the observations index. Try to draw a similar plot of the X-axis error bars around the arithmetic mean of miles.</p>
+<p><br></p>
+<button onclick="showText(&#39;myDIV24&#39;)">
+show / hide
+</button>
+<div id="myDIV24" style="display:none;">
+<p><br></p>
+<div id="htmlwidget-ad6ad9ed9e0911f953fc" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ad6ad9ed9e0911f953fc">{"x":{"data":[{"x":[43521,31002,18868,12339,9997],"y":[12500,13350,14600,15750,17500],"text":["miles: 43521<br />price: 12500","miles: 31002<br />price: 13350","miles: 18868<br />price: 14600","miles: 12339<br />price: 15750","miles:  9997<br />price: 17500"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,255,1)","opacity":1,"size":11.3385826771654,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,255,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[23145.4,23145.4],"y":[12250,17750],"text":"xintercept: 23145","type":"scatter","mode":"lines","line":{"width":5.66929133858268,"color":"rgba(255,0,0,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[43521,23145.4,null,31002,23145.4,null,18868,23145.4,null,12339,23145.4,null,9997,23145.4],"y":[12500,12500,null,13350,13350,null,14600,14600,null,15750,15750,null,17500,17500],"text":["miles: 43521<br />price: 12500<br />X_bar: 23145<br />price: 12500<br />miles: 43521<br />price: 12500","miles: 43521<br />price: 12500<br />X_bar: 23145<br />price: 12500<br />miles: 43521<br />price: 12500",null,"miles: 31002<br />price: 13350<br />X_bar: 23145<br />price: 13350<br />miles: 31002<br />price: 13350","miles: 31002<br />price: 13350<br />X_bar: 23145<br />price: 13350<br />miles: 31002<br />price: 13350",null,"miles: 18868<br />price: 14600<br />X_bar: 23145<br />price: 14600<br />miles: 18868<br />price: 14600","miles: 18868<br />price: 14600<br />X_bar: 23145<br />price: 14600<br />miles: 18868<br />price: 14600",null,"miles: 12339<br />price: 15750<br />X_bar: 23145<br />price: 15750<br />miles: 12339<br />price: 15750","miles: 12339<br />price: 15750<br />X_bar: 23145<br />price: 15750<br />miles: 12339<br />price: 15750",null,"miles:  9997<br />price: 17500<br />X_bar: 23145<br />price: 17500<br />miles:  9997<br />price: 17500","miles:  9997<br />price: 17500<br />X_bar: 23145<br />price: 17500<br />miles:  9997<br />price: 17500"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(0,0,0,0.3)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.2283105022831,"r":7.30593607305936,"b":40.1826484018265,"l":54.7945205479452},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[8320.8,45197.2],"tickmode":"array","ticktext":["10000","20000","30000","40000","NA"],"tickvals":[10000,20000,30000,40000],"categoryorder":"array","categoryarray":["10000","20000","30000","40000","NA"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"miles","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[12250,17750],"tickmode":"array","ticktext":["NA","13000","14000","15000","16000","17000","NA"],"tickvals":[13000,14000,15000,16000,17000],"categoryorder":"array","categoryarray":["NA","13000","14000","15000","16000","17000","NA"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"price","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"8f404f11e5d":{"x":{},"y":{},"type":"scatter"},"8f404cf52722":{"xintercept":{}},"8f407e684bb9":{"x":{},"y":{},"xend":{},"yend":{},"x.1":{},"y.1":{}}},"cur_data":"8f404f11e5d","visdat":{"8f404f11e5d":["function (y) ","x"],"8f404cf52722":["function (y) ","x"],"8f407e684bb9":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>We just had to rotate our thnking by 90 degrees clockwise, that’s all. Hover over the virtical average lilne to see the mean of miles as <code>X_bar</code>.</p>
+</div>
+<p><br></p>
+<p>Now let’s layer one graph on the other. This will get a little dense, but will not so badly illustrate the interaction of price and miles.</p>
+<div id="htmlwidget-fac3851feb4efdc4cd24" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-fac3851feb4efdc4cd24">{"x":{"data":[{"x":[43521,31002,18868,12339,9997],"y":[12500,13350,14600,15750,17500],"text":["miles: 43521<br />price: 12500","miles: 31002<br />price: 13350","miles: 18868<br />price: 14600","miles: 12339<br />price: 15750","miles:  9997<br />price: 17500"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,255,1)","opacity":1,"size":11.3385826771654,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,255,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[8320.8,45197.2],"y":[14740,14740],"text":"yintercept: 14740","type":"scatter","mode":"lines","line":{"width":5.66929133858268,"color":"rgba(255,0,0,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[43521,43521,null,31002,31002,null,18868,18868,null,12339,12339,null,9997,9997],"y":[12500,14740,null,13350,14740,null,14600,14740,null,15750,14740,null,17500,14740],"text":["miles: 43521<br />price: 12500<br />miles: 43521<br />Y_bar: 14740<br />miles: 43521<br />price: 12500","miles: 43521<br />price: 12500<br />miles: 43521<br />Y_bar: 14740<br />miles: 43521<br />price: 12500",null,"miles: 31002<br />price: 13350<br />miles: 31002<br />Y_bar: 14740<br />miles: 31002<br />price: 13350","miles: 31002<br />price: 13350<br />miles: 31002<br />Y_bar: 14740<br />miles: 31002<br />price: 13350",null,"miles: 18868<br />price: 14600<br />miles: 18868<br />Y_bar: 14740<br />miles: 18868<br />price: 14600","miles: 18868<br />price: 14600<br />miles: 18868<br />Y_bar: 14740<br />miles: 18868<br />price: 14600",null,"miles: 12339<br />price: 15750<br />miles: 12339<br />Y_bar: 14740<br />miles: 12339<br />price: 15750","miles: 12339<br />price: 15750<br />miles: 12339<br />Y_bar: 14740<br />miles: 12339<br />price: 15750",null,"miles:  9997<br />price: 17500<br />miles:  9997<br />Y_bar: 14740<br />miles:  9997<br />price: 17500","miles:  9997<br />price: 17500<br />miles:  9997<br />Y_bar: 14740<br />miles:  9997<br />price: 17500"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(0,0,0,0.3)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[23145.4,23145.4],"y":[12250,17750],"text":"xintercept: 23145","type":"scatter","mode":"lines","line":{"width":5.66929133858268,"color":"rgba(255,0,0,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[43521,23145.4,null,31002,23145.4,null,18868,23145.4,null,12339,23145.4,null,9997,23145.4],"y":[12500,12500,null,13350,13350,null,14600,14600,null,15750,15750,null,17500,17500],"text":["miles: 43521<br />price: 12500<br />X_bar: 23145<br />price: 12500<br />miles: 43521<br />price: 12500","miles: 43521<br />price: 12500<br />X_bar: 23145<br />price: 12500<br />miles: 43521<br />price: 12500",null,"miles: 31002<br />price: 13350<br />X_bar: 23145<br />price: 13350<br />miles: 31002<br />price: 13350","miles: 31002<br />price: 13350<br />X_bar: 23145<br />price: 13350<br />miles: 31002<br />price: 13350",null,"miles: 18868<br />price: 14600<br />X_bar: 23145<br />price: 14600<br />miles: 18868<br />price: 14600","miles: 18868<br />price: 14600<br />X_bar: 23145<br />price: 14600<br />miles: 18868<br />price: 14600",null,"miles: 12339<br />price: 15750<br />X_bar: 23145<br />price: 15750<br />miles: 12339<br />price: 15750","miles: 12339<br />price: 15750<br />X_bar: 23145<br />price: 15750<br />miles: 12339<br />price: 15750",null,"miles:  9997<br />price: 17500<br />X_bar: 23145<br />price: 17500<br />miles:  9997<br />price: 17500","miles:  9997<br />price: 17500<br />X_bar: 23145<br />price: 17500<br />miles:  9997<br />price: 17500"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(0,0,0,0.3)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.2283105022831,"r":7.30593607305936,"b":40.1826484018265,"l":54.7945205479452},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[8320.8,45197.2],"tickmode":"array","ticktext":["10000","20000","30000","40000","NA"],"tickvals":[10000,20000,30000,40000],"categoryorder":"array","categoryarray":["10000","20000","30000","40000","NA"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"miles","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[12250,17750],"tickmode":"array","ticktext":["NA","13000","14000","15000","16000","17000","NA"],"tickvals":[13000,14000,15000,16000,17000],"categoryorder":"array","categoryarray":["NA","13000","14000","15000","16000","17000","NA"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"price","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"8f404c25bc6":{"x":{},"y":{},"type":"scatter"},"8f4015153cc2":{"yintercept":{}},"8f4048597f95":{"x":{},"y":{},"xend":{},"yend":{},"x.1":{},"y.1":{}},"8f40797f6d2e":{"xintercept":{}},"8f407a053b8f":{"x":{},"y":{},"xend":{},"yend":{},"x.1":{},"y.1":{}}},"cur_data":"8f404c25bc6","visdat":{"8f404c25bc6":["function (y) ","x"],"8f4015153cc2":["function (y) ","x"],"8f4048597f95":["function (y) ","x"],"8f40797f6d2e":["function (y) ","x"],"8f407a053b8f":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>We not have price and miles in the cross-hairs and begin to see not just the individual variations of price and miles about their respective means, but can begin to visualize the co-variation of price and miles.</p>
+<p>To illustrate model 3, price dependency on miles: <span class="math inline">\(Y_i=b_0+b_1X_i+e_i\)</span>, let’s draw the best line we can through the scatter, one that will minimize squared deviations of price about our odometer-inspired model of price. Let’s leave that calculation till later. Willingly we will suspend any disbelief about that calculation. Let’s instead believe the numbers to be true. Let’s also keep the cross-hairs. Here we go.</p>
+<div id="htmlwidget-53cc6a6a6692818bf671" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-53cc6a6a6692818bf671">{"x":{"data":[{"x":[43521,31002,18868,12339,9997],"y":[12500,13350,14600,15750,17500],"text":["miles: 43521<br />price: 12500","miles: 31002<br />price: 13350","miles: 18868<br />price: 14600","miles: 12339<br />price: 15750","miles:  9997<br />price: 17500"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,255,1)","opacity":1,"size":11.3385826771654,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,255,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[8320.8,45197.2],"y":[14740,14740],"text":"yintercept: 14740","type":"scatter","mode":"lines","line":{"width":3.77952755905512,"color":"rgba(255,0,0,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[43521,43521,null,31002,31002,null,18868,18868,null,12339,12339,null,9997,9997],"y":[12500,14740,null,13350,14740,null,14600,14740,null,15750,14740,null,17500,14740],"text":["miles: 43521<br />price: 12500<br />miles: 43521<br />Y_bar: 14740<br />miles: 43521<br />price: 12500","miles: 43521<br />price: 12500<br />miles: 43521<br />Y_bar: 14740<br />miles: 43521<br />price: 12500",null,"miles: 31002<br />price: 13350<br />miles: 31002<br />Y_bar: 14740<br />miles: 31002<br />price: 13350","miles: 31002<br />price: 13350<br />miles: 31002<br />Y_bar: 14740<br />miles: 31002<br />price: 13350",null,"miles: 18868<br />price: 14600<br />miles: 18868<br />Y_bar: 14740<br />miles: 18868<br />price: 14600","miles: 18868<br />price: 14600<br />miles: 18868<br />Y_bar: 14740<br />miles: 18868<br />price: 14600",null,"miles: 12339<br />price: 15750<br />miles: 12339<br />Y_bar: 14740<br />miles: 12339<br />price: 15750","miles: 12339<br />price: 15750<br />miles: 12339<br />Y_bar: 14740<br />miles: 12339<br />price: 15750",null,"miles:  9997<br />price: 17500<br />miles:  9997<br />Y_bar: 14740<br />miles:  9997<br />price: 17500","miles:  9997<br />price: 17500<br />miles:  9997<br />Y_bar: 14740<br />miles:  9997<br />price: 17500"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(0,0,0,0.3)","dash":"dash"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[23145.4,23145.4],"y":[11789.7302552808,17771.9176068914],"text":"xintercept: 23145","type":"scatter","mode":"lines","line":{"width":5.66929133858268,"color":"rgba(255,0,0,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[43521,23145.4,null,31002,23145.4,null,18868,23145.4,null,12339,23145.4,null,9997,23145.4],"y":[12500,12500,null,13350,13350,null,14600,14600,null,15750,15750,null,17500,17500],"text":["miles: 43521<br />price: 12500<br />X_bar: 23145<br />price: 12500<br />miles: 43521<br />price: 12500","miles: 43521<br />price: 12500<br />X_bar: 23145<br />price: 12500<br />miles: 43521<br />price: 12500",null,"miles: 31002<br />price: 13350<br />X_bar: 23145<br />price: 13350<br />miles: 31002<br />price: 13350","miles: 31002<br />price: 13350<br />X_bar: 23145<br />price: 13350<br />miles: 31002<br />price: 13350",null,"miles: 18868<br />price: 14600<br />X_bar: 23145<br />price: 14600<br />miles: 18868<br />price: 14600","miles: 18868<br />price: 14600<br />X_bar: 23145<br />price: 14600<br />miles: 18868<br />price: 14600",null,"miles: 12339<br />price: 15750<br />X_bar: 23145<br />price: 15750<br />miles: 12339<br />price: 15750","miles: 12339<br />price: 15750<br />X_bar: 23145<br />price: 15750<br />miles: 12339<br />price: 15750",null,"miles:  9997<br />price: 17500<br />X_bar: 23145<br />price: 17500<br />miles:  9997<br />price: 17500","miles:  9997<br />price: 17500<br />X_bar: 23145<br />price: 17500<br />miles:  9997<br />price: 17500"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(0,0,0,0.3)","dash":"dash"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[9997,10421.3544303797,10845.7088607595,11270.0632911392,11694.417721519,12118.7721518987,12543.1265822785,12967.4810126582,13391.835443038,13816.1898734177,14240.5443037975,14664.8987341772,15089.253164557,15513.6075949367,15937.9620253165,16362.3164556962,16786.6708860759,17211.0253164557,17635.3797468354,18059.7341772152,18484.0886075949,18908.4430379747,19332.7974683544,19757.1518987342,20181.5063291139,20605.8607594937,21030.2151898734,21454.5696202532,21878.9240506329,22303.2784810127,22727.6329113924,23151.9873417722,23576.3417721519,24000.6962025316,24425.0506329114,24849.4050632911,25273.7594936709,25698.1139240506,26122.4683544304,26546.8227848101,26971.1772151899,27395.5316455696,27819.8860759494,28244.2405063291,28668.5949367089,29092.9493670886,29517.3037974684,29941.6582278481,30366.0126582278,30790.3670886076,31214.7215189873,31639.0759493671,32063.4303797468,32487.7848101266,32912.1392405063,33336.4936708861,33760.8481012658,34185.2025316456,34609.5569620253,35033.9113924051,35458.2658227848,35882.6202531646,36306.9746835443,36731.329113924,37155.6835443038,37580.0379746835,38004.3924050633,38428.746835443,38853.1012658228,39277.4556962025,39701.8101265823,40126.164556962,40550.5189873418,40974.8734177215,41399.2278481013,41823.582278481,42247.9367088608,42672.2911392405,43096.6455696203,43521],"y":[16468.3439628288,16412.5629995294,16356.7820362299,16301.0010729305,16245.220109631,16189.4391463316,16133.6581830321,16077.8772197327,16022.0962564332,15966.3152931338,15910.5343298343,15854.7533665349,15798.9724032354,15743.191439936,15687.4104766365,15631.6295133371,15575.8485500376,15520.0675867382,15464.2866234387,15408.5056601392,15352.7246968398,15296.9437335403,15241.1627702409,15185.3818069414,15129.600843642,15073.8198803425,15018.0389170431,14962.2579537436,14906.4769904442,14850.6960271447,14794.9150638453,14739.1341005458,14683.3531372464,14627.5721739469,14571.7912106475,14516.010247348,14460.2292840486,14404.4483207491,14348.6673574497,14292.8863941502,14237.1054308508,14181.3244675513,14125.5435042519,14069.7625409524,14013.981577653,13958.2006143535,13902.4196510541,13846.6386877546,13790.8577244552,13735.0767611557,13679.2957978563,13623.5148345568,13567.7338712574,13511.9529079579,13456.1719446585,13400.390981359,13344.6100180596,13288.8290547601,13233.0480914607,13177.2671281612,13121.4861648618,13065.7052015623,13009.9242382629,12954.1432749634,12898.362311664,12842.5813483645,12786.8003850651,12731.0194217656,12675.2384584662,12619.4574951667,12563.6765318673,12507.8955685678,12452.1146052684,12396.3336419689,12340.5526786695,12284.77171537,12228.9907520706,12173.2097887711,12117.4288254717,12061.6478621722],"text":["miles:  9997<br />price: 16468","miles: 10421<br />price: 16413","miles: 10846<br />price: 16357","miles: 11270<br />price: 16301","miles: 11694<br />price: 16245","miles: 12119<br />price: 16189","miles: 12543<br />price: 16134","miles: 12967<br />price: 16078","miles: 13392<br />price: 16022","miles: 13816<br />price: 15966","miles: 14241<br />price: 15911","miles: 14665<br />price: 15855","miles: 15089<br />price: 15799","miles: 15514<br />price: 15743","miles: 15938<br />price: 15687","miles: 16362<br />price: 15632","miles: 16787<br />price: 15576","miles: 17211<br />price: 15520","miles: 17635<br />price: 15464","miles: 18060<br />price: 15409","miles: 18484<br />price: 15353","miles: 18908<br />price: 15297","miles: 19333<br />price: 15241","miles: 19757<br />price: 15185","miles: 20182<br />price: 15130","miles: 20606<br />price: 15074","miles: 21030<br />price: 15018","miles: 21455<br />price: 14962","miles: 21879<br />price: 14906","miles: 22303<br />price: 14851","miles: 22728<br />price: 14795","miles: 23152<br />price: 14739","miles: 23576<br />price: 14683","miles: 24001<br />price: 14628","miles: 24425<br />price: 14572","miles: 24849<br />price: 14516","miles: 25274<br />price: 14460","miles: 25698<br />price: 14404","miles: 26122<br />price: 14349","miles: 26547<br />price: 14293","miles: 26971<br />price: 14237","miles: 27396<br />price: 14181","miles: 27820<br />price: 14126","miles: 28244<br />price: 14070","miles: 28669<br />price: 14014","miles: 29093<br />price: 13958","miles: 29517<br />price: 13902","miles: 29942<br />price: 13847","miles: 30366<br />price: 13791","miles: 30790<br />price: 13735","miles: 31215<br />price: 13679","miles: 31639<br />price: 13624","miles: 32063<br />price: 13568","miles: 32488<br />price: 13512","miles: 32912<br />price: 13456","miles: 33336<br />price: 13400","miles: 33761<br />price: 13345","miles: 34185<br />price: 13289","miles: 34610<br />price: 13233","miles: 35034<br />price: 13177","miles: 35458<br />price: 13121","miles: 35883<br />price: 13066","miles: 36307<br />price: 13010","miles: 36731<br />price: 12954","miles: 37156<br />price: 12898","miles: 37580<br />price: 12843","miles: 38004<br />price: 12787","miles: 38429<br />price: 12731","miles: 38853<br />price: 12675","miles: 39277<br />price: 12619","miles: 39702<br />price: 12564","miles: 40126<br />price: 12508","miles: 40551<br />price: 12452","miles: 40975<br />price: 12396","miles: 41399<br />price: 12341","miles: 41824<br />price: 12285","miles: 42248<br />price: 12229","miles: 42672<br />price: 12173","miles: 43097<br />price: 12117","miles: 43521<br />price: 12062"],"type":"scatter","mode":"lines","name":"fitted values","line":{"width":3.77952755905512,"color":"rgba(51,102,255,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[43521,43521,null,31002,31002,null,18868,18868,null,12339,12339,null,9997,9997],"y":[12500,12063.7802,null,13350,13708.7768,null,14600,15303.1844,null,15750,16161.095,null,17500,16468.8338],"text":["miles: 43521<br />Y_predicted: 12064<br />miles: 43521<br />price: 12500","miles: 43521<br />Y_predicted: 12064<br />miles: 43521<br />price: 12500",null,"miles: 31002<br />Y_predicted: 13709<br />miles: 31002<br />price: 13350","miles: 31002<br />Y_predicted: 13709<br />miles: 31002<br />price: 13350",null,"miles: 18868<br />Y_predicted: 15303<br />miles: 18868<br />price: 14600","miles: 18868<br />Y_predicted: 15303<br />miles: 18868<br />price: 14600",null,"miles: 12339<br />Y_predicted: 16161<br />miles: 12339<br />price: 15750","miles: 12339<br />Y_predicted: 16161<br />miles: 12339<br />price: 15750",null,"miles:  9997<br />Y_predicted: 16469<br />miles:  9997<br />price: 17500","miles:  9997<br />Y_predicted: 16469<br />miles:  9997<br />price: 17500"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(0,0,139,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.2283105022831,"r":7.30593607305936,"b":40.1826484018265,"l":54.7945205479452},"plot_bgcolor":"rgba(255,255,255,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[8320.8,45197.2],"tickmode":"array","ticktext":["10000","20000","30000","40000","NA"],"tickvals":[10000,20000,30000,40000],"categoryorder":"array","categoryarray":["10000","20000","30000","40000","NA"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"miles","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[11789.7302552808,17771.9176068914],"tickmode":"array","ticktext":["12000","14000","16000","NA"],"tickvals":[12000,14000,16000],"categoryorder":"array","categoryarray":["12000","14000","16000","NA"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"price","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":"transparent","line":{"color":"rgba(51,51,51,1)","width":0.66417600664176,"linetype":"solid"},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"8f405652189a":{"x":{},"y":{},"type":"scatter"},"8f4078434dae":{"yintercept":{}},"8f4066151ffc":{"x":{},"y":{},"xend":{},"yend":{},"x.1":{},"y.1":{}},"8f403a2eed":{"xintercept":{}},"8f40f23d81":{"x":{},"y":{},"xend":{},"yend":{},"x.1":{},"y.1":{}},"8f405f5e7e4e":{"x":{},"y":{}},"8f40236a6030":{"xend":{},"yend":{},"x":{},"y":{}}},"cur_data":"8f405652189a","visdat":{"8f405652189a":["function (y) ","x"],"8f4078434dae":["function (y) ","x"],"8f4066151ffc":["function (y) ","x"],"8f403a2eed":["function (y) ","x"],"8f40f23d81":["function (y) ","x"],"8f405f5e7e4e":["function (y) ","x"],"8f40236a6030":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>hover over the dark blue error bars that connect data pairs of miles and price to a new average, a downward-sloping straight (linear that is) line. If we were to be told that the average slope is -0.1314, what would we think the average Y-intercept is?</p>
+<p><br></p>
+<button onclick="showText(&#39;myDIV25&#39;)">
+show / hide
+</button>
+<div id="myDIV25" style="display:none;">
+<p><br></p>
+<p>Our new average price, <span class="math inline">\(\bar{Y}\)</span>, is an estimate of the average of <span class="math inline">\(Y\)</span> conditional on miles, <span class="math inline">\(X\)</span> and its average, still <span class="math inline">\(\bar{X}\)</span>, is</p>
+<p><span class="math display">\[
+\bar{Y} = b_0 + b_1 \bar{X}
+\]</span>
+We know that <span class="math inline">\(\bar{Y}=14740\)</span>, <span class="math inline">\(\bar{X}=23145.4\)</span>, and have just been informed that the slope parameter <span class="math inline">\(b_1=-0.1314\)</span>. So we plug (that is substitute) these numbers into the formula to get this.</p>
+<p><span class="math display">\[
+14740=b_0-0.1314(23145.4)
+\]</span>
+We now solve for the Y-intercept <span class="math inline">\(b_0\)</span> to find this result.</p>
+<p><span class="math display">\[
+b_0=14740+0.1314\bar{X}=17782.4396
+\]</span>
+Phew!, but not so bad, just one equation in one unknown.</p>
+</div>
+<p><br></p>
+<p>We now have jumped into hyper-space (at least 2-space) to expand our consciousness from univariate to bivariate relationships.</p>
+<p>Our next stop is to use these and other versions of deviations to get a handle on the scale, range, variation, deviation, and yes, error in the data, at least with respect to our beliefs about the data. We just expanded our beliefs from univariate to multivariate. When we get to multivariate we will look at how variations relate to one another, in our case bivariate variations in price relating to variations in miles and vice-versa.</p>
+</div>
+<div id="blinded-by-the-light" class="section level2">
+<h2><span class="header-section-number">6.3</span> Blinded by the light</h2>
+<div id="whats-a-sample-again" class="section level3">
+<h3><span class="header-section-number">6.3.1</span> What’s a sample? (again)</h3>
+<p>Let’s recall what a sample is. It is a random draw from a larger group of data called a population. The word random derives from the Frankish (Germanic language from a while back) word <em>rant</em> much like our word rant and eventually meaning (by about 1880) simply indiscriminate.</p>
+<p>Our sample of auction prices is whatever we could get our hands on at the time of the sampling, thus a sort of random draw from the population of all auctioned cars. This begins to allow us to look at the error bars we generated as random deviations from the mean.</p>
+<p>Let’s also recall that this drawing of the random sample is the first analytical step after identifying a business question and a population from which to sample.</p>
+<p>So we have a sample of two univariate data series. We have also thought that is is reasonable to relate the two series together. Let’s now find some measures of scale, deviation, and variation for each of the univariate series.</p>
+</div>
+<div id="standard-deviation" class="section level3">
+<h3><span class="header-section-number">6.3.2</span> 1. Standard deviation</h3>
+<p>If <span class="math inline">\(x\)</span> is a sample (subset) indexed by <span class="math inline">\(i = 1 \dots N\)</span> with <span class="math inline">\(N\)</span> elements from the population, then we already know that</p>
+<p><span class="math display">\[
+\bar{X} = \frac{\Sigma_{i=1}^N X_i}{N}
+\]</span></p>
+<p>Our model of deviations from the mean produced error terms <span class="math inline">\(e_i=X_i-\bar{X}\)</span>, which we assigned to the miles univariate data series. If we were to add up these deviations like this</p>
+<p><span class="math display">\[
+\Sigma_{i=1}^{5}(X_i-\bar{X})
+\]</span></p>
+<p>what would we get?</p>
+<p><br></p>
+<button onclick="showText(&#39;myDIV26&#39;)">
+show / hide
+</button>
+<div id="myDIV26" style="display:none;">
+<p><br></p>
+<p>ZERO.</p>
+</div>
+<p><br></p>
+<p>Right, this aggregation of deviations will always give us zero, by definition.</p>
+<p>Again, like we did to find the best average, let’s calculate the sum of squared errors, the <span class="math inline">\(SSE\)</span>. Because we sampled the data, the average <span class="math inline">\(SSE\)</span> will have to be divided by <span class="math inline">\(N-1=5-1=4\)</span>, called, for the moment, the number of degrees of freedom. This will produce an unbiased measure, another topic for another time!</p>
+<p><span class="math display">\[
+s^2 = \frac{\Sigma_{i=1}^N (x_i - \bar{x})^2}{N-1}
+\]</span>
+The squared measure <span class="math inline">\(s^2\)</span> is officially called the variance. It’s square root</p>
+<p><span class="math display">\[
+s = \sqrt{s^2}
+\]</span></p>
+<p>is the standard deviation. THe notion of standard is that of an average. We already know what a deviation is.</p>
+<p>Let’s build a table of four columns to calculate this measure of scale, deviation, error, and variation.</p>
+<p><br></p>
+<button onclick="showText(&#39;myDIV27&#39;)">
+show / hide
+</button>
+<div id="myDIV27" style="display:none;">
+
+<p><br></p>
+<table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+i
+</th>
+<th style="text-align:center;">
+miles
+</th>
+<th style="text-align:center;">
+deviation
+</th>
+<th style="text-align:center;">
+deviation squared
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;">
+1
+</td>
+<td style="text-align:center;font-weight: bold;color: blue !important;">
+43521
+</td>
+<td style="text-align:center;font-weight: bold;color: red !important;">
+20376
+</td>
+<td style="text-align:center;font-weight: bold;color: red !important;">
+415165075
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+2
+</td>
+<td style="text-align:center;font-weight: bold;color: blue !important;">
+31002
+</td>
+<td style="text-align:center;font-weight: bold;color: red !important;">
+7857
+</td>
+<td style="text-align:center;font-weight: bold;color: red !important;">
+61726164
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+3
+</td>
+<td style="text-align:center;font-weight: bold;color: blue !important;">
+18868
+</td>
+<td style="text-align:center;font-weight: bold;color: red !important;">
+-4277
+</td>
+<td style="text-align:center;font-weight: bold;color: red !important;">
+18296151
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+4
+</td>
+<td style="text-align:center;font-weight: bold;color: blue !important;">
+12339
+</td>
+<td style="text-align:center;font-weight: bold;color: red !important;">
+-10806
+</td>
+<td style="text-align:center;font-weight: bold;color: red !important;">
+116778281
+</td>
+</tr>
+<tr>
+<td style="text-align:center;">
+5
+</td>
+<td style="text-align:center;font-weight: bold;color: blue !important;">
+9997
+</td>
+<td style="text-align:center;font-weight: bold;color: red !important;">
+-13148
+</td>
+<td style="text-align:center;font-weight: bold;color: red !important;">
+172880423
+</td>
+</tr>
+</tbody>
+</table>
+<p>Some really big numbers emerge. That is typical and we often try to scale these down when performing computations, again a topic for later.</p>
+<p>Let’s sum up the deviations again (just to prove they add up to zero) and the squared deviations (<span class="math inline">\(SSE\)</span>)</p>
+<p><span class="math display">\[
+var(miles)=s^2=\frac{784846093.2}{5 - 1}=196211523.3
+\]</span>
+and then</p>
+<p><span class="math display">\[
+s=\sqrt{variance}=\sqrt{196211523.3}=14007.5524
+\]</span></p>
+</div>
+<p><br></p>
+<p>What about the standard deviation of price?</p>
+<p><br></p>
+<button onclick="showText(&#39;myDIV28&#39;)">
+show / hide
+</button>
+<div id="myDIV28" style="display:none;">
+<p><br></p>
+<p>We should have gotten 1975.2848</p>
+</div>
+<p><br></p>
+</div>
+<div id="robust-measures" class="section level3">
+<h3><span class="header-section-number">6.3.3</span> 2. Robust measures</h3>
+<ul>
+<li><strong>Range</strong>: the distance between the max and min</li>
+</ul>
+<p><span class="math display">\[
+Range = max(x) - min(x)
+\]</span></p>
+<ul>
+<li><strong>Interquartile Range, IQR</strong>: <span class="math inline">\(Q_3\)</span> net of <span class="math inline">\(Q_1\)</span> (<span class="math inline">\(P_{75} - P_{25}\)</span>) gives us a robust view like that in Tukey’s (1977) box plot. What is the IQR of miles and price?</li>
+</ul>
+<p><br></p>
+<button onclick="showText(&#39;myDIV29&#39;)">
+show / hide
+</button>
+<div id="myDIV29" style="display:none;">
+<p><br></p>
+<p>We should have gotten</p>
+<p><span class="math display">\[
+IQR_{miles}=31002-12339=18663
+\]</span>
+and</p>
+<p><span class="math display">\[
+IQR_{price}=15750-13350=2400
+\]</span></p>
+<p>Wider, broader scale than the standard deviations? This measure is robust to highly skewed distributions with thick tails.</p>
+</div>
+<p><br></p>
+<ul>
+<li><strong>Mean Absolute Deviation</strong>: MAD is robust to outliers.</li>
+</ul>
+<p><span class="math display">\[
+MAD = \frac{\Sigma_{i=1}^N |X_i - \mu|}{N}
+\]</span>
+Let’s compute this statistic for price and miles.</p>
+<p><br></p>
+<button onclick="showText(&#39;myDIV30&#39;)">
+show / hide
+</button>
+<div id="myDIV30" style="display:none;">
+<p><br></p>
+<p>This time we should have gotten for <span class="math inline">\(X_i= miles_i\)</span>:</p>
+<p><span class="math display">\[
+MAD_{miles} = \frac{\Sigma_{i=1}^N |X_i - \mu|}{N} = \frac{56464.4}{5} = 11292.88
+\]</span></p>
+</div>
+<p><br></p>
+</div>
+<div id="correlation" class="section level3">
+<h3><span class="header-section-number">6.3.4</span> 3. Correlation</h3>
+<p>Correlation measures the degree of relationship between two variables. The measure ranges from a low of -1 to a high of +1. The -1 is a perfectly correlated inverse relationship between two variables. The +1 correlation measure a perfectly possitive relationship between two variables. A 0 indicates no relationship seems to exist. This is not cause and effect, just two variables happening to bump together or not in the street one day in the Bronx. We otherwise call this an antecedent-consequent relationship.</p>
+<div id="three-steps-to-a-correlation." class="section level4">
+<h4><span class="header-section-number">6.3.4.1</span> Three steps to a correlation.</h4>
+<ol style="list-style-type: decimal">
+<li>Calculate the covariance between two variables, <span class="math inline">\(X_i\)</span> and <span class="math inline">\(Y_i\)</span>.</li>
+</ol>
+<p><span class="math display">\[
+cov(X, Y) = s_{xy} = \frac{\Sigma_{i=1}^N(X_i-\bar{X})(Y_i-\bar{Y})}{N-1}
+\]</span>
+The numerative sums up the pairwaise ups and downs of how <span class="math inline">\(X\)</span> varies with <span class="math inline">\(Y\)</span>. This number may net out to positive, negative, or just very close to zero. We lose at least one degree of freedom because we have to use the arithmetic mean to calculate deviations, just like we did for the sample standard deviation.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Calculate the standard deviations for each of the two variables, <span class="math inline">\(X_i\)</span> and <span class="math inline">\(Y_i\)</span>. First, the variance, here illustrated for <span class="math inline">\(X\)</span>, miles in our example.</li>
+</ol>
+<p><span class="math display">\[
+var(X) = s_{x}^2 = \frac{\Sigma_{i=1}^N(X_i-\bar{X})^2}{N-1} = \frac{784846093.2}{5} = 196211523.3
+\]</span>
+<span class="math display">\[
+s_X = \sqrt{var(X)} = 14007.5524 
+\]</span>
+and for <span class="math inline">\(Y\)</span> as price we have</p>
+<p><span class="math display">\[
+s_Y = 1975.2848
+\]</span></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Calculate the ratio of covariance to the product of the standard deviations. This step transform the unwieldly, and hard to interpret covariance from the <span class="math inline">\(-\infty...+\infty\)</span> to the <span class="math inline">\(-1...+1\)</span> range. For samples we call the correlation <span class="math inline">\(r_{XY}\)</span>.</li>
+</ol>
+<p><span class="math display">\[
+r_{XY} = \frac{cov(X,Y)}{s_x s_y} = \frac{-25791807.5}{(14007.5524)(1975.2848) } = -0.9322
+\]</span></p>
+<p>Let’s build a table and calculate away.</p>
+<p><br></p>
+<button onclick="showText(&#39;myDIV31&#39;)">
+show / hide
+</button>
+<div id="myDIV31" style="display:none;">
+
+<p><br></p>
+<p>First a table.</p>
+<table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+i
+</th>
+<th style="text-align:center;">
+X=miles
+</th>
+<th style="text-align:center;">
+Y=price
+</th>
+<th style="text-align:center;">
+(X-X_bar)
+</th>
+<th style="text-align:center;">
+(Y-Y_bar)
+</th>
+<th style="text-align:center;">
+(X-X_bar)(Y-Y_bar)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;font-weight: bold;color: blue !important;">
+1
+</td>
+<td style="text-align:center;">
+43521
+</td>
+<td style="text-align:center;">
+12500
+</td>
+<td style="text-align:center;">
+20376
+</td>
+<td style="text-align:center;">
+-2240
+</td>
+<td style="text-align:center;">
+-45641344
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight: bold;color: blue !important;">
+2
+</td>
+<td style="text-align:center;">
+31002
+</td>
+<td style="text-align:center;">
+13350
+</td>
+<td style="text-align:center;">
+7857
+</td>
+<td style="text-align:center;">
+-1390
+</td>
+<td style="text-align:center;">
+-10920674
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight: bold;color: blue !important;">
+3
+</td>
+<td style="text-align:center;">
+18868
+</td>
+<td style="text-align:center;">
+14600
+</td>
+<td style="text-align:center;">
+-4277
+</td>
+<td style="text-align:center;">
+-140
+</td>
+<td style="text-align:center;">
+598836
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight: bold;color: blue !important;">
+4
+</td>
+<td style="text-align:center;">
+12339
+</td>
+<td style="text-align:center;">
+15750
+</td>
+<td style="text-align:center;">
+-10806
+</td>
+<td style="text-align:center;">
+1010
+</td>
+<td style="text-align:center;">
+-10914464
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight: bold;color: blue !important;">
+5
+</td>
+<td style="text-align:center;">
+9997
+</td>
+<td style="text-align:center;">
+17500
+</td>
+<td style="text-align:center;">
+-13148
+</td>
+<td style="text-align:center;">
+2760
+</td>
+<td style="text-align:center;">
+-36289584
+</td>
+</tr>
+</tbody>
+</table>
+<p>Summing up the cross deviation terms <span class="math inline">\((X_i-\bar{X})(Y_i-\bar{Y})\)</span> we get</p>
+<p><span class="math display">\[
+\Sigma_{i=1}^5 (X_i-\bar{X})(Y_i-\bar{Y}) = -103167230
+\]</span>
+Dividing by the degrees of freedom <span class="math inline">\(N-1=5-1=4\)</span> we then have the sample covariance</p>
+<p><span class="math display">\[
+cov(X, Y) = \frac{\Sigma_{i=1}^5 (X_i-\bar{X})(Y_i-\bar{Y})}{N-1} = -25791807.5
+\]</span></p>
+<p>We already have the standard deviations of miles, 14007.5524, and price, 1975.2848, so now we can compute the sample correlation as</p>
+<p><span class="math display">\[
+r_{XY} = r_{XY} = \frac{cov(X,Y)}{s_x s_y} = -0.9322
+\]</span></p>
+</div>
+<p><br></p>
+</div>
+<div id="what-about-the-slope" class="section level4">
+<h4><span class="header-section-number">6.3.4.2</span> What about the slope?</h4>
+<p>We will show later (yes, with calculus – free of charge) that the slope parameter <span class="math inline">\(b_1\)</span> is just the ratio of the covariance of miles (<span class="math inline">\(X\)</span>) and price (<span class="math inline">\(Y\)</span>) to the variance of miles (<span class="math inline">\(X\)</span>.</p>
+<p>Should we try it?</p>
+<p><br></p>
+<button onclick="showText(&#39;myDIV32&#39;)">
+show / hide
+</button>
+<div id="myDIV32" style="display:none;">
+<p><br></p>
+<p><span class="math display">\[
+b_1 = \frac{cov(X,Y)}{var(X)} = \frac{-25791807.5}{196211523.3} =   -0.1314
+\]</span></p>
+<p>Negatively sloped, reflecting the negative correlation: when variations in miles are positive, variations in prices are negative, on average in this sample.</p>
+</div>
+<p><br></p>
+<p>If we find a car at the auction with an odometer reading of 15010 miles. What price would we expect based on our model?</p>
+<p><br></p>
+<button onclick="showText(&#39;myDIV33&#39;)">
+show / hide
+</button>
+<div id="myDIV33" style="display:none;">
+<p><br></p>
+<p>Sure. We found that if we knew <span class="math inline">\(b_1=-0.1314\)</span>, then we could calculate at the cross-hairs of average <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> that <span class="math inline">\(b_0=17782.4396\)</span>. We substitute this into our model to get</p>
+<p><span class="math display">\[
+price = b_0 + b_1\,\,miles = 17782.4396 + (-0.1314)(15010) = 15810.1256
+\]</span></p>
+<p>Would we be willing to pay that amount? We might want to look at other factors such as the age and condition of the car, among many other features of our auction in New Jersey.</p>
+</div>
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="the-tails-have-it" class="section level2">
+<h2><span class="header-section-number">6.4</span> The tails have it!</h2>
+<p>To round out our discussion about the shape of data, we ask two more questions:</p>
+<ol style="list-style-type: decimal">
+<li><p>What direction do the tails of distribution tend to go, to the right or the left?</p></li>
+<li><p>How thick are the tails?</p></li>
+</ol>
+<p>The first question gets at the asymmetry in lots of data. An example of this is this data on losses from trading common stock in solar ppwer companies. We gather several days of stock prices, then comppute returns as percentage changes in the daily prices. A loss is whenever the returns are negative. Suppose that the latest price per share is USD 45.01 and we have 100,000 shares.</p>
+<div id="htmlwidget-b5e6346fb9ac9001ecb3" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b5e6346fb9ac9001ecb3">{"x":{"data":[{"orientation":"v","width":[24929.6413515693,24929.6413515693,24929.6413515693,24929.6413515693,24929.6413515693,24929.6413515693,24929.6413515693,24929.6413515693,24929.6413515693,24929.6413515693,24929.6413515693,24929.6413515693,24929.6413515693,24929.6413515693,24929.6413515693,24929.6413515693,24929.6413515693,24929.6413515693,24929.6413515693,24929.6413515693,24929.6413515693,24929.6413515692,24929.6413515694,24929.6413515692,24929.6413515694,24929.6413515692,24929.6413515694,24929.6413515692,24929.6413515694,24929.6413515692],"base":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"x":[0,24929.6413515693,49859.2827031387,74788.924054708,99718.5654062773,124648.206757847,149577.848109416,174507.489460985,199437.130812555,224366.772164124,249296.413515693,274226.054867263,299155.696218832,324085.337570401,349014.978921971,373944.62027354,398874.261625109,423803.902976679,448733.544328248,473663.185679817,498592.827031387,523522.468382956,548452.109734525,573381.751086095,598311.392437664,623241.033789233,648170.675140803,673100.316492372,698029.957843941,722959.59919551],"y":[131,283,243,157,150,94,68,49,31,20,18,13,7,2,4,5,1,2,0,0,0,0,0,0,1,0,1,0,0,1],"text":["count: 131<br />loss_rf:      0<br />distribution: historical","count: 283<br />loss_rf:  24930<br />distribution: historical","count: 243<br />loss_rf:  49859<br />distribution: historical","count: 157<br />loss_rf:  74789<br />distribution: historical","count: 150<br />loss_rf:  99719<br />distribution: historical","count:  94<br />loss_rf: 124648<br />distribution: historical","count:  68<br />loss_rf: 149578<br />distribution: historical","count:  49<br />loss_rf: 174507<br />distribution: historical","count:  31<br />loss_rf: 199437<br />distribution: historical","count:  20<br />loss_rf: 224367<br />distribution: historical","count:  18<br />loss_rf: 249296<br />distribution: historical","count:  13<br />loss_rf: 274226<br />distribution: historical","count:   7<br />loss_rf: 299156<br />distribution: historical","count:   2<br />loss_rf: 324085<br />distribution: historical","count:   4<br />loss_rf: 349015<br />distribution: historical","count:   5<br />loss_rf: 373945<br />distribution: historical","count:   1<br />loss_rf: 398874<br />distribution: historical","count:   2<br />loss_rf: 423804<br />distribution: historical","count:   0<br />loss_rf: 448734<br />distribution: historical","count:   0<br />loss_rf: 473663<br />distribution: historical","count:   0<br />loss_rf: 498593<br />distribution: historical","count:   0<br />loss_rf: 523522<br />distribution: historical","count:   0<br />loss_rf: 548452<br />distribution: historical","count:   0<br />loss_rf: 573382<br />distribution: historical","count:   1<br />loss_rf: 598311<br />distribution: historical","count:   0<br />loss_rf: 623241<br />distribution: historical","count:   1<br />loss_rf: 648171<br />distribution: historical","count:   0<br />loss_rf: 673100<br />distribution: historical","count:   0<br />loss_rf: 698030<br />distribution: historical","count:   1<br />loss_rf: 722960<br />distribution: historical"],"type":"bar","marker":{"autocolorscale":false,"color":"rgba(248,118,109,1)","line":{"width":1.88976377952756,"color":"transparent"}},"name":"historical","legendgroup":"historical","showlegend":true,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":26.2283105022831,"r":7.30593607305936,"b":40.1826484018265,"l":43.1050228310502},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-49859.2827031387,772818.881898649],"tickmode":"array","ticktext":["0","200000","400000","600000","NA"],"tickvals":[0,200000,400000,600000],"categoryorder":"array","categoryarray":["0","200000","400000","600000","NA"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"loss_rf","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-14.15,297.15],"tickmode":"array","ticktext":["0","100","200","NA"],"tickvals":[0,100,200],"categoryorder":"array","categoryarray":["0","100","200","NA"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"count","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":true,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895},"y":0.96751968503937},"annotations":[{"text":"distribution","x":1.02,"y":1,"showarrow":false,"ax":0,"ay":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xref":"paper","yref":"paper","textangle":-0,"xanchor":"left","yanchor":"bottom","legendTitle":true}],"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"8f4054045c6c":{"x":{},"fill":{},"type":"bar"}},"cur_data":"8f4054045c6c","visdat":{"8f4054045c6c":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>Let’s eyeball answers to the questions.</p>
+<p><br></p>
+<button onclick="showText(&#39;myDIV52&#39;)">
+show / hide
+</button>
+<div id="myDIV52" style="display:none;">
+<p><br></p>
+<ol style="list-style-type: decimal">
+<li>What direction does the distribution tend to?</li>
+</ol>
+<p>This data looks like the skewness is to the right. There is a preponderance of observations in the body to the left of the 100000 mark.</p>
+<p>The distirbution therefore looks like it is right- or positively-skewed.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>How thick tailed is the distribution?</li>
+</ol>
+<p>The losses seem to be somewhat frequent in the tails. It looks like it might be tick tailed. In financial terms this means that the volatility (standard deviation, IQR) is itself volatile.</p>
+</div>
+<p><br></p>
+<p>The answer to these questions can also come from two more aggregations, both based on deviations and variation of data points from thwir means. Skewness needs a direction so a positive metric will mean deviations can be found in the positive tail on average, while a negative metric will indicate a net average long tail in the opposite diredtion. Here is a metric that does this:</p>
+<p><span class="math display">\[
+skew = \frac{\frac{\Sigma_{i=1}^N (X_i - m)^3}{N-1}}{s^3}
+\]</span></p>
+<p>Just like correlation is dimensionless by scaling the covariance with the product of standard deviations, so the skewness measure looks at the cubed deviations per cubed standard deviation.</p>
+<ul>
+<li>What direction is the price data?</li>
+</ul>
+<p><br></p>
+<button onclick="showText(&#39;myDIV53&#39;)">
+show / hide
+</button>
+<div id="myDIV53" style="display:none;">
+
+<p><br></p>
+<p>Using the formula we construct a table like so.</p>
+<table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+i
+</th>
+<th style="text-align:center;">
+Y=price
+</th>
+<th style="text-align:center;">
+(Y-Y_bar)
+</th>
+<th style="text-align:center;">
+(Y-Y_bar)^3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;font-weight: bold;color: blue !important;">
+1
+</td>
+<td style="text-align:center;">
+12500
+</td>
+<td style="text-align:center;">
+-2240
+</td>
+<td style="text-align:center;">
+-11239424000
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight: bold;color: blue !important;">
+2
+</td>
+<td style="text-align:center;">
+13350
+</td>
+<td style="text-align:center;">
+-1390
+</td>
+<td style="text-align:center;">
+-2685619000
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight: bold;color: blue !important;">
+3
+</td>
+<td style="text-align:center;">
+14600
+</td>
+<td style="text-align:center;">
+-140
+</td>
+<td style="text-align:center;">
+-2744000
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight: bold;color: blue !important;">
+4
+</td>
+<td style="text-align:center;">
+15750
+</td>
+<td style="text-align:center;">
+1010
+</td>
+<td style="text-align:center;">
+1030301000
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight: bold;color: blue !important;">
+5
+</td>
+<td style="text-align:center;">
+17500
+</td>
+<td style="text-align:center;">
+2760
+</td>
+<td style="text-align:center;">
+21024576000
+</td>
+</tr>
+</tbody>
+</table>
+<p>We see lots of negative cubed deviations. Let’s add them up to get 8127090000. Divide this by $N-1=$5 and we get 2031772500. Dividing by the cube of the standard deviation we see our result.</p>
+<p><span class="math display">\[
+skew = \frac{\frac{\Sigma_{i=1}^N (X_i - m)^3}{N-1}}{s^3} = \frac{2031772500}{7707067427.797} = 0.2636
+\]</span></p>
+<p>We are sure to check out the units of measurement here. The skew is positive. Price variations on average are <em>above</em> their mean. What about miles?</p>
+<p>By the by, the solar loss ditribution does indeed compute a positive skewness. But we could see that with our own eyes as well.</p>
+</div>
+<p><br></p>
+<p>So now how thick is the tail? Here we can use a variant of the skew just by squaring the variance term. Kurtosis describes the condition of the thickness of the tail. Just as skewness tells us whether the deviations are on average above or below the mean, so kurtosis tells us how volatile the standard deviation is.</p>
+<p>Try this formula out for kurtosis on the price variable.</p>
+<p><span class="math display">\[
+kurtosis = \frac{\frac{\Sigma_{i=1}^N (X_i - m)^4}{N-1}}{s^4}
+\]</span></p>
+<ul>
+<li>How thick or thin are the tails?</li>
+</ul>
+<p><br></p>
+<button onclick="showText(&#39;myDIV54&#39;)">
+show / hide
+</button>
+<div id="myDIV54" style="display:none;">
+
+<p><br></p>
+<p>Using the formula we construct a table like so.</p>
+<table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:center;">
+i
+</th>
+<th style="text-align:center;">
+Y=price
+</th>
+<th style="text-align:center;">
+(Y-Y_bar)
+</th>
+<th style="text-align:center;">
+(Y-Y_bar)^4
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;font-weight: bold;color: blue !important;">
+1
+</td>
+<td style="text-align:center;">
+12500
+</td>
+<td style="text-align:center;">
+-2240
+</td>
+<td style="text-align:center;">
+25176309760000
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight: bold;color: blue !important;">
+2
+</td>
+<td style="text-align:center;">
+13350
+</td>
+<td style="text-align:center;">
+-1390
+</td>
+<td style="text-align:center;">
+3733010410000
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight: bold;color: blue !important;">
+3
+</td>
+<td style="text-align:center;">
+14600
+</td>
+<td style="text-align:center;">
+-140
+</td>
+<td style="text-align:center;">
+384160000
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight: bold;color: blue !important;">
+4
+</td>
+<td style="text-align:center;">
+15750
+</td>
+<td style="text-align:center;">
+1010
+</td>
+<td style="text-align:center;">
+1040604010000
+</td>
+</tr>
+<tr>
+<td style="text-align:center;font-weight: bold;color: blue !important;">
+5
+</td>
+<td style="text-align:center;">
+17500
+</td>
+<td style="text-align:center;">
+2760
+</td>
+<td style="text-align:center;">
+58027829760000
+</td>
+</tr>
+</tbody>
+</table>
+<p>We see lots of negative cubed deviations. Let’s add them up to get 8127090000. Divide this by $N-1=$5 and we get 2031772500. Dividing by the cube of the standard deviation we see our result.</p>
+<p><span class="math display">\[
+kurtosis = \frac{\frac{\Sigma_{i=1}^N (X_i - m)^4}{N-1}}{s^4} = \frac{2031772500}{15223653062500} = 0.0001
+\]</span></p>
+<p>THe kurtosis is very small, indeed a very thin tale. This indicates a very stable volatility in prices. We will see later with teh normal distribution that the normal kurtosis is 3.00. Compared to the normal distribution, the price distribution is a very thin tailed distribution. An implication might be that it is a rare occurrence to see a high price in this sample. We must remember thata there are only 5 data points in the first place!</p>
+<p>The solar loss distribution has a kurtosis that is only slightly greater than 3.</p>
+<p>We are sure to check out the units of measurement here. The skew is positive. Price variations on average are <em>above</em> their mean. What about miles?</p>
+</div>
+<p><br></p>
+</div>
+<div id="how-can-we-use-all-of-this" class="section level2">
+<h2><span class="header-section-number">6.5</span> How can we use all of this?</h2>
+<p>At least five come to mind. All of these build on a foundation of where (location, tendency) a distribution tends to land.</p>
+<ol style="list-style-type: decimal">
+<li><strong>Empirical Rule</strong>: if we thnk the distribution is symmetrical (“normal”) then the proportion of observations will be</li>
+</ol>
+<table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+distance
+</th>
+<th style="text-align:right;">
+proportion
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(\mu \pm 1 \sigma\)</span>
+</td>
+<td style="text-align:right;">
+68.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(\mu \pm 2 \sigma\)</span>
+</td>
+<td style="text-align:right;">
+95.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(\mu \pm 3 \sigma\)</span>
+</td>
+<td style="text-align:right;">
+99.7
+</td>
+</tr>
+</tbody>
+</table>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>Chebychev</strong>: at least 75% of all values are within ±2σ of the mean regardless of the shape of a distribution lie within <span class="math inline">\(\pm 2 \sigma\)</span> of the mean; for <span class="math inline">\(\mu \pm k \sigma\)</span>, <span class="math inline">\(k\)</span> standard deviations and the proportion of observations is</li>
+</ol>
+<p><span class="math display">\[
+1 - \frac{1}{k^2}
+\]</span></p>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>Outlier analysis</strong>: using IQR as a quantile inspired deviation we can build <strong>fences</strong>: Tukey(1977) once recommended</li>
+</ol>
+<ul>
+<li><p>We add 1.5 times IQR to Q3 and see if any data exceeded that <strong>fence</strong> <em>and</em></p></li>
+<li><p>We subtract 1.5 times IQR from Q1 and see if any data fell short of that <strong>fence</strong></p></li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>Coefficient of Variation</strong>: the ratio of the standard deviation to the mean expressed in percentage and is denoted CV</li>
+</ol>
+<p><span class="math display">\[
+CV = \frac{\sigma}{\mu} \times 100
+\]</span></p>
+<ol start="4" style="list-style-type: decimal">
+<li><strong>Comparisons using the z-score</strong>: converts means into standard deviation units; the number of standard deviations a value from the distribution is above or below the mean of the distribution</li>
+</ol>
+<p><span class="math display">\[
+z = \frac{x - \mu}{\sigma}
+\]</span></p>
+<ol start="5" style="list-style-type: decimal">
+<li><strong>Higher moments.</strong> The third and fourth moments are present in the skewnewss (cubed) and kurtosis (fourth power). Very nice math with a meaningful punch. Skewness will help us understand if deviations are above (positive skewness) or below (negative skewness) the average. Kurtosis will tell us if the standard deviation varies more or less than the normal distribution average of 3.00 (to be dug into later, of course).</li>
+</ol>
+</div>
+<div id="problems-always-problems" class="section level2">
+<h2><span class="header-section-number">6.6</span> Problems, always problems</h2>
+<ol style="list-style-type: decimal">
+<li>Shown below are the top nine leading retailers in the United States in a recent year according to Statista.com. Compute range, IQR, MAD, standard deviation, CV, and invoke the empirical rule and Chebychev’s Theorem, along with the z-score for each. Treat this as a sample (then what’s the population?).</li>
+</ol>
+<table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+company
+</th>
+<th style="text-align:right;">
+revenue
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Walmart
+</td>
+<td style="text-align:right;">
+343.62
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The Kroger Co. 
+</td>
+<td style="text-align:right;">
+103.03
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Costco
+</td>
+<td style="text-align:right;">
+79.69
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+The Home Depot
+</td>
+<td style="text-align:right;">
+74.20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Walgreen
+</td>
+<td style="text-align:right;">
+72.67
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Target
+</td>
+<td style="text-align:right;">
+72.62
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CVS Caremark
+</td>
+<td style="text-align:right;">
+67.97
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lowe’s Companies
+</td>
+<td style="text-align:right;">
+54.81
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Amazon. Com
+</td>
+<td style="text-align:right;">
+49.38
+</td>
+</tr>
+</tbody>
+</table>
+<button onclick="showText(&#39;myDIV1&#39;)">
+show / hide
+</button>
+<div id="myDIV1" style="display:none;">
+
+<p><br></p>
+<p><strong>Answers (so many)</strong></p>
+<ul>
+<li><strong>Range</strong>: the distance between the max and min</li>
+</ul>
+<p><span class="math display">\[
+Range = |max(x) - min(x)| = 343.62- 49.38 = 294.24
+\]</span></p>
+<ul>
+<li><strong>IQR</strong>: <span class="math inline">\(Q_3\)</span> net of <span class="math inline">\(Q_1\)</span> (<span class="math inline">\(P_{75} - P_{25}\)</span>)</li>
+</ul>
+<p><span class="math display">\[
+IQR = Q_3 - Q_2 = 79.69 - 67.97 = 11.72
+\]</span></p>
+<ul>
+<li><strong>Mean Absolute Deviation</strong>: MAD is robust</li>
+</ul>
+<p><span class="math display">\[
+MAD = \frac{\Sigma_{i=1}^N |x_i - \mu|}{N}
+\]</span>
+<span class="math display">\[
+\mu = \frac{\Sigma_{i=1}^N x_i}{N}=\frac{917.99}{9}
+\]</span>
+<span class="math display">\[
+MAD = \frac{485.3044}{9}
+\]</span>
+- <strong>Standard Deviation</strong>: first the square of the standard deviation is the variance</p>
+<p><span class="math display">\[
+\sigma^2 = \frac{\Sigma_{i=1}^N (x_i - \mu)^2}{N}
+\]</span>
+next, the standard deviation is</p>
+<p><span class="math display">\[
+\sigma = \sqrt{\sigma^2}
+\]</span>
+A slightly easier way to compute <span class="math inline">\(\sigma^2\)</span> is</p>
+<p><span class="math display">\[
+\sigma^2 = \frac{\Sigma_{i=1}^N x_i^2 - N(\bar{x})^2}{N}
+\]</span>
+<span class="math display">\[
+\sigma^2 = \frac{161163.0561 - 9(101.9989)^2}{9} = 8441.137
+\]</span>
+<span class="math display">\[
+\sigma = 91.8757
+\]</span></p>
+<ul>
+<li><strong>Empirical Rule</strong>: if we think the distribution is symmetrical (“normal”) then the proportion of observations will be</li>
+</ul>
+<p>and</p>
+<ul>
+<li><strong>Chebychev</strong>: at least 75% of all values are within ±2σ of the mean regardless of the shape of a distribution lie within <span class="math inline">\(\pm 2 \sigma\)</span> of the mean; for <span class="math inline">\(\mu \pm k \sigma\)</span>, <span class="math inline">\(k\)</span> standard deviations and the proportion of observations is</li>
+</ul>
+<p><span class="math display">\[
+1 - \frac{1}{k^2}
+\]</span></p>
+<table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+distance
+</th>
+<th style="text-align:right;">
+proportion
+</th>
+<th style="text-align:right;">
+k
+</th>
+<th style="text-align:left;">
+distance.1
+</th>
+<th style="text-align:left;">
+chebychev
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(\mu \pm 1 \sigma\)</span>
+</td>
+<td style="text-align:right;">
+68.0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(101 \pm 1*92\)</span>
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(\mu \pm 2 \sigma\)</span>
+</td>
+<td style="text-align:right;">
+95.0
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(101 \pm 2*92\)</span>
+</td>
+<td style="text-align:left;">
+0.75
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(\mu \pm 3 \sigma\)</span>
+</td>
+<td style="text-align:right;">
+99.7
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(101 \pm 3*92\)</span>
+</td>
+<td style="text-align:left;">
+0.89
+</td>
+</tr>
+</tbody>
+</table></li>
+<li><strong>Coefficient of Variation</strong>: the ratio of the standard deviation to the mean expressed in percentage and is denoted CV</li>
+</ul>
+<p><span class="math display">\[
+CV = \frac{\sigma}{\mu} \times 100 = \frac{91.8757}{101.9989} \times 100 = 90.0752
+\]</span></p>
+<ul>
+<li><strong>z-score</strong>: converts means into standard deviation units; the number of standard deviations a value from the distribution is above or below the mean of the distribution. For the first data point</li>
+</ul>
+<p><span class="math display">\[
+z = \frac{x - \mu}{\sigma} = \frac{343.62 - 101.9989}{91.8757}=\frac{241.6211}{91.8757}
+\]</span></p>
+<p>This observation is 2.6299 standard deviations from the mean 101.9989.</p>
+<ul>
+<li>Sample versus population</li>
+</ul>
+<p>If <span class="math inline">\(x\)</span> is a sample (subset) indexed by <span class="math inline">\(i = 1 \dots N\)</span> with <span class="math inline">\(N\)</span> elements from the population, then (the same formula!)</p>
+<p><span class="math display">\[
+\bar{x} = \frac{\Sigma_{i=1}^N x_i}{N} = \frac{917.99}{9} = 101.9989
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+s^2 = \frac{\Sigma_{i=1}^N (x_i - \bar{x})^2}{N-1} - \frac{67529.0961}{9 -1} = 8441.137
+\]</span>
+and then</p>
+<p><span class="math display">\[
+s = \sqrt{s^2} = 91.8757
+\]</span></p>
+</div>
+<p><br></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Shown below are the <em>per diem</em> business travel expenses in 11 international cities selected from a study conducted for Business Travel News’ 2015 Corporate Travel Index, which is an annual study showing the daily cost of business travel in cities across the Globe. The per diem rates include hotel, car, and food expenses. Use this list to calculate the z scores for Lagos, Riyadh, and Bangkok. Treat the list as a sample.</li>
+</ol>
+<table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+city
+</th>
+<th style="text-align:right;">
+expense
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+London
+</td>
+<td style="text-align:right;">
+576
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mexico City
+</td>
+<td style="text-align:right;">
+240
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Tokyo
+</td>
+<td style="text-align:right;">
+484
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bangalore
+</td>
+<td style="text-align:right;">
+199
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Bangkok
+</td>
+<td style="text-align:right;">
+234
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Riyadh
+</td>
+<td style="text-align:right;">
+483
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lagos
+</td>
+<td style="text-align:right;">
+506
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Cape Town
+</td>
+<td style="text-align:right;">
+230
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Zurich
+</td>
+<td style="text-align:right;">
+508
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Paris
+</td>
+<td style="text-align:right;">
+483
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Guatemala City
+</td>
+<td style="text-align:right;">
+213
+</td>
+</tr>
+</tbody>
+</table>
+<button onclick="showText(&#39;myDIV2&#39;)">
+show / hide
+</button>
+<div id="myDIV2" style="display:none;">
+<p><strong>Answer</strong></p>
+<ul>
+<li><strong>Range</strong>: the distance between the max and min</li>
+</ul>
+<p><span class="math display">\[
+Range = |max(x) - min(x)| = 576- 199 = 377
+\]</span></p>
+<ul>
+<li><strong>IQR</strong>: <span class="math inline">\(Q_3\)</span> net of <span class="math inline">\(Q_1\)</span> (<span class="math inline">\(P_{75} - P_{25}\)</span>)</li>
+</ul>
+<p><span class="math display">\[
+IQR = Q_3 - Q_2 = 495 - 232 = 263
+\]</span></p>
+<ul>
+<li><strong>Mean Absolute Deviation</strong>: MAD is robust</li>
+</ul>
+<p><span class="math display">\[
+MAD = \frac{\Sigma_{i=1}^N |x_i - \mu|}{N}
+\]</span>
+<span class="math display">\[
+\mu = \frac{\Sigma_{i=1}^N x_i}{N}=\frac{4156}{11} = 377.8182
+\]</span>
+<span class="math display">\[
+MAD = \frac{1546.1818}{11} = 140.562 
+\]</span>
+- <strong>Standard Deviation</strong>: first the square of the standard deviation is the variance</p>
+<p><span class="math display">\[
+\sigma^2 = \frac{\Sigma_{i=1}^N (x_i - \mu)^2}{N}
+\]</span>
+next, the standard deviation is</p>
+<p><span class="math display">\[
+\sigma = \sqrt{\sigma^2}
+\]</span>
+A slightly easier way to compute <span class="math inline">\(\sigma^2\)</span> is</p>
+<p><span class="math display">\[
+\sigma^2 = \frac{\Sigma_{i=1}^N x_i^2 - N(\bar{x})^2}{N}
+\]</span>
+<span class="math display">\[
+\sigma^2 = \frac{1796936 - 11(377.8182)^2}{11} = 22672.3636
+\]</span>
+<span class="math display">\[
+\sigma = 150.5734
+\]</span></p>
+<ul>
+<li><strong>Empirical Rule</strong>: if we think the distribution is symmetrical (“normal”) then the proportion of observations will be</li>
+</ul>
+<p>and</p>
+<ul>
+<li><strong>Chebychev</strong>: at least 75% of all values are within ±2σ of the mean regardless of the shape of a distribution lie within <span class="math inline">\(\pm 2 \sigma\)</span> of the mean; for <span class="math inline">\(\mu \pm k \sigma\)</span>, <span class="math inline">\(k\)</span> standard deviations and the proportion of observations is</li>
+</ul>
+<p><span class="math display">\[
+1 - \frac{1}{k^2}
+\]</span></p>
+<table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+distance
+</th>
+<th style="text-align:right;">
+proportion
+</th>
+<th style="text-align:right;">
+k
+</th>
+<th style="text-align:left;">
+distance.1
+</th>
+<th style="text-align:left;">
+chebychev
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(\mu \pm 1 \sigma\)</span>
+</td>
+<td style="text-align:right;">
+0.680
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(378 \pm 1*151\)</span>
+</td>
+<td style="text-align:left;">
+<ul>
+<li></td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(\mu \pm 2 \sigma\)</span>
+</td>
+<td style="text-align:right;">
+0.950
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(378 \pm 2*151\)</span>
+</td>
+<td style="text-align:left;">
+0.75
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(\mu \pm 3 \sigma\)</span>
+</td>
+<td style="text-align:right;">
+0.997
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(378 \pm 3*151\)</span>
+</td>
+<td style="text-align:left;">
+0.89
+</td>
+</tr>
+</tbody>
+</table></li>
+<li><strong>Coefficient of Variation</strong>: the ratio of the standard deviation to the mean expressed in percentage and is denoted CV</li>
+</ul>
+<p><span class="math display">\[
+CV = \frac{\sigma}{\mu} \times 100 = \frac{150.5734}{377.8182} \times 100 = 39.8534
+\]</span></p>
+<ul>
+<li><strong>z-score</strong>: converts means into standard deviation units; the number of standard deviations a value from the distribution is above or below the mean of the distribution. For the first data point</li>
+</ul>
+<p><span class="math display">\[
+z = \frac{x - \mu}{\sigma} = \frac{576 - 377.8182}{150.5734}=\frac{198.1818}{150.5734}
+\]</span></p>
+<p>This observation is 1.3162 standard deviations from the mean 377.8182.</p>
+<ul>
+<li>Sample versus population</li>
+</ul>
+<p>If <span class="math inline">\(x\)</span> is a sample (subset) indexed by <span class="math inline">\(i = 1 \dots N\)</span> with <span class="math inline">\(N\)</span> elements from the population, then (the same formula!)</p>
+<p><span class="math display">\[
+\bar{x} = \frac{\Sigma_{i=1}^N x_i}{N} = \frac{4156}{11} = 377.8182
+\]</span></p>
+<p>and</p>
+<p><span class="math display">\[
+s^2 = \frac{\Sigma_{i=1}^N (x_i - \bar{x})^2}{N-1} - \frac{226723.6364}{11 -1} = 22672.3636
+\]</span>
+and then</p>
+<p><span class="math display">\[
+s = \sqrt{s^2} = 150.5734
+\]</span></p>
+</div>
+<p><br></p>
+</div>
+<div id="what-have-we-learned-1" class="section level2">
+<h2><span class="header-section-number">6.7</span> What have we learned?</h2>
+<p>So much! More to come.</p>
+<ul>
+<li><p>Deviation drives statistical thinking</p></li>
+<li><p>Deviation depends on movements away from where we believe data tends</p></li>
+<li><p>We have a model: <span class="math inline">\(y = \bar{y} + e\)</span> where <span class="math inline">\(e\)</span> is the deviation of a variable <span class="math inline">\(y\)</span> from its tendency <span class="math inline">\(\bar{y}\)</span>.</p></li>
+</ul>
+
+<script>
+function showText(y) {
+    var x = document.getElementById(y);
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+</script>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="tendency.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="binomial-distribution.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["book-stat-thinking.pdf", "book-stat-thinking.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

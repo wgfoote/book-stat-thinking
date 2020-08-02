@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 13 More Inference: Hypothesis Testing | Statistical Thinking</title>
+  <meta name="description" content="Statistical reasoning from an elementary point of view" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 13 More Inference: Hypothesis Testing | Statistical Thinking" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Statistical reasoning from an elementary point of view" />
+  <meta name="github-repo" content="wgfoote/book-stat-thinking" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 13 More Inference: Hypothesis Testing | Statistical Thinking" />
+  
+  <meta name="twitter:description" content="Statistical reasoning from an elementary point of view" />
+  
+
+<meta name="author" content="Bill Foote" />
+
+
+<meta name="date" content="2020-08-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="confidence-intervals.html"/>
+<link rel="next" href="simple-linear-regression.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="libs/vis-4.20.1/vis.css" rel="stylesheet" />
+<script src="libs/vis-4.20.1/vis.min.js"></script>
+<script src="libs/visNetwork-binding-2.0.9/visNetwork.js"></script>
+<link href="libs/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<script src="libs/plotly-binding-4.9.2/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<script src="libs/viz-0.3/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.1/grViz.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Statistical Thinking</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preliminaries</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#the-basic-problem"><i class="fa fa-check"></i><b>1.1</b> The basic problem</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#analytics"><i class="fa fa-check"></i><b>1.2</b> Analytics</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#readiness-for-statistical-thinking"><i class="fa fa-check"></i><b>1.3</b> Readiness for statistical thinking</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#solve-this-riddle"><i class="fa fa-check"></i><b>1.3.1</b> Solve this riddle</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#join-these-sets"><i class="fa fa-check"></i><b>1.3.2</b> Join these sets</a></li>
+<li class="chapter" data-level="1.3.3" data-path="index.html"><a href="index.html#partition-this-board"><i class="fa fa-check"></i><b>1.3.3</b> Partition this board</a></li>
+<li class="chapter" data-level="1.3.4" data-path="index.html"><a href="index.html#calculate-this-expression"><i class="fa fa-check"></i><b>1.3.4</b> Calculate this expression</a></li>
+<li class="chapter" data-level="1.3.5" data-path="index.html"><a href="index.html#solve-this-equation"><i class="fa fa-check"></i><b>1.3.5</b> Solve this equation</a></li>
+<li class="chapter" data-level="1.3.6" data-path="index.html"><a href="index.html#summation-calculations"><i class="fa fa-check"></i><b>1.3.6</b> Summation calculations</a></li>
+<li class="chapter" data-level="1.3.7" data-path="index.html"><a href="index.html#weighted-average"><i class="fa fa-check"></i><b>1.3.7</b> Weighted average</a></li>
+<li class="chapter" data-level="1.3.8" data-path="index.html"><a href="index.html#linear-coefficients"><i class="fa fa-check"></i><b>1.3.8</b> Linear coefficients</a></li>
+<li class="chapter" data-level="1.3.9" data-path="index.html"><a href="index.html#linear-simultaneous-equations"><i class="fa fa-check"></i><b>1.3.9</b> Linear simultaneous equations</a></li>
+<li class="chapter" data-level="1.3.10" data-path="index.html"><a href="index.html#elasticity-a-little-light-calculus"><i class="fa fa-check"></i><b>1.3.10</b> Elasticity: a little light calculus</a></li>
+<li class="chapter" data-level="1.3.11" data-path="index.html"><a href="index.html#area-under-a-curve"><i class="fa fa-check"></i><b>1.3.11</b> Area under a curve</a></li>
+<li class="chapter" data-level="1.3.12" data-path="index.html"><a href="index.html#next-steps"><i class="fa fa-check"></i><b>1.3.12</b> Next steps?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#chapter-outline"><i class="fa fa-check"></i><b>1.4</b> Chapter outline</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html"><i class="fa fa-check"></i><b>2</b> Statistical Reasoning</a><ul>
+<li class="chapter" data-level="2.1" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#welcome-to-statistical-reasoning"><i class="fa fa-check"></i><b>2.1</b> Welcome to Statistical Reasoning</a></li>
+<li class="chapter" data-level="2.2" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#why-do-we-reason-statistically"><i class="fa fa-check"></i><b>2.2</b> Why do we reason statistically?</a></li>
+<li class="chapter" data-level="2.3" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#what-is-statistical-reasoning"><i class="fa fa-check"></i><b>2.3</b> What is statistical reasoning?</a></li>
+<li class="chapter" data-level="2.4" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#lets-learn-some-more-from-this-example"><i class="fa fa-check"></i><b>2.4</b> Let’s learn some more from this example:</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#why"><i class="fa fa-check"></i><b>2.4.1</b> Why?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#digging-deeper"><i class="fa fa-check"></i><b>2.5</b> Digging deeper</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#learn-by-doing-this"><i class="fa fa-check"></i><b>2.5.1</b> Learn by doing this</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#what-is-the-conceptual-framework-of-statistical-reasoning"><i class="fa fa-check"></i><b>2.6</b> What is the conceptual framework of statistical reasoning?</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#learn-by-doing"><i class="fa fa-check"></i><b>2.6.1</b> Learn by doing</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#infer"><i class="fa fa-check"></i><b>2.7</b> Infer</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#deductive-reasoning-conclusion-guaranteed"><i class="fa fa-check"></i><b>2.7.1</b> Deductive reasoning: conclusion guaranteed</a></li>
+<li class="chapter" data-level="2.7.2" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#inductive-reasoning-comclusion-not-guaranteed"><i class="fa fa-check"></i><b>2.7.2</b> Inductive reasoning: comclusion not guaranteed</a></li>
+<li class="chapter" data-level="2.7.3" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#abductive-reasoning-taking-your-best-shot"><i class="fa fa-check"></i><b>2.7.3</b> Abductive reasoning: taking your best shot</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#critical-thinking"><i class="fa fa-check"></i><b>2.8</b> Critical thinking</a></li>
+<li class="chapter" data-level="2.9" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#try-this"><i class="fa fa-check"></i><b>2.9</b> Try this</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html"><i class="fa fa-check"></i><b>3</b> The many faces of data</a><ul>
+<li class="chapter" data-level="3.1" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#learning-outomes"><i class="fa fa-check"></i><b>3.1</b> Learning outomes</a></li>
+<li class="chapter" data-level="3.2" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#march-on"><i class="fa fa-check"></i><b>3.2</b> March on</a></li>
+<li class="chapter" data-level="3.3" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#air-pollution-and-birth-outcomes"><i class="fa fa-check"></i><b>3.3</b> Air pollution and birth outcomes</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#classifying-data-types"><i class="fa fa-check"></i><b>3.3.1</b> Classifying data types</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#something-a-bit-more-complicated"><i class="fa fa-check"></i><b>3.4</b> Something a bit more complicated</a></li>
+<li class="chapter" data-level="3.5" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#what-have-we-learned"><i class="fa fa-check"></i><b>3.5</b> What have we learned?</a></li>
+<li class="chapter" data-level="3.6" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#review-these-scenarios"><i class="fa fa-check"></i><b>3.6</b> Review these scenarios</a></li>
+<li class="chapter" data-level="3.7" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#try-this-1"><i class="fa fa-check"></i><b>3.7</b> Try this</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html"><i class="fa fa-check"></i><b>4</b> First Steps in Exploring Data</a><ul>
+<li class="chapter" data-level="4.1" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#learning-objectives"><i class="fa fa-check"></i><b>4.1</b> Learning objectives</a></li>
+<li class="chapter" data-level="4.2" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#business-context"><i class="fa fa-check"></i><b>4.2</b> Business context</a></li>
+<li class="chapter" data-level="4.3" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#bullets"><i class="fa fa-check"></i><b>4.3</b> Bullets</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#what-did-we-do"><i class="fa fa-check"></i><b>4.3.1</b> What did we do?</a></li>
+<li class="chapter" data-level="4.3.2" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#what-can-we-say"><i class="fa fa-check"></i><b>4.3.2</b> What can we say?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#incidents-and-accidents"><i class="fa fa-check"></i><b>4.4</b> Incidents and accidents</a></li>
+<li class="chapter" data-level="4.5" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#where-do-we-go-from-here"><i class="fa fa-check"></i><b>4.5</b> Where do we go from here?</a></li>
+<li class="chapter" data-level="4.6" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#resources"><i class="fa fa-check"></i><b>4.6</b> Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="tendency.html"><a href="tendency.html"><i class="fa fa-check"></i><b>5</b> Tendency</a><ul>
+<li class="chapter" data-level="5.1" data-path="tendency.html"><a href="tendency.html#learning-outcomes"><i class="fa fa-check"></i><b>5.1</b> Learning outcomes</a></li>
+<li class="chapter" data-level="5.2" data-path="tendency.html"><a href="tendency.html#the-best-we-have"><i class="fa fa-check"></i><b>5.2</b> The best we have</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="tendency.html"><a href="tendency.html#square-those-errors"><i class="fa fa-check"></i><b>5.2.1</b> Square those errors</a></li>
+<li class="chapter" data-level="5.2.2" data-path="tendency.html"><a href="tendency.html#absolutely"><i class="fa fa-check"></i><b>5.2.2</b> Absolutely!</a></li>
+<li class="chapter" data-level="5.2.3" data-path="tendency.html"><a href="tendency.html#quantiles-anyone"><i class="fa fa-check"></i><b>5.2.3</b> Quantiles anyone?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="tendency.html"><a href="tendency.html#procedures"><i class="fa fa-check"></i><b>5.3</b> Procedures</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="tendency.html"><a href="tendency.html#mean"><i class="fa fa-check"></i><b>5.3.1</b> Mean</a></li>
+<li class="chapter" data-level="5.3.2" data-path="tendency.html"><a href="tendency.html#median"><i class="fa fa-check"></i><b>5.3.2</b> Median</a></li>
+<li class="chapter" data-level="5.3.3" data-path="tendency.html"><a href="tendency.html#mode"><i class="fa fa-check"></i><b>5.3.3</b> Mode</a></li>
+<li class="chapter" data-level="5.3.4" data-path="tendency.html"><a href="tendency.html#percentile-and-quantile"><i class="fa fa-check"></i><b>5.3.4</b> Percentile and quantile</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="tendency.html"><a href="tendency.html#always-problems"><i class="fa fa-check"></i><b>5.4</b> Always problems</a></li>
+<li class="chapter" data-level="5.5" data-path="tendency.html"><a href="tendency.html#visualizing-with-tukeys-box"><i class="fa fa-check"></i><b>5.5</b> Visualizing with Tukey’s box</a></li>
+<li class="chapter" data-level="5.6" data-path="tendency.html"><a href="tendency.html#what-have-we-gotten-to-so-far"><i class="fa fa-check"></i><b>5.6</b> What have we gotten to so far?</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="deviation.html"><a href="deviation.html"><i class="fa fa-check"></i><b>6</b> Deviation</a><ul>
+<li class="chapter" data-level="6.1" data-path="deviation.html"><a href="deviation.html#learning-outcomes-1"><i class="fa fa-check"></i><b>6.1</b> Learning outcomes</a></li>
+<li class="chapter" data-level="6.2" data-path="deviation.html"><a href="deviation.html#rev-up-the-deuce"><i class="fa fa-check"></i><b>6.2</b> Rev up the deuce</a></li>
+<li class="chapter" data-level="6.3" data-path="deviation.html"><a href="deviation.html#blinded-by-the-light"><i class="fa fa-check"></i><b>6.3</b> Blinded by the light</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="deviation.html"><a href="deviation.html#whats-a-sample-again"><i class="fa fa-check"></i><b>6.3.1</b> What’s a sample? (again)</a></li>
+<li class="chapter" data-level="6.3.2" data-path="deviation.html"><a href="deviation.html#standard-deviation"><i class="fa fa-check"></i><b>6.3.2</b> 1. Standard deviation</a></li>
+<li class="chapter" data-level="6.3.3" data-path="deviation.html"><a href="deviation.html#robust-measures"><i class="fa fa-check"></i><b>6.3.3</b> 2. Robust measures</a></li>
+<li class="chapter" data-level="6.3.4" data-path="deviation.html"><a href="deviation.html#correlation"><i class="fa fa-check"></i><b>6.3.4</b> 3. Correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="deviation.html"><a href="deviation.html#the-tails-have-it"><i class="fa fa-check"></i><b>6.4</b> The tails have it!</a></li>
+<li class="chapter" data-level="6.5" data-path="deviation.html"><a href="deviation.html#how-can-we-use-all-of-this"><i class="fa fa-check"></i><b>6.5</b> How can we use all of this?</a></li>
+<li class="chapter" data-level="6.6" data-path="deviation.html"><a href="deviation.html#problems-always-problems"><i class="fa fa-check"></i><b>6.6</b> Problems, always problems</a></li>
+<li class="chapter" data-level="6.7" data-path="deviation.html"><a href="deviation.html#what-have-we-learned-1"><i class="fa fa-check"></i><b>6.7</b> What have we learned?</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="binomial-distribution.html"><a href="binomial-distribution.html"><i class="fa fa-check"></i><b>7</b> Binomial Distribution</a><ul>
+<li class="chapter" data-level="7.1" data-path="binomial-distribution.html"><a href="binomial-distribution.html#what-is-a-probability-distribution"><i class="fa fa-check"></i><b>7.1</b> What is a probability distribution?</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="binomial-distribution.html"><a href="binomial-distribution.html#discrete-or-continuous"><i class="fa fa-check"></i><b>7.1.1</b> Discrete or continuous?</a></li>
+<li class="chapter" data-level="7.1.2" data-path="binomial-distribution.html"><a href="binomial-distribution.html#examples-of-distributions"><i class="fa fa-check"></i><b>7.1.2</b> Examples of distributions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="imagine-this.html"><a href="imagine-this.html"><i class="fa fa-check"></i><b>8</b> Imagine this</a></li>
+<li class="chapter" data-level="9" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html"><i class="fa fa-check"></i><b>9</b> What’s a binomial?</a><ul>
+<li class="chapter" data-level="9.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#then-there-were-two"><i class="fa fa-check"></i><b>9.1</b> Then there were two</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#how-often"><i class="fa fa-check"></i><b>9.1.1</b> How often?</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#being-binomial"><i class="fa fa-check"></i><b>9.2</b> Being binomial</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#consumer-goods-r-us"><i class="fa fa-check"></i><b>9.2.1</b> Consumer goods ‘r’ us</a></li>
+<li class="chapter" data-level="9.2.2" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#whats-a-binomial-1"><i class="fa fa-check"></i><b>9.2.2</b> What’s a binomial?</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#whats-a-combination"><i class="fa fa-check"></i><b>9.3</b> What’s a combination?</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#for-a-simple-example"><i class="fa fa-check"></i><b>9.3.1</b> For a simple example</a></li>
+<li class="chapter" data-level="9.3.2" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#we-have-to-start-with-permutation-first"><i class="fa fa-check"></i><b>9.3.2</b> We have to start with permutation first</a></li>
+<li class="chapter" data-level="9.3.3" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#start-with-a-abcde-letters-in-a-text-to-your-friend."><i class="fa fa-check"></i><b>9.3.3</b> Start with <span class="math inline">\(A = \{a,b,c,d,e\}\)</span> letters in a text to your friend.</a></li>
+<li class="chapter" data-level="9.3.4" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#find-the-number-of-3-letter-words-you-can-form-from-a-list-of-5-letters."><i class="fa fa-check"></i><b>9.3.4</b> Find the number of 3 letter words you can form from a list of 5 letters.</a></li>
+<li class="chapter" data-level="9.3.5" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#what-about-combinations"><i class="fa fa-check"></i><b>9.3.5</b> What about combinations?</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#combinations-from-permutations"><i class="fa fa-check"></i><b>9.4</b> Combinations from permutations</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#try-these-combinations-and-permutations"><i class="fa fa-check"></i><b>9.4.1</b> Try these: combinations and permutations</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#so-how-do-we-use-the-binomial-process"><i class="fa fa-check"></i><b>9.5</b> So how do we use the binomial process?</a></li>
+<li class="chapter" data-level="9.6" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#try-this-binomial-distribution"><i class="fa fa-check"></i><b>9.6</b> Try this: binomial distribution</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#try-another"><i class="fa fa-check"></i><b>9.6.1</b> Try another</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#what-does-a-graph-of-the-binomial-look-like"><i class="fa fa-check"></i><b>9.7</b> What does a graph of the binomial look like?</a></li>
+<li class="chapter" data-level="9.8" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#binomial-statistics"><i class="fa fa-check"></i><b>9.8</b> Binomial statistics</a><ul>
+<li class="chapter" data-level="9.8.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#try-this-2"><i class="fa fa-check"></i><b>9.8.1</b> Try this</a></li>
+</ul></li>
+<li class="chapter" data-level="9.9" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#short-exercises"><i class="fa fa-check"></i><b>9.9</b> Short exercises</a></li>
+<li class="chapter" data-level="9.10" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#binomial-barrels"><i class="fa fa-check"></i><b>9.10</b> Binomial barrels</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="poisson-distribution.html"><a href="poisson-distribution.html"><i class="fa fa-check"></i><b>10</b> Poisson Distribution</a><ul>
+<li class="chapter" data-level="10.1" data-path="poisson-distribution.html"><a href="poisson-distribution.html#imagine-this-1"><i class="fa fa-check"></i><b>10.1</b> Imagine this</a></li>
+<li class="chapter" data-level="10.2" data-path="poisson-distribution.html"><a href="poisson-distribution.html#lets-calculate"><i class="fa fa-check"></i><b>10.2</b> Let’s calculate</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="poisson-distribution.html"><a href="poisson-distribution.html#try-this-3"><i class="fa fa-check"></i><b>10.2.1</b> Try this</a></li>
+<li class="chapter" data-level="10.2.2" data-path="poisson-distribution.html"><a href="poisson-distribution.html#results"><i class="fa fa-check"></i><b>10.2.2</b> Results</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="poisson-distribution.html"><a href="poisson-distribution.html#some-mercifully-short-exercises"><i class="fa fa-check"></i><b>10.3</b> Some (mercifully) short exercises</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="poisson-distribution.html"><a href="poisson-distribution.html#not-so-short-exercises"><i class="fa fa-check"></i><b>10.3.1</b> Not so short exercises</a></li>
+<li class="chapter" data-level="10.3.2" data-path="poisson-distribution.html"><a href="poisson-distribution.html#answers"><i class="fa fa-check"></i><b>10.3.2</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html"><i class="fa fa-check"></i><b>11</b> How likely is that?</a><ul>
+<li class="chapter" data-level="11.1" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#learning-outcomes-2"><i class="fa fa-check"></i><b>11.1</b> Learning outcomes</a></li>
+<li class="chapter" data-level="11.2" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#invitation-to-a-formal"><i class="fa fa-check"></i><b>11.2</b> Invitation to a formal</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#a-bit-of-english"><i class="fa fa-check"></i><b>11.2.1</b> A bit of English</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#dress-down-a-bit"><i class="fa fa-check"></i><b>11.3</b> Dress down a bit</a></li>
+<li class="chapter" data-level="11.4" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#try-another-1"><i class="fa fa-check"></i><b>11.4</b> Try another</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#what-does-the-event-space-look-like"><i class="fa fa-check"></i><b>11.4.1</b> What does the event space look like?</a></li>
+<li class="chapter" data-level="11.4.2" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#what-is"><i class="fa fa-check"></i><b>11.4.2</b> What is…</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#law-of-conditional-probability-bayes"><i class="fa fa-check"></i><b>11.5</b> Law of Conditional Probability (Bayes)</a></li>
+<li class="chapter" data-level="11.6" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#practice-1"><i class="fa fa-check"></i><b>11.6</b> Practice 1</a></li>
+<li class="chapter" data-level="11.7" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#practice-2"><i class="fa fa-check"></i><b>11.7</b> Practice 2</a></li>
+<li class="chapter" data-level="11.8" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#nothing-is-random"><i class="fa fa-check"></i><b>11.8</b> Nothing is random!</a><ul>
+<li class="chapter" data-level="11.8.1" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#suppose-20-of-the-people-in-a-city-prefer-pepsi-cola-as-their-soft-drink-of-choice."><i class="fa fa-check"></i><b>11.8.1</b> Suppose 20% of the people in a city prefer Pepsi-Cola as their soft drink of choice.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="confidence-intervals.html"><a href="confidence-intervals.html"><i class="fa fa-check"></i><b>12</b> Confidence Intervals</a><ul>
+<li class="chapter" data-level="12.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#imagine-this-2"><i class="fa fa-check"></i><b>12.1</b> Imagine this…</a></li>
+<li class="chapter" data-level="12.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#objectives"><i class="fa fa-check"></i><b>12.2</b> Objectives</a></li>
+<li class="chapter" data-level="12.3" data-path="confidence-intervals.html"><a href="confidence-intervals.html#try-this-4"><i class="fa fa-check"></i><b>12.3</b> Try this</a></li>
+<li class="chapter" data-level="12.4" data-path="confidence-intervals.html"><a href="confidence-intervals.html#what-about-the-sample-standard-deviation"><i class="fa fa-check"></i><b>12.4</b> What about the sample standard deviation?</a></li>
+<li class="chapter" data-level="12.5" data-path="confidence-intervals.html"><a href="confidence-intervals.html#explore-a-bit-further"><i class="fa fa-check"></i><b>12.5</b> Explore a bit further</a></li>
+<li class="chapter" data-level="12.6" data-path="confidence-intervals.html"><a href="confidence-intervals.html#confidence-interval-1-known-population-standard-deviation"><i class="fa fa-check"></i><b>12.6</b> Confidence interval ##1: known population standard deviation</a></li>
+<li class="chapter" data-level="12.7" data-path="confidence-intervals.html"><a href="confidence-intervals.html#our-procedure"><i class="fa fa-check"></i><b>12.7</b> Our procedure</a></li>
+<li class="chapter" data-level="12.8" data-path="confidence-intervals.html"><a href="confidence-intervals.html#on-to-the-unknown"><i class="fa fa-check"></i><b>12.8</b> On to the unknown</a></li>
+<li class="chapter" data-level="12.9" data-path="confidence-intervals.html"><a href="confidence-intervals.html#by-the-way-who-is-student"><i class="fa fa-check"></i><b>12.9</b> By the way, who is Student?</a></li>
+<li class="chapter" data-level="12.10" data-path="confidence-intervals.html"><a href="confidence-intervals.html#our-procedure-1"><i class="fa fa-check"></i><b>12.10</b> Our procedure</a></li>
+<li class="chapter" data-level="12.11" data-path="confidence-intervals.html"><a href="confidence-intervals.html#exercises"><i class="fa fa-check"></i><b>12.11</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html"><i class="fa fa-check"></i><b>13</b> More Inference: Hypothesis Testing</a><ul>
+<li class="chapter" data-level="13.1" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#imagine-this-3"><i class="fa fa-check"></i><b>13.1</b> Imagine this</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#two-errors-are-possible"><i class="fa fa-check"></i><b>13.1.1</b> Two errors are possible</a></li>
+<li class="chapter" data-level="13.1.2" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#control-is-probability"><i class="fa fa-check"></i><b>13.1.2</b> Control is probability</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#on-to-the-unknown-1"><i class="fa fa-check"></i><b>13.2</b> On to the unknown</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#by-the-way-who-is-student-1"><i class="fa fa-check"></i><b>13.2.1</b> By the way, who is Student?</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#on-with-our-story"><i class="fa fa-check"></i><b>13.3</b> On with our story…</a></li>
+<li class="chapter" data-level="13.4" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#what-about-two-shifts"><i class="fa fa-check"></i><b>13.4</b> What about two shifts?</a></li>
+<li class="chapter" data-level="13.5" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#exercises-1"><i class="fa fa-check"></i><b>13.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>14</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="14.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#the-perfect-relationship"><i class="fa fa-check"></i><b>14.1</b> The perfect relationship</a></li>
+<li class="chapter" data-level="14.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#linear-regression"><i class="fa fa-check"></i><b>14.2</b> Linear regression</a></li>
+<li class="chapter" data-level="14.3" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#ordinary-least-squares"><i class="fa fa-check"></i><b>14.3</b> Ordinary least squares</a></li>
+<li class="chapter" data-level="14.4" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#residual-interests"><i class="fa fa-check"></i><b>14.4</b> Residual interests</a></li>
+<li class="chapter" data-level="14.5" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#a-dash-of-calculus"><i class="fa fa-check"></i><b>14.5</b> A dash of calculus</a></li>
+<li class="chapter" data-level="14.6" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#now-for-the-residuals"><i class="fa fa-check"></i><b>14.6</b> Now for the residuals</a></li>
+<li class="chapter" data-level="14.7" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#have-some-confidence"><i class="fa fa-check"></i><b>14.7</b> Have some confidence</a></li>
+<li class="chapter" data-level="14.8" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#central-to-our-discussion"><i class="fa fa-check"></i><b>14.8</b> Central to our discussion</a></li>
+<li class="chapter" data-level="14.9" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#on-to-the-unknown-2"><i class="fa fa-check"></i><b>14.9</b> On to the unknown</a></li>
+<li class="chapter" data-level="14.10" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#by-the-way-who-is-student-2"><i class="fa fa-check"></i><b>14.10</b> By the way, who is Student?</a></li>
+<li class="chapter" data-level="14.11" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#in-all-confidence-forecasting-for-fun-and"><i class="fa fa-check"></i><b>14.11</b> In all confidence: forecasting for fun and …</a></li>
+<li class="chapter" data-level="14.12" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#how-confident-are-we-in-our-estimates"><i class="fa fa-check"></i><b>14.12</b> How confident are we in our estimates?</a></li>
+<li class="chapter" data-level="14.13" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#next-lets-hypothesize"><i class="fa fa-check"></i><b>14.13</b> Next let’s hypothesize</a></li>
+<li class="chapter" data-level="14.14" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#yet-another-school-of-thought"><i class="fa fa-check"></i><b>14.14</b> Yet another school of thought</a></li>
+<li class="chapter" data-level="14.15" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#summary-of-simple-linear-regression-estimation"><i class="fa fa-check"></i><b>14.15</b> Summary of simple linear regression estimation</a></li>
+<li class="chapter" data-level="14.16" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#how-good-a-fit"><i class="fa fa-check"></i><b>14.16</b> How good a fit?</a></li>
+<li class="chapter" data-level="14.17" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#lets-build-more-statistics"><i class="fa fa-check"></i><b>14.17</b> Let’s build more statistics!</a></li>
+<li class="chapter" data-level="14.18" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#analyze-this"><i class="fa fa-check"></i><b>14.18</b> Analyze this …</a></li>
+<li class="chapter" data-level="14.19" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#two-samples-same-population"><i class="fa fa-check"></i><b>14.19</b> Two samples – same population?</a></li>
+<li class="chapter" data-level="14.20" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#anything-abnormal"><i class="fa fa-check"></i><b>14.20</b> Anything abnormal?</a></li>
+<li class="chapter" data-level="14.21" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#exercises-2"><i class="fa fa-check"></i><b>14.21</b> Exercises</a><ul>
+<li class="chapter" data-level="14.21.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#us-house-of-representatives-seats-and-unemployment"><i class="fa fa-check"></i><b>14.21.1</b> US House of Representatives seats and unemployment</a></li>
+<li class="chapter" data-level="14.21.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#peruvian-anchovies"><i class="fa fa-check"></i><b>14.21.2</b> Peruvian anchovies</a></li>
+<li class="chapter" data-level="14.21.3" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#bronx-corn"><i class="fa fa-check"></i><b>14.21.3</b> Bronx corn</a></li>
+<li class="chapter" data-level="14.21.4" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#consumption-and-disposable-income"><i class="fa fa-check"></i><b>14.21.4</b> Consumption and disposable income</a></li>
+</ul></li>
+<li class="chapter" data-level="14.22" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#references"><i class="fa fa-check"></i><b>14.22</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="quantile-regression.html"><a href="quantile-regression.html"><i class="fa fa-check"></i><b>15</b> Quantile regression</a><ul>
+<li class="chapter" data-level="15.1" data-path="quantile-regression.html"><a href="quantile-regression.html#what-is-it"><i class="fa fa-check"></i><b>15.1</b> What is it?</a></li>
+<li class="chapter" data-level="15.2" data-path="quantile-regression.html"><a href="quantile-regression.html#an-example"><i class="fa fa-check"></i><b>15.2</b> An example</a></li>
+<li class="chapter" data-level="15.3" data-path="quantile-regression.html"><a href="quantile-regression.html#even-in-ggplot2"><i class="fa fa-check"></i><b>15.3</b> Even in ggplot2</a></li>
+<li class="chapter" data-level="15.4" data-path="quantile-regression.html"><a href="quantile-regression.html#interpretations"><i class="fa fa-check"></i><b>15.4</b> Interpretations</a></li>
+<li class="chapter" data-level="15.5" data-path="quantile-regression.html"><a href="quantile-regression.html#exercises-3"><i class="fa fa-check"></i><b>15.5</b> Exercises</a><ul>
+<li class="chapter" data-level="15.5.1" data-path="quantile-regression.html"><a href="quantile-regression.html#us-house-of-representatives-seats-and-unemployment-1"><i class="fa fa-check"></i><b>15.5.1</b> US House of Representatives seats and unemployment</a></li>
+<li class="chapter" data-level="15.5.2" data-path="quantile-regression.html"><a href="quantile-regression.html#peruvian-anchovies-1"><i class="fa fa-check"></i><b>15.5.2</b> Peruvian anchovies</a></li>
+<li class="chapter" data-level="15.5.3" data-path="quantile-regression.html"><a href="quantile-regression.html#bronx-corn-1"><i class="fa fa-check"></i><b>15.5.3</b> Bronx corn</a></li>
+<li class="chapter" data-level="15.5.4" data-path="quantile-regression.html"><a href="quantile-regression.html#consumption-and-disposable-income-1"><i class="fa fa-check"></i><b>15.5.4</b> Consumption and disposable income</a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="quantile-regression.html"><a href="quantile-regression.html#references-1"><i class="fa fa-check"></i><b>15.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>16</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="16.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#the-more-perfect-relationship"><i class="fa fa-check"></i><b>16.1</b> The more perfect relationship</a></li>
+<li class="chapter" data-level="16.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#arrays-and-you"><i class="fa fa-check"></i><b>16.2</b> Arrays and You</a><ul>
+<li class="chapter" data-level="16.2.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#running-a-regression"><i class="fa fa-check"></i><b>16.2.1</b> Running a regression</a></li>
+<li class="chapter" data-level="16.2.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#more-about-residuals"><i class="fa fa-check"></i><b>16.2.2</b> More about residuals</a></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#more-array-work"><i class="fa fa-check"></i><b>16.3</b> More Array Work</a></li>
+<li class="chapter" data-level="16.4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#exercising-the-model"><i class="fa fa-check"></i><b>16.4</b> Exercising the model</a><ul>
+<li class="chapter" data-level="16.4.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#exercise-1-housing-market-determinants"><i class="fa fa-check"></i><b>16.4.1</b> Exercise 1: housing market determinants</a></li>
+<li class="chapter" data-level="16.4.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#exercise-2-risk-driver-model-using-regression-analysis"><i class="fa fa-check"></i><b>16.4.2</b> Exercise 2: risk driver model using regression analysis</a></li>
+<li class="chapter" data-level="16.4.3" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#exercise-3-commercial-loan-projection-using-regression"><i class="fa fa-check"></i><b>16.4.3</b> Exercise 3: commercial loan projection using regression</a></li>
+<li class="chapter" data-level="16.4.4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#work-flow"><i class="fa fa-check"></i><b>16.4.4</b> Work Flow</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="binary-regression.html"><a href="binary-regression.html"><i class="fa fa-check"></i><b>17</b> Binary Regression</a><ul>
+<li class="chapter" data-level="17.1" data-path="binary-regression.html"><a href="binary-regression.html#what-is-binary-risk-analysis"><i class="fa fa-check"></i><b>17.1</b> What is Binary Risk Analysis?</a></li>
+<li class="chapter" data-level="17.2" data-path="binary-regression.html"><a href="binary-regression.html#an-expository-simulation"><i class="fa fa-check"></i><b>17.2</b> An expository simulation</a></li>
+<li class="chapter" data-level="17.3" data-path="binary-regression.html"><a href="binary-regression.html#enter-the-discrete-decision-maker"><i class="fa fa-check"></i><b>17.3</b> Enter the discrete decision maker</a></li>
+<li class="chapter" data-level="17.4" data-path="binary-regression.html"><a href="binary-regression.html#the-odds-are"><i class="fa fa-check"></i><b>17.4</b> The odds are …</a></li>
+<li class="chapter" data-level="17.5" data-path="binary-regression.html"><a href="binary-regression.html#predict-now"><i class="fa fa-check"></i><b>17.5</b> Predict now …</a></li>
+<li class="chapter" data-level="17.6" data-path="binary-regression.html"><a href="binary-regression.html#a-deposit"><i class="fa fa-check"></i><b>17.6</b> A deposit</a></li>
+<li class="chapter" data-level="17.7" data-path="binary-regression.html"><a href="binary-regression.html#references-2"><i class="fa fa-check"></i><b>17.7</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="time-series-analysis.html"><a href="time-series-analysis.html"><i class="fa fa-check"></i><b>18</b> Time Series Analysis</a><ul>
+<li class="chapter" data-level="18.1" data-path="time-series-analysis.html"><a href="time-series-analysis.html#preliminaries-1"><i class="fa fa-check"></i><b>18.1</b> Preliminaries</a></li>
+<li class="chapter" data-level="18.2" data-path="time-series-analysis.html"><a href="time-series-analysis.html#where-do-we-start"><i class="fa fa-check"></i><b>18.2</b> Where do we start?</a></li>
+<li class="chapter" data-level="18.3" data-path="time-series-analysis.html"><a href="time-series-analysis.html#autoregressive-processes"><i class="fa fa-check"></i><b>18.3</b> Autoregressive processes</a></li>
+<li class="chapter" data-level="18.4" data-path="time-series-analysis.html"><a href="time-series-analysis.html#moving-average-processes"><i class="fa fa-check"></i><b>18.4</b> Moving average processes</a></li>
+<li class="chapter" data-level="18.5" data-path="time-series-analysis.html"><a href="time-series-analysis.html#takeaways"><i class="fa fa-check"></i><b>18.5</b> Takeaways</a></li>
+<li class="chapter" data-level="18.6" data-path="time-series-analysis.html"><a href="time-series-analysis.html#references-3"><i class="fa fa-check"></i><b>18.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html"><i class="fa fa-check"></i><b>19</b> Bootstrapping Estimates</a><ul>
+<li class="chapter" data-level="19.1" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#imagine"><i class="fa fa-check"></i><b>19.1</b> Imagine</a></li>
+<li class="chapter" data-level="19.2" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#tools"><i class="fa fa-check"></i><b>19.2</b> Tools</a></li>
+<li class="chapter" data-level="19.3" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#d-p-q-runif"><i class="fa fa-check"></i><b>19.3</b> <code>[d p q r]unif</code></a></li>
+<li class="chapter" data-level="19.4" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#permutations-with-sample"><i class="fa fa-check"></i><b>19.4</b> Permutations with <code>sample()</code></a></li>
+<li class="chapter" data-level="19.5" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#resampling-with-sample"><i class="fa fa-check"></i><b>19.5</b> Resampling with <code>sample()</code></a></li>
+<li class="chapter" data-level="19.6" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#expected-shortfall-test"><i class="fa fa-check"></i><b>19.6</b> Expected shortfall test</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/wgfoote/book-stat-thinking" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Statistical Thinking</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="more-inference-hypothesis-testing" class="section level1">
+<h1><span class="header-section-number">Chapter 13</span> More Inference: Hypothesis Testing</h1>
+<div id="imagine-this-3" class="section level2">
+<h2><span class="header-section-number">13.1</span> Imagine this</h2>
+<p>An online startup company carefully and thoroughly searches documents on behalf of clients from a variety of domains including science, engineering, healthcare, and finance.</p>
+<ol style="list-style-type: decimal">
+<li><p>The company has access to a huge <em>corpus</em> of information for each domain.</p></li>
+<li><p>Researchers express their information needs through <em>queries</em> in terms of topics, categories, and individual words, as well as by <em>reference</em> through citations of work product.</p></li>
+<li><p>Queries are input to a <em>search engine</em>, the output of which matches <em>queries</em> with information objects in the <em>corpus</em>.</p></li>
+</ol>
+<p>The company measures its performance in terms of</p>
+<ul>
+<li><p>Information retrieval <em>coverage</em> as the fraction of objects the searcher discovers, and</p></li>
+<li><p>The fraction of objects that are <em>relevant</em> to the search.</p></li>
+</ul>
+<div id="two-errors-are-possible" class="section level3">
+<h3><span class="header-section-number">13.1.1</span> Two errors are possible</h3>
+<p>Retrieval faces off with relevance. Two errors are possible:</p>
+<table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+Retrieved
+</th>
+<th style="text-align:left;">
+Not Retrieved
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Revelant
+</td>
+<td style="text-align:left;">
+OK
+</td>
+<td style="text-align:left;">
+False Negative
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Not Relevant
+</td>
+<td style="text-align:left;">
+False Positive
+</td>
+<td style="text-align:left;">
+OK
+</td>
+</tr>
+</tbody>
+</table>
+<ol style="list-style-type: decimal">
+<li><p><strong>Type I Error</strong>: the False Negative means the researcher did not retrieve relevant information.</p></li>
+<li><p><strong>Type II Error</strong>: the False Positive means that the research retrieved irrelevant information.</p></li>
+</ol>
+<p>How can the research company control for error? Be specific: How can the company ensure that the number of retrieved and relevant documents per day is as high as possible?</p>
+</div>
+<div id="control-is-probability" class="section level3">
+<h3><span class="header-section-number">13.1.2</span> Control is probability</h3>
+<p>Here is what the company does:</p>
+<ol style="list-style-type: decimal">
+<li>Management makes an assumption and forms a hypothesis about the average rate of documents found in searches. This is a precise statement about a specific metric. Here the metric is the average number of retrieved and relevant documents per day, <span class="math inline">\(\mu\)</span>, Suppose this target level is 1000 documents per day.</li>
+</ol>
+<ul>
+<li><p>The <em>null hypothesis</em> (<span class="math inline">\(H_0\)</span>) is that the population metric equals a target value <span class="math inline">\(\mu_0\)</span> or <span class="math inline">\(H_0: \mu = \mu_0\)</span>. Suppose that <span class="math inline">\(H_0: \mu = 1000\)</span>.</p></li>
+<li><p>The <em>alternative hypothesis</em> (<span class="math inline">\(H_1\)</span>) is that the population metric does not equal (or is just greater or less than) the target value. Thus we would have <span class="math inline">\(H_1: \mu \neq 1000\)</span>.</p></li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>Corporate policy sets a degree of confidence in accepting as true the assumption or hypothesis about the metric. The company determines that 95% of the time <span class="math inline">\(\mu = 1000\)</span>. This means there is an <span class="math inline">\(\alpha =\)</span> 5% significance that the company would be willing to be wrong about rejecting that <span class="math inline">\(H_0: \mu = 1000\)</span> is true.</li>
+</ol>
+<ul>
+<li><p>Under the null hypothesis it is probable that above or below a mean value of 1000 there is an error of <span class="math inline">\(\alpha = 0.05\)</span> in total, or <span class="math inline">\(\alpha / 2 = 0.025\)</span> above and <span class="math inline">\(\alpha / 2 = 0.025\)</span> below the mean.</p></li>
+<li><p>Because management expresses the alternative hypothesis, <span class="math inline">\(H_1: \mu \neq 1000\)</span>, as “not equal” then this translates into a two-tailed test of the null hypothesis.</p></li>
+</ul>
+<p><strong>What if management expressed the alternative hypothesis as <span class="math inline">\(H_1 &gt; 1000\)</span>?</strong></p>
+<button onclick="showText(&#39;myDIV1&#39;)">
+show / hide
+</button>
+<div id="myDIV1" style="display:none;">
+<p></br></p>
+<p>If <span class="math inline">\(H_1: \mu &gt; 1000\)</span>, then management in effect specifies a <strong>one-tailed</strong> test.</p>
+<p>This means that management believes that under the null hypotheses <span class="math inline">\(H_0:\, \mu = 0\)</span>, that the distribution of documents per day for which the null hypothesis is probably true extends from the lowest number of documents all the way up to the 95%tile of occurrences of the number of documents per day.</p>
+<p>The region of the distribution beyond the 95%tile is 5% of the time and represents the highest range of documents per day.</p>
+<p>Similarly for the <span class="math inline">\(H_1:\,\mu&lt;1000\)</span> case.</p>
+</div>
+</div>
+</div>
+<div id="on-to-the-unknown-1" class="section level2">
+<h2><span class="header-section-number">13.2</span> On to the unknown</h2>
+<p>Let’s now suppose we <em>do not know</em> the population standard deviation. Now the sample standard deviation is also a random variable, like the sample mean. In practice this is nearly always the case. What do we do now?</p>
+<ul>
+<li><p>Use the Student’s t distribution to correct for confidences that are, well, not so confident.</p></li>
+<li><p>Here’s a plot of the Student’s t overlaid with the normal distribution.</p></li>
+</ul>
+<p><img src="book-stat-thinking_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+<p>What do we notice?</p>
+<ul>
+<li><p>Normal is more pinched in than t (kurtosis? right!)</p></li>
+<li><p>t has thicker tails than normal</p></li>
+<li><p>Let’s check that: in Excel use <code>=T.INV(2.5%,3)</code> which returns <code>-3.18</code>, and where the degrees of freedom <span class="math inline">\(df\)</span> of our 4 sample billings from our work in confidence intervals is <span class="math inline">\(df = n - k = 4 - 1 = 3\)</span>. Here <span class="math inline">\(n\)</span> is the sample size of 4 rnadomly sampled billings and <span class="math inline">\(k\)</span> is the number of estimators we are building, just one in this case <span class="math inline">\(\mu\)</span>.</p></li>
+<li><p>Thus for the t distribution it takes 3.18 standard deviations below the mean to hit the 2.5% level of cumulative probability. It only took 1.96 standard deviations on the normal distribution.</p></li>
+<li><p>There are <span class="math inline">\(k=3\)</span> degrees of freedom because it only takes 3 out of the 4 sampled billings to get the third sampled billing (we do this by using 1 estimator, the mean we calculated).</p></li>
+<li><p>That it took fewer standard deviations for the normal than for the t distribution to hit the 2.5% level of cumulative probability means that the t distribution is thicker tailed than the normal.</p></li>
+</ul>
+<p><img src="book-stat-thinking_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+<div id="by-the-way-who-is-student-1" class="section level3">
+<h3><span class="header-section-number">13.2.1</span> By the way, who is Student?</h3>
+<ul>
+<li><p>“Guiness is Good for You”</p></li>
+<li><p>W. S. Gosset (1876-1937) was a modest, well-liked Englishman who was
+a brewer and agricultural statistician for the famous Guinness brewing
+company in Dublin.</p></li>
+<li><p>Guiness insisted that its employees keep their work secret,
+so he published the distribution under the pseudonym “Student” in 1908.</p></li>
+<li><p>This was one of the first results in modern small-sample statistics.</p></li>
+</ul>
+</div>
+</div>
+<div id="on-with-our-story" class="section level2">
+<h2><span class="header-section-number">13.3</span> On with our story…</h2>
+<p>When management does not know the population standard deviation, the analyst must use the Student’s t distribution to correct for small sample sizes. As this is almost always the case for hypothesis testing, management has decreed that the Student-t distribution will be used for hypothesis testing.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>CONTINUED — management decides on regions of the distribution for acceptance that the null hypothesis is probably true and for rejection of the null hypothesis as well. This picture tells those and about 900+ more words.</li>
+</ol>
+<p><img src="book-stat-thinking_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li><p>Management takes a random sample of <span class="math inline">\(n = 100\)</span> searches. An analyst then computes the sample average <span class="math inline">\(\bar X = 980\)</span> of retrieved and relevant searches with a standard deviation of <span class="math inline">\(s = 80\)</span>, meant to represent the very unknown population <span class="math inline">\(\sigma\)</span>.</p></li>
+<li><p>They then compute the <span class="math inline">\(t\)</span> score, just like the z-score for the normal distribution:</p></li>
+</ol>
+<p><span class="math display">\[
+t = \frac{\bar X - \mu_0}{s / \sqrt{n}} = \frac{980 - 1000}{80 / \sqrt{100}} = -2.5
+\]</span></p>
+<p>and compare this value with the the acceptance region of the null hypotheses <span class="math inline">\(H_0\)</span>. So, what is this value?</p>
+<ol start="5" style="list-style-type: decimal">
+<li>For a sample size of <span class="math inline">\(n = 100\)</span> and <span class="math inline">\(k = 1\)</span> estimator (<span class="math inline">\(\bar X\)</span>), the degrees of freedom <span class="math inline">\(df = n - k = 100 - 1\)</span>. Under a Student’s t distribution with 99 <span class="math inline">\(df\)</span>, and using Excel’s <code>=T.INV(0.025, 99)</code>, the region is bounded by t scores between <span class="math inline">\(-1.98\)</span> and <span class="math inline">\(+1.98\)</span>.</li>
+</ol>
+<ul>
+<li><p>The computed t score is -2.5 and falls in the rejection region of the null hypothesis.</p></li>
+<li><p>The analyst can report that she is 95% confident that management may reject the null hypothesis that reseachers retrieve 1,000 relevant documents each day.</p></li>
+<li><p>Another way of reporting this is that there is a 5% probability that management would be wrong in concluding that researchers do not retrieve 1,000 relevant documents each day.</p></li>
+</ul>
+</div>
+<div id="what-about-two-shifts" class="section level2">
+<h2><span class="header-section-number">13.4</span> What about two shifts?</h2>
+<p>Now management wants to know how two different shifts of researchers compare. Specifically, management has been assuming that the day shift (shift 1) retrieves more relevant documents than the night shift (shift 2).</p>
+<ol style="list-style-type: decimal">
+<li><p>The analyst formulates the null hypothesis that the mean relevant retrieved documents in one day is the same for both shifts, and thus their difference is zero, or as
+<span class="math display">\[
+H_0: \mu_1 - \mu_2 = 0
+\]</span>
+and the alternative hypothesis as
+<span class="math display">\[
+H_1: \mu_1 - \mu_2 &gt;0.
+\]</span></p></li>
+<li><p>This is a one-tailed test where the <span class="math inline">\(\alpha = 0.05\)</span> significance level region of the rejection of the null hypothesis <span class="math inline">\(H_0\)</span> is entirely in the upper tail of the Student’s t distribution.</p></li>
+</ol>
+<ul>
+<li><p>The number of degrees of freedom now equal all of the observations from the night and the day shift minus the number of estimators, now equal to 2, or, <span class="math inline">\(n_1 + n_2 - 2\)</span>.</p></li>
+<li><p>If the analyst samples <span class="math inline">\(n_1 = 45\)</span> searches from the day shift and <span class="math inline">\(n_2 = 54\)</span> searches from the night shift, then the number of degrees of freedom is <span class="math inline">\(n_1+n_2-2 = 99 - 2 = 97\)</span>.</p></li>
+</ul>
+<p><img src="book-stat-thinking_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li>The analyst samples 45 searches in the day shift (shift 1) and 54 searches in the night shift (shift 2), and uses the same <span class="math inline">\(\alpha = 0.05\)</span> significance level for rejection of the null hypothesis. She estimates</li>
+</ol>
+<ul>
+<li><p><span class="math inline">\(\bar X_1 = 600\)</span> with <span class="math inline">\(s_{\bar X_1}=60\)</span></p></li>
+<li><p><span class="math inline">\(\bar X_2 = 540\)</span> with <span class="math inline">\(s_{\bar X_2}=68\)</span>.</p></li>
+</ul>
+<ol start="4" style="list-style-type: decimal">
+<li><p>Her next job is to pool (also known as “aggregate”) the standard deviations together since the risk associated with the null hypothesis relates to two pooled sample means <span class="math inline">\(\bar X_1 - \bar X_2 = 600 - 540 = 60\)</span>. The analyst assumes that the two samples are not at all correlated with one another.
+<span class="math display">\[
+s_{\bar X_1 - \bar X_2 } = \sqrt{\frac{s_1^2}{n_1}+\frac{s_2^2}{n_2}}
+\]</span>
+<span class="math display">\[
+= \sqrt{\frac{60^2}{45}+\frac{68^2}{54}} = 12.87
+\]</span>
+and calculates the <span class="math inline">\(t\)</span> score as
+<span class="math display">\[
+t = \frac{(\bar X_1 - \bar X_2) - (\mu_{0,1} - \mu_{0,2})}{s_{\bar X_1 - \bar X_2 }} = \frac{60 - 0}{12.87} = 4.66 
+\]</span></p></li>
+<li><p>A <span class="math inline">\(t\)</span> score of 4.66 means that the score, and the difference between the means, is in the region of rejection of the null hypothesis.</p></li>
+</ol>
+<ul>
+<li><p>There is at most a 5% chance that management is wrong in its assertion that the day shift out performs the night shift.</p></li>
+<li><p>Another interpretation is possible. Using Excel the analyst can calculate <code>= 1 - T.DIST(4.66, 97)</code> = 0.0005% which is the so-called <code>p-value</code> or cumulative probability greater than <span class="math inline">\(t=4.66\)</span> that she was wrong about the rejection of the null hypothesis, very slim indeed.</p></li>
+<li><p>The analyst compares the <code>p-value</code> with the significance level of 5% and sees that there is an even slimmer chance of a Type I false negative error than indicated simply by looking at the rejection region.</p></li>
+</ul>
+</div>
+<div id="exercises-1" class="section level2">
+<h2><span class="header-section-number">13.5</span> Exercises</h2>
+<ol style="list-style-type: decimal">
+<li>An electric car manufacturer buys aluminum alloy sheets of 0.05 of an inch in thickness. Thick sheets are too heavy and thin sheets imbalance the axle loads on icy and rainy road surfaces. The purchasing officer along with a manufacturing engineer samples 100 sheets of a shipment before accepting it and calculates an average of 0.048 inches in thickness with a standard deviation of 0.01 of an inch.</li>
+</ol>
+<ul>
+<li><p>At a 5% level of significance, should the purchasing officer accept the shipment?</p></li>
+<li><p>What is the probability that the purchasing officer is wrong about rejecting the null hypothesis?</p></li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>A real estate developer is comparing construction wages in two markets. In New York, using a random sample of 150 workers, the average daily wage is $1,800 with a standard deviation of $500 per day. In Los Angeles, for the same skills and experience, a random sample of 125 workers yields a daily wage average of $1,700 per day with a standard deviation of $450 per day.</li>
+</ol>
+<ul>
+<li><p>Is there a significant difference in wage levels between the two cities at the 5% level?</p></li>
+<li><p>What is the probability of being wrong about rejecting the null hypothesis?</p></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="confidence-intervals.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="simple-linear-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["book-stat-thinking.pdf", "book-stat-thinking.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

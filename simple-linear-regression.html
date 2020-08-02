@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 14 Simple Linear Regression | Statistical Thinking</title>
+  <meta name="description" content="Statistical reasoning from an elementary point of view" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 14 Simple Linear Regression | Statistical Thinking" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Statistical reasoning from an elementary point of view" />
+  <meta name="github-repo" content="wgfoote/book-stat-thinking" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 14 Simple Linear Regression | Statistical Thinking" />
+  
+  <meta name="twitter:description" content="Statistical reasoning from an elementary point of view" />
+  
+
+<meta name="author" content="Bill Foote" />
+
+
+<meta name="date" content="2020-08-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="more-inference-hypothesis-testing.html"/>
+<link rel="next" href="quantile-regression.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="libs/vis-4.20.1/vis.css" rel="stylesheet" />
+<script src="libs/vis-4.20.1/vis.min.js"></script>
+<script src="libs/visNetwork-binding-2.0.9/visNetwork.js"></script>
+<link href="libs/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<script src="libs/plotly-binding-4.9.2/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<script src="libs/viz-0.3/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.1/grViz.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Statistical Thinking</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preliminaries</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#the-basic-problem"><i class="fa fa-check"></i><b>1.1</b> The basic problem</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#analytics"><i class="fa fa-check"></i><b>1.2</b> Analytics</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#readiness-for-statistical-thinking"><i class="fa fa-check"></i><b>1.3</b> Readiness for statistical thinking</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#solve-this-riddle"><i class="fa fa-check"></i><b>1.3.1</b> Solve this riddle</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#join-these-sets"><i class="fa fa-check"></i><b>1.3.2</b> Join these sets</a></li>
+<li class="chapter" data-level="1.3.3" data-path="index.html"><a href="index.html#partition-this-board"><i class="fa fa-check"></i><b>1.3.3</b> Partition this board</a></li>
+<li class="chapter" data-level="1.3.4" data-path="index.html"><a href="index.html#calculate-this-expression"><i class="fa fa-check"></i><b>1.3.4</b> Calculate this expression</a></li>
+<li class="chapter" data-level="1.3.5" data-path="index.html"><a href="index.html#solve-this-equation"><i class="fa fa-check"></i><b>1.3.5</b> Solve this equation</a></li>
+<li class="chapter" data-level="1.3.6" data-path="index.html"><a href="index.html#summation-calculations"><i class="fa fa-check"></i><b>1.3.6</b> Summation calculations</a></li>
+<li class="chapter" data-level="1.3.7" data-path="index.html"><a href="index.html#weighted-average"><i class="fa fa-check"></i><b>1.3.7</b> Weighted average</a></li>
+<li class="chapter" data-level="1.3.8" data-path="index.html"><a href="index.html#linear-coefficients"><i class="fa fa-check"></i><b>1.3.8</b> Linear coefficients</a></li>
+<li class="chapter" data-level="1.3.9" data-path="index.html"><a href="index.html#linear-simultaneous-equations"><i class="fa fa-check"></i><b>1.3.9</b> Linear simultaneous equations</a></li>
+<li class="chapter" data-level="1.3.10" data-path="index.html"><a href="index.html#elasticity-a-little-light-calculus"><i class="fa fa-check"></i><b>1.3.10</b> Elasticity: a little light calculus</a></li>
+<li class="chapter" data-level="1.3.11" data-path="index.html"><a href="index.html#area-under-a-curve"><i class="fa fa-check"></i><b>1.3.11</b> Area under a curve</a></li>
+<li class="chapter" data-level="1.3.12" data-path="index.html"><a href="index.html#next-steps"><i class="fa fa-check"></i><b>1.3.12</b> Next steps?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#chapter-outline"><i class="fa fa-check"></i><b>1.4</b> Chapter outline</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html"><i class="fa fa-check"></i><b>2</b> Statistical Reasoning</a><ul>
+<li class="chapter" data-level="2.1" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#welcome-to-statistical-reasoning"><i class="fa fa-check"></i><b>2.1</b> Welcome to Statistical Reasoning</a></li>
+<li class="chapter" data-level="2.2" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#why-do-we-reason-statistically"><i class="fa fa-check"></i><b>2.2</b> Why do we reason statistically?</a></li>
+<li class="chapter" data-level="2.3" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#what-is-statistical-reasoning"><i class="fa fa-check"></i><b>2.3</b> What is statistical reasoning?</a></li>
+<li class="chapter" data-level="2.4" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#lets-learn-some-more-from-this-example"><i class="fa fa-check"></i><b>2.4</b> Let’s learn some more from this example:</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#why"><i class="fa fa-check"></i><b>2.4.1</b> Why?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#digging-deeper"><i class="fa fa-check"></i><b>2.5</b> Digging deeper</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#learn-by-doing-this"><i class="fa fa-check"></i><b>2.5.1</b> Learn by doing this</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#what-is-the-conceptual-framework-of-statistical-reasoning"><i class="fa fa-check"></i><b>2.6</b> What is the conceptual framework of statistical reasoning?</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#learn-by-doing"><i class="fa fa-check"></i><b>2.6.1</b> Learn by doing</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#infer"><i class="fa fa-check"></i><b>2.7</b> Infer</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#deductive-reasoning-conclusion-guaranteed"><i class="fa fa-check"></i><b>2.7.1</b> Deductive reasoning: conclusion guaranteed</a></li>
+<li class="chapter" data-level="2.7.2" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#inductive-reasoning-comclusion-not-guaranteed"><i class="fa fa-check"></i><b>2.7.2</b> Inductive reasoning: comclusion not guaranteed</a></li>
+<li class="chapter" data-level="2.7.3" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#abductive-reasoning-taking-your-best-shot"><i class="fa fa-check"></i><b>2.7.3</b> Abductive reasoning: taking your best shot</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#critical-thinking"><i class="fa fa-check"></i><b>2.8</b> Critical thinking</a></li>
+<li class="chapter" data-level="2.9" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#try-this"><i class="fa fa-check"></i><b>2.9</b> Try this</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html"><i class="fa fa-check"></i><b>3</b> The many faces of data</a><ul>
+<li class="chapter" data-level="3.1" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#learning-outomes"><i class="fa fa-check"></i><b>3.1</b> Learning outomes</a></li>
+<li class="chapter" data-level="3.2" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#march-on"><i class="fa fa-check"></i><b>3.2</b> March on</a></li>
+<li class="chapter" data-level="3.3" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#air-pollution-and-birth-outcomes"><i class="fa fa-check"></i><b>3.3</b> Air pollution and birth outcomes</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#classifying-data-types"><i class="fa fa-check"></i><b>3.3.1</b> Classifying data types</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#something-a-bit-more-complicated"><i class="fa fa-check"></i><b>3.4</b> Something a bit more complicated</a></li>
+<li class="chapter" data-level="3.5" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#what-have-we-learned"><i class="fa fa-check"></i><b>3.5</b> What have we learned?</a></li>
+<li class="chapter" data-level="3.6" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#review-these-scenarios"><i class="fa fa-check"></i><b>3.6</b> Review these scenarios</a></li>
+<li class="chapter" data-level="3.7" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#try-this-1"><i class="fa fa-check"></i><b>3.7</b> Try this</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html"><i class="fa fa-check"></i><b>4</b> First Steps in Exploring Data</a><ul>
+<li class="chapter" data-level="4.1" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#learning-objectives"><i class="fa fa-check"></i><b>4.1</b> Learning objectives</a></li>
+<li class="chapter" data-level="4.2" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#business-context"><i class="fa fa-check"></i><b>4.2</b> Business context</a></li>
+<li class="chapter" data-level="4.3" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#bullets"><i class="fa fa-check"></i><b>4.3</b> Bullets</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#what-did-we-do"><i class="fa fa-check"></i><b>4.3.1</b> What did we do?</a></li>
+<li class="chapter" data-level="4.3.2" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#what-can-we-say"><i class="fa fa-check"></i><b>4.3.2</b> What can we say?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#incidents-and-accidents"><i class="fa fa-check"></i><b>4.4</b> Incidents and accidents</a></li>
+<li class="chapter" data-level="4.5" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#where-do-we-go-from-here"><i class="fa fa-check"></i><b>4.5</b> Where do we go from here?</a></li>
+<li class="chapter" data-level="4.6" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#resources"><i class="fa fa-check"></i><b>4.6</b> Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="tendency.html"><a href="tendency.html"><i class="fa fa-check"></i><b>5</b> Tendency</a><ul>
+<li class="chapter" data-level="5.1" data-path="tendency.html"><a href="tendency.html#learning-outcomes"><i class="fa fa-check"></i><b>5.1</b> Learning outcomes</a></li>
+<li class="chapter" data-level="5.2" data-path="tendency.html"><a href="tendency.html#the-best-we-have"><i class="fa fa-check"></i><b>5.2</b> The best we have</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="tendency.html"><a href="tendency.html#square-those-errors"><i class="fa fa-check"></i><b>5.2.1</b> Square those errors</a></li>
+<li class="chapter" data-level="5.2.2" data-path="tendency.html"><a href="tendency.html#absolutely"><i class="fa fa-check"></i><b>5.2.2</b> Absolutely!</a></li>
+<li class="chapter" data-level="5.2.3" data-path="tendency.html"><a href="tendency.html#quantiles-anyone"><i class="fa fa-check"></i><b>5.2.3</b> Quantiles anyone?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="tendency.html"><a href="tendency.html#procedures"><i class="fa fa-check"></i><b>5.3</b> Procedures</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="tendency.html"><a href="tendency.html#mean"><i class="fa fa-check"></i><b>5.3.1</b> Mean</a></li>
+<li class="chapter" data-level="5.3.2" data-path="tendency.html"><a href="tendency.html#median"><i class="fa fa-check"></i><b>5.3.2</b> Median</a></li>
+<li class="chapter" data-level="5.3.3" data-path="tendency.html"><a href="tendency.html#mode"><i class="fa fa-check"></i><b>5.3.3</b> Mode</a></li>
+<li class="chapter" data-level="5.3.4" data-path="tendency.html"><a href="tendency.html#percentile-and-quantile"><i class="fa fa-check"></i><b>5.3.4</b> Percentile and quantile</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="tendency.html"><a href="tendency.html#always-problems"><i class="fa fa-check"></i><b>5.4</b> Always problems</a></li>
+<li class="chapter" data-level="5.5" data-path="tendency.html"><a href="tendency.html#visualizing-with-tukeys-box"><i class="fa fa-check"></i><b>5.5</b> Visualizing with Tukey’s box</a></li>
+<li class="chapter" data-level="5.6" data-path="tendency.html"><a href="tendency.html#what-have-we-gotten-to-so-far"><i class="fa fa-check"></i><b>5.6</b> What have we gotten to so far?</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="deviation.html"><a href="deviation.html"><i class="fa fa-check"></i><b>6</b> Deviation</a><ul>
+<li class="chapter" data-level="6.1" data-path="deviation.html"><a href="deviation.html#learning-outcomes-1"><i class="fa fa-check"></i><b>6.1</b> Learning outcomes</a></li>
+<li class="chapter" data-level="6.2" data-path="deviation.html"><a href="deviation.html#rev-up-the-deuce"><i class="fa fa-check"></i><b>6.2</b> Rev up the deuce</a></li>
+<li class="chapter" data-level="6.3" data-path="deviation.html"><a href="deviation.html#blinded-by-the-light"><i class="fa fa-check"></i><b>6.3</b> Blinded by the light</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="deviation.html"><a href="deviation.html#whats-a-sample-again"><i class="fa fa-check"></i><b>6.3.1</b> What’s a sample? (again)</a></li>
+<li class="chapter" data-level="6.3.2" data-path="deviation.html"><a href="deviation.html#standard-deviation"><i class="fa fa-check"></i><b>6.3.2</b> 1. Standard deviation</a></li>
+<li class="chapter" data-level="6.3.3" data-path="deviation.html"><a href="deviation.html#robust-measures"><i class="fa fa-check"></i><b>6.3.3</b> 2. Robust measures</a></li>
+<li class="chapter" data-level="6.3.4" data-path="deviation.html"><a href="deviation.html#correlation"><i class="fa fa-check"></i><b>6.3.4</b> 3. Correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="deviation.html"><a href="deviation.html#the-tails-have-it"><i class="fa fa-check"></i><b>6.4</b> The tails have it!</a></li>
+<li class="chapter" data-level="6.5" data-path="deviation.html"><a href="deviation.html#how-can-we-use-all-of-this"><i class="fa fa-check"></i><b>6.5</b> How can we use all of this?</a></li>
+<li class="chapter" data-level="6.6" data-path="deviation.html"><a href="deviation.html#problems-always-problems"><i class="fa fa-check"></i><b>6.6</b> Problems, always problems</a></li>
+<li class="chapter" data-level="6.7" data-path="deviation.html"><a href="deviation.html#what-have-we-learned-1"><i class="fa fa-check"></i><b>6.7</b> What have we learned?</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="binomial-distribution.html"><a href="binomial-distribution.html"><i class="fa fa-check"></i><b>7</b> Binomial Distribution</a><ul>
+<li class="chapter" data-level="7.1" data-path="binomial-distribution.html"><a href="binomial-distribution.html#what-is-a-probability-distribution"><i class="fa fa-check"></i><b>7.1</b> What is a probability distribution?</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="binomial-distribution.html"><a href="binomial-distribution.html#discrete-or-continuous"><i class="fa fa-check"></i><b>7.1.1</b> Discrete or continuous?</a></li>
+<li class="chapter" data-level="7.1.2" data-path="binomial-distribution.html"><a href="binomial-distribution.html#examples-of-distributions"><i class="fa fa-check"></i><b>7.1.2</b> Examples of distributions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="imagine-this.html"><a href="imagine-this.html"><i class="fa fa-check"></i><b>8</b> Imagine this</a></li>
+<li class="chapter" data-level="9" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html"><i class="fa fa-check"></i><b>9</b> What’s a binomial?</a><ul>
+<li class="chapter" data-level="9.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#then-there-were-two"><i class="fa fa-check"></i><b>9.1</b> Then there were two</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#how-often"><i class="fa fa-check"></i><b>9.1.1</b> How often?</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#being-binomial"><i class="fa fa-check"></i><b>9.2</b> Being binomial</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#consumer-goods-r-us"><i class="fa fa-check"></i><b>9.2.1</b> Consumer goods ‘r’ us</a></li>
+<li class="chapter" data-level="9.2.2" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#whats-a-binomial-1"><i class="fa fa-check"></i><b>9.2.2</b> What’s a binomial?</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#whats-a-combination"><i class="fa fa-check"></i><b>9.3</b> What’s a combination?</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#for-a-simple-example"><i class="fa fa-check"></i><b>9.3.1</b> For a simple example</a></li>
+<li class="chapter" data-level="9.3.2" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#we-have-to-start-with-permutation-first"><i class="fa fa-check"></i><b>9.3.2</b> We have to start with permutation first</a></li>
+<li class="chapter" data-level="9.3.3" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#start-with-a-abcde-letters-in-a-text-to-your-friend."><i class="fa fa-check"></i><b>9.3.3</b> Start with <span class="math inline">\(A = \{a,b,c,d,e\}\)</span> letters in a text to your friend.</a></li>
+<li class="chapter" data-level="9.3.4" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#find-the-number-of-3-letter-words-you-can-form-from-a-list-of-5-letters."><i class="fa fa-check"></i><b>9.3.4</b> Find the number of 3 letter words you can form from a list of 5 letters.</a></li>
+<li class="chapter" data-level="9.3.5" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#what-about-combinations"><i class="fa fa-check"></i><b>9.3.5</b> What about combinations?</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#combinations-from-permutations"><i class="fa fa-check"></i><b>9.4</b> Combinations from permutations</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#try-these-combinations-and-permutations"><i class="fa fa-check"></i><b>9.4.1</b> Try these: combinations and permutations</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#so-how-do-we-use-the-binomial-process"><i class="fa fa-check"></i><b>9.5</b> So how do we use the binomial process?</a></li>
+<li class="chapter" data-level="9.6" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#try-this-binomial-distribution"><i class="fa fa-check"></i><b>9.6</b> Try this: binomial distribution</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#try-another"><i class="fa fa-check"></i><b>9.6.1</b> Try another</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#what-does-a-graph-of-the-binomial-look-like"><i class="fa fa-check"></i><b>9.7</b> What does a graph of the binomial look like?</a></li>
+<li class="chapter" data-level="9.8" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#binomial-statistics"><i class="fa fa-check"></i><b>9.8</b> Binomial statistics</a><ul>
+<li class="chapter" data-level="9.8.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#try-this-2"><i class="fa fa-check"></i><b>9.8.1</b> Try this</a></li>
+</ul></li>
+<li class="chapter" data-level="9.9" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#short-exercises"><i class="fa fa-check"></i><b>9.9</b> Short exercises</a></li>
+<li class="chapter" data-level="9.10" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#binomial-barrels"><i class="fa fa-check"></i><b>9.10</b> Binomial barrels</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="poisson-distribution.html"><a href="poisson-distribution.html"><i class="fa fa-check"></i><b>10</b> Poisson Distribution</a><ul>
+<li class="chapter" data-level="10.1" data-path="poisson-distribution.html"><a href="poisson-distribution.html#imagine-this-1"><i class="fa fa-check"></i><b>10.1</b> Imagine this</a></li>
+<li class="chapter" data-level="10.2" data-path="poisson-distribution.html"><a href="poisson-distribution.html#lets-calculate"><i class="fa fa-check"></i><b>10.2</b> Let’s calculate</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="poisson-distribution.html"><a href="poisson-distribution.html#try-this-3"><i class="fa fa-check"></i><b>10.2.1</b> Try this</a></li>
+<li class="chapter" data-level="10.2.2" data-path="poisson-distribution.html"><a href="poisson-distribution.html#results"><i class="fa fa-check"></i><b>10.2.2</b> Results</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="poisson-distribution.html"><a href="poisson-distribution.html#some-mercifully-short-exercises"><i class="fa fa-check"></i><b>10.3</b> Some (mercifully) short exercises</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="poisson-distribution.html"><a href="poisson-distribution.html#not-so-short-exercises"><i class="fa fa-check"></i><b>10.3.1</b> Not so short exercises</a></li>
+<li class="chapter" data-level="10.3.2" data-path="poisson-distribution.html"><a href="poisson-distribution.html#answers"><i class="fa fa-check"></i><b>10.3.2</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html"><i class="fa fa-check"></i><b>11</b> How likely is that?</a><ul>
+<li class="chapter" data-level="11.1" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#learning-outcomes-2"><i class="fa fa-check"></i><b>11.1</b> Learning outcomes</a></li>
+<li class="chapter" data-level="11.2" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#invitation-to-a-formal"><i class="fa fa-check"></i><b>11.2</b> Invitation to a formal</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#a-bit-of-english"><i class="fa fa-check"></i><b>11.2.1</b> A bit of English</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#dress-down-a-bit"><i class="fa fa-check"></i><b>11.3</b> Dress down a bit</a></li>
+<li class="chapter" data-level="11.4" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#try-another-1"><i class="fa fa-check"></i><b>11.4</b> Try another</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#what-does-the-event-space-look-like"><i class="fa fa-check"></i><b>11.4.1</b> What does the event space look like?</a></li>
+<li class="chapter" data-level="11.4.2" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#what-is"><i class="fa fa-check"></i><b>11.4.2</b> What is…</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#law-of-conditional-probability-bayes"><i class="fa fa-check"></i><b>11.5</b> Law of Conditional Probability (Bayes)</a></li>
+<li class="chapter" data-level="11.6" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#practice-1"><i class="fa fa-check"></i><b>11.6</b> Practice 1</a></li>
+<li class="chapter" data-level="11.7" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#practice-2"><i class="fa fa-check"></i><b>11.7</b> Practice 2</a></li>
+<li class="chapter" data-level="11.8" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#nothing-is-random"><i class="fa fa-check"></i><b>11.8</b> Nothing is random!</a><ul>
+<li class="chapter" data-level="11.8.1" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#suppose-20-of-the-people-in-a-city-prefer-pepsi-cola-as-their-soft-drink-of-choice."><i class="fa fa-check"></i><b>11.8.1</b> Suppose 20% of the people in a city prefer Pepsi-Cola as their soft drink of choice.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="confidence-intervals.html"><a href="confidence-intervals.html"><i class="fa fa-check"></i><b>12</b> Confidence Intervals</a><ul>
+<li class="chapter" data-level="12.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#imagine-this-2"><i class="fa fa-check"></i><b>12.1</b> Imagine this…</a></li>
+<li class="chapter" data-level="12.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#objectives"><i class="fa fa-check"></i><b>12.2</b> Objectives</a></li>
+<li class="chapter" data-level="12.3" data-path="confidence-intervals.html"><a href="confidence-intervals.html#try-this-4"><i class="fa fa-check"></i><b>12.3</b> Try this</a></li>
+<li class="chapter" data-level="12.4" data-path="confidence-intervals.html"><a href="confidence-intervals.html#what-about-the-sample-standard-deviation"><i class="fa fa-check"></i><b>12.4</b> What about the sample standard deviation?</a></li>
+<li class="chapter" data-level="12.5" data-path="confidence-intervals.html"><a href="confidence-intervals.html#explore-a-bit-further"><i class="fa fa-check"></i><b>12.5</b> Explore a bit further</a></li>
+<li class="chapter" data-level="12.6" data-path="confidence-intervals.html"><a href="confidence-intervals.html#confidence-interval-1-known-population-standard-deviation"><i class="fa fa-check"></i><b>12.6</b> Confidence interval ##1: known population standard deviation</a></li>
+<li class="chapter" data-level="12.7" data-path="confidence-intervals.html"><a href="confidence-intervals.html#our-procedure"><i class="fa fa-check"></i><b>12.7</b> Our procedure</a></li>
+<li class="chapter" data-level="12.8" data-path="confidence-intervals.html"><a href="confidence-intervals.html#on-to-the-unknown"><i class="fa fa-check"></i><b>12.8</b> On to the unknown</a></li>
+<li class="chapter" data-level="12.9" data-path="confidence-intervals.html"><a href="confidence-intervals.html#by-the-way-who-is-student"><i class="fa fa-check"></i><b>12.9</b> By the way, who is Student?</a></li>
+<li class="chapter" data-level="12.10" data-path="confidence-intervals.html"><a href="confidence-intervals.html#our-procedure-1"><i class="fa fa-check"></i><b>12.10</b> Our procedure</a></li>
+<li class="chapter" data-level="12.11" data-path="confidence-intervals.html"><a href="confidence-intervals.html#exercises"><i class="fa fa-check"></i><b>12.11</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html"><i class="fa fa-check"></i><b>13</b> More Inference: Hypothesis Testing</a><ul>
+<li class="chapter" data-level="13.1" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#imagine-this-3"><i class="fa fa-check"></i><b>13.1</b> Imagine this</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#two-errors-are-possible"><i class="fa fa-check"></i><b>13.1.1</b> Two errors are possible</a></li>
+<li class="chapter" data-level="13.1.2" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#control-is-probability"><i class="fa fa-check"></i><b>13.1.2</b> Control is probability</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#on-to-the-unknown-1"><i class="fa fa-check"></i><b>13.2</b> On to the unknown</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#by-the-way-who-is-student-1"><i class="fa fa-check"></i><b>13.2.1</b> By the way, who is Student?</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#on-with-our-story"><i class="fa fa-check"></i><b>13.3</b> On with our story…</a></li>
+<li class="chapter" data-level="13.4" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#what-about-two-shifts"><i class="fa fa-check"></i><b>13.4</b> What about two shifts?</a></li>
+<li class="chapter" data-level="13.5" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#exercises-1"><i class="fa fa-check"></i><b>13.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>14</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="14.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#the-perfect-relationship"><i class="fa fa-check"></i><b>14.1</b> The perfect relationship</a></li>
+<li class="chapter" data-level="14.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#linear-regression"><i class="fa fa-check"></i><b>14.2</b> Linear regression</a></li>
+<li class="chapter" data-level="14.3" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#ordinary-least-squares"><i class="fa fa-check"></i><b>14.3</b> Ordinary least squares</a></li>
+<li class="chapter" data-level="14.4" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#residual-interests"><i class="fa fa-check"></i><b>14.4</b> Residual interests</a></li>
+<li class="chapter" data-level="14.5" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#a-dash-of-calculus"><i class="fa fa-check"></i><b>14.5</b> A dash of calculus</a></li>
+<li class="chapter" data-level="14.6" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#now-for-the-residuals"><i class="fa fa-check"></i><b>14.6</b> Now for the residuals</a></li>
+<li class="chapter" data-level="14.7" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#have-some-confidence"><i class="fa fa-check"></i><b>14.7</b> Have some confidence</a></li>
+<li class="chapter" data-level="14.8" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#central-to-our-discussion"><i class="fa fa-check"></i><b>14.8</b> Central to our discussion</a></li>
+<li class="chapter" data-level="14.9" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#on-to-the-unknown-2"><i class="fa fa-check"></i><b>14.9</b> On to the unknown</a></li>
+<li class="chapter" data-level="14.10" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#by-the-way-who-is-student-2"><i class="fa fa-check"></i><b>14.10</b> By the way, who is Student?</a></li>
+<li class="chapter" data-level="14.11" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#in-all-confidence-forecasting-for-fun-and"><i class="fa fa-check"></i><b>14.11</b> In all confidence: forecasting for fun and …</a></li>
+<li class="chapter" data-level="14.12" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#how-confident-are-we-in-our-estimates"><i class="fa fa-check"></i><b>14.12</b> How confident are we in our estimates?</a></li>
+<li class="chapter" data-level="14.13" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#next-lets-hypothesize"><i class="fa fa-check"></i><b>14.13</b> Next let’s hypothesize</a></li>
+<li class="chapter" data-level="14.14" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#yet-another-school-of-thought"><i class="fa fa-check"></i><b>14.14</b> Yet another school of thought</a></li>
+<li class="chapter" data-level="14.15" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#summary-of-simple-linear-regression-estimation"><i class="fa fa-check"></i><b>14.15</b> Summary of simple linear regression estimation</a></li>
+<li class="chapter" data-level="14.16" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#how-good-a-fit"><i class="fa fa-check"></i><b>14.16</b> How good a fit?</a></li>
+<li class="chapter" data-level="14.17" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#lets-build-more-statistics"><i class="fa fa-check"></i><b>14.17</b> Let’s build more statistics!</a></li>
+<li class="chapter" data-level="14.18" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#analyze-this"><i class="fa fa-check"></i><b>14.18</b> Analyze this …</a></li>
+<li class="chapter" data-level="14.19" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#two-samples-same-population"><i class="fa fa-check"></i><b>14.19</b> Two samples – same population?</a></li>
+<li class="chapter" data-level="14.20" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#anything-abnormal"><i class="fa fa-check"></i><b>14.20</b> Anything abnormal?</a></li>
+<li class="chapter" data-level="14.21" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#exercises-2"><i class="fa fa-check"></i><b>14.21</b> Exercises</a><ul>
+<li class="chapter" data-level="14.21.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#us-house-of-representatives-seats-and-unemployment"><i class="fa fa-check"></i><b>14.21.1</b> US House of Representatives seats and unemployment</a></li>
+<li class="chapter" data-level="14.21.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#peruvian-anchovies"><i class="fa fa-check"></i><b>14.21.2</b> Peruvian anchovies</a></li>
+<li class="chapter" data-level="14.21.3" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#bronx-corn"><i class="fa fa-check"></i><b>14.21.3</b> Bronx corn</a></li>
+<li class="chapter" data-level="14.21.4" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#consumption-and-disposable-income"><i class="fa fa-check"></i><b>14.21.4</b> Consumption and disposable income</a></li>
+</ul></li>
+<li class="chapter" data-level="14.22" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#references"><i class="fa fa-check"></i><b>14.22</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="quantile-regression.html"><a href="quantile-regression.html"><i class="fa fa-check"></i><b>15</b> Quantile regression</a><ul>
+<li class="chapter" data-level="15.1" data-path="quantile-regression.html"><a href="quantile-regression.html#what-is-it"><i class="fa fa-check"></i><b>15.1</b> What is it?</a></li>
+<li class="chapter" data-level="15.2" data-path="quantile-regression.html"><a href="quantile-regression.html#an-example"><i class="fa fa-check"></i><b>15.2</b> An example</a></li>
+<li class="chapter" data-level="15.3" data-path="quantile-regression.html"><a href="quantile-regression.html#even-in-ggplot2"><i class="fa fa-check"></i><b>15.3</b> Even in ggplot2</a></li>
+<li class="chapter" data-level="15.4" data-path="quantile-regression.html"><a href="quantile-regression.html#interpretations"><i class="fa fa-check"></i><b>15.4</b> Interpretations</a></li>
+<li class="chapter" data-level="15.5" data-path="quantile-regression.html"><a href="quantile-regression.html#exercises-3"><i class="fa fa-check"></i><b>15.5</b> Exercises</a><ul>
+<li class="chapter" data-level="15.5.1" data-path="quantile-regression.html"><a href="quantile-regression.html#us-house-of-representatives-seats-and-unemployment-1"><i class="fa fa-check"></i><b>15.5.1</b> US House of Representatives seats and unemployment</a></li>
+<li class="chapter" data-level="15.5.2" data-path="quantile-regression.html"><a href="quantile-regression.html#peruvian-anchovies-1"><i class="fa fa-check"></i><b>15.5.2</b> Peruvian anchovies</a></li>
+<li class="chapter" data-level="15.5.3" data-path="quantile-regression.html"><a href="quantile-regression.html#bronx-corn-1"><i class="fa fa-check"></i><b>15.5.3</b> Bronx corn</a></li>
+<li class="chapter" data-level="15.5.4" data-path="quantile-regression.html"><a href="quantile-regression.html#consumption-and-disposable-income-1"><i class="fa fa-check"></i><b>15.5.4</b> Consumption and disposable income</a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="quantile-regression.html"><a href="quantile-regression.html#references-1"><i class="fa fa-check"></i><b>15.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>16</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="16.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#the-more-perfect-relationship"><i class="fa fa-check"></i><b>16.1</b> The more perfect relationship</a></li>
+<li class="chapter" data-level="16.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#arrays-and-you"><i class="fa fa-check"></i><b>16.2</b> Arrays and You</a><ul>
+<li class="chapter" data-level="16.2.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#running-a-regression"><i class="fa fa-check"></i><b>16.2.1</b> Running a regression</a></li>
+<li class="chapter" data-level="16.2.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#more-about-residuals"><i class="fa fa-check"></i><b>16.2.2</b> More about residuals</a></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#more-array-work"><i class="fa fa-check"></i><b>16.3</b> More Array Work</a></li>
+<li class="chapter" data-level="16.4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#exercising-the-model"><i class="fa fa-check"></i><b>16.4</b> Exercising the model</a><ul>
+<li class="chapter" data-level="16.4.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#exercise-1-housing-market-determinants"><i class="fa fa-check"></i><b>16.4.1</b> Exercise 1: housing market determinants</a></li>
+<li class="chapter" data-level="16.4.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#exercise-2-risk-driver-model-using-regression-analysis"><i class="fa fa-check"></i><b>16.4.2</b> Exercise 2: risk driver model using regression analysis</a></li>
+<li class="chapter" data-level="16.4.3" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#exercise-3-commercial-loan-projection-using-regression"><i class="fa fa-check"></i><b>16.4.3</b> Exercise 3: commercial loan projection using regression</a></li>
+<li class="chapter" data-level="16.4.4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#work-flow"><i class="fa fa-check"></i><b>16.4.4</b> Work Flow</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="binary-regression.html"><a href="binary-regression.html"><i class="fa fa-check"></i><b>17</b> Binary Regression</a><ul>
+<li class="chapter" data-level="17.1" data-path="binary-regression.html"><a href="binary-regression.html#what-is-binary-risk-analysis"><i class="fa fa-check"></i><b>17.1</b> What is Binary Risk Analysis?</a></li>
+<li class="chapter" data-level="17.2" data-path="binary-regression.html"><a href="binary-regression.html#an-expository-simulation"><i class="fa fa-check"></i><b>17.2</b> An expository simulation</a></li>
+<li class="chapter" data-level="17.3" data-path="binary-regression.html"><a href="binary-regression.html#enter-the-discrete-decision-maker"><i class="fa fa-check"></i><b>17.3</b> Enter the discrete decision maker</a></li>
+<li class="chapter" data-level="17.4" data-path="binary-regression.html"><a href="binary-regression.html#the-odds-are"><i class="fa fa-check"></i><b>17.4</b> The odds are …</a></li>
+<li class="chapter" data-level="17.5" data-path="binary-regression.html"><a href="binary-regression.html#predict-now"><i class="fa fa-check"></i><b>17.5</b> Predict now …</a></li>
+<li class="chapter" data-level="17.6" data-path="binary-regression.html"><a href="binary-regression.html#a-deposit"><i class="fa fa-check"></i><b>17.6</b> A deposit</a></li>
+<li class="chapter" data-level="17.7" data-path="binary-regression.html"><a href="binary-regression.html#references-2"><i class="fa fa-check"></i><b>17.7</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="time-series-analysis.html"><a href="time-series-analysis.html"><i class="fa fa-check"></i><b>18</b> Time Series Analysis</a><ul>
+<li class="chapter" data-level="18.1" data-path="time-series-analysis.html"><a href="time-series-analysis.html#preliminaries-1"><i class="fa fa-check"></i><b>18.1</b> Preliminaries</a></li>
+<li class="chapter" data-level="18.2" data-path="time-series-analysis.html"><a href="time-series-analysis.html#where-do-we-start"><i class="fa fa-check"></i><b>18.2</b> Where do we start?</a></li>
+<li class="chapter" data-level="18.3" data-path="time-series-analysis.html"><a href="time-series-analysis.html#autoregressive-processes"><i class="fa fa-check"></i><b>18.3</b> Autoregressive processes</a></li>
+<li class="chapter" data-level="18.4" data-path="time-series-analysis.html"><a href="time-series-analysis.html#moving-average-processes"><i class="fa fa-check"></i><b>18.4</b> Moving average processes</a></li>
+<li class="chapter" data-level="18.5" data-path="time-series-analysis.html"><a href="time-series-analysis.html#takeaways"><i class="fa fa-check"></i><b>18.5</b> Takeaways</a></li>
+<li class="chapter" data-level="18.6" data-path="time-series-analysis.html"><a href="time-series-analysis.html#references-3"><i class="fa fa-check"></i><b>18.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html"><i class="fa fa-check"></i><b>19</b> Bootstrapping Estimates</a><ul>
+<li class="chapter" data-level="19.1" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#imagine"><i class="fa fa-check"></i><b>19.1</b> Imagine</a></li>
+<li class="chapter" data-level="19.2" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#tools"><i class="fa fa-check"></i><b>19.2</b> Tools</a></li>
+<li class="chapter" data-level="19.3" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#d-p-q-runif"><i class="fa fa-check"></i><b>19.3</b> <code>[d p q r]unif</code></a></li>
+<li class="chapter" data-level="19.4" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#permutations-with-sample"><i class="fa fa-check"></i><b>19.4</b> Permutations with <code>sample()</code></a></li>
+<li class="chapter" data-level="19.5" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#resampling-with-sample"><i class="fa fa-check"></i><b>19.5</b> Resampling with <code>sample()</code></a></li>
+<li class="chapter" data-level="19.6" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#expected-shortfall-test"><i class="fa fa-check"></i><b>19.6</b> Expected shortfall test</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/wgfoote/book-stat-thinking" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Statistical Thinking</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="simple-linear-regression" class="section level1">
+<h1><span class="header-section-number">Chapter 14</span> Simple Linear Regression</h1>
+<div id="the-perfect-relationship" class="section level2">
+<h2><span class="header-section-number">14.1</span> The perfect relationship</h2>
+<p>This figure shows two variables whose relationship can be modeled perfectly with a straight line. The equation for the line is
+<span class="math display">\[
+y = 10 + 20x
+\]</span>
+The line cross the vertical y-axis at <span class="math inline">\(y=10\)</span> and <span class="math inline">\(x = 0\)</span>. The slope is <span class="math inline">\(20\)</span>, that is, if <span class="math inline">\(x\)</span> increases by one unit, then <span class="math inline">\(y\)</span> increases by <span class="math inline">\(20\)</span> units.</p>
+<p><img src="book-stat-thinking_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
+<p>Imagine what a perfect linear relationship would mean:</p>
+<ul>
+<li><p>You would know the exact value of <span class="math inline">\(y\)</span> just by knowing the value of <span class="math inline">\(x\)</span>.
+This is unrealistic in almost any natural process.</p></li>
+<li><p>For example, if we took family income <span class="math inline">\(x\)</span>,
+this value would provide some useful information about
+how much financial support <span class="math inline">\(y\)</span> a college may offer a prospective student.</p></li>
+<li><p>However, there would still be variability in financial support,
+even when comparing students whose families have similar financial backgrounds.</p></li>
+</ul>
+</div>
+<div id="linear-regression" class="section level2">
+<h2><span class="header-section-number">14.2</span> Linear regression</h2>
+<p>Linear regression assumes that the relationship between two variables, <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, can be modeled by a straight line:</p>
+<p><span class="math display">\[
+y = \beta_0 + \beta_1x
+\]</span></p>
+<p>Here <span class="math inline">\(\beta_0\)</span> is the intercept and <span class="math inline">\(\beta_1\)</span> is the slope of the straight line.</p>
+<p>It is rare for all of the data to fall on a straight line, as seen in the three scatterplots in the next figure.</p>
+<p><img src="book-stat-thinking_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+<p>In each case, the data falls around a straight line, even if none of the observations fall exactly on the line.</p>
+<ol style="list-style-type: decimal">
+<li>The first plot shows a relatively strong downward linear trend, where the remaining variability in the data around the line is minor relative to the strength of the relationship between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.</li>
+<li>The second plot shows an upward trend that, while evident, is not as strong as the first.</li>
+<li>The last plot shows a very weak downward trend in the data, so slight we can hardly notice it.</li>
+</ol>
+<p>In each of these examples, we will have some uncertainty regarding our estimates of the model parameters, <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>. For instance, we might wonder, should we move the line up or down a little, or should we tilt it more or less?</p>
+</div>
+<div id="ordinary-least-squares" class="section level2">
+<h2><span class="header-section-number">14.3</span> Ordinary least squares</h2>
+<p>Here we begin to calculate the intercept and slope of that linear relationship we just looked at. The way to do this is to minimize the a measure of the errors (residuals) around this line. The traditional approach calculated deviations of the model from the dependent variable, then squares these deviations, and finally looks for the intercept and slope that minimizes the sum of the squared deviations. All of this is due to Carl Friedrich Gauss. It was later called “ordinary” least squares. There are definitely variants that are far from “ordinary” in the menagerie of statistical techniques.</p>
+</div>
+<div id="residual-interests" class="section level2">
+<h2><span class="header-section-number">14.4</span> Residual interests</h2>
+<p>Every <span class="math inline">\((x_i,y_i)\)</span>, for <span class="math inline">\(i = 1 \dots N\)</span> points in the scatterplots above can be conceived a straight line plus or minus a “residual” <span class="math inline">\(\varepsilon\)</span>
+<span class="math display">\[
+y_i = \beta_0 + \beta_1 x_i + \varepsilon_i
+\]</span>
+Here we conceive of the <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> as <em>population</em> parameters and <span class="math inline">\(\varepsilon_i\)</span> as a population variate, a <em>sample</em> of which produces estimates <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span>. The job at hand is to find the unique combination of <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> such that all of <span class="math inline">\(N\)</span> sample observations of the <span class="math inline">\(\varepsilon_i\)</span> taken together are as small a distance from <span class="math inline">\((x_i,y_i)\)</span> to the straight line as possible.</p>
+<p>Let’s look at simple data set before we go any further.Here is data from 10/1/2016 through 9/1/2017 on real consumption and disposable income from FRED.</p>
+<p>First a scatterplot. We have 12 monthly observations of two variables, consumption and income.</p>
+<p><img src="book-stat-thinking_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<p>Second, suppose we think that the marginal propensity to consume out of disposable income is 0.9 and that even at zero disposable income, the residents of the U.S. would still consume 136.</p>
+<p>Thus let’s run this straight line through the scatter of data.</p>
+<p><span class="math display">\[
+\hat{Y} = b_0 + b_1 X
+\]</span>
+<span class="math display">\[
+\hat{Y} = 136 + 0.9 X
+\]</span></p>
+<p>where <span class="math inline">\(\hat{Y}\)</span> is our estimated model of consumption versus income <span class="math inline">\(X\)</span>. Don’t confuse <span class="math inline">\(X\)</span> as income here with the <span class="math inline">\(X\)</span> from our scatter plot story above!</p>
+<ul>
+<li><p><span class="math inline">\(Y\)</span> is also called the <em>dependent</em> variable</p></li>
+<li><p><span class="math inline">\(X\)</span> is the <em>independent</em> variable</p></li>
+</ul>
+<p><img src="book-stat-thinking_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<ul>
+<li><p>Some points are practically on the line, others are pretty far away.</p></li>
+<li><p>The vertical distance from a consumption-income point to the line is the residual.</p></li>
+<li><p>Our next step: draw error bars to visualize the residuals.</p></li>
+</ul>
+<p>Each sample residual <span class="math inline">\(e_i\)</span> is calculated from the model for consumption:</p>
+<p><span class="math display">\[
+Y_i = \hat{Y_i} + e_i
+\]</span>
+<span class="math display">\[
+Y_i = b_0 + b_1 X_i + e_i
+\]</span>
+<span class="math display">\[
+Y_i = 136 + 0.9 X_i + e_i
+\]</span>
+That is,
+<span class="math display">\[
+e_i = Y_i - (136 + 0.9 X_i)
+\]</span></p>
+<p><img src="book-stat-thinking_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<p>What we really want is to have a line go through this data such that it is the <em>best</em> line. We define “best” as the smallest possible sum of squared residuals for this data set and a straight line that runs through the scatterplot.</p>
+<p>We are looking for estimates of <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span>, namely <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> that minimize the sum of squared residuals <span class="math inline">\(SSR\)</span>. Let’s remember that there are as many possible estimates <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> as there are potential samples from the population of all consumption-income combinations.</p>
+<p><span class="math inline">\(SSE\)</span> is the sum of squared residual errors
+<span class="math display">\[
+SSE = e_1^2 + e_2^2 + \dots + e_N^2
+\]</span>
+<span class="math display">\[
+SSE = \sum_{i=1}^{N}\varepsilon_i^2
+\]</span>
+Substitute our calculation for <span class="math inline">\(\varepsilon_i\)</span>. Our job is to find the <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> that minimizes
+<span class="math display">\[
+SSE = \sum_{i=1}^{N}[Y_i - (b_0 + b_1 X_i)]^2
+\]</span>
+for all <span class="math inline">\(N\)</span> observations we sampled from the consumption (<span class="math inline">\(Y\)</span>) - income (<span class="math inline">\(X\)</span>) population.</p>
+</div>
+<div id="a-dash-of-calculus" class="section level2">
+<h2><span class="header-section-number">14.5</span> A dash of calculus</h2>
+<p>Now let’s find the best <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span>. To do this recall (with great affection!) the following two rules of differentiation (yes, the calculus). Suppose we have a function <span class="math inline">\(u = v^2\)</span>. Then
+<span class="math display">\[
+\frac{du}{dv} = 2v^{2-1} = 2v^1 = 2v
+\]</span>
+Not so bad! But let’s mix it up a bit and suppose we have another function <span class="math inline">\(w = (1-v^2) = w(u(v))\)</span>? We need to use the chain rule of differentiation of a function of a function to get at a derivative. The rule is this: if w(v) = w(u(v)), then
+<span class="math display">\[
+\frac{dw}{dv} = \frac{dw}{du}\frac{du}{dv}
+\]</span></p>
+<p>We already know what <span class="math inline">\(du/dv = 2v\)</span>. What is <span class="math inline">\(dw/du\)</span>? If we let <span class="math inline">\(u=v^2\)</span>, then <span class="math inline">\(w=1-u\)</span>
+<span class="math display">\[
+\frac{dw}{du}=-1
+\]</span>
+That’s it. Putting the two derivatives together we have
+<span class="math display">\[
+\frac{dw}{dv} = \frac{dw}{du}\frac{du}{dv} = (-1)(2v) = -2v
+\]</span></p>
+<p>Back to the <span class="math inline">\(SSE\)</span> story, We have 12 terms like this
+<span class="math display">\[
+SSE_i = (Y_i - b_0 - b_1 X_i)^2
+\]</span>
+Overall we have two variables for which we want together to minimize <span class="math inline">\(SSR\)</span>. We take them one at a time, holding the other “constant.” We take the “partial” derivative to accomplish this task. First, for <span class="math inline">\(b_0\)</span> and for each <span class="math inline">\(i\)</span>.
+<span class="math display">\[
+\frac{\partial SSE_i}{\partial b_0} = -2(Y_i - b_0 - b_1 X_i)
+\]</span>
+Then we calculate the partial of <span class="math inline">\(SSE_i\)</span> with respect to <span class="math inline">\(b_1\)</span>.
+<span class="math display">\[
+\frac{\partial SSE_i}{\partial b_1} = -2X_i(Y_i - b_0 - b_1 X_i)
+\]</span></p>
+<p>we can summarize the overall effect of changing first <span class="math inline">\(b_0\)</span> and then <span class="math inline">\(b_1\)</span> by summing the partial derivatives for <span class="math inline">\(i=1 \dots N\)</span>, where <span class="math inline">\(N=12\)</span> in our consumption-income example. Here are the first order conditions (FOC) around <span class="math inline">\(SSE(b_0,b_1)\)</span>:</p>
+<p><span class="math display">\[
+\frac{\partial SSE_i}{\partial b_0} = -2\sum_{i=1}^{N}[Y_i - (b_0 + b_1 X_i)] = 0
+\]</span>
+<span class="math display">\[
+\frac{\partial SSE_i}{\partial b_1} = 2\sum_{i=1}^{N}[Y_i - (b_0 + b_1 X_i)](-X_i) = 0
+\]</span>
+Here we have factored out the <span class="math inline">\(-2\)</span> across the sum of residuals. We can solve these two simultaneous equations for <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> to get</p>
+<p><span class="math display">\[
+b_0 = \frac{\sum_{i=1}^N Y_i}{N} - b_1 \frac{\sum_{i=1}^N X_i}{N}
+\]</span></p>
+<p><span class="math display">\[
+b_1 = \frac{N\sum_{i=1}^N X_i Y_i - \sum_{i=1}^N X_i \sum_{i=1}^N Y_i}{N\sum_{i=1}^N X_i^2 - (\sum_{i=1}^N X_i)^2}
+\]</span>
+Next we perform some arithmetic.</p>
+<p>Here is a table of sums we need:</p>
+<p><span class="math display">\[
+\begin{center}
+\begin{tabular}{c|l|r}
+\hline
+term &amp; Excel name &amp; result\\ \hline
+$N$ &amp; `n` &amp; 12 \\
+$\sum_{i=1}^N Y_i$ &amp; `sumY` &amp; 141.7 \\
+$\sum_{i=1}^N X_i$ &amp; `sumX` &amp; 152.6 \\
+$\sum_{i=1}^N X_i Y_i$ &amp; `sumXY` &amp; 1801.7\\
+$\sum_{i=1}^N X_i^2$ &amp; `sumX2` &amp; 1939.8\\
+\hline
+\end{tabular}
+\end{center}
+\]</span></p>
+<p>We insert these amounts into the formulae for <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span>. We start with</p>
+<p><span class="math display">\[
+b_1 = \frac{n \times sumXY - (sumX) \times (sumY)}{n \times sumX2 - (sumX)^2}
+\]</span>
+This translates into the following result:</p>
+<p><span class="math display">\[
+b_1 = \frac{12 \times 1801.7 - 152.6 \times 141.7 }{12 \times 1939.8- (152.6)^2} = 0.918
+\]</span>
+And then we get
+<span class="math display">\[
+b_0 = sumY/N - b_1 \times sumX/N
+\]</span>
+<span class="math display">\[
+b_0 = 141.7/12 - 0.918 (152.6/12) = 0.136
+\]</span>
+We can summarize our results using our understanding of macroeconomics:</p>
+<ul>
+<li><p>The <em>marginal propensity to consume</em> out of disposable income is 91.8%. The rest is “savings.”</p></li>
+<li><p>Structural consumption, <em>almost</em> an idea of <em>permanent consumption</em>, is $136 billion over this sample period.</p></li>
+</ul>
+</div>
+<div id="now-for-the-residuals" class="section level2">
+<h2><span class="header-section-number">14.6</span> Now for the residuals</h2>
+<p>From our definition of residuals we can compute
+<span class="math display">\[
+e_i = Y_i - b_0 -b_1 X_i
+\]</span>
+The sample mean of the residuals is
+<span class="math display">\[
+\bar e = \bar Y - b_0 - b_1 \bar X
+\]</span>
+<span class="math display">\[
+= \bar Y -  (\bar Y - b_1 \bar X) - b_1 \bar X
+\]</span>
+<span class="math display">\[
+= (\bar Y - \bar Y) + b_1 \bar X - b_1 \bar X = 0
+\]</span>
+The mean of resisuals, by definition, is just zero!</p>
+<p>The variance (standard deviation squared) of the residuals is
+<span class="math display">\[
+var(e_i) = s_e^2 = \frac{\sum_{i=1}^N (e_i - \bar e)^2}{n - k} = \frac{\sum_{i=1}^N e_i^2}{N - k}
+\]</span>
+so that the standard error is:
+<span class="math display">\[
+s_e = \sqrt{var(e)}
+\]</span>
+Here we have <span class="math inline">\(k=2\)</span> sample estimators <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> and thus <span class="math inline">\(n-k = 12 - 2 = 10\)</span> degrees of freedom. These are “freely” varying observations. This means that if we have 12 observations and have estimated 2 parameters, in effect, we have only 10 freely varying observations and can infer the other 2 by using the two estimated parameters.</p>
+<p>From our data</p>
+<p><span class="math display">\[
+var(e) = \frac{\sum_{i=1}^N e_i^2}{n - k} = \frac{0.0171}{10} = 0.00171
+\]</span>
+<span class="math display">\[
+s_e = \sqrt{var(e)} = \sqrt{0.00171} = 0.0414
+\]</span>
+Let’s construct a 95% prediction confidence interval around the ability of this model to predict consumption when we forecast a new level of disposable income. We know that the critical <span class="math inline">\(t\)</span> scores for a two-tailed (2.5% in each tail) 95% confidence region are <span class="math inline">\(+/- 2.2281\)</span>.</p>
+<p>The variance of a forecasted level of consumption given an estimate of the forecasted level of disposable income <span class="math inline">\(Y_F\)</span> is, through quite a bit of algebraic rearrangement,</p>
+<p><span class="math display">\[
+s_F^2 = s_e^2\left[1 + \frac{1}{N} + \frac{(X_F - \bar X)^2}{\sum_{i=1}^N (X_i - \bar X)^2}\right]
+\]</span>
+<span class="math display">\[
+= (0.00171)\left[1 + \frac{1}{12} + \frac{(13 - 12.7139)^2}{0.0962}\right] 
+=0.003342
+\]</span>
+<span class="math display">\[
+s_F = \sqrt{0.03342} = 0.0578
+\]</span>
+The forecasted consumption is
+<span class="math display">\[
+\hat Y = Y_F =  0.136 + 0.0918 \times 13 = 12.07
+\]</span></p>
+</div>
+<div id="have-some-confidence" class="section level2">
+<h2><span class="header-section-number">14.7</span> Have some confidence</h2>
+<p>If we need <em>confidence</em> that must mean we are unsure about something. That something is the reliability of our forecast and the underlying estimates of <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span>.</p>
+</div>
+<div id="central-to-our-discussion" class="section level2">
+<h2><span class="header-section-number">14.8</span> Central to our discussion</h2>
+<p>Take any distribution, say the Poisson with <span class="math inline">\(\lambda = 3\)</span>. Run many, many samples of this distribution of size <span class="math inline">\(x = 10\)</span>. Calculate the sums, means (that is, the sums divided by the sample size <span class="math inline">\(x\)</span>), and the variances (square of the standard deviation) of each sampling. Suppose now we take 10,000 samples.</p>
+<p>Here are the results visualized as distributions.</p>
+<p><img src="book-stat-thinking_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<p>The main take away is that with sampled means we get approximately normal distributions. A t-distribution is indicated when the sampled standard deviations are also random, as they appear to be here.</p>
+</div>
+<div id="on-to-the-unknown-2" class="section level2">
+<h2><span class="header-section-number">14.9</span> On to the unknown</h2>
+<p>Let’s suppose we <em>do not know</em> the population standard deviation. Now the sample standard deviation is also a random variable, like the sample mean. In practice this is nearly always the case. What do we do now?</p>
+<ul>
+<li><p>Use the Student’s t distribution to correct for confidences that are, well, not so confident.</p></li>
+<li><p>Here’s a plot of the Student’s t overlaid with the normal distribution.</p></li>
+</ul>
+<p><img src="book-stat-thinking_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
+<p>What do we notice?</p>
+<ul>
+<li><p>Normal is more pinched in than the <span class="math inline">\(t\)</span> (kurtosis? right!)</p></li>
+<li><p><span class="math inline">\(t\)</span> has thicker tails than normal</p></li>
+</ul>
+<p>Let’s check that: in Excel use <code>=T.INV(2.5%, 10)</code> which returns <code>-2.23</code>, and where the degrees of freedom <span class="math inline">\(df\)</span> of our 12 sample observations is <span class="math inline">\(df = n - k = 12 - 2 = 2\)</span>. Thus for the t distribution it takes 2.23 standard deviations below the mean to hit the 2.5% level of cumulative probability. It only took 1.96 standard deviations on the normal distribution. There are 10 degrees of freedom because it only takes 10 out of the 12 sampled consumption-disposable income pairs to get the eleventh and twelth observations (we do this by using 2 estimators, the mean y-intercept <span class="math inline">\(b_0\)</span> and the mean slope <span class="math inline">\(b_1\)</span> we calculated).</p>
+<ul>
+<li>That it took fewer standard deviations for the normal than for the t distribution to hit the 2.5% level of cumulative probability means that the t distribution is thicker tailed than the normal.</li>
+</ul>
+<p><img src="book-stat-thinking_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+</div>
+<div id="by-the-way-who-is-student-2" class="section level2">
+<h2><span class="header-section-number">14.10</span> By the way, who is Student?</h2>
+<p>You may have seen the slogan “Guiness is Good for You.” William Gosset (1876-1937) was a modest, well-liked Englishman who was a brewer and agricultural statistician for the famous Guinness brewing company in Dublin.</p>
+<p>Guiness insisted that its employees keep their work secret, so Gosset published the distribution under the pseudonym “Student” in 1908. This was one of the first results in modern small-sample statistics.</p>
+</div>
+<div id="in-all-confidence-forecasting-for-fun-and" class="section level2">
+<h2><span class="header-section-number">14.11</span> In all confidence: forecasting for fun and …</h2>
+<p>A confidence interval has the estimate in the middle with upper and lower bounds on the estimate determined by the number of standard deviations away from the estimate that are tolerable. If there is a tolarance of 5% error, then there are 2.5% tolerances above the upper and 2.5% tolerances below the lower bounds. Another way of putting this is to say that between the upper and lower bounds of the interval we are 95% confident in the range of the population forecast. All of this depends on the assumption that the residuals are normally distributed with zero mean and a constant standard deviation (variance).</p>
+<p>The 95/% confidence interval of the <em>population</em> forecast <span class="math inline">\(Y_F\)</span> is this probability statement.
+<span class="math display">\[
+Prob[\hat Y - t_{0.025}s_F \leq Y_F \leq \hat Y + t_{0.975}s_F ] = 0.95
+\]</span>
+The lower bound of the population forecast of consumption <span class="math inline">\(Y_F\)</span> is <span class="math inline">\(t_{0.025}\)</span> standard deviations <span class="math inline">\(s_F\)</span> below the estimated forecast <span class="math inline">\(\hat Y\)</span>, and similarly for the upper bound. In Excel we can find the number of standard deviations from zero that corresponds to a probability of 2.5% using <code>T.INV(0.025, 10)</code>, where <span class="math inline">\(10\)</span> is the degrees of freedom <span class="math inline">\(N - k = 12 - 2 = 10\)</span>. This number is <span class="math inline">\(-2.23\)</span>. Because the <span class="math inline">\(t-\)</span>distribution is symmetric about zero, we can use the absolute value of the same number in the upper end of the interval.</p>
+<p><span class="math display">\[
+Prob[12.07 - (2.23)(0.0578) \leq Y_F \leq 12.07 + (2.23)(0.0578) ] = 0.95
+\]</span>
+<span class="math display">\[
+Pr[11.9 \leq Y_F \leq 12.2] = 0.95
+\]</span>
+There is a 95% probability that forecasted consumption conditional on a forecast of disposable income equal to $<span class="math inline">\(13\)</span> trillion will lie between <span class="math inline">\(\$11.9\)</span> and <span class="math inline">\(\$12.2\)</span> trillion.</p>
+</div>
+<div id="how-confident-are-we-in-our-estimates" class="section level2">
+<h2><span class="header-section-number">14.12</span> How confident are we in our estimates?</h2>
+<p>Let’s put <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> into a form that will be really useful when we try to infer the confidence interval for these parameters. This form will also allow us to interpret the <span class="math inline">\(b_1\)</span> estimate in terms of the correlation estimate <span class="math inline">\(r_{cy}\)</span> and the consumption elasticity of income <span class="math inline">\(\eta_{cy}\)</span>.</p>
+<p>Let’s start with
+<span class="math display">\[
+b_1 = \frac{N\sum_{i=1}^N X_i Y_i - \sum_{i=1}^N X_i \sum_{i=1}^N Y_i}{N\sum_{i=1}^N X_i^2 - (\sum_{i=1}^N X_i)^2}
+\]</span>
+Multiply both sides by <span class="math inline">\(1 = N^2 / N^2\)</span>. This manuever will allow us to restate <span class="math inline">\(b_1\)</span> in an algebraicly equivalent way (shout out to Huygens, the astronomer b. 1629).
+<span class="math display">\[
+b_1 = \frac{\frac{\sum_{i=1}^N X_i Y_i}{N} - \left(\frac{\sum_{i=1}^N X_i}{N}\right) \left(\frac{\sum_{i=1}^N Y_i}{N}\right)}{\frac{\sum_{i=1}^N X_i^2}{N} - \left(\frac{\sum_{i=1}^N X_i}{N}\right)^2}
+\]</span></p>
+<p>We rearrange the numerator and denominator into this slightly neat(er) result.</p>
+<p><span class="math display">\[
+b_1 = \frac{\frac{\sum_{i=1}^N X_i Y_i}{N} - \bar{X}\bar{Y}}{\frac{\sum_{i=1}^N X_i^2}{N} - \bar{X}^2}
+\]</span>
+In turn we can express this as</p>
+<p><span class="math display">\[
+b_1 = \frac{\sum_{i=1}^N (X_i - \bar{X})(Y_i - \bar Y)}{\sum_{i=1}^N (X_i - \bar X)^2} = \frac{cov(X,Y)}{ var(X)}
+\]</span>
+where <span class="math inline">\(cov(X,Y)\)</span> is the covariance of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> and <span class="math inline">\(var(X)\)</span> is the variance (standard deviation squared) of <span class="math inline">\(X\)</span>.</p>
+<p>Using this form we can derive the variance of the random variable <span class="math inline">\(b_1\)</span>.</p>
+<p>Here goes for consumption <span class="math inline">\(Y\)</span> and disposable income <span class="math inline">\(X\)</span>:</p>
+<p><span class="math display">\[
+s_{b_1}^2 = \frac{s_e^2}{\sum_{i=1}^N (X_i - \bar X)^2} = \frac{0.00171}{0.0962} = 0.01777
+\]</span></p>
+<p><span class="math display">\[
+s_{b_1} = \sqrt{0.01777} = 0.134
+\]</span>
+with rounding.</p>
+<p>The 95% confidence interval for estimating the population parameter <span class="math inline">\(\beta_1\)</span> is this probability statement.
+<span class="math display">\[
+Prob[b_1 - t_{0.025}s_{b_1} \leq \beta_1 \leq b_1 + t_{0.025}s_{b_1} ] = 0.95
+\]</span>
+<span class="math display">\[
+Pr[0.918 - (2.23)(0.134) \leq \beta_1 \leq 0.918 + (2.23)(0.134) ] = 0.95
+\]</span>
+<span class="math display">\[
+Pr[0.619 \leq \beta_1 \leq 1.217] = 0.95
+\]</span>
+There is a 95% probability that the population marginal propensity to consume out of disposable income will lie between <span class="math inline">\(0.619\)</span> and <span class="math inline">\(1.219\)</span>. Decision makers might do well to plan for considerable movement in this number when formulating policy.</p>
+<p>Again the estimation cuts a wide swathe. This width may be the cause of the wide forecast interval for predicted consumption we noticed above.</p>
+<p>Let’s compute the variance of the random variable <span class="math inline">\(b_0\)</span>. Here it goes:</p>
+<p><span class="math display">\[
+s_{b_0}^2 = s_e^2\left[\frac{1}{N} + \frac{\bar X^2}{\sum_{i=1}^N (X_i - \bar X)^2}\right] = 0.00171\left(0.0833 + \frac{12.71^2}{0.0962}\right) = 2.9036
+\]</span>
+<span class="math display">\[
+s_{b_0} = \sqrt{2.9036} = 1.701
+\]</span>
+with rounding. Remember that <span class="math inline">\(X\)</span> is the independent variable disposable income.</p>
+<p>The 95% confidence interval for estimating the population parameter <span class="math inline">\(\beta_0\)</span> is this probability statement.
+<span class="math display">\[
+Prob[b_0 - t_{0.025}s_{b_0} \leq \beta_0 \leq b_0 + t_{0.025}s_{b_0} ] = 0.95
+\]</span>
+<span class="math display">\[
+Prob[0.136 - (2.23)(1.701) \leq \beta_0 \leq 0.136 + (2.23)(1.701) ] = 0.95
+\]</span>
+<span class="math display">\[
+Prob[-3.661 \leq \beta_0 \leq 3.993] = 0.95
+\]</span>
+There is a 95% probability that the population structural level of consumption (intercept term) will lie between <span class="math inline">\(-3.661\)</span> and <span class="math inline">\(3.993\)</span>.</p>
+<p>We have further probable evidence that our estimation has a fairly high degree of uncertainty as parameterized by this probability statement for the <span class="math inline">\(\beta_0\)</span> confidence interval.</p>
+</div>
+<div id="next-lets-hypothesize" class="section level2">
+<h2><span class="header-section-number">14.13</span> Next let’s hypothesize</h2>
+<p>Herein we test the hypothesis that <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> are no different than zero. This is called the <em>null hypothesis</em> or <span class="math inline">\(H_0\)</span>. The <em>alternative hypothesis</em> or <span class="math inline">\(H_1\)</span> is that the estimators are meaningful, namely, they do not equal zero.</p>
+<p>Two errors are possible</p>
+<table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:left;">
+True
+</th>
+<th style="text-align:left;">
+False
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Accept
+</td>
+<td style="text-align:left;">
+Correct
+</td>
+<td style="text-align:left;">
+II: False Negative
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Reject
+</td>
+<td style="text-align:left;">
+I: False Positive
+</td>
+<td style="text-align:left;">
+Correct
+</td>
+</tr>
+</tbody>
+</table>
+<ol style="list-style-type: decimal">
+<li><p><strong>Type I Error</strong>: A type I error occurs when the null hypothesis (<span class="math inline">\(H_0\)</span>) is true, but is rejected. It is asserting something that is absent, a false hit. A type I error is often called a false positive (a result that indicates that a given condition is present when it actually is not present).</p></li>
+<li><p><strong>Type II Error</strong>: A type II error occurs when the null hypothesis ($H_0) is false, but is accepted. It is asserting something that is there, but really is not. A type II error is often called a false negative (a result that indicates that a given condition is absent when it actually is present).</p></li>
+</ol>
+<p>How can we control for error?</p>
+<p>Here is what we can do:</p>
+<ol style="list-style-type: decimal">
+<li>Management makes an assumption and forms a hypothesis about the population <span class="math inline">\(\beta_0\)</span> and <span class="math inline">\(\beta_1\)</span> estimates. This is a precise statement about two specific metrics. Let’s work with <span class="math inline">\(\beta_0\)</span>. All the same can, and will be said of <span class="math inline">\(\beta_1\)</span>.</li>
+</ol>
+<ul>
+<li><p>The <em>null hypothesis</em> (<span class="math inline">\(H_0\)</span>) is that the population metric equals a target value <span class="math inline">\(\beta_0^*\)</span> or <span class="math inline">\(H_0: \beta_0 = \beta_0^*\)</span>. Suppose that <span class="math inline">\(H_0: \beta_0 = 0\)</span>.</p></li>
+<li><p>The <em>alternative hypothesis</em> (<span class="math inline">\(H_1\)</span>) is that the population metric does not equal (or is just greater or less than) the target value. Thus we would have <span class="math inline">\(H_1: \beta_0 \neq 0\)</span>.</p></li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>A decision maker sets a degree of confidence in accepting as true the assumption or hypothesis about the metric. The decision maker determines that 95% of the time <span class="math inline">\(\beta_0 = 0\)</span>. This means there is an <span class="math inline">\(\alpha =\)</span> 5% significance that the company would be willing to be wrong about rejecting the assertion that <span class="math inline">\(H_0: \beta_0 = 0\)</span> is true.</li>
+</ol>
+<ul>
+<li><p>Under the null hypothesis it is probable that above or below a mean value of zero there is a Type I error of <span class="math inline">\(\alpha = 0.05\)</span> over the entire distribution of <span class="math inline">\(b_0\)</span> or of <span class="math inline">\(b_1\)</span>. This translates into <span class="math inline">\(\alpha / 2 = 0.025\)</span> above and <span class="math inline">\(\alpha / 2 = 0.025\)</span> below the mean.</p></li>
+<li><p>Because management expresses the null hypothesis as “not equal,” then this translates into a two-tailed test of the null hypothesis.</p></li>
+</ul>
+<p><img src="book-stat-thinking_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
+<ol start="3" style="list-style-type: decimal">
+<li><p>We have a sample of <span class="math inline">\(N = 12\)</span> observations of consumption and disposable income. We then computed the sample estimate <span class="math inline">\(b_0 = 0.136\)</span> for the average intercept with sample standard deviation <span class="math inline">\(s_{b_0} = 1.701\)</span>, and in trillions of USDs.</p></li>
+<li><p>Now compute the <span class="math inline">\(t\)</span> score</p></li>
+</ol>
+<p><span class="math display">\[
+t = \frac{b_0 - 0}{s_{b_0}} = \frac{0.136 - 0}{1.701} = 0.0799
+\]</span></p>
+<p>and compare this value with the the acceptance region of the null hypotheses <span class="math inline">\(H_0\)</span>.</p>
+<ol start="5" style="list-style-type: decimal">
+<li>For a sample size of <span class="math inline">\(n = 12\)</span> and <span class="math inline">\(k = 2\)</span> estimators (<span class="math inline">\(\bar X\)</span>), then the degrees of freedom <span class="math inline">\(df = n - k = 12 - 2 = 10\)</span>. Under a Student’s t distribution with 10 <span class="math inline">\(df\)</span>, and using Excel’s <code>=T.INV(0.025, 10)</code>, the region is bounded by t scores between <span class="math inline">\(-2.23\)</span> and <span class="math inline">\(+2.23\)</span>.</li>
+</ol>
+<ul>
+<li><p>The computed t score is 0.0799 and falls in the <em>acceptance</em> region of the null hypothesis <span class="math inline">\(H_0: \beta_0 = 0\)</span>.</p></li>
+<li><p>We can now report that we are 95% confident that a decision maker may <em>accept the null hypothesis</em> that the consumption-income intercept is no different than zero.</p></li>
+<li><p>Another way of reporting this is that there is a 5% probability that we analysts could be wrong in concluding that the intercept is zero.</p></li>
+</ul>
+</div>
+<div id="yet-another-school-of-thought" class="section level2">
+<h2><span class="header-section-number">14.14</span> Yet another school of thought</h2>
+<p>we could ask this question:</p>
+<ul>
+<li><p>If we know the <em>t-score</em>, what is the probability that any other t-scores are greater than this computed t-score?</p></li>
+<li><p>Find the <em>p-value</em> <span class="math inline">\(= Pr(|t|)\)</span></p></li>
+</ul>
+<p>If this <em>p-value</em> is “small” enough, then our parameter estimate is “far enough” away from zero to reject the null hypothesis.</p>
+<ul>
+<li>Compare with criterion <span class="math inline">\(t^*\)</span> value that is the probability of being wrong about rejecting the null hypothesis and <span class="math inline">\(1-Pr(t^*)\)</span> being right about accepting the alternative hypothesis.</li>
+</ul>
+<p>Calculating <span class="math inline">\(\dots\)</span></p>
+<p>Use <span class="math inline">\(1-\)</span><code>T.DIST(abs(score), df, TRUE)</code></p>
+<ul>
+<li><p>This gets us the probability from the score all the way to the end of the distribution (infinity and beyond!)</p></li>
+<li><p>This is the probability that you would be wrong if you accepted the null hypothesis</p></li>
+<li><p><span class="math inline">\(1-\)</span><em>p-value</em> is the probability that you would be correcct if you rejected the null hypothesis (accepted the alternative hypothesis)</p></li>
+</ul>
+<p>For <span class="math inline">\(b_0\)</span>, <span class="math inline">\(t = 0.080\)</span></p>
+<ol style="list-style-type: decimal">
+<li><p>Set acceptance criterion: at <span class="math inline">\(t^* 1\%\)</span> probability of being wrong about rejecting the null hypothesis</p></li>
+<li><p>Calculate <span class="math inline">\(1-Pr(|t|)\)</span> = <span class="math inline">\(1-\)</span><code>T.DIST(abs(0.0799), 10, TRUE)</code> <span class="math inline">\(=1-0.47 = 0.53\)</span></p></li>
+<li><p>Test: <em>p-value</em> <span class="math inline">\(&gt; 1\%\)</span>, therefore accept the null hypothesis that <span class="math inline">\(b_0 = 0\)</span></p></li>
+</ol>
+<p>For <span class="math inline">\(b_1\)</span>, <span class="math inline">\(|t| = 6.8503\)</span></p>
+<ol style="list-style-type: decimal">
+<li><p>Set acceptance criterion: at <span class="math inline">\(t^* = 1\%\)</span> probability of being wrong about rejecting the null hypothesis</p></li>
+<li><p>Calculate <span class="math inline">\(1-Pr(|t|)\)</span> = <span class="math inline">\(1-\)</span><code>T.DIST(abs(6.8503), 10, TRUE)</code> <span class="math inline">\(=1- 0.999978 = 0.00002\)</span></p></li>
+<li><p>Test: <em>p-value</em> <span class="math inline">\(&lt; 1\%\)</span>, therefore accept the alternative hypothesis that <span class="math inline">\(b_1 \neq 0\)</span></p></li>
+</ol>
+</div>
+<div id="summary-of-simple-linear-regression-estimation" class="section level2">
+<h2><span class="header-section-number">14.15</span> Summary of simple linear regression estimation</h2>
+<p>For the model
+<span class="math display">\[
+Y_i = b_0 + b_1 X_i + e_i
+\]</span></p>
+<table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+parameter
+</th>
+<th style="text-align:left;">
+estimator
+</th>
+<th style="text-align:left;">
+standard.deviation
+</th>
+<th style="text-align:left;">
+t.value
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(b_0\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\bar Y - b_1 \bar X\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\sqrt{s_e^2\left[\frac{1}{N} + \frac{\bar X^2}{\sum_{i=1}^N (X_i - \bar X)^2}\right]}\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\frac{b_0}{s_{b0}}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(b_1\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\frac{N\sum_{i=1}^N X_i Y_i - \left(\sum_{i=1}^N X_i\right) \left(\sum_{i=1}^N Y_i\right)}{N\sum_{i=1}^N X_i^2 - (\sum_{i=1}^N X_i)^2}\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\sqrt{\frac{s_e^2}{\sum_{i=1}^N (X_i - \bar X)^2}}\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(\frac{b_1}{s_{b1}}\)</span>
+</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+<div id="how-good-a-fit" class="section level2">
+<h2><span class="header-section-number">14.16</span> How good a fit?</h2>
+<p>Even though we just examined parameter-specific hypotheses:</p>
+<ul>
+<li><p>Is <span class="math inline">\(b_0\)</span> far enough away from <span class="math inline">\(0\)</span> to claim that <span class="math inline">\(b_0 \neq 0\)</span>?</p></li>
+<li><p>Is <span class="math inline">\(b_1\)</span> far enough away from <span class="math inline">\(0\)</span> to claim that <span class="math inline">\(b_1 \neq 0\)</span>?</p></li>
+</ul>
+<p>We still need to ask (and answer <em>probably</em>)</p>
+<ul>
+<li><p>Is the model any better than just noise?</p></li>
+<li><p>Are <span class="math inline">\(b_0\)</span> and <span class="math inline">\(b_1\)</span> jointly not far enough away from <span class="math inline">\(0\)</span>?</p></li>
+</ul>
+<p><span class="math display">\[
+H_0: b_0 = b_1 = 0
+\]</span>
+<span class="math display">\[
+H_1: b_0, b_1 \neq 0
+\]</span></p>
+</div>
+<div id="lets-build-more-statistics" class="section level2">
+<h2><span class="header-section-number">14.17</span> Let’s build more statistics!</h2>
+<p>To answer these pressing questions we need to look at the variations in the model.</p>
+<ul>
+<li>Calculate the total variation in <span class="math inline">\(Y\)</span> (consumption <span class="math inline">\(c\)</span>) as the “sum of squares total” or <span class="math inline">\(SST\)</span> around its own mean <span class="math inline">\(\bar Y\)</span>
+<span class="math display">\[
+SST = \sum_{i=1}^N (Y_i - \bar Y)^2
+\]</span></li>
+<li>Calculate the variation in the model itself from the average <span class="math inline">\(Y\)</span> as the “sum of squares of the regression” of <span class="math inline">\(SSR\)</span>
+<span class="math display">\[
+SSR = \sum_{i=1}^N ((b_0 + b_1 X_i) - \bar Y)^2
+\]</span></li>
+<li>Calculate the variation in the error term (we already did this one!) as the “sum of squares of the error” or <span class="math inline">\(SSE\)</span>
+<span class="math display">\[
+SSE = \sum_{i=1}^N e_i^2
+\]</span></li>
+</ul>
+<p>From the model’s point of view we have</p>
+<p><span class="math display">\[
+Y_i = b_0 + b_1 X_i + e_i
+\]</span>
+Subtract <span class="math inline">\(\bar Y\)</span> (average disposable income) from both sides to get</p>
+<p><span class="math display">\[
+Y_i - \bar Y = b_0 + b_1 X_i + e_i - \bar Y = (b_0 + b_1 X_i)- \bar Y + e_i 
+\]</span>
+We then square each side. But wait!</p>
+<p>Then we use a property of the model that there are no cross terms between the error <span class="math inline">\(e_i\)</span> terms and the model. This means that the model measures variations that are in no way at all related to the error terms. They are thus independent of one another. We get this
+<span class="math display">\[
+(Y_i - \bar Y)^2 = (b_0 + b_1 X_i - \bar Y)^2 + e_i^2 + 2(b_0 + b_1 X_i - \bar Y)e_i
+\]</span>
+<span class="math display">\[
+(Y_i - \bar Y)^2 = (b_0 + b_1 X_i - \bar Y)^2 + e_i^2
+\]</span>
+Then sum it all up to get
+<span class="math display">\[
+\underbrace{\sum_{i=1}^N (Y_i - \bar Y)^2}_{SST} = \underbrace{\sum_{i=1}^N (b_0 + b_1 X_i - \bar Y)^2}_{SSR} + \underbrace{\sum_{i=1}^N  e_i^2}_{SSE}
+\]</span>
+That is</p>
+<p><span class="math display">\[
+\underbrace{SST}_{total} = \underbrace{SSR}_{explained} + \underbrace{SSE}_{unexplained}
+\]</span>
+Forever and for all time.</p>
+<p>For our consumption-income data we have <span class="math inline">\(SST = 0.098\)</span>, <span class="math inline">\(SSR = 0.082\)</span>, <span class="math inline">\(SSE = 0.017\)</span>, so that
+<span class="math display">\[
+SST = SSR + SSE
+\]</span></p>
+<p><span class="math display">\[
+0.098 = 0.082 + 0.017
+\]</span></p>
+<p>Now divide both sides by <span class="math inline">\(SST\)</span> to get the proportion of total variation due to the two components: the model and the error
+<span class="math display">\[
+\frac{SST}{SST} = 1 = \frac{SSR}{SST} + \frac{SSE}{SST}
+\]</span>
+Now define the <span class="math inline">\(R^2\)</span> statistic as the fraction of total variation that the regression “explains” or
+<span class="math display">\[
+R^2 = \frac{SSR}{SST} = 1 - \frac{SSE}{SST}
+\]</span>
+<span class="math display">\[
+R^2 = \frac{0.082}{0.098} = 1 - \frac{0.017}{0.098} = 0.84
+\]</span>
+In words: our model with disposable income explains 84% of the total variation in the consumption data.</p>
+<p>How good is this? We had to ask <span class="math inline">\(\dots\)</span>!</p>
+</div>
+<div id="analyze-this" class="section level2">
+<h2><span class="header-section-number">14.18</span> Analyze this …</h2>
+<p>We have just decomposed the total variation into two components:</p>
+<ul>
+<li><p>the model and the error term (explained and the unexplained)</p></li>
+<li><p>ratios of model variation and error variation to the total variation (<span class="math inline">\(R^2\)</span>)</p></li>
+</ul>
+<p>The null hypothesis is the average variation in the model is no different from zero. This means that under the null hypothesis, the model does not explain anything at all:
+<span class="math display">\[
+H_0: b_0 = b_1 = 0
+\]</span></p>
+<p>It’s all just noise. Our job now is to compare the regression variation with the error variation. If the regression variation is very small relative to the error variation then we (probably) have reason to accept the null hypothesis that the model explains nothing much at all.</p>
+<p>We calculate (SS = Sum of Squares, df = degrees of freedom, MS = Mean Square, F = (F)isher’s statistic)</p>
+
+
+<p>Let’s dig into the <span class="math inline">\(F\)</span> statistic.</p>
+<ul>
+<li><p>Just like the <span class="math inline">\(t\)</span> statistic it is a “score”</p></li>
+<li><p>Measures the relative variation of two sums of squares</p></li>
+<li><p>Student’s-t composed of the <em>ratio</em> of a normal distribution to a <em>chi-squared</em> distribution</p></li>
+<li><p>Different from the Student’s-t: composed of the ratio of two <em>chi-squared</em> distributions, each with a different degree of freedom</p></li>
+</ul>
+<p><span class="math display">\[
+F(k-1, N-k) \approx \frac{SSR / (k-1)}{SSE / (N-k)}
+\]</span></p>
+<p><img src="book-stat-thinking_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
+<ol style="list-style-type: decimal">
+<li><p>Set the probability that we are wrong about accepting the null hypotheses <span class="math inline">\(= 1\%\)</span></p></li>
+<li><p>Calculate <span class="math inline">\(F = &quot;explained&quot; variation / &quot;unexplained&quot; variation = MSR / MSE = 46.3\)</span></p></li>
+<li><p>Calculate the <em>p-value</em> using <span class="math inline">\(1-\)</span> <code>F.DIST(46.9, 1, 10, TRUE)</code> <span class="math inline">\(= 1 - 0.999955 = 0.000045\)</span></p></li>
+<li><p>Reject the null hypothesis with a probability that you might be wrong <span class="math inline">\(0.0045\%\)</span> of the time and accept the alternative hypothesis that this model with disposable income sufficiently explains the variation in total consumption <span class="math inline">\(99.99\%\)</span> of the time.</p></li>
+</ol>
+</div>
+<div id="two-samples-same-population" class="section level2">
+<h2><span class="header-section-number">14.19</span> Two samples – same population?</h2>
+<p>We often take samples of the same variable at different times or as subsets of a larger pool of observations.</p>
+<p>Suppose we wonder if the marginal propensity to consume out of disposable income was different before the Volker era of the Federal Reserve, say, early 1980, versus long after, in late 2017. To do this we take two samples of consumption-income at two different times: 1980’s and the very recent past. We find that</p>
+<p><span class="math display">\[
+\begin{center}
+\begin{tabular}{c|c|c|c|c}
+sample &amp; parameter &amp; estimate &amp; standard deviation &amp; sample size \\ \hline
+1980 &amp; $b_1$ &amp; 0.86 &amp; 0.201 &amp; 14 \\ \hline
+2017 &amp; $b_1$ &amp; 0.92 &amp; 0.134 &amp; 12 \\ \hline
+\end{tabular}
+\end{center}
+\]</span></p>
+<p>Here is a procedure we can follow:</p>
+<ol style="list-style-type: decimal">
+<li><p>Set the significance level to 1% (or some other level).</p></li>
+<li><p>Form the null and alternative hypotheses:
+<span class="math display">\[
+H_0: \beta_{1,2017} = \beta_{1,1980}
+\]</span>
+<span class="math display">\[
+H_1: \beta_{1,2017} \neq \beta_{1,1980}
+\]</span>
+where the <span class="math inline">\(\beta_1\)</span>s are the population parameters for the marginal propensity to consume out of disposable income. This formulation is equivalent to
+<span class="math display">\[
+H_0: \beta_{1,2017} - \beta_{1,1980} = 0
+\]</span>
+<span class="math display">\[
+H_1: \beta_{1,2017} - \beta_{1,1980} \neq 0
+\]</span></p></li>
+<li><p>Calculate the pooled standard deviation of the two samples as
+<span class="math display">\[
+s_{pool} = \sqrt{s_{1,2017}^2 + s_{1,1980}^2}
+\]</span>
+<span class="math display">\[
+s_{pool} = \sqrt{0.134^2 + 0.501^2} = 0.242
+\]</span></p></li>
+<li><p>Calculate the t-ratio</p></li>
+</ol>
+<p><span class="math display">\[
+t = \frac{b_{1,2017}-b_{1,1980}}{s_{pool}} = \frac{0.92 - 0.86}{0.242} = 0.248
+\]</span></p>
+<p>Correcting for the two regression error standard deviations embedded in each of the two standard deviations of the <span class="math inline">\(b_1\)</span>s, the degrees of freedom are</p>
+<p><span class="math display">\[
+df_{pool} = (N_{2017} - 2) + (N_{1980} - 2) = (12-2)+(14-2) = 22
+\]</span></p>
+<ol start="5" style="list-style-type: decimal">
+<li><p>Calculate <span class="math inline">\(Pr(&gt;|t|)\)</span> using <code>=1 - T.DIST(0.248, 22, TRUE)</code> <span class="math inline">\(=1-0.594 = 0.406\)</span>, the cumulative probability in the tail of the distribution.</p></li>
+<li><p>Accept the null hypothesis and reject the alternative hypothesis since
+<span class="math display">\[
+Pr(&gt;|t|)= 0.406 &gt; 0.01
+\]</span>
+far in excess of the significance level. We would be wrong (probably) over 40% of the time if we were to reject the null hypothesis that the two marginal propensities to consume out of disposable income were equal.</p></li>
+</ol>
+</div>
+<div id="anything-abnormal" class="section level2">
+<h2><span class="header-section-number">14.20</span> Anything abnormal?</h2>
+<p>We have assumed thruoghout our statistical inference that underlying variables and their statistical estiamtes are normally distributed. Is this so?</p>
+<p><img src="book-stat-thinking_files/figure-html/unnamed-chunk-58-1.png" width="672" />
+This doen’t look very symmetric with thin tails.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+mean
+</th>
+<th style="text-align:right;">
+median
+</th>
+<th style="text-align:right;">
+skewness
+</th>
+<th style="text-align:right;">
+kurtosis
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+error statistics
+</td>
+<td style="text-align:right;">
+0.001
+</td>
+<td style="text-align:right;">
+-0.003
+</td>
+<td style="text-align:right;">
+0.998
+</td>
+<td style="text-align:right;">
+3.19
+</td>
+</tr>
+</tbody>
+</table>
+<p>The mean and median are fairly close together. There is some positive (right side) skewness. Kurtosis is not very far from mesokurtic value of 3.0 for the normal distribution. All in all, the errors do not look so non-normal after all.</p>
+<p>We can bootstrap a confidence interval for the kurtosis of the error term by creating a sample of 1000 of the error terms. For each replication we then calculate the kurtosis. The result is 1000 random samples of kurtosis. Here is the distribution of the kurtosis from this experiment.</p>
+<p><img src="book-stat-thinking_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
+<p>We can then build this 95% confidence interval around the kurtosis:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+</th>
+<th style="text-align:right;">
+0.025
+</th>
+<th style="text-align:right;">
+0.25
+</th>
+<th style="text-align:right;">
+0.5
+</th>
+<th style="text-align:right;">
+0.75
+</th>
+<th style="text-align:right;">
+0.975
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+error quantiles
+</td>
+<td style="text-align:right;">
+1.41
+</td>
+<td style="text-align:right;">
+2.12
+</td>
+<td style="text-align:right;">
+2.98
+</td>
+<td style="text-align:right;">
+3.8
+</td>
+<td style="text-align:right;">
+6.53
+</td>
+</tr>
+</tbody>
+</table>
+<p>The median tells us that the kurtosis is very close the 3.0 value of a normal distirbution with little kurtosis in excess of 3.0. However, there is again a skewness in that the distance between the 2.5% and 50%tile versus the distance between the 50% and 97.5%tile are quite different. There is a higher probability of values above the median than below, thus the skewness.</p>
+</div>
+<div id="exercises-2" class="section level2">
+<h2><span class="header-section-number">14.21</span> Exercises</h2>
+<ol style="list-style-type: decimal">
+<li><p>Repeat the forecast confidence intervals for disposable income equal to 15, 20, 25. What do you observe about the width of the interval as the forecast increases?</p></li>
+<li><p>Test the hypothesis that the population marginal propensity to consume out of disposable income is no different than zero with a probability of type II error equal to 95%.</p></li>
+<li><p>Using the following data sets to compute all regression estimates, standard deviations, a forecast confidence interval for a forecasted independent variable observation, confidence intervals and hypothesis testing for each of the estimators, and <span class="math inline">\(R^2\)</span> and <span class="math inline">\(F\)</span> hypothesis testing for the overall model. For each data set and model extract the error terms and review the percentiles, mean, standard deviation, skewness, and kurtosis. Do they look like they were drawn from a normal distribution? Show all work. Interpret your findings.</p></li>
+</ol>
+<ul>
+<li>Peruvian anchovies</li>
+<li>Bronx corn</li>
+<li>US House of Representatives data from the package <code>openintro</code></li>
+</ul>
+<div id="us-house-of-representatives-seats-and-unemployment" class="section level3">
+<h3><span class="header-section-number">14.21.1</span> US House of Representatives seats and unemployment</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/unemployment-seats.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="co">#str(data)</span></a>
+<a class="sourceLine" id="cb3-3" title="3">lm_fit &lt;-<span class="st"> </span><span class="kw">lm</span>(unemployment <span class="op">~</span><span class="st"> </span>house.seats, data)</a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="kw">summary</span>(lm_fit)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = unemployment ~ house.seats, data = data)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -3.579 -2.264 -1.180  0.065 14.325 
+## 
+## Coefficients:
+##             Estimate Std. Error t value  Pr(&gt;|t|)    
+## (Intercept)  6.95447    1.28079    5.43 0.0000096 ***
+## house.seats  0.00697    0.08259    0.08      0.93    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 4.13 on 27 degrees of freedom
+## Multiple R-squared:  0.000264,   Adjusted R-squared:  -0.0368 
+## F-statistic: 0.00712 on 1 and 27 DF,  p-value: 0.933</code></pre>
+</div>
+<div id="peruvian-anchovies" class="section level3">
+<h3><span class="header-section-number">14.21.2</span> Peruvian anchovies</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/peruvian_anchovies.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="co">#str(data_peru)</span></a>
+<a class="sourceLine" id="cb5-3" title="3">lm_fit &lt;-<span class="st"> </span><span class="kw">lm</span>(price <span class="op">~</span><span class="st"> </span>catch, data)</a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="kw">summary</span>(lm_fit)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = price ~ catch, data = data)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -110.0  -38.3  -19.0   34.6  142.3 
+## 
+## Coefficients:
+##             Estimate Std. Error t value    Pr(&gt;|t|)    
+## (Intercept)   451.99      36.79   12.28 0.000000037 ***
+## catch         -29.39       5.09   -5.78 0.000087664 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 71.6 on 12 degrees of freedom
+## Multiple R-squared:  0.736,  Adjusted R-squared:  0.714 
+## F-statistic: 33.4 on 1 and 12 DF,  p-value: 0.0000877</code></pre>
+</div>
+<div id="bronx-corn" class="section level3">
+<h3><span class="header-section-number">14.21.3</span> Bronx corn</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/corn_bronx.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="co">#str(data)</span></a>
+<a class="sourceLine" id="cb7-3" title="3">lm_fit &lt;-<span class="st"> </span><span class="kw">lm</span>(corn <span class="op">~</span><span class="st"> </span>fertilizer, data)</a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="kw">summary</span>(lm_fit)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = corn ~ fertilizer, data = data)
+## 
+## Residuals:
+##      1      2      3      4      5      6      7 
+##  2.839 -2.375 -1.679 -3.589  1.107  3.804 -0.107 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   27.250      3.057    8.91   0.0003 ***
+## fertilizer     1.652      0.142   11.64 0.000082 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 3 on 5 degrees of freedom
+## Multiple R-squared:  0.964,  Adjusted R-squared:  0.957 
+## F-statistic:  135 on 1 and 5 DF,  p-value: 0.0000822</code></pre>
+</div>
+<div id="consumption-and-disposable-income" class="section level3">
+<h3><span class="header-section-number">14.21.4</span> Consumption and disposable income</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">data_cdi &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/consumption_income.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="co">#str(data_cdi)</span></a>
+<a class="sourceLine" id="cb9-3" title="3">lm_fit &lt;-<span class="st"> </span><span class="kw">lm</span>(consumption <span class="op">~</span><span class="st"> </span>income, data_cdi)</a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="kw">summary</span>(lm_fit)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = consumption ~ income, data = data_cdi)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.04821 -0.02181 -0.00425  0.00626  0.08556 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)    0.136      1.704    0.08     0.94    
+## income         0.918      0.134    6.85 0.000045 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.0416 on 10 degrees of freedom
+## Multiple R-squared:  0.824,  Adjusted R-squared:  0.807 
+## F-statistic: 46.9 on 1 and 10 DF,  p-value: 0.0000446</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co">#str(data_cdi)</span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="co"># log-log fit for elasticity estimation</span></a>
+<a class="sourceLine" id="cb11-3" title="3">lm_fit &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(consumption) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(income), data_cdi)</a>
+<a class="sourceLine" id="cb11-4" title="4">lm_summary &lt;-<span class="st"> </span><span class="kw">summary</span>(lm_fit)</a>
+<a class="sourceLine" id="cb11-5" title="5">lm_summary</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = log(consumption) ~ log(income), data = data_cdi)
+## 
+## Residuals:
+##       Min        1Q    Median        3Q       Max 
+## -0.004128 -0.001829 -0.000358  0.000542  0.007187 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  -0.0411     0.3661   -0.11     0.91    
+## log(income)   0.9871     0.1440    6.86 0.000044 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.00352 on 10 degrees of freedom
+## Multiple R-squared:  0.825,  Adjusted R-squared:  0.807 
+## F-statistic:   47 on 1 and 10 DF,  p-value: 0.0000443</code></pre>
+<p>Is the slope estimate no different than 1? That is, is the elasticity of consumption with respect to disposable income unitary so that a 10% change in income will probably produce a 10% change in consumption?</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co">## H_0: \beta_1 = 1 &lt;=&gt; \beta_1 - 1 = 0</span></a>
+<a class="sourceLine" id="cb13-2" title="2">b_<span class="dv">1</span> &lt;-<span class="st"> </span>lm_fit<span class="op">$</span>coefficients[<span class="dv">2</span>] <span class="co">## extract slope estimate</span></a>
+<a class="sourceLine" id="cb13-3" title="3">s_b1 &lt;-<span class="st"> </span><span class="kw">coef</span>(lm_summary)[,<span class="dv">2</span>][<span class="dv">2</span>]  <span class="co">## extract slope estimate standard error</span></a>
+<a class="sourceLine" id="cb13-4" title="4">t_score &lt;-<span class="st"> </span>(b_<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="dv">1</span>) <span class="op">/</span><span class="st"> </span>s_b1</a>
+<a class="sourceLine" id="cb13-5" title="5">pr_t &lt;-<span class="st"> </span><span class="dv">1</span><span class="op">-</span><span class="kw">pt</span>(t_score,<span class="kw">nrow</span>(data_cdi)<span class="op">-</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb13-6" title="6">t_score</a></code></pre></div>
+<pre><code>## log(income) 
+##     -0.0894</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">ifelse</span>(pr_t <span class="op">&gt;</span><span class="st"> </span><span class="fl">0.01</span>, <span class="st">&quot;Accept $H_0: </span><span class="ch">\b</span><span class="st">eta_1 = 1$&quot;</span>, <span class="st">&quot;Reject $H_0: </span><span class="ch">\b</span><span class="st">eta_1 </span><span class="ch">\n</span><span class="st">eq 1$&quot;</span>)</a></code></pre></div>
+<pre><code>##                 log(income) 
+## &quot;Accept $H_0: \beta_1 = 1$&quot;</code></pre>
+<p>Yes, a 10% change in income will probably produce a 10% in consumption in this sample.</p>
+</div>
+</div>
+<div id="references" class="section level2">
+<h2><span class="header-section-number">14.22</span> References</h2>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="more-inference-hypothesis-testing.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="quantile-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["book-stat-thinking.pdf", "book-stat-thinking.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

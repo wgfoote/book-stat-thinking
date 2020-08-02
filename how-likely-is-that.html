@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 11 How likely is that? | Statistical Thinking</title>
+  <meta name="description" content="Statistical reasoning from an elementary point of view" />
+  <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 11 How likely is that? | Statistical Thinking" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Statistical reasoning from an elementary point of view" />
+  <meta name="github-repo" content="wgfoote/book-stat-thinking" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 11 How likely is that? | Statistical Thinking" />
+  
+  <meta name="twitter:description" content="Statistical reasoning from an elementary point of view" />
+  
+
+<meta name="author" content="Bill Foote" />
+
+
+<meta name="date" content="2020-08-01" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="poisson-distribution.html"/>
+<link rel="next" href="confidence-intervals.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<link href="libs/vis-4.20.1/vis.css" rel="stylesheet" />
+<script src="libs/vis-4.20.1/vis.min.js"></script>
+<script src="libs/visNetwork-binding-2.0.9/visNetwork.js"></script>
+<link href="libs/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<script src="libs/plotly-binding-4.9.2/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<script src="libs/viz-0.3/viz.js"></script>
+<link href="libs/DiagrammeR-styles-0.2/styles.css" rel="stylesheet" />
+<script src="libs/grViz-binding-1.0.1/grViz.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Statistical Thinking</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preliminaries</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#the-basic-problem"><i class="fa fa-check"></i><b>1.1</b> The basic problem</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#analytics"><i class="fa fa-check"></i><b>1.2</b> Analytics</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#readiness-for-statistical-thinking"><i class="fa fa-check"></i><b>1.3</b> Readiness for statistical thinking</a><ul>
+<li class="chapter" data-level="1.3.1" data-path="index.html"><a href="index.html#solve-this-riddle"><i class="fa fa-check"></i><b>1.3.1</b> Solve this riddle</a></li>
+<li class="chapter" data-level="1.3.2" data-path="index.html"><a href="index.html#join-these-sets"><i class="fa fa-check"></i><b>1.3.2</b> Join these sets</a></li>
+<li class="chapter" data-level="1.3.3" data-path="index.html"><a href="index.html#partition-this-board"><i class="fa fa-check"></i><b>1.3.3</b> Partition this board</a></li>
+<li class="chapter" data-level="1.3.4" data-path="index.html"><a href="index.html#calculate-this-expression"><i class="fa fa-check"></i><b>1.3.4</b> Calculate this expression</a></li>
+<li class="chapter" data-level="1.3.5" data-path="index.html"><a href="index.html#solve-this-equation"><i class="fa fa-check"></i><b>1.3.5</b> Solve this equation</a></li>
+<li class="chapter" data-level="1.3.6" data-path="index.html"><a href="index.html#summation-calculations"><i class="fa fa-check"></i><b>1.3.6</b> Summation calculations</a></li>
+<li class="chapter" data-level="1.3.7" data-path="index.html"><a href="index.html#weighted-average"><i class="fa fa-check"></i><b>1.3.7</b> Weighted average</a></li>
+<li class="chapter" data-level="1.3.8" data-path="index.html"><a href="index.html#linear-coefficients"><i class="fa fa-check"></i><b>1.3.8</b> Linear coefficients</a></li>
+<li class="chapter" data-level="1.3.9" data-path="index.html"><a href="index.html#linear-simultaneous-equations"><i class="fa fa-check"></i><b>1.3.9</b> Linear simultaneous equations</a></li>
+<li class="chapter" data-level="1.3.10" data-path="index.html"><a href="index.html#elasticity-a-little-light-calculus"><i class="fa fa-check"></i><b>1.3.10</b> Elasticity: a little light calculus</a></li>
+<li class="chapter" data-level="1.3.11" data-path="index.html"><a href="index.html#area-under-a-curve"><i class="fa fa-check"></i><b>1.3.11</b> Area under a curve</a></li>
+<li class="chapter" data-level="1.3.12" data-path="index.html"><a href="index.html#next-steps"><i class="fa fa-check"></i><b>1.3.12</b> Next steps?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#chapter-outline"><i class="fa fa-check"></i><b>1.4</b> Chapter outline</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html"><i class="fa fa-check"></i><b>2</b> Statistical Reasoning</a><ul>
+<li class="chapter" data-level="2.1" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#welcome-to-statistical-reasoning"><i class="fa fa-check"></i><b>2.1</b> Welcome to Statistical Reasoning</a></li>
+<li class="chapter" data-level="2.2" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#why-do-we-reason-statistically"><i class="fa fa-check"></i><b>2.2</b> Why do we reason statistically?</a></li>
+<li class="chapter" data-level="2.3" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#what-is-statistical-reasoning"><i class="fa fa-check"></i><b>2.3</b> What is statistical reasoning?</a></li>
+<li class="chapter" data-level="2.4" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#lets-learn-some-more-from-this-example"><i class="fa fa-check"></i><b>2.4</b> Let’s learn some more from this example:</a><ul>
+<li class="chapter" data-level="2.4.1" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#why"><i class="fa fa-check"></i><b>2.4.1</b> Why?</a></li>
+</ul></li>
+<li class="chapter" data-level="2.5" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#digging-deeper"><i class="fa fa-check"></i><b>2.5</b> Digging deeper</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#learn-by-doing-this"><i class="fa fa-check"></i><b>2.5.1</b> Learn by doing this</a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#what-is-the-conceptual-framework-of-statistical-reasoning"><i class="fa fa-check"></i><b>2.6</b> What is the conceptual framework of statistical reasoning?</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#learn-by-doing"><i class="fa fa-check"></i><b>2.6.1</b> Learn by doing</a></li>
+</ul></li>
+<li class="chapter" data-level="2.7" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#infer"><i class="fa fa-check"></i><b>2.7</b> Infer</a><ul>
+<li class="chapter" data-level="2.7.1" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#deductive-reasoning-conclusion-guaranteed"><i class="fa fa-check"></i><b>2.7.1</b> Deductive reasoning: conclusion guaranteed</a></li>
+<li class="chapter" data-level="2.7.2" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#inductive-reasoning-comclusion-not-guaranteed"><i class="fa fa-check"></i><b>2.7.2</b> Inductive reasoning: comclusion not guaranteed</a></li>
+<li class="chapter" data-level="2.7.3" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#abductive-reasoning-taking-your-best-shot"><i class="fa fa-check"></i><b>2.7.3</b> Abductive reasoning: taking your best shot</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#critical-thinking"><i class="fa fa-check"></i><b>2.8</b> Critical thinking</a></li>
+<li class="chapter" data-level="2.9" data-path="statistical-reasoning.html"><a href="statistical-reasoning.html#try-this"><i class="fa fa-check"></i><b>2.9</b> Try this</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html"><i class="fa fa-check"></i><b>3</b> The many faces of data</a><ul>
+<li class="chapter" data-level="3.1" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#learning-outomes"><i class="fa fa-check"></i><b>3.1</b> Learning outomes</a></li>
+<li class="chapter" data-level="3.2" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#march-on"><i class="fa fa-check"></i><b>3.2</b> March on</a></li>
+<li class="chapter" data-level="3.3" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#air-pollution-and-birth-outcomes"><i class="fa fa-check"></i><b>3.3</b> Air pollution and birth outcomes</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#classifying-data-types"><i class="fa fa-check"></i><b>3.3.1</b> Classifying data types</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#something-a-bit-more-complicated"><i class="fa fa-check"></i><b>3.4</b> Something a bit more complicated</a></li>
+<li class="chapter" data-level="3.5" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#what-have-we-learned"><i class="fa fa-check"></i><b>3.5</b> What have we learned?</a></li>
+<li class="chapter" data-level="3.6" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#review-these-scenarios"><i class="fa fa-check"></i><b>3.6</b> Review these scenarios</a></li>
+<li class="chapter" data-level="3.7" data-path="the-many-faces-of-data.html"><a href="the-many-faces-of-data.html#try-this-1"><i class="fa fa-check"></i><b>3.7</b> Try this</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html"><i class="fa fa-check"></i><b>4</b> First Steps in Exploring Data</a><ul>
+<li class="chapter" data-level="4.1" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#learning-objectives"><i class="fa fa-check"></i><b>4.1</b> Learning objectives</a></li>
+<li class="chapter" data-level="4.2" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#business-context"><i class="fa fa-check"></i><b>4.2</b> Business context</a></li>
+<li class="chapter" data-level="4.3" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#bullets"><i class="fa fa-check"></i><b>4.3</b> Bullets</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#what-did-we-do"><i class="fa fa-check"></i><b>4.3.1</b> What did we do?</a></li>
+<li class="chapter" data-level="4.3.2" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#what-can-we-say"><i class="fa fa-check"></i><b>4.3.2</b> What can we say?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#incidents-and-accidents"><i class="fa fa-check"></i><b>4.4</b> Incidents and accidents</a></li>
+<li class="chapter" data-level="4.5" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#where-do-we-go-from-here"><i class="fa fa-check"></i><b>4.5</b> Where do we go from here?</a></li>
+<li class="chapter" data-level="4.6" data-path="first-steps-in-exploring-data.html"><a href="first-steps-in-exploring-data.html#resources"><i class="fa fa-check"></i><b>4.6</b> Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="tendency.html"><a href="tendency.html"><i class="fa fa-check"></i><b>5</b> Tendency</a><ul>
+<li class="chapter" data-level="5.1" data-path="tendency.html"><a href="tendency.html#learning-outcomes"><i class="fa fa-check"></i><b>5.1</b> Learning outcomes</a></li>
+<li class="chapter" data-level="5.2" data-path="tendency.html"><a href="tendency.html#the-best-we-have"><i class="fa fa-check"></i><b>5.2</b> The best we have</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="tendency.html"><a href="tendency.html#square-those-errors"><i class="fa fa-check"></i><b>5.2.1</b> Square those errors</a></li>
+<li class="chapter" data-level="5.2.2" data-path="tendency.html"><a href="tendency.html#absolutely"><i class="fa fa-check"></i><b>5.2.2</b> Absolutely!</a></li>
+<li class="chapter" data-level="5.2.3" data-path="tendency.html"><a href="tendency.html#quantiles-anyone"><i class="fa fa-check"></i><b>5.2.3</b> Quantiles anyone?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="tendency.html"><a href="tendency.html#procedures"><i class="fa fa-check"></i><b>5.3</b> Procedures</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="tendency.html"><a href="tendency.html#mean"><i class="fa fa-check"></i><b>5.3.1</b> Mean</a></li>
+<li class="chapter" data-level="5.3.2" data-path="tendency.html"><a href="tendency.html#median"><i class="fa fa-check"></i><b>5.3.2</b> Median</a></li>
+<li class="chapter" data-level="5.3.3" data-path="tendency.html"><a href="tendency.html#mode"><i class="fa fa-check"></i><b>5.3.3</b> Mode</a></li>
+<li class="chapter" data-level="5.3.4" data-path="tendency.html"><a href="tendency.html#percentile-and-quantile"><i class="fa fa-check"></i><b>5.3.4</b> Percentile and quantile</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="tendency.html"><a href="tendency.html#always-problems"><i class="fa fa-check"></i><b>5.4</b> Always problems</a></li>
+<li class="chapter" data-level="5.5" data-path="tendency.html"><a href="tendency.html#visualizing-with-tukeys-box"><i class="fa fa-check"></i><b>5.5</b> Visualizing with Tukey’s box</a></li>
+<li class="chapter" data-level="5.6" data-path="tendency.html"><a href="tendency.html#what-have-we-gotten-to-so-far"><i class="fa fa-check"></i><b>5.6</b> What have we gotten to so far?</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="deviation.html"><a href="deviation.html"><i class="fa fa-check"></i><b>6</b> Deviation</a><ul>
+<li class="chapter" data-level="6.1" data-path="deviation.html"><a href="deviation.html#learning-outcomes-1"><i class="fa fa-check"></i><b>6.1</b> Learning outcomes</a></li>
+<li class="chapter" data-level="6.2" data-path="deviation.html"><a href="deviation.html#rev-up-the-deuce"><i class="fa fa-check"></i><b>6.2</b> Rev up the deuce</a></li>
+<li class="chapter" data-level="6.3" data-path="deviation.html"><a href="deviation.html#blinded-by-the-light"><i class="fa fa-check"></i><b>6.3</b> Blinded by the light</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="deviation.html"><a href="deviation.html#whats-a-sample-again"><i class="fa fa-check"></i><b>6.3.1</b> What’s a sample? (again)</a></li>
+<li class="chapter" data-level="6.3.2" data-path="deviation.html"><a href="deviation.html#standard-deviation"><i class="fa fa-check"></i><b>6.3.2</b> 1. Standard deviation</a></li>
+<li class="chapter" data-level="6.3.3" data-path="deviation.html"><a href="deviation.html#robust-measures"><i class="fa fa-check"></i><b>6.3.3</b> 2. Robust measures</a></li>
+<li class="chapter" data-level="6.3.4" data-path="deviation.html"><a href="deviation.html#correlation"><i class="fa fa-check"></i><b>6.3.4</b> 3. Correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="deviation.html"><a href="deviation.html#the-tails-have-it"><i class="fa fa-check"></i><b>6.4</b> The tails have it!</a></li>
+<li class="chapter" data-level="6.5" data-path="deviation.html"><a href="deviation.html#how-can-we-use-all-of-this"><i class="fa fa-check"></i><b>6.5</b> How can we use all of this?</a></li>
+<li class="chapter" data-level="6.6" data-path="deviation.html"><a href="deviation.html#problems-always-problems"><i class="fa fa-check"></i><b>6.6</b> Problems, always problems</a></li>
+<li class="chapter" data-level="6.7" data-path="deviation.html"><a href="deviation.html#what-have-we-learned-1"><i class="fa fa-check"></i><b>6.7</b> What have we learned?</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="binomial-distribution.html"><a href="binomial-distribution.html"><i class="fa fa-check"></i><b>7</b> Binomial Distribution</a><ul>
+<li class="chapter" data-level="7.1" data-path="binomial-distribution.html"><a href="binomial-distribution.html#what-is-a-probability-distribution"><i class="fa fa-check"></i><b>7.1</b> What is a probability distribution?</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="binomial-distribution.html"><a href="binomial-distribution.html#discrete-or-continuous"><i class="fa fa-check"></i><b>7.1.1</b> Discrete or continuous?</a></li>
+<li class="chapter" data-level="7.1.2" data-path="binomial-distribution.html"><a href="binomial-distribution.html#examples-of-distributions"><i class="fa fa-check"></i><b>7.1.2</b> Examples of distributions</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="imagine-this.html"><a href="imagine-this.html"><i class="fa fa-check"></i><b>8</b> Imagine this</a></li>
+<li class="chapter" data-level="9" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html"><i class="fa fa-check"></i><b>9</b> What’s a binomial?</a><ul>
+<li class="chapter" data-level="9.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#then-there-were-two"><i class="fa fa-check"></i><b>9.1</b> Then there were two</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#how-often"><i class="fa fa-check"></i><b>9.1.1</b> How often?</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#being-binomial"><i class="fa fa-check"></i><b>9.2</b> Being binomial</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#consumer-goods-r-us"><i class="fa fa-check"></i><b>9.2.1</b> Consumer goods ‘r’ us</a></li>
+<li class="chapter" data-level="9.2.2" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#whats-a-binomial-1"><i class="fa fa-check"></i><b>9.2.2</b> What’s a binomial?</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#whats-a-combination"><i class="fa fa-check"></i><b>9.3</b> What’s a combination?</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#for-a-simple-example"><i class="fa fa-check"></i><b>9.3.1</b> For a simple example</a></li>
+<li class="chapter" data-level="9.3.2" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#we-have-to-start-with-permutation-first"><i class="fa fa-check"></i><b>9.3.2</b> We have to start with permutation first</a></li>
+<li class="chapter" data-level="9.3.3" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#start-with-a-abcde-letters-in-a-text-to-your-friend."><i class="fa fa-check"></i><b>9.3.3</b> Start with <span class="math inline">\(A = \{a,b,c,d,e\}\)</span> letters in a text to your friend.</a></li>
+<li class="chapter" data-level="9.3.4" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#find-the-number-of-3-letter-words-you-can-form-from-a-list-of-5-letters."><i class="fa fa-check"></i><b>9.3.4</b> Find the number of 3 letter words you can form from a list of 5 letters.</a></li>
+<li class="chapter" data-level="9.3.5" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#what-about-combinations"><i class="fa fa-check"></i><b>9.3.5</b> What about combinations?</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#combinations-from-permutations"><i class="fa fa-check"></i><b>9.4</b> Combinations from permutations</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#try-these-combinations-and-permutations"><i class="fa fa-check"></i><b>9.4.1</b> Try these: combinations and permutations</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#so-how-do-we-use-the-binomial-process"><i class="fa fa-check"></i><b>9.5</b> So how do we use the binomial process?</a></li>
+<li class="chapter" data-level="9.6" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#try-this-binomial-distribution"><i class="fa fa-check"></i><b>9.6</b> Try this: binomial distribution</a><ul>
+<li class="chapter" data-level="9.6.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#try-another"><i class="fa fa-check"></i><b>9.6.1</b> Try another</a></li>
+</ul></li>
+<li class="chapter" data-level="9.7" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#what-does-a-graph-of-the-binomial-look-like"><i class="fa fa-check"></i><b>9.7</b> What does a graph of the binomial look like?</a></li>
+<li class="chapter" data-level="9.8" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#binomial-statistics"><i class="fa fa-check"></i><b>9.8</b> Binomial statistics</a><ul>
+<li class="chapter" data-level="9.8.1" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#try-this-2"><i class="fa fa-check"></i><b>9.8.1</b> Try this</a></li>
+</ul></li>
+<li class="chapter" data-level="9.9" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#short-exercises"><i class="fa fa-check"></i><b>9.9</b> Short exercises</a></li>
+<li class="chapter" data-level="9.10" data-path="whats-a-binomial.html"><a href="whats-a-binomial.html#binomial-barrels"><i class="fa fa-check"></i><b>9.10</b> Binomial barrels</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="poisson-distribution.html"><a href="poisson-distribution.html"><i class="fa fa-check"></i><b>10</b> Poisson Distribution</a><ul>
+<li class="chapter" data-level="10.1" data-path="poisson-distribution.html"><a href="poisson-distribution.html#imagine-this-1"><i class="fa fa-check"></i><b>10.1</b> Imagine this</a></li>
+<li class="chapter" data-level="10.2" data-path="poisson-distribution.html"><a href="poisson-distribution.html#lets-calculate"><i class="fa fa-check"></i><b>10.2</b> Let’s calculate</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="poisson-distribution.html"><a href="poisson-distribution.html#try-this-3"><i class="fa fa-check"></i><b>10.2.1</b> Try this</a></li>
+<li class="chapter" data-level="10.2.2" data-path="poisson-distribution.html"><a href="poisson-distribution.html#results"><i class="fa fa-check"></i><b>10.2.2</b> Results</a></li>
+</ul></li>
+<li class="chapter" data-level="10.3" data-path="poisson-distribution.html"><a href="poisson-distribution.html#some-mercifully-short-exercises"><i class="fa fa-check"></i><b>10.3</b> Some (mercifully) short exercises</a><ul>
+<li class="chapter" data-level="10.3.1" data-path="poisson-distribution.html"><a href="poisson-distribution.html#not-so-short-exercises"><i class="fa fa-check"></i><b>10.3.1</b> Not so short exercises</a></li>
+<li class="chapter" data-level="10.3.2" data-path="poisson-distribution.html"><a href="poisson-distribution.html#answers"><i class="fa fa-check"></i><b>10.3.2</b> Answers</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html"><i class="fa fa-check"></i><b>11</b> How likely is that?</a><ul>
+<li class="chapter" data-level="11.1" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#learning-outcomes-2"><i class="fa fa-check"></i><b>11.1</b> Learning outcomes</a></li>
+<li class="chapter" data-level="11.2" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#invitation-to-a-formal"><i class="fa fa-check"></i><b>11.2</b> Invitation to a formal</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#a-bit-of-english"><i class="fa fa-check"></i><b>11.2.1</b> A bit of English</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#dress-down-a-bit"><i class="fa fa-check"></i><b>11.3</b> Dress down a bit</a></li>
+<li class="chapter" data-level="11.4" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#try-another-1"><i class="fa fa-check"></i><b>11.4</b> Try another</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#what-does-the-event-space-look-like"><i class="fa fa-check"></i><b>11.4.1</b> What does the event space look like?</a></li>
+<li class="chapter" data-level="11.4.2" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#what-is"><i class="fa fa-check"></i><b>11.4.2</b> What is…</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#law-of-conditional-probability-bayes"><i class="fa fa-check"></i><b>11.5</b> Law of Conditional Probability (Bayes)</a></li>
+<li class="chapter" data-level="11.6" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#practice-1"><i class="fa fa-check"></i><b>11.6</b> Practice 1</a></li>
+<li class="chapter" data-level="11.7" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#practice-2"><i class="fa fa-check"></i><b>11.7</b> Practice 2</a></li>
+<li class="chapter" data-level="11.8" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#nothing-is-random"><i class="fa fa-check"></i><b>11.8</b> Nothing is random!</a><ul>
+<li class="chapter" data-level="11.8.1" data-path="how-likely-is-that.html"><a href="how-likely-is-that.html#suppose-20-of-the-people-in-a-city-prefer-pepsi-cola-as-their-soft-drink-of-choice."><i class="fa fa-check"></i><b>11.8.1</b> Suppose 20% of the people in a city prefer Pepsi-Cola as their soft drink of choice.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="confidence-intervals.html"><a href="confidence-intervals.html"><i class="fa fa-check"></i><b>12</b> Confidence Intervals</a><ul>
+<li class="chapter" data-level="12.1" data-path="confidence-intervals.html"><a href="confidence-intervals.html#imagine-this-2"><i class="fa fa-check"></i><b>12.1</b> Imagine this…</a></li>
+<li class="chapter" data-level="12.2" data-path="confidence-intervals.html"><a href="confidence-intervals.html#objectives"><i class="fa fa-check"></i><b>12.2</b> Objectives</a></li>
+<li class="chapter" data-level="12.3" data-path="confidence-intervals.html"><a href="confidence-intervals.html#try-this-4"><i class="fa fa-check"></i><b>12.3</b> Try this</a></li>
+<li class="chapter" data-level="12.4" data-path="confidence-intervals.html"><a href="confidence-intervals.html#what-about-the-sample-standard-deviation"><i class="fa fa-check"></i><b>12.4</b> What about the sample standard deviation?</a></li>
+<li class="chapter" data-level="12.5" data-path="confidence-intervals.html"><a href="confidence-intervals.html#explore-a-bit-further"><i class="fa fa-check"></i><b>12.5</b> Explore a bit further</a></li>
+<li class="chapter" data-level="12.6" data-path="confidence-intervals.html"><a href="confidence-intervals.html#confidence-interval-1-known-population-standard-deviation"><i class="fa fa-check"></i><b>12.6</b> Confidence interval ##1: known population standard deviation</a></li>
+<li class="chapter" data-level="12.7" data-path="confidence-intervals.html"><a href="confidence-intervals.html#our-procedure"><i class="fa fa-check"></i><b>12.7</b> Our procedure</a></li>
+<li class="chapter" data-level="12.8" data-path="confidence-intervals.html"><a href="confidence-intervals.html#on-to-the-unknown"><i class="fa fa-check"></i><b>12.8</b> On to the unknown</a></li>
+<li class="chapter" data-level="12.9" data-path="confidence-intervals.html"><a href="confidence-intervals.html#by-the-way-who-is-student"><i class="fa fa-check"></i><b>12.9</b> By the way, who is Student?</a></li>
+<li class="chapter" data-level="12.10" data-path="confidence-intervals.html"><a href="confidence-intervals.html#our-procedure-1"><i class="fa fa-check"></i><b>12.10</b> Our procedure</a></li>
+<li class="chapter" data-level="12.11" data-path="confidence-intervals.html"><a href="confidence-intervals.html#exercises"><i class="fa fa-check"></i><b>12.11</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html"><i class="fa fa-check"></i><b>13</b> More Inference: Hypothesis Testing</a><ul>
+<li class="chapter" data-level="13.1" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#imagine-this-3"><i class="fa fa-check"></i><b>13.1</b> Imagine this</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#two-errors-are-possible"><i class="fa fa-check"></i><b>13.1.1</b> Two errors are possible</a></li>
+<li class="chapter" data-level="13.1.2" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#control-is-probability"><i class="fa fa-check"></i><b>13.1.2</b> Control is probability</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#on-to-the-unknown-1"><i class="fa fa-check"></i><b>13.2</b> On to the unknown</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#by-the-way-who-is-student-1"><i class="fa fa-check"></i><b>13.2.1</b> By the way, who is Student?</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#on-with-our-story"><i class="fa fa-check"></i><b>13.3</b> On with our story…</a></li>
+<li class="chapter" data-level="13.4" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#what-about-two-shifts"><i class="fa fa-check"></i><b>13.4</b> What about two shifts?</a></li>
+<li class="chapter" data-level="13.5" data-path="more-inference-hypothesis-testing.html"><a href="more-inference-hypothesis-testing.html#exercises-1"><i class="fa fa-check"></i><b>13.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html"><i class="fa fa-check"></i><b>14</b> Simple Linear Regression</a><ul>
+<li class="chapter" data-level="14.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#the-perfect-relationship"><i class="fa fa-check"></i><b>14.1</b> The perfect relationship</a></li>
+<li class="chapter" data-level="14.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#linear-regression"><i class="fa fa-check"></i><b>14.2</b> Linear regression</a></li>
+<li class="chapter" data-level="14.3" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#ordinary-least-squares"><i class="fa fa-check"></i><b>14.3</b> Ordinary least squares</a></li>
+<li class="chapter" data-level="14.4" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#residual-interests"><i class="fa fa-check"></i><b>14.4</b> Residual interests</a></li>
+<li class="chapter" data-level="14.5" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#a-dash-of-calculus"><i class="fa fa-check"></i><b>14.5</b> A dash of calculus</a></li>
+<li class="chapter" data-level="14.6" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#now-for-the-residuals"><i class="fa fa-check"></i><b>14.6</b> Now for the residuals</a></li>
+<li class="chapter" data-level="14.7" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#have-some-confidence"><i class="fa fa-check"></i><b>14.7</b> Have some confidence</a></li>
+<li class="chapter" data-level="14.8" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#central-to-our-discussion"><i class="fa fa-check"></i><b>14.8</b> Central to our discussion</a></li>
+<li class="chapter" data-level="14.9" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#on-to-the-unknown-2"><i class="fa fa-check"></i><b>14.9</b> On to the unknown</a></li>
+<li class="chapter" data-level="14.10" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#by-the-way-who-is-student-2"><i class="fa fa-check"></i><b>14.10</b> By the way, who is Student?</a></li>
+<li class="chapter" data-level="14.11" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#in-all-confidence-forecasting-for-fun-and"><i class="fa fa-check"></i><b>14.11</b> In all confidence: forecasting for fun and …</a></li>
+<li class="chapter" data-level="14.12" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#how-confident-are-we-in-our-estimates"><i class="fa fa-check"></i><b>14.12</b> How confident are we in our estimates?</a></li>
+<li class="chapter" data-level="14.13" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#next-lets-hypothesize"><i class="fa fa-check"></i><b>14.13</b> Next let’s hypothesize</a></li>
+<li class="chapter" data-level="14.14" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#yet-another-school-of-thought"><i class="fa fa-check"></i><b>14.14</b> Yet another school of thought</a></li>
+<li class="chapter" data-level="14.15" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#summary-of-simple-linear-regression-estimation"><i class="fa fa-check"></i><b>14.15</b> Summary of simple linear regression estimation</a></li>
+<li class="chapter" data-level="14.16" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#how-good-a-fit"><i class="fa fa-check"></i><b>14.16</b> How good a fit?</a></li>
+<li class="chapter" data-level="14.17" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#lets-build-more-statistics"><i class="fa fa-check"></i><b>14.17</b> Let’s build more statistics!</a></li>
+<li class="chapter" data-level="14.18" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#analyze-this"><i class="fa fa-check"></i><b>14.18</b> Analyze this …</a></li>
+<li class="chapter" data-level="14.19" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#two-samples-same-population"><i class="fa fa-check"></i><b>14.19</b> Two samples – same population?</a></li>
+<li class="chapter" data-level="14.20" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#anything-abnormal"><i class="fa fa-check"></i><b>14.20</b> Anything abnormal?</a></li>
+<li class="chapter" data-level="14.21" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#exercises-2"><i class="fa fa-check"></i><b>14.21</b> Exercises</a><ul>
+<li class="chapter" data-level="14.21.1" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#us-house-of-representatives-seats-and-unemployment"><i class="fa fa-check"></i><b>14.21.1</b> US House of Representatives seats and unemployment</a></li>
+<li class="chapter" data-level="14.21.2" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#peruvian-anchovies"><i class="fa fa-check"></i><b>14.21.2</b> Peruvian anchovies</a></li>
+<li class="chapter" data-level="14.21.3" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#bronx-corn"><i class="fa fa-check"></i><b>14.21.3</b> Bronx corn</a></li>
+<li class="chapter" data-level="14.21.4" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#consumption-and-disposable-income"><i class="fa fa-check"></i><b>14.21.4</b> Consumption and disposable income</a></li>
+</ul></li>
+<li class="chapter" data-level="14.22" data-path="simple-linear-regression.html"><a href="simple-linear-regression.html#references"><i class="fa fa-check"></i><b>14.22</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="quantile-regression.html"><a href="quantile-regression.html"><i class="fa fa-check"></i><b>15</b> Quantile regression</a><ul>
+<li class="chapter" data-level="15.1" data-path="quantile-regression.html"><a href="quantile-regression.html#what-is-it"><i class="fa fa-check"></i><b>15.1</b> What is it?</a></li>
+<li class="chapter" data-level="15.2" data-path="quantile-regression.html"><a href="quantile-regression.html#an-example"><i class="fa fa-check"></i><b>15.2</b> An example</a></li>
+<li class="chapter" data-level="15.3" data-path="quantile-regression.html"><a href="quantile-regression.html#even-in-ggplot2"><i class="fa fa-check"></i><b>15.3</b> Even in ggplot2</a></li>
+<li class="chapter" data-level="15.4" data-path="quantile-regression.html"><a href="quantile-regression.html#interpretations"><i class="fa fa-check"></i><b>15.4</b> Interpretations</a></li>
+<li class="chapter" data-level="15.5" data-path="quantile-regression.html"><a href="quantile-regression.html#exercises-3"><i class="fa fa-check"></i><b>15.5</b> Exercises</a><ul>
+<li class="chapter" data-level="15.5.1" data-path="quantile-regression.html"><a href="quantile-regression.html#us-house-of-representatives-seats-and-unemployment-1"><i class="fa fa-check"></i><b>15.5.1</b> US House of Representatives seats and unemployment</a></li>
+<li class="chapter" data-level="15.5.2" data-path="quantile-regression.html"><a href="quantile-regression.html#peruvian-anchovies-1"><i class="fa fa-check"></i><b>15.5.2</b> Peruvian anchovies</a></li>
+<li class="chapter" data-level="15.5.3" data-path="quantile-regression.html"><a href="quantile-regression.html#bronx-corn-1"><i class="fa fa-check"></i><b>15.5.3</b> Bronx corn</a></li>
+<li class="chapter" data-level="15.5.4" data-path="quantile-regression.html"><a href="quantile-regression.html#consumption-and-disposable-income-1"><i class="fa fa-check"></i><b>15.5.4</b> Consumption and disposable income</a></li>
+</ul></li>
+<li class="chapter" data-level="15.6" data-path="quantile-regression.html"><a href="quantile-regression.html#references-1"><i class="fa fa-check"></i><b>15.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html"><i class="fa fa-check"></i><b>16</b> Multiple Linear Regression</a><ul>
+<li class="chapter" data-level="16.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#the-more-perfect-relationship"><i class="fa fa-check"></i><b>16.1</b> The more perfect relationship</a></li>
+<li class="chapter" data-level="16.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#arrays-and-you"><i class="fa fa-check"></i><b>16.2</b> Arrays and You</a><ul>
+<li class="chapter" data-level="16.2.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#running-a-regression"><i class="fa fa-check"></i><b>16.2.1</b> Running a regression</a></li>
+<li class="chapter" data-level="16.2.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#more-about-residuals"><i class="fa fa-check"></i><b>16.2.2</b> More about residuals</a></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#more-array-work"><i class="fa fa-check"></i><b>16.3</b> More Array Work</a></li>
+<li class="chapter" data-level="16.4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#exercising-the-model"><i class="fa fa-check"></i><b>16.4</b> Exercising the model</a><ul>
+<li class="chapter" data-level="16.4.1" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#exercise-1-housing-market-determinants"><i class="fa fa-check"></i><b>16.4.1</b> Exercise 1: housing market determinants</a></li>
+<li class="chapter" data-level="16.4.2" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#exercise-2-risk-driver-model-using-regression-analysis"><i class="fa fa-check"></i><b>16.4.2</b> Exercise 2: risk driver model using regression analysis</a></li>
+<li class="chapter" data-level="16.4.3" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#exercise-3-commercial-loan-projection-using-regression"><i class="fa fa-check"></i><b>16.4.3</b> Exercise 3: commercial loan projection using regression</a></li>
+<li class="chapter" data-level="16.4.4" data-path="multiple-linear-regression.html"><a href="multiple-linear-regression.html#work-flow"><i class="fa fa-check"></i><b>16.4.4</b> Work Flow</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="binary-regression.html"><a href="binary-regression.html"><i class="fa fa-check"></i><b>17</b> Binary Regression</a><ul>
+<li class="chapter" data-level="17.1" data-path="binary-regression.html"><a href="binary-regression.html#what-is-binary-risk-analysis"><i class="fa fa-check"></i><b>17.1</b> What is Binary Risk Analysis?</a></li>
+<li class="chapter" data-level="17.2" data-path="binary-regression.html"><a href="binary-regression.html#an-expository-simulation"><i class="fa fa-check"></i><b>17.2</b> An expository simulation</a></li>
+<li class="chapter" data-level="17.3" data-path="binary-regression.html"><a href="binary-regression.html#enter-the-discrete-decision-maker"><i class="fa fa-check"></i><b>17.3</b> Enter the discrete decision maker</a></li>
+<li class="chapter" data-level="17.4" data-path="binary-regression.html"><a href="binary-regression.html#the-odds-are"><i class="fa fa-check"></i><b>17.4</b> The odds are …</a></li>
+<li class="chapter" data-level="17.5" data-path="binary-regression.html"><a href="binary-regression.html#predict-now"><i class="fa fa-check"></i><b>17.5</b> Predict now …</a></li>
+<li class="chapter" data-level="17.6" data-path="binary-regression.html"><a href="binary-regression.html#a-deposit"><i class="fa fa-check"></i><b>17.6</b> A deposit</a></li>
+<li class="chapter" data-level="17.7" data-path="binary-regression.html"><a href="binary-regression.html#references-2"><i class="fa fa-check"></i><b>17.7</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="time-series-analysis.html"><a href="time-series-analysis.html"><i class="fa fa-check"></i><b>18</b> Time Series Analysis</a><ul>
+<li class="chapter" data-level="18.1" data-path="time-series-analysis.html"><a href="time-series-analysis.html#preliminaries-1"><i class="fa fa-check"></i><b>18.1</b> Preliminaries</a></li>
+<li class="chapter" data-level="18.2" data-path="time-series-analysis.html"><a href="time-series-analysis.html#where-do-we-start"><i class="fa fa-check"></i><b>18.2</b> Where do we start?</a></li>
+<li class="chapter" data-level="18.3" data-path="time-series-analysis.html"><a href="time-series-analysis.html#autoregressive-processes"><i class="fa fa-check"></i><b>18.3</b> Autoregressive processes</a></li>
+<li class="chapter" data-level="18.4" data-path="time-series-analysis.html"><a href="time-series-analysis.html#moving-average-processes"><i class="fa fa-check"></i><b>18.4</b> Moving average processes</a></li>
+<li class="chapter" data-level="18.5" data-path="time-series-analysis.html"><a href="time-series-analysis.html#takeaways"><i class="fa fa-check"></i><b>18.5</b> Takeaways</a></li>
+<li class="chapter" data-level="18.6" data-path="time-series-analysis.html"><a href="time-series-analysis.html#references-3"><i class="fa fa-check"></i><b>18.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html"><i class="fa fa-check"></i><b>19</b> Bootstrapping Estimates</a><ul>
+<li class="chapter" data-level="19.1" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#imagine"><i class="fa fa-check"></i><b>19.1</b> Imagine</a></li>
+<li class="chapter" data-level="19.2" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#tools"><i class="fa fa-check"></i><b>19.2</b> Tools</a></li>
+<li class="chapter" data-level="19.3" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#d-p-q-runif"><i class="fa fa-check"></i><b>19.3</b> <code>[d p q r]unif</code></a></li>
+<li class="chapter" data-level="19.4" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#permutations-with-sample"><i class="fa fa-check"></i><b>19.4</b> Permutations with <code>sample()</code></a></li>
+<li class="chapter" data-level="19.5" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#resampling-with-sample"><i class="fa fa-check"></i><b>19.5</b> Resampling with <code>sample()</code></a></li>
+<li class="chapter" data-level="19.6" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#expected-shortfall-test"><i class="fa fa-check"></i><b>19.6</b> Expected shortfall test</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/wgfoote/book-stat-thinking" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Statistical Thinking</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="how-likely-is-that" class="section level1">
+<h1><span class="header-section-number">Chapter 11</span> How likely is that?</h1>
+<div id="learning-outcomes-2" class="section level2">
+<h2><span class="header-section-number">11.1</span> Learning outcomes</h2>
+<p>How likely is it we ask the question, “How likely is that?” Alot! This unit moves our thinking from simply counting how often an event we have sampled occurs to how probable. The move is subtle.</p>
+<ul>
+<li><p>Relative frequency empirically becomes associated with the probability that an event occurs, and</p></li>
+<li><p>Cumulative relative frequency empirically becomes associated with the cumulative probaability that a set of events occurs.</p></li>
+</ul>
+<p>In this unit we will</p>
+<ul>
+<li><p>Define and use sample spaces of events (all of our sampled data) summarized in a cross-tabulation table</p></li>
+<li><p>Calculate the probability that either one event or another might occur</p></li>
+<li><p>Calculate the probability that both one event and another might occur</p></li>
+<li><p>Calculate the probability that an event might occur given that another event might occur</p></li>
+<li><p>Calculate aa revision of a probability given new or different information has arrived</p></li>
+</ul>
+<p>So it is one table and four calculations in this unit. What do you get from this exercise? The ability to use empirical data and query the many possible relationships in that data all summarized by intersections (both - and), unions (either - or), and conditions (one thing given the existence of another). These queries will answer the question: “how likely is that?”</p>
+</div>
+<div id="invitation-to-a-formal" class="section level2">
+<h2><span class="header-section-number">11.2</span> Invitation to a formal</h2>
+<p>Let’s get speicifc about what we are talking:</p>
+<ul>
+<li><p>Sample space <span class="math inline">\(S\)</span>: all possible outcomes of an experiment <span class="math inline">\(E\)</span>
+Example: “Raining two days in a row” <span class="math inline">\(S = \{ (rain, not), (not, rain), (rain, rain), (not, not) \}\)</span></p></li>
+<li><p>Events in a sample sample <span class="math inline">\(F\)</span>: subset of sample space
+Example: “If it rains today, then”" <span class="math inline">\(F = \{ (rain, not), (rain, rain) \}\)</span></p></li>
+<li><p>Measure of probability <span class="math inline">\(P\)</span>: maps <span class="math inline">\(F\)</span> to the real numbers between <span class="math inline">\([0,1]\)</span></p></li>
+</ul>
+<ol style="list-style-type: decimal">
+<li><p><span class="math inline">\(p \in [0,1]\)</span></p></li>
+<li><p>for all events <span class="math inline">\(i \in F\)</span>: <span class="math inline">\(\Sigma_i p_i = 1\)</span></p></li>
+<li><p>the union of any disjoint events <span class="math inline">\(A_j \in F\)</span>: <span class="math inline">\(\cup_i\,Prob(A_j) = \Sigma_i\,Prob(A_j)\)</span></p></li>
+</ol>
+<p>We use these same ideas when we talk about non-overlapping intervals of data, the frequency of the number of observations in an interval, the relative and cumulative relative frequency of the empirical occurence of data in an interval. What we are now adding is how one data stream migh relate to another.</p>
+<p>We can now ask a question like this: “how likely is it that when we see high prices, do we also see high square-ffot lot sizes?”</p>
+<p>Let’s relate our formal concepts to the language we normally use.</p>
+<div id="a-bit-of-english" class="section level3">
+<h3><span class="header-section-number">11.2.1</span> A bit of English</h3>
+<p>Let’s wrap some everyday language around these formal concepts.</p>
+<table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+phrase
+</th>
+<th style="text-align:left;">
+meaning
+</th>
+<th style="text-align:left;">
+math
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(x\)</span> is at least <span class="math inline">\(k\)</span>
+</td>
+<td style="text-align:left;">
+the least <span class="math inline">\(x\)</span> is allowed to be is <span class="math inline">\(k\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(x \geq k\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(x\)</span> is at most <span class="math inline">\(k\)</span>
+</td>
+<td style="text-align:left;">
+the most <span class="math inline">\(x\)</span> is allowed to be is <span class="math inline">\(k\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(x \leq k\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+both <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>
+</td>
+<td style="text-align:left;">
+common elements of <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(x \cap y\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+either <span class="math inline">\(x\)</span> or <span class="math inline">\(y\)</span>
+</td>
+<td style="text-align:left;">
+one, or the other, or both <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(x \cup y\)</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="dress-down-a-bit" class="section level2">
+<h2><span class="header-section-number">11.3</span> Dress down a bit</h2>
+<p>We can use probability to help us anticipate the range of possible outcomes we might experience. For example, in two days will the stock of Johnson and Johnson rise or fall? It turns out it can do both potentially, How likely, and by how much, will that stock price rise (or fall)?</p>
+<p>Suppose the experiment <span class="math inline">\(E\)</span> consists of stock price moves UP (U) and DOWN (D). So on day 1 (tomorrow), the stock price sample space is just <span class="math inline">\(S_1 = \{U, D\}\)</span>, where the subscript stands for day 1, that simple.</p>
+<p>But on day two, the day after tomorrow, the paths get a bit more complicated. If the stock goes up tomorrow, then on the next day the stock might either go up or go down. Thus there are two events we have to account for in two days if the stock price was up the day before <span class="math inline">\(S_2^U = \{UU, UD\}\)</span>, where the superscript helps us to cull only day 1 ups. The same logic will apply if on day one the stock price had gone down. In this case the sequence is <span class="math inline">\(S_2^D = \{DU, DD\}\)</span></p>
+<p>Putting it all together the sample space by the end of day two may be represented by <span class="math inline">\(S_2 = \{UU, UD, DU, DD\}\)</span>.</p>
+<p>just like a toss of a coin. Here the coin is the “market.” Given that the coin is fair and that the coin is tossed in an independent and identical manner, it is reasonable to apply the equally likely model: a 50% chance of a rise or a fall in any given round of flip the coin, or a day in the life of a stock price. But we can also load the coin and be more pessimistic or optimistic about a rise or fall in the price.</p>
+<ol style="list-style-type: decimal">
+<li><p>What is the probability of at least 1 UP tick on day one or two? Looking at the sample space we see three (out of four) elements <span class="math inline">\(\{UU, UD, DU\}\)</span> have at least one UP; thus, Prob(at least 1 UP) = 3/4 = 75%.</p></li>
+<li><p>What is the probability of no UP ticks)? Notice that the event {no UPs} = {at least one UP<span class="math inline">\(\}^c\)</span> = {all DOWN }, so that using the notations <span class="math inline">\(-UP\)</span> for no (anything, in this case UP):</p></li>
+</ol>
+<p><span class="math display">\[
+Prob(-UP) = 1 - Prob(at\,\,least\,\,one\,\,UP)
+\]</span>
+<span class="math display">\[
+= Prob(\{UU\}\cup\{UD\}\cup\{DU\}) = 1 - 3/4 = 1/4.
+\]</span>
+Here we use the language either-or, a union of events. We will use this trick often.</p>
+</div>
+<div id="try-another-1" class="section level2">
+<h2><span class="header-section-number">11.4</span> Try another</h2>
+<p>Suppose the experiment <span class="math inline">\(E\)</span> consists of 92 people some of whom identify with being female (F) or being male (M), some of whom smoke (S) or don’t (N). There are several events in this space that combine with gender and smoking status.</p>
+<div id="what-does-the-event-space-look-like" class="section level3">
+<h3><span class="header-section-number">11.4.1</span> What does the event space look like?</h3>
+<button onclick="showText(&#39;eventspace&#39;)">
+show / hide
+</button>
+<div id="eventspace" style="display:none;">
+<p><br></p>
+</div>
+<p><br></p>
+<p>Here is a table of empirical results from the survey.</p>
+<table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:smokes-table">Table 11.1: </span>Counts: Gender x Smoking
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;color: blue !important;">
+</th>
+<th style="text-align:center;font-weight: bold;color: blue !important;">
+no
+</th>
+<th style="text-align:center;font-weight: bold;color: blue !important;">
+yes
+</th>
+<th style="text-align:center;font-weight: bold;color: blue !important;">
+Sum
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;font-weight: bold;font-weight: bold;color: blue !important;border-right:1px solid;">
+female
+</td>
+<td style="text-align:center;font-weight: bold;">
+27
+</td>
+<td style="text-align:center;font-weight: bold;border-right:1px solid;">
+8
+</td>
+<td style="text-align:center;font-weight: bold;font-weight: bold;color: blue !important;">
+35
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;font-weight: bold;color: blue !important;border-right:1px solid;">
+male
+</td>
+<td style="text-align:center;font-weight: bold;">
+37
+</td>
+<td style="text-align:center;font-weight: bold;border-right:1px solid;">
+20
+</td>
+<td style="text-align:center;font-weight: bold;font-weight: bold;color: blue !important;">
+57
+</td>
+</tr>
+<tr>
+<td style="text-align:left;font-weight: bold;color: blue !important;font-weight: bold;color: blue !important;border-right:1px solid;">
+Sum
+</td>
+<td style="text-align:center;font-weight: bold;color: blue !important;">
+64
+</td>
+<td style="text-align:center;font-weight: bold;color: blue !important;border-right:1px solid;">
+28
+</td>
+<td style="text-align:center;font-weight: bold;color: blue !important;font-weight: bold;color: blue !important;">
+92
+</td>
+</tr>
+</tbody>
+</table>
+<p>We notice the counts are in a bold black font. The row and column sums are in bold blue. We can use this information to answer several questions to enhance our knowledge of what might or might not happen. That knowledge is what we might label <strong>anticipation</strong>, or even <strong>belief</strong>, and if we are really bold, a <strong>forecast</strong> or <strong>prediction</strong>.</p>
+</div>
+<div id="what-is" class="section level3">
+<h3><span class="header-section-number">11.4.2</span> What is…</h3>
+<p>There are several ways we can interpret our results by querying:</p>
+<ol style="list-style-type: decimal">
+<li><p>What is the probability of being both a female and a smoker?</p></li>
+<li><p>What is the probability of either being a female or a smoker?</p></li>
+<li><p>If you are a female, what is the probability of being a smoker?</p></li>
+</ol>
+<p>We can use our table of counts to help us with our inquiries.</p>
+<p>Let’s try question one first. What can we calculate?</p>
+<button onclick="showText(&#39;myDIV1&#39;)">
+show / hide
+</button>
+<div id="myDIV1" style="display:none;">
+<p><br></p>
+<ol style="list-style-type: decimal">
+<li>What is the probability of being both a female (F) and a smoker (S), the yes column?</li>
+</ol>
+<ul>
+<li>Find the percentage of each cell relative to the whole sample (93).</li>
+</ul>
+<p><span class="math display">\[
+Prob(F \cap S) = \frac{n(F\cap S)}{n} = \frac{8}{92} = 8.70\%
+\]</span>
+where <span class="math inline">\(n\)</span> is the whole sample.</p>
+</div>
+<p><br>
+<br></p>
+<p>Let’s use the same idea but twist it a bit into an either-or, or union calculation instead of an intersection to answer question 2. Let’s try it.</p>
+<button onclick="showText(&#39;either-or&#39;)">
+show / hide
+</button>
+<div id="either-or" style="display:none;">
+<p><br></p>
+<ol start="2" style="list-style-type: decimal">
+<li>What is the probability of either being a female or a smoker?</li>
+</ol>
+<p>Find the probability of being a female <span class="math inline">\(Prob(F) = 38.04\%\)</span>.</p>
+<p>Find the probability of being a smoker <span class="math inline">\(Prob(S) = 30.43\%\)</span>.</p>
+<p>Then find the probability of being both a female and a smoker <span class="math inline">\(Prob(F \cap S) = 8.70\%\)</span>, just so we don’t double count anybody.</p>
+<p>Finally,</p>
+<p><span class="math display">\[
+Prob(F\,\,or\,\,S) = Prob(F \cup S) = Prob(F) + Prob(S) - Prob(F \cap S)
+\]</span>
+<span class="math display">\[
+= 38.04\% + 30.43\% - 8.70\% = 59.77\%
+\]</span></p>
+<p>Why?</p>
+<p>We always remember not to double count observations, or events for that matter. This also shows that identifying as a smoker or as a female are not two mutually exclusive events. There are 8 respondents who would agree.</p>
+</div>
+<p><br>
+<br></p>
+<ol start="3" style="list-style-type: decimal">
+<li>If you are a female, what is the probability of being a smoker?</li>
+</ol>
+<p>We focus on smokers only and thus look at the column in the table for yes, a smoker. We use this as the basis (also known as the denominator) for figuring out the probability we seek.</p>
+<p>We again consult our tabulation table. But this time we only look at the counts in the female row at the cell that intersects with smokers, because respondents who identify as females might smoke or not.</p>
+<p>We need this data:</p>
+<ul>
+<li><p>How many females smoke?</p></li>
+<li><p>How many smokers are there in the survey?</p></li>
+</ul>
+<button onclick="showText(&#39;conditional-count&#39;)">
+show / hide
+</button>
+<div id="conditional-count" style="display:none;">
+<p><br></p>
+<p>THe number of smokers who respond as females is the intersection of the number of smokers and the number of females.</p>
+<p><span class="math display">\[
+n(S\cap F) = 8
+\]</span>
+where <span class="math inline">\(n()\)</span> is the number or count of what is in the parentheses. We can read the total number of smokers as the column sum of yes (smokers).</p>
+<p><span class="math display">\[
+n(S) = 28
+\]</span>
+Not so bad, and now we continue to one of the more important concepts, that of conditional probability.</p>
+</div>
+<p><br>
+<br></p>
+<p>We model <span class="math inline">\(Prob(S | F)\)</span> as the probability of seeing a smoker in the survey, among all of the respondents whoa re females. The symbol <span class="math inline">\(|\)</span> is read as <strong>conditional</strong> or <strong>given</strong>, so the <span class="math inline">\(S | F\)</span> means <span class="math inline">\(S\)</span> conditional on <span class="math inline">\(F\)</span> and <span class="math inline">\(S\)</span> given only <span class="math inline">\(F\)</span>. Thus we look at all <span class="math inline">\(F\)</span> observations an filter only <span class="math inline">\(S\)</span> of those observations.</p>
+<p>We would be right if we guessed that <span class="math inline">\(F\)</span> is the independent variable and that <span class="math inline">\(S\)</span> depends on the <span class="math inline">\(F\)</span> part of the sample. In fact one way of looking at our regression model</p>
+<p><span class="math display">\[
+Y = a + bX + e
+\]</span>
+is using the notation that <span class="math inline">\(Y \mid X\)</span>: given <span class="math inline">\(X\)</span> how do we get <span class="math inline">\(Y\)</span>. Here <span class="math inline">\(Y\)</span>, and <span class="math inline">\(S\)</span> are conditional on the occurrences in <span class="math inline">\(X\)</span> and <span class="math inline">\(F\)</span>. Just like the way we calculated the slope <span class="math inline">\(b\)</span> as</p>
+<p><span class="math display">\[
+b = \frac{cov(X,Y)}{var(X)}
+\]</span></p>
+<p>to recognize that there are covariations of <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> relative to the total variation in <span class="math inline">\(X\)</span>, we have</p>
+<p><span class="math display">\[
+Prob(S\,\, given\,\,F) = Prob(S\mid F) = \frac{n(S\cap F) / n(S)}{n(F) / n(S)} = \frac{n(S\cap F)}{n(F)}
+\]</span></p>
+<p>or with numbers from the tabulation we have for gender and smoking status:</p>
+<p><span class="math display">\[
+Prob(S \mid F) = \frac{Prob(S\cap F)}{Prob(F)} = \frac{8.70}{38.04} =  22.87\%
+\]</span></p>
+<p>In the numerator are the number of ways in which smokers, the dependent variable, and females interact (intersect and might even co-vary). In the denominator are the total number of females, the independent variable.</p>
+<p>But…what is <span class="math inline">\(Prob(F \mid S)\)</span>?</p>
+<button onclick="showText(&#39;conditional-F&#39;)">
+show / hide
+</button>
+<div id="conditional-F" style="display:none;">
+<p><br>
+<br></p>
+<p>We flip the logic a bit here. Now females are the dependent variable, and we look to the total number of smokers as the independent variable.</p>
+<p>Again, using the original counts, we get a different result.</p>
+<p><span class="math display">\[
+Prob(F|S) = \frac{Prob(F\cap S)}{Prob(S)} = \frac{8/92}{28/92} =  28.57\%
+\]</span></p>
+</div>
+<p><br></p>
+</div>
+</div>
+<div id="law-of-conditional-probability-bayes" class="section level2">
+<h2><span class="header-section-number">11.5</span> Law of Conditional Probability (Bayes)</h2>
+<p>Our female smokers lead us to a more general approach here. If we know <span class="math inline">\(Prob(B \mid A)\)</span>, can we find <span class="math inline">\(Prob(A \mid B)\)</span>?
+<span class="math display">\[
+Prob(B \mid A) =\frac{Prob(A \cap B)}{Prob(A)} = \frac{Prob(B \cap A)}{Prob(A)}
+\]</span>
+<span class="math display">\[
+Prob(A \cap B) = Prob(B \mid A) Prob(A)
+\]</span>
+<span class="math display">\[
+Prob(A \cap B) = \frac{n(B)}{n(A)} \frac{n(A)}{n(S)} = \frac{n(B)}{n(S)}
+\]</span></p>
+<p>But then we also have</p>
+<p><span class="math display">\[
+Prob(B \cap A) = Prob(A \mid B) Prob(B)
+\]</span>
+<span class="math display">\[
+Prob(B \cap A) = \frac{n(A)}{n(B)} \frac{n(B)}{n(S)} = \frac{n(A)}{n(S)}
+\]</span>
+But from our work on contingency tables we also know that $ Prob(B A) = Prob(A B)$, and this means that</p>
+<p><span class="math display">\[
+Prob(B \cap A) = Prob(A \mid B) Prob(B) = Prob(A \cap B) = Prob(B \mid A) Prob(A)
+\]</span>
+<span class="math display">\[
+Prob(A \mid B) Prob(B) = Prob(B \mid A) Prob(A)
+\]</span>
+<strong>Bayes’ Rule (Theorem)</strong></p>
+<p><span class="math display">\[
+Prob(A \mid B) = \frac{Prob(B \mid A) Prob(A)}{Prob(B)}
+\]</span></p>
+<p>Yes we can is the right answer.</p>
+</div>
+<div id="practice-1" class="section level2">
+<h2><span class="header-section-number">11.6</span> Practice 1</h2>
+<p>Your company keeps detailed records of quality metrics for its manufacturing operations. At the gargleblaster plant in West Adelbrad the morning shift (“M”), 200 gargleblasters are defective (“D”) for every 100,000 produced. For the evening shift (“E”), 500 items are defective per 100,000 produced. In the average 24 hour period 1,000 items are produced by the morning shift and 600 by the evening shift.</p>
+<p>What is the probability that an item picked at random from the average total output produced in the 24 hour period:</p>
+<ol style="list-style-type: decimal">
+<li>Was produced by the morning shift and is defective?</li>
+<li>Was produced by the evening shift and is defective?</li>
+<li>Was produced by the evening shift and is not defective?</li>
+<li>Is defective, whether produced by the evening or the morning shift?</li>
+<li>Is defective and was produced only by the morning shift?</li>
+<li>Is not defective and was produced only by the evening shift?</li>
+</ol>
+<button onclick="showText(&#39;myDIV2&#39;)">
+show / hide
+</button>
+<div id="myDIV2" style="display:none;">
+<p><br></p>
+<p>What is the probability, <span class="math inline">\(Prob()\)</span>, that an item picked at random from the average total produced in the 24 hour period:</p>
+<ol style="list-style-type: decimal">
+<li>Was produced by the morning shift and is defective?</li>
+</ol>
+<p>We are looking for the probability of output that is from “both the morning shift and is defective,” that is, <span class="math inline">\(Prob(M \cap D)\)</span>. This probability is found from the multiplication law of probability which states</p>
+<p><span class="math display">\[
+Prob(M \cap D) = Prob(M) Prob(D \mid M)
+\]</span></p>
+<p>and similarly for <span class="math inline">\(Prob(E \cap D)\)</span>.</p>
+<p>The marginal probabilities of picking an item when produced by the morning shift (“M”) is</p>
+<p><span class="math display">\[
+Prob(M) = \frac{1,000}{1,600} = 0.625
+\]</span></p>
+<p>and by the evening shift (“E”)
+<span class="math display">\[
+Prob(E) = \frac{600}{1,600} = 0.375
+\]</span></p>
+<p>These are marginal probabilities across both defective and not defective items.</p>
+<p>The probability of picking a defective item (“D”) from the morning shift is</p>
+<p><span class="math display">\[
+Prob(D \mid M) = \frac{200}{100,000} = 0.002
+\]</span></p>
+<p>This conditional probability examines the split of defective and not defective items within the sample of morning shift items.</p>
+<p>The conditional probability of picking a defective item from the sample of evening shift output is</p>
+<p><span class="math display">\[
+Prob(D \mid E) = \frac{500}{100,000} = 0.005
+\]</span></p>
+<p>The probability that an item is picked at random from a total of 1,600 items produced during a 24 hour period was produced by the morning shift and is defective is</p>
+<p><span class="math display">\[
+Prob(M \cap D) = Prob(M) Prob(D \mid M) = (0.625)(0.002) = 0.00125
+\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Was produced by the evening shift and is defective?</li>
+</ol>
+<p><span class="math display">\[
+Prob(E \cap D) = Prob(E) Prob(D \mid E) = (0.375)(0.005) = 0.001875
+\]</span></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Was produced by the evening shift and is not defective?</li>
+</ol>
+<p>The conditional probability that given the evening shift output only, the probability of no defects (<span class="math inline">\(\neg\)</span> means “not”) is</p>
+<p><span class="math display">\[
+Prob(\neg D \mid E) = 1 - Prob(D \mid E) = 1 - 0.005 = 0.995
+\]</span></p>
+<p>so we then have</p>
+<p><span class="math display">\[
+Prob(E \cap \neg D) = Prob(E) Prob(\neg D \mid E) = (0.375)(0.995) = 0.373125
+\]</span></p>
+<ol start="4" style="list-style-type: decimal">
+<li>Is defective and produced by the morning or the evening shift?</li>
+</ol>
+<p>The expected number of defective items from the morning shift equals the probability of a defective item from the morning shift times the number of items produced only by the morning shift.</p>
+<p><span class="math display">\[
+Prob(D \mid M)count(M) = (0.002)(1,000) = 2
+\]</span></p>
+<p>defective items.</p>
+<p>From the evening shift we expect</p>
+<p><span class="math display">\[
+Prob(D \mid E)Count(E) = (0.005)(600) = 3
+\]</span></p>
+<p>defective items. Thus we expect <span class="math inline">\(2 + 3 = 5\)</span> defective items to be produced during a 24 hour period.</p>
+<p>If there were to be 5 defective items, then the probability of a random pick of 5 defective items out of a total of 1,600 items is</p>
+<p><span class="math display">\[
+Prob(D) = 5/1,600 = 0.003125
+\]</span></p>
+<ol start="5" style="list-style-type: decimal">
+<li>Is defective and was produced only by the morning shift?</li>
+</ol>
+<p>We are looking for <span class="math inline">\(Prob(M \mid D)\)</span>. We already have <span class="math inline">\(Prob(D \mid M)\)</span>. Here we can use Bayes’ theorem to retrieve <span class="math inline">\(Prob(M \mid D)\)</span>.</p>
+<p>Let’s derive Bayes’ theorem first. We already know that according to the multiplication law of probability we have</p>
+<p><span class="math display">\[
+Prob(D \cap M) = Prob(M)Prob(D \mid M)
+\]</span></p>
+<p>Dividing both sides of this equation by <span class="math inline">\(Prob(M)\)</span>, and rearranging, gives us a formula for conditional probability</p>
+<p><span class="math display">\[
+Prob(D \mid M) = \frac{Prob(D \cap M)}{Prob(M)}
+\]</span></p>
+<p>We also know that <span class="math inline">\(Prob(D \cap M) = Prob(M \cap D)\)</span> from our work on contingency tables. Thus substituting <span class="math inline">\(Prob(M \cap D)\)</span> for <span class="math inline">\(Prob(D \cap M)\)</span> we get</p>
+<p><span class="math display">\[
+Prob(D \mid M) = \frac{Prob(M \cap D)}{Prob(M)} = \frac{Prob(D)Prob(M \mid D)}{Prob(M)}
+\]</span></p>
+<p>Solving for <span class="math inline">\(Prob(M \mid D)\)</span> we finally have Bayes’ theorem</p>
+<p><span class="math display">\[
+Prob(M \mid D) = \frac{Prob(M)Prob(D \mid M)}{Prob(D)}
+\]</span></p>
+<p>For our data, <span class="math inline">\(Prob(M) = 0.625\)</span>, <span class="math inline">\(Prob(D \mid M) = 0.002\)</span>, and <span class="math inline">\(Prob(D) = 0.003125\)</span>, so we have</p>
+<p><span class="math display">\[
+Prob(M \mid D) = \frac{(0.625)(0.002)}{0.003125} = 0.60
+\]</span></p>
+<p>The probability that a defective item picked at random from the total 24 hour output is produced by the morning shift is 60%. This probability expresses the contribution of defective items by the morning shift only.</p>
+<ol start="6" style="list-style-type: decimal">
+<li>Is not defective and was produced only by the evening shift?</li>
+</ol>
+<p>Now we look for <span class="math inline">\(Prob(E \mid \neg D)\)</span>. Using Bayes’ theorem we have</p>
+<p><span class="math display">\[
+Prob(E \mid \neg D) = \frac{Prob(E)Prob(\neg D \mid E)}{Prob(\neg D)}
+\]</span></p>
+<p>For our data, <span class="math inline">\(Prob(E) = 0.375\)</span>, <span class="math inline">\(Prob(\neg D \mid E) = 1 - 0.005 = 0.995\)</span>, and <span class="math inline">\(Prob(\neg D) = 1- 0.003125 = 0.996875\)</span>, so we have</p>
+<p><span class="math display">\[
+Prob(E \mid \neg D) = \frac{(0.375)(0.995)}{0.996875} = 0.3742947
+\]</span></p>
+</div>
+<p><br></p>
+<p>The probability that there are no defective items picked at random from the total 24 hour output when produced by the evening shift is 37.43%. This probability expresses the contribution of not defective items by the evening shift only.</p>
+</div>
+<div id="practice-2" class="section level2">
+<h2><span class="header-section-number">11.7</span> Practice 2</h2>
+<p>The marketing department of a everyday-low-price retailer is attempting to optimize marketing promotions. The department analysts estimate that approximately 1 in 50 potential buyers of a product will see the ad after hearing about the ad from a friend, and 1 in 5 sees a corresponding ad on the internet. One in 100 potential buyers will either hear about the ad or see it on the internet. One in 3 actually purchases the product after seeing the ad, while 1 in 10 without seeing it.</p>
+<ul>
+<li>What is the probability that a randomly selected potential customer will purchase the product?</li>
+</ul>
+<button onclick="showText(&#39;myDIV3&#39;)">
+show / hide
+</button>
+<div id="myDIV3" style="display:none;">
+<p><br></p>
+<p>Define the following events:</p>
+<ul>
+<li>A: buyer hears about the ad from a friend (“word of mouth”)</li>
+<li>B: buyer sees only the internet ad</li>
+<li>C: buyer purchases the product</li>
+</ul>
+<ol style="list-style-type: decimal">
+<li>What is the probability that the buyer hears about the ad through word of mouth?</li>
+</ol>
+<p><span class="math display">\[
+Prob(A) = \frac{1}{50} = 0.02
+\]</span></p>
+<ol start="2" style="list-style-type: decimal">
+<li>What is the probability that the buyer sees only the internet ad?</li>
+</ol>
+<p><span class="math display">\[
+Prob(B) = \frac{1}{5} = 0.20
+\]</span></p>
+<ol start="3" style="list-style-type: decimal">
+<li>What is the probability that a buyer knows about the ad?</li>
+</ol>
+<p><span class="math display">\[
+Prob(A \cap B) = \frac{1}{100} = 0.01
+\]</span></p>
+<ol start="4" style="list-style-type: decimal">
+<li>What is the probability that a buyer hears about the ad and sees it on the internet?</li>
+</ol>
+<p><span class="math display">\[
+Prob(A \cup B) = Prob(A) + Prob(B) - Prob(A \cap B) = 0.02 + 0.20 - 0.01 = 0.21
+\]</span></p>
+<ol start="5" style="list-style-type: decimal">
+<li>What is the probability that buyer does not see or does not hear about an ad?</li>
+</ol>
+<p><span class="math display">\[
+Prob(\neg A \cup \neg B) = 1 - Prob(A \cup B) = 1 - Prob(A \cup B) = 1 - 0.21 = 0.79
+\]</span></p>
+<ol start="6" style="list-style-type: decimal">
+<li>What is the probability that a buyer will purchase after knowing about the ad?</li>
+</ol>
+<p><span class="math display">\[
+Prob(C \mid (A \cup B)) = \frac{1}{3} = 0.33
+\]</span></p>
+<ol start="7" style="list-style-type: decimal">
+<li>What is the probability that a buyer will purchase without knowing about the ad?</li>
+</ol>
+<p><span class="math display">\[
+Prob(C \mid (\neg A \cup \neg B)) = \frac{1}{10} = 0.1
+\]</span></p>
+<ol start="8" style="list-style-type: decimal">
+<li>Finally, we get to answer the question: What is the probability that a buyer will purchase the item?</li>
+</ol>
+<ul>
+<li>There are two ways the buyer would purchase the item. One way is through the ad channel, so that the probability of buying is composed of the probability that a buyer hears about the ad and sees it on the internet <em>and</em> the probability that a buyer will purchase after knowing about the ad. Here <span class="math inline">\(Ads = (A \cup B)\)</span>, so that</li>
+</ul>
+<p><span class="math display">\[
+Prob(Buying \cap Ads) = Prob(A \cup B)Prob(C \mid (A \cup B)) = (0.21)(0.33) = 0.0693
+\]</span></p>
+<ul>
+<li>The second channel is without knowledge of ads. The probability of buying is composed of the probability that a buyer does not hear about the ad and does not see it on the internet <em>and</em> the probability that a buyer will still purchase after not knowing about the ad. Here <span class="math inline">\(\neg Ads = (\neg A \cup \neg B)\)</span> so that</li>
+</ul>
+<p><span class="math display">\[
+Prob(Buying \cap \neg Ads) = Prob(\neg A \cup \neg B)Prob(C \mid (\neg A \cup \neg B)) = (0.79)(0.10) = 0.0790
+\]</span></p>
+<ul>
+<li>Combining the two channels we have</li>
+</ul>
+<p><span class="math display">\[Prob(Buying) = 0.0693 + 0.0790 = 0.1483\]</span></p>
+<p>The probability that a randomly picked customer buys the product is 14.83%.</p>
+</div>
+<p><br></p>
+</div>
+<div id="nothing-is-random" class="section level2">
+<h2><span class="header-section-number">11.8</span> Nothing is random!</h2>
+<p>Well not quite as many outcomes are simply uncertain, and at least indiscriminately appearing before us.</p>
+<p>Suppose we there’s a 20% chance of rain: will it rain? it might (rain = 1, with probability 0-20%) it might not (rain = 0, with probability 80%)</p>
+<p>Rain as defined here is a so-called <em>random variable</em>. Any random variable (really a functional mapping) is a set of possible outcomes, each of which is assigned a probability of occurrence.</p>
+<ul>
+<li><p>a number of outcomes {1, 0}</p></li>
+<li><p>each outcome assigned a probability {20%, 80%}</p></li>
+</ul>
+<div id="suppose-20-of-the-people-in-a-city-prefer-pepsi-cola-as-their-soft-drink-of-choice." class="section level3">
+<h3><span class="header-section-number">11.8.1</span> Suppose 20% of the people in a city prefer Pepsi-Cola as their soft drink of choice.</h3>
+<ol style="list-style-type: decimal">
+<li>If a random sample of six people is chosen, the number of Pepsi drinkers could range from?</li>
+</ol>
+<button onclick="showText(&#39;myDIV4&#39;)">
+show / hide
+</button>
+<div id="myDIV4" style="display:none;">
+<p><br></p>
+<p>zero to six</p>
+</div>
+<p><br></p>
+<p>Shown here are the possible numbers of Pepsi drinkers in a sample of six people and the probability of that number of Pepsi drinkers occurring in the sample.</p>
+<table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+Drinkers
+</th>
+<th style="text-align:right;">
+Probability
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.262
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.393
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+0.246
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+0.082
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+0.015
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+0.002
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+0.000
+</td>
+</tr>
+</tbody>
+</table>
+<ol start="2" style="list-style-type: decimal">
+<li>Is there a random variable in our midst?</li>
+</ol>
+<button onclick="showText(&#39;myDIV5&#39;)">
+show / hide
+</button>
+<div id="myDIV5" style="display:none;">
+<p><br></p>
+<p>YES!</p>
+<p>Let <span class="math inline">\(D\)</span> equal the number of drinkers from zero to six. Each outcome has a probability of occurrence associated with the outcome.</p>
+<p>We have outcomes mapped to probabilities and thus we have a random variable.</p>
+<p>Actually we have a binomial process at work here: 6 drinkers taken from 0 to 6 at a time when there is a 20% probability of finding a Pepsi-Cola (YUCK!) drinker.</p>
+</div>
+<p><br></p>
+<ol start="3" style="list-style-type: decimal">
+<li>Is this a discrete or a continuous random variable?</li>
+</ol>
+<button onclick="showText(&#39;myDIV6&#39;)">
+show / hide
+</button>
+<div id="myDIV6" style="display:none;">
+<p><br></p>
+<p>It is discrete: a set of integers describes the outcomes. There is no number allowed here between any two of these outcomes. Why? It is simply nonsensical to have 1/3 of a drinker. Add a drinker to the mythical 1/3 drinker and you have a just as mythical 1 and 2/3 drinker, and so on.</p>
+<p>If we allowed parts of drinkers, then maybe we would have a continuous random variable.</p>
+</div>
+<p><br></p>
+<ol start="4" style="list-style-type: decimal">
+<li>What is the probability that 2 or more drinkers are Pepsi-cola drinkers?</li>
+</ol>
+<button onclick="showText(&#39;myDIV7&#39;)">
+show / hide
+</button>
+<div id="myDIV7" style="display:none;">
+<p><br></p>
+<p>First, the probability of either 0 or 1 drinker: <span class="math inline">\(Prob(D &lt; 2) = 0.655\)</span></p>
+<p>Second, the probability of 2 or more drinkers: <span class="math inline">\(Prob(D \geq 2) = 1 - Prob(D &lt; 2) = 1 - 0.655 = 0.345\)</span></p>
+</div>
+<p><br></p>
+<ol start="4" style="list-style-type: decimal">
+<li>What is the mean and standard deviation of the random variable drinkers of Pepsi, which we will call <span class="math inline">\(D\)</span>?</li>
+</ol>
+<button onclick="showText(&#39;myDIV8&#39;)">
+show / hide
+</button>
+<div id="myDIV8" style="display:none;">
+<p><br></p>
+<p>See this worksheet:</p>
+<table class="table table-striped table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Index
+</th>
+<th style="text-align:left;">
+Drinkers
+</th>
+<th style="text-align:left;">
+Probability
+</th>
+<th style="text-align:left;">
+Expected Outcome
+</th>
+<th style="text-align:left;">
+Expected Deviation Squared
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+<span class="math inline">\(i\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(D_i\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(P(D_i)\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(P(D_i) D_i\)</span>
+</td>
+<td style="text-align:left;">
+<span class="math inline">\(P(D_i) ( D_i - \mu)^2\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0.262
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0.377
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+0.393
+</td>
+<td style="text-align:left;">
+0.393
+</td>
+<td style="text-align:left;">
+0.016
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:left;">
+0.246
+</td>
+<td style="text-align:left;">
+0.492
+</td>
+<td style="text-align:left;">
+0.157
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+0.082
+</td>
+<td style="text-align:left;">
+0.246
+</td>
+<td style="text-align:left;">
+0.266
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:left;">
+0.015
+</td>
+<td style="text-align:left;">
+0.061
+</td>
+<td style="text-align:left;">
+0.118
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:left;">
+0.002
+</td>
+<td style="text-align:left;">
+0.008
+</td>
+<td style="text-align:left;">
+0.029
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0
+</td>
+<td style="text-align:left;">
+0.000
+</td>
+</tr>
+</tbody>
+</table>
+<p>where</p>
+<p><span class="math inline">\(\mu = 1.2\)</span>, <span class="math inline">\(\sigma = \sqrt{variance} = 0.9813\)</span></p>
+</div>
+<p><br></p>
+
+<script>
+function showText(y) {
+    var x = document.getElementById(y);
+    if (x.style.display === "none") {
+        x.style.display = "block";
+    } else {
+        x.style.display = "none";
+    }
+}
+</script>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="poisson-distribution.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="confidence-intervals.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["book-stat-thinking.pdf", "book-stat-thinking.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
