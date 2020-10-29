@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 14 Multiple Linear Regression | Statistical Thinking</title>
+  <title>Chapter 16 Normal Distribution and More | Statistical Thinking</title>
   <meta name="description" content="Statistical reasoning from an elementary point of view" />
   <meta name="generator" content="bookdown 0.19 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 14 Multiple Linear Regression | Statistical Thinking" />
+  <meta property="og:title" content="Chapter 16 Normal Distribution and More | Statistical Thinking" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="wgfoote/book-stat-thinking" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 14 Multiple Linear Regression | Statistical Thinking" />
+  <meta name="twitter:title" content="Chapter 16 Normal Distribution and More | Statistical Thinking" />
   
   <meta name="twitter:description" content="Statistical reasoning from an elementary point of view" />
   
@@ -31,16 +31,16 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="simple-linear-regression.html"/>
-<link rel="next" href="binary-regression.html"/>
-<script src="libs/jquery/jquery.min.js"></script>
-<link href="libs/gitbook/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook/css/plugin-clipboard.css" rel="stylesheet" />
+<link rel="prev" href="binary-regression.html"/>
+<link rel="next" href="quantile-regression.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
 
 
 
@@ -50,21 +50,6 @@
 
 
 
-<script src="libs/htmlwidgets/htmlwidgets.js"></script>
-<link href="libs/vis/vis.css" rel="stylesheet" />
-<script src="libs/vis/vis.min.js"></script>
-<script src="libs/visNetwork-binding/visNetwork.js"></script>
-<link href="libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-<script src="libs/kePrint/kePrint.js"></script>
-<script src="libs/plotly-binding/plotly.js"></script>
-<script src="libs/typedarray/typedarray.min.js"></script>
-<link href="libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
-<script src="libs/crosstalk/js/crosstalk.min.js"></script>
-<link href="libs/plotly-htmlwidgets-css/plotly-htmlwidgets.css" rel="stylesheet" />
-<script src="libs/plotly-main/plotly-latest.min.js"></script>
-<script src="libs/viz/viz.js"></script>
-<link href="libs/DiagrammeR-styles/styles.css" rel="stylesheet" />
-<script src="libs/grViz-binding/grViz.js"></script>
 
 
 <style type="text/css">
@@ -130,6 +115,7 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<link rel="stylesheet" href="css\style.css" type="text/css" />
 </head>
 
 <body>
@@ -142,6 +128,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
+<li><a href="./">Statistical Thinking</a></li>
+
+<li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Preliminaries</a><ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#the-basic-problem"><i class="fa fa-check"></i><b>1.1</b> The basic problem</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#analytics"><i class="fa fa-check"></i><b>1.2</b> Analytics</a></li>
@@ -388,40 +377,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15.6" data-path="binary-regression.html"><a href="binary-regression.html#a-deposit"><i class="fa fa-check"></i><b>15.6</b> A deposit</a></li>
 <li class="chapter" data-level="15.7" data-path="binary-regression.html"><a href="binary-regression.html#references-1"><i class="fa fa-check"></i><b>15.7</b> References</a></li>
 </ul></li>
-<li class="chapter" data-level="16" data-path="quantile-regression.html"><a href="quantile-regression.html"><i class="fa fa-check"></i><b>16</b> Quantile regression</a><ul>
-<li class="chapter" data-level="16.1" data-path="quantile-regression.html"><a href="quantile-regression.html#what-is-it"><i class="fa fa-check"></i><b>16.1</b> What is it?</a></li>
-<li class="chapter" data-level="16.2" data-path="quantile-regression.html"><a href="quantile-regression.html#an-example"><i class="fa fa-check"></i><b>16.2</b> An example</a></li>
-<li class="chapter" data-level="16.3" data-path="quantile-regression.html"><a href="quantile-regression.html#even-in-ggplot2"><i class="fa fa-check"></i><b>16.3</b> Even in ggplot2</a></li>
-<li class="chapter" data-level="16.4" data-path="quantile-regression.html"><a href="quantile-regression.html#interpretations"><i class="fa fa-check"></i><b>16.4</b> Interpretations</a></li>
-<li class="chapter" data-level="16.5" data-path="quantile-regression.html"><a href="quantile-regression.html#exercises-3"><i class="fa fa-check"></i><b>16.5</b> Exercises</a><ul>
-<li class="chapter" data-level="16.5.1" data-path="quantile-regression.html"><a href="quantile-regression.html#us-house-of-representatives-seats-and-unemployment-1"><i class="fa fa-check"></i><b>16.5.1</b> US House of Representatives seats and unemployment</a></li>
-<li class="chapter" data-level="16.5.2" data-path="quantile-regression.html"><a href="quantile-regression.html#peruvian-anchovies-1"><i class="fa fa-check"></i><b>16.5.2</b> Peruvian anchovies</a></li>
-<li class="chapter" data-level="16.5.3" data-path="quantile-regression.html"><a href="quantile-regression.html#bronx-corn-1"><i class="fa fa-check"></i><b>16.5.3</b> Bronx corn</a></li>
-<li class="chapter" data-level="16.5.4" data-path="quantile-regression.html"><a href="quantile-regression.html#consumption-and-disposable-income-1"><i class="fa fa-check"></i><b>16.5.4</b> Consumption and disposable income</a></li>
+<li class="chapter" data-level="16" data-path="normal-distribution-and-more-1.html"><a href="normal-distribution-and-more-1.html"><i class="fa fa-check"></i><b>16</b> Normal Distribution and More</a><ul>
+<li class="chapter" data-level="16.1" data-path="normal-distribution-and-more-1.html"><a href="normal-distribution-and-more-1.html#the-most-uninformative-distribution-1"><i class="fa fa-check"></i><b>16.1</b> The most uninformative distribution</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="normal-distribution-and-more-1.html"><a href="normal-distribution-and-more-1.html#how-informative-1"><i class="fa fa-check"></i><b>16.1.1</b> How informative?</a></li>
 </ul></li>
-<li class="chapter" data-level="16.6" data-path="quantile-regression.html"><a href="quantile-regression.html#references-2"><i class="fa fa-check"></i><b>16.6</b> References</a></li>
+<li class="chapter" data-level="16.2" data-path="normal-distribution-and-more-1.html"><a href="normal-distribution-and-more-1.html#what-is-normal-1"><i class="fa fa-check"></i><b>16.2</b> What is normal?</a><ul>
+<li class="chapter" data-level="16.2.1" data-path="normal-distribution-and-more-1.html"><a href="normal-distribution-and-more-1.html#how-can-we-check-this-1"><i class="fa fa-check"></i><b>16.2.1</b> How can we check this?</a></li>
+<li class="chapter" data-level="16.2.2" data-path="normal-distribution-and-more-1.html"><a href="normal-distribution-and-more-1.html#lets-investigate-1"><i class="fa fa-check"></i><b>16.2.2</b> Let’s investigate</a></li>
+<li class="chapter" data-level="16.2.3" data-path="normal-distribution-and-more-1.html"><a href="normal-distribution-and-more-1.html#now-try-this-1"><i class="fa fa-check"></i><b>16.2.3</b> Now try this</a></li>
 </ul></li>
-<li class="chapter" data-level="17" data-path="time-series-analysis.html"><a href="time-series-analysis.html"><i class="fa fa-check"></i><b>17</b> Time Series Analysis</a><ul>
-<li class="chapter" data-level="17.1" data-path="time-series-analysis.html"><a href="time-series-analysis.html#preliminaries-1"><i class="fa fa-check"></i><b>17.1</b> Preliminaries</a></li>
-<li class="chapter" data-level="17.2" data-path="time-series-analysis.html"><a href="time-series-analysis.html#where-do-we-start"><i class="fa fa-check"></i><b>17.2</b> Where do we start?</a></li>
-<li class="chapter" data-level="17.3" data-path="time-series-analysis.html"><a href="time-series-analysis.html#autoregressive-processes"><i class="fa fa-check"></i><b>17.3</b> Autoregressive processes</a></li>
-<li class="chapter" data-level="17.4" data-path="time-series-analysis.html"><a href="time-series-analysis.html#moving-average-processes"><i class="fa fa-check"></i><b>17.4</b> Moving average processes</a></li>
-<li class="chapter" data-level="17.5" data-path="time-series-analysis.html"><a href="time-series-analysis.html#takeaways"><i class="fa fa-check"></i><b>17.5</b> Takeaways</a></li>
-<li class="chapter" data-level="17.6" data-path="time-series-analysis.html"><a href="time-series-analysis.html#references-3"><i class="fa fa-check"></i><b>17.6</b> References</a></li>
+<li class="chapter" data-level="16.3" data-path="normal-distribution-and-more-1.html"><a href="normal-distribution-and-more-1.html#standard-normal-too-1"><i class="fa fa-check"></i><b>16.3</b> Standard normal too</a></li>
+<li class="chapter" data-level="16.4" data-path="normal-distribution-and-more-1.html"><a href="normal-distribution-and-more-1.html#where-do-normal-outcomes-come-from-1"><i class="fa fa-check"></i><b>16.4</b> Where do normal outcomes come from?</a></li>
 </ul></li>
-<li class="chapter" data-level="18" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html"><i class="fa fa-check"></i><b>18</b> Bootstrapping Estimates</a><ul>
-<li class="chapter" data-level="18.1" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#imagine"><i class="fa fa-check"></i><b>18.1</b> Imagine</a></li>
-<li class="chapter" data-level="18.2" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#tools"><i class="fa fa-check"></i><b>18.2</b> Tools</a></li>
-<li class="chapter" data-level="18.3" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#d-p-q-runif"><i class="fa fa-check"></i><b>18.3</b> <code>[d p q r]unif</code></a></li>
-<li class="chapter" data-level="18.4" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#permutations-with-sample"><i class="fa fa-check"></i><b>18.4</b> Permutations with <code>sample()</code></a></li>
-<li class="chapter" data-level="18.5" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#resampling-with-sample"><i class="fa fa-check"></i><b>18.5</b> Resampling with <code>sample()</code></a></li>
-<li class="chapter" data-level="18.6" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#expected-shortfall-test"><i class="fa fa-check"></i><b>18.6</b> Expected shortfall test</a></li>
+<li class="chapter" data-level="17" data-path="quantile-regression.html"><a href="quantile-regression.html"><i class="fa fa-check"></i><b>17</b> Quantile regression</a><ul>
+<li class="chapter" data-level="17.1" data-path="quantile-regression.html"><a href="quantile-regression.html#what-is-it"><i class="fa fa-check"></i><b>17.1</b> What is it?</a></li>
+<li class="chapter" data-level="17.2" data-path="quantile-regression.html"><a href="quantile-regression.html#an-example"><i class="fa fa-check"></i><b>17.2</b> An example</a></li>
+<li class="chapter" data-level="17.3" data-path="quantile-regression.html"><a href="quantile-regression.html#even-in-ggplot2"><i class="fa fa-check"></i><b>17.3</b> Even in ggplot2</a></li>
+<li class="chapter" data-level="17.4" data-path="quantile-regression.html"><a href="quantile-regression.html#interpretations"><i class="fa fa-check"></i><b>17.4</b> Interpretations</a></li>
+<li class="chapter" data-level="17.5" data-path="quantile-regression.html"><a href="quantile-regression.html#exercises-3"><i class="fa fa-check"></i><b>17.5</b> Exercises</a><ul>
+<li class="chapter" data-level="17.5.1" data-path="quantile-regression.html"><a href="quantile-regression.html#us-house-of-representatives-seats-and-unemployment-1"><i class="fa fa-check"></i><b>17.5.1</b> US House of Representatives seats and unemployment</a></li>
+<li class="chapter" data-level="17.5.2" data-path="quantile-regression.html"><a href="quantile-regression.html#peruvian-anchovies-1"><i class="fa fa-check"></i><b>17.5.2</b> Peruvian anchovies</a></li>
+<li class="chapter" data-level="17.5.3" data-path="quantile-regression.html"><a href="quantile-regression.html#bronx-corn-1"><i class="fa fa-check"></i><b>17.5.3</b> Bronx corn</a></li>
+<li class="chapter" data-level="17.5.4" data-path="quantile-regression.html"><a href="quantile-regression.html#consumption-and-disposable-income-1"><i class="fa fa-check"></i><b>17.5.4</b> Consumption and disposable income</a></li>
 </ul></li>
-<li class="chapter" data-level="19" data-path="text-mining.html"><a href="text-mining.html"><i class="fa fa-check"></i><b>19</b> Text Mining</a><ul>
-<li class="chapter" data-level="19.1" data-path="text-mining.html"><a href="text-mining.html#miners49ers"><i class="fa fa-check"></i><b>19.1</b> Miners…49ers</a></li>
-<li class="chapter" data-level="19.2" data-path="text-mining.html"><a href="text-mining.html#imagine-this-4"><i class="fa fa-check"></i><b>19.2</b> Imagine this</a></li>
-<li class="chapter" data-level="19.3" data-path="text-mining.html"><a href="text-mining.html#the-corpus"><i class="fa fa-check"></i><b>19.3</b> The Corpus</a></li>
+<li class="chapter" data-level="17.6" data-path="quantile-regression.html"><a href="quantile-regression.html#references-2"><i class="fa fa-check"></i><b>17.6</b> References</a></li>
 </ul></li>
+<li class="chapter" data-level="18" data-path="time-series-analysis.html"><a href="time-series-analysis.html"><i class="fa fa-check"></i><b>18</b> Time Series Analysis</a><ul>
+<li class="chapter" data-level="18.1" data-path="time-series-analysis.html"><a href="time-series-analysis.html#preliminaries-1"><i class="fa fa-check"></i><b>18.1</b> Preliminaries</a></li>
+<li class="chapter" data-level="18.2" data-path="time-series-analysis.html"><a href="time-series-analysis.html#where-do-we-start"><i class="fa fa-check"></i><b>18.2</b> Where do we start?</a></li>
+<li class="chapter" data-level="18.3" data-path="time-series-analysis.html"><a href="time-series-analysis.html#autoregressive-processes"><i class="fa fa-check"></i><b>18.3</b> Autoregressive processes</a></li>
+<li class="chapter" data-level="18.4" data-path="time-series-analysis.html"><a href="time-series-analysis.html#moving-average-processes"><i class="fa fa-check"></i><b>18.4</b> Moving average processes</a></li>
+<li class="chapter" data-level="18.5" data-path="time-series-analysis.html"><a href="time-series-analysis.html#takeaways"><i class="fa fa-check"></i><b>18.5</b> Takeaways</a></li>
+<li class="chapter" data-level="18.6" data-path="time-series-analysis.html"><a href="time-series-analysis.html#references-3"><i class="fa fa-check"></i><b>18.6</b> References</a></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html"><i class="fa fa-check"></i><b>19</b> Bootstrapping Estimates</a><ul>
+<li class="chapter" data-level="19.1" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#imagine"><i class="fa fa-check"></i><b>19.1</b> Imagine</a></li>
+<li class="chapter" data-level="19.2" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#tools"><i class="fa fa-check"></i><b>19.2</b> Tools</a></li>
+<li class="chapter" data-level="19.3" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#d-p-q-runif"><i class="fa fa-check"></i><b>19.3</b> <code>[d p q r]unif</code></a></li>
+<li class="chapter" data-level="19.4" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#permutations-with-sample"><i class="fa fa-check"></i><b>19.4</b> Permutations with <code>sample()</code></a></li>
+<li class="chapter" data-level="19.5" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#resampling-with-sample"><i class="fa fa-check"></i><b>19.5</b> Resampling with <code>sample()</code></a></li>
+<li class="chapter" data-level="19.6" data-path="bootstrapping-estimates.html"><a href="bootstrapping-estimates.html#expected-shortfall-test"><i class="fa fa-check"></i><b>19.6</b> Expected shortfall test</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="text-mining.html"><a href="text-mining.html"><i class="fa fa-check"></i><b>20</b> Text Mining</a><ul>
+<li class="chapter" data-level="20.1" data-path="text-mining.html"><a href="text-mining.html#miners49ers"><i class="fa fa-check"></i><b>20.1</b> Miners…49ers</a></li>
+<li class="chapter" data-level="20.2" data-path="text-mining.html"><a href="text-mining.html#imagine-this-4"><i class="fa fa-check"></i><b>20.2</b> Imagine this</a></li>
+<li class="chapter" data-level="20.3" data-path="text-mining.html"><a href="text-mining.html#the-corpus"><i class="fa fa-check"></i><b>20.3</b> The Corpus</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://bookdown.org" target="blank">Published with bookdown</a></li>
+
 </ul>
 
       </nav>
@@ -439,397 +443,281 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="multiple-linear-regression" class="section level1">
-<h1><span class="header-section-number">Chapter 14</span> Multiple Linear Regression</h1>
-<div id="the-more-perfect-relationship" class="section level2">
-<h2><span class="header-section-number">14.1</span> The more perfect relationship</h2>
-</div>
-<div id="arrays-and-you" class="section level2">
-<h2><span class="header-section-number">14.2</span> Arrays and You</h2>
-<p>Arrays have rows and columns and are akin to tables. All of Excel’s worksheets are organized into cells that are tables with columns and rows. Data frames are more akin to tables in data bases. Here are some simple matrix arrays and functions. We start by making a mistake:</p>
-<pre><code>##      [,1] [,2] [,3] [,4]
-## [1,]    1    4    7   10
-## [2,]    2    5    8   11
-## [3,]    3    6    9    1</code></pre>
-<p>The <code>matrix()</code> function takes as input here the sequence of numbers from 1 to 11. It then tries to put these 11 elements into a 4 column array with 3 rows. It is missing a number as the error points out. To make a 4 column array out of 11 numbers it needs a twelth number to complete the third row. We then type in these statements</p>
-<pre><code>##      [,1] [,2] [,3] [,4]
-## [1,]    1    4    7   10
-## [2,]    2    5    8   11
-## [3,]    3    6    9   12</code></pre>
-<pre><code>##      [,1] [,2] [,3] [,4]
-## [1,]    1    4    7   10
-## [2,]    2    5    8   11
-## [3,]    3    6    9   12</code></pre>
-<p>In <code>A</code> we take 12 integers in a row and specify they be organized into 4 columns, and in <code>R</code> this is by row. In the next statement we see that <code>A.col</code> and column binding <code>cbind()</code> are equivalent.</p>
-<pre><code>##      [,1] [,2] [,3] [,4]
-## [1,]    1    2    3    4
-## [2,]    5    6    7    8
-## [3,]    9   10   11   12</code></pre>
-<pre><code>##      [,1] [,2] [,3] [,4]
-## [1,]    1    4    7   10
-## [2,]    2    5    8   11
-## [3,]    3    6    9   12</code></pre>
-<pre><code>##      [,1] [,2] [,3] [,4]
-## [1,] TRUE TRUE TRUE TRUE
-## [2,] TRUE TRUE TRUE TRUE
-## [3,] TRUE TRUE TRUE TRUE</code></pre>
-<p>Using the <code>outer</code> product allows us to operate on matrix elements, first picking the minimum, then the maximum of each row. The <code>pmin</code> and <code>pmax</code> compare rows element by element. If you used <code>min</code> and <code>max</code> you would get the minimum and maximum of the whole matrix.</p>
-<pre><code>##      [,1] [,2] [,3] [,4]
-## [1,] 0.75 0.75 0.75 0.75
-## [2,] 0.75 1.00 1.00 1.00
-## [3,] 0.75 1.00 1.25 1.25
-## [4,] 0.75 1.00 1.25 1.50</code></pre>
-<pre><code>##      [,1] [,2] [,3] [,4]
-## [1,] 0.75 1.00 1.25  1.5
-## [2,] 1.00 1.00 1.25  1.5
-## [3,] 1.25 1.25 1.25  1.5
-## [4,] 1.50 1.50 1.50  1.5</code></pre>
-<p>We build a symmetrical matrix and replace the diagonal with 1. <code>A.sym</code> looks like a correlation matrix. Here all we were doing is playing with shaping data.</p>
-<pre><code>##       [,1]  [,2]  [,3]  [,4]
-## [1,] -0.50 -0.25  0.00  0.25
-## [2,] -0.25 -0.50 -0.25  0.00
-## [3,]  0.00 -0.25 -0.50 -0.25
-## [4,]  0.25  0.00 -0.25 -0.50</code></pre>
-<pre><code>##       [,1]  [,2]  [,3]  [,4]
-## [1,]  1.00 -0.25  0.00  0.25
-## [2,] -0.25  1.00 -0.25  0.00
-## [3,]  0.00 -0.25  1.00 -0.25
-## [4,]  0.25  0.00 -0.25  1.00</code></pre>
-<div id="running-a-regression" class="section level3">
-<h3><span class="header-section-number">14.2.1</span> Running a regression</h3>
-<p>The <code>inner</code> product <code>%*%</code> cross-multiplies successive elements of a row with the successive elements of a column. If there are two rows with 5 columns, there must be a matrix at least with 1 column that has 5 rows in it.</p>
-<p>Let’s run these statements.</p>
-<p><img src="book-stat-thinking_files/figure-html/unnamed-chunk-77-1.png" width="672" /><img src="book-stat-thinking_files/figure-html/unnamed-chunk-77-2.png" width="672" /></p>
-<p><code>rgamma</code> allows us to generate <code>n.sim</code> versions of the gamma distribution with scale parameter <code>0.5</code> and shape parameter <code>0.2</code>. <code>rlnorm</code> is a popular financial return distribution with mean <code>0.15</code> and standard deviation <code>0.25</code>. We can call up <code>??distributions</code> to get detailed information. Let’s plot the histograms of each simulated random variate using <code>hist()</code>.</p>
-<p>The <code>cbind</code> function binds into matrix columns the row arrays <code>x.1</code> and <code>x.2</code>. These might be simulations of operational and financial losses. The <code>X</code> matrix could look like the “design” matrix for a regression.</p>
-<p>Let’s simulate a response vector, say equity, and call it <code>y</code> and look at its histogram.</p>
-<p>Now we have a model for <span class="math inline">\(y\)</span>:</p>
+<div id="normal-distribution-and-more-1" class="section level1">
+<h1><span class="header-section-number">Chapter 16</span> Normal Distribution and More</h1>
+<div id="the-most-uninformative-distribution-1" class="section level2">
+<h2><span class="header-section-number">16.1</span> The most uninformative distribution</h2>
+<p>Suppose we have no idea about the shape of the distribution of our stock portfolio. We do know that the value of the portfolio can range from $10,000 to $15,000 in a 52 week period. What is mean and standard deviation you can expect in this situation?</p>
+<p>We use the uniform distribution to model our diffuse beliefs. For this problem <span class="math inline">\(a = 10^{4}\)</span>, <span class="math inline">\(b = 1.5\times 10^{4}\)</span>. The population mean of the uniform distribution is</p>
 <p><span class="math display">\[
-y = X \beta + \varepsilon
+\mu = \frac{(a+b)}{2} = \frac{10^{4} + 1.5\times 10^{4}}{2} = 1.25\times 10^{4}
 \]</span></p>
-<p>where <span class="math inline">\(y\)</span> is a 100 <span class="math inline">\(\times\)</span> 1 (rows <span class="math inline">\(\times\)</span> columns) vector, <span class="math inline">\(X\)</span> is a 100 <span class="math inline">\(\times\)</span> 2 matrix, <span class="math inline">\(\beta\)</span> is a 2 <span class="math inline">\(\times\)</span> 1 vector, and <span class="math inline">\(\epsilon\)</span> is a 100 <span class="math inline">\(\times\)</span> 1 vector of disturbances (a.k.a., “errors”).</p>
-<p>Multiplying out the matrix term <span class="math inline">\(X \beta\)</span> we have</p>
+<p>The population standard deviation is</p>
 <p><span class="math display">\[
-y = \beta_1 x_1 + \beta_2 x_2 + \varepsilon
+\sigma = \frac{(b-a)}{\sqrt{12}} = \frac{(1.5\times 10^{4} - 10^{4})}{3.4641016} = 1443.375673
 \]</span></p>
-<p>where <span class="math inline">\(y\)</span>, <span class="math inline">\(x_1\)</span>, <span class="math inline">\(x_2\)</span>, and <span class="math inline">\(\varepsilon\)</span> are all vectors with 100 rows for simulated observations.</p>
-<p>If we look for <span class="math inline">\(\beta\)</span> to minimize the sum of squared <span class="math inline">\(\varepsilon\)</span> we would find that the solution is</p>
+<p>Why?</p>
+<button onclick="showText(&#39;uniform&#39;)">
+show / hide
+</button>
+<div id="uniform" style="display:none;">
+<p><br>
+We start with the probability distribution function of the uniform distribution.</p>
 <p><span class="math display">\[
-\hat{\beta} = (X^T X)^{-1} X^{T} y.
-\]</span></p>
-<p>Where <span class="math inline">\(\hat{\beta}\)</span> is read as “beta hat”.</p>
-<p>The result <span class="math inline">\(y\)</span> with its <code>hist()</code> is</p>
-<p><img src="book-stat-thinking_files/figure-html/unnamed-chunk-79-1.png" width="672" /></p>
-<p>The rubber meets the road here as we compute <span class="math inline">\(\hat{\beta}\)</span>.</p>
-<pre><code>##     [,1]
-## x.1 1.87
-## x.2 3.03</code></pre>
-<p>The <code>beta.hat</code> coefficients are much different than our model for <code>y</code>. Why? Because of the innovation, error, disturbance term <code>rnorm(n.sim, 1, 2)</code> we added to the <code>1.5*x.1  + 0.8 * x.2</code> terms.</p>
-<p>Now for the estimated <span class="math inline">\(\varepsilon\)</span> where we use the matrix inner product <code>%*%</code>. We need to be sure to <em>pre</em>-multiply <code>beta.hat</code> with <code>X</code>!</p>
-<p><img src="book-stat-thinking_files/figure-html/unnamed-chunk-82-1.png" width="672" /></p>
-<p>We see that the “residuals” are almost centered at <code>0</code>.</p>
-</div>
-<div id="more-about-residuals" class="section level3">
-<h3><span class="header-section-number">14.2.2</span> More about residuals</h3>
-<p>For no charge at all let’s calculate the sum of squared errors in matrix talk, along with the number of obervations <code>n</code> and degrees of freedom <code>n - k</code>, all to get the standard error of the regression <code>e.se</code>. Mathematically we are computing</p>
+\begin{equation}
+f(x) =
+\begin{cases}
+\frac{1}{b-a}, &amp; a \le x \le b \\
+0, &amp; \text{otherwise}
+\end{cases}
+\end{equation}
+\]</span>
+where <span class="math inline">\(x\)</span> is a number between <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>, <span class="math inline">\(a \le x \le b\)</span>. This equation states simply that in an experiment, say call some brokers, there is an <span class="math inline">\(f(x)\)</span> probability of getting a value <span class="math inline">\(x\)</span>. The <span class="math inline">\(f(x\)</span> are all the same and constant. This is about as uninformative a distribution as we can imagine.</p>
+<p>What is the expected value? It is just the weighted average of <span class="math inline">\(x\)</span> from <span class="math inline">\(x=a\)</span> to <span class="math inline">\(x=b\)</span> where the weights are all given by <span class="math inline">\(f(x)\)</span>. Since <span class="math inline">\(x\)</span> is on the real line, we use the integral to calculate the weighted average. We should expect the answer to be the simple average of <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>.</p>
 <p><span class="math display">\[
-\sigma_{\varepsilon} = \sqrt{\sum_{i=1}^N \frac{\varepsilon_i^2}{n-k}}
+\begin{align}
+  \mu &amp;= \int_a^b xf(x)dx \\
+      &amp;= \int_a^b x \left(\frac{1}{b-a}\right) dx \\
+      &amp;= \left(\frac{1}{b-a}\right) \int_a^b x\, dx \\
+      &amp;= \left(\frac{1}{b-a}\right) \left. \frac{x^2}{2} \right|_{x=a}^{x=b} \\
+      &amp;= \left(\frac{1}{b-a}\right)\left( \frac{b^2 - a^2}{2}\right) \\
+      &amp;= \frac{a+b}{2}
+\end{align}
 \]</span></p>
-<pre><code>##      [,1]
-## [1,] 2354</code></pre>
-<pre><code>## [1] 100</code></pre>
-<pre><code>## [1] 2</code></pre>
-<pre><code>##      [,1]
-## [1,]  4.9</code></pre>
-<p>The statement <code>dim(X)[1]</code> returns the first of two dimensions of the matrix <code>X</code>.</p>
-<p>Finally, again for no charge at all, lets load library <code>psych</code> (use <code>install.packages("psych")</code> as needed). We will use <code>pairs.panels()</code> for a pretty picture of our work in this try out. First column bind <code>cbind()</code> the <code>y</code>, <code>X</code>, and <code>e</code> arrays to create a data frame for <code>pairs.panel()</code>.</p>
-<p>We then invoke the <code>pairs.panels()</code> function using the <code>all</code> array we just created. The result is a scatterplot matrix with histograms of each variate down the diagonal. The lower triangle of the matrix is populated with scatterplots. The upper triangle of the matrix has correlations depicted with increasing font sizes for higher correlations.
-<img src="book-stat-thinking_files/figure-html/unnamed-chunk-85-1.png" width="672" />
-We will use this tool again and again to explore the multivariate relationships among our data.</p>
+<p>We used the division of <span class="math inline">\(b^2-a^2\)</span> by <span class="math inline">\(b-a\)</span> to get <span class="math inline">\(b+a\)</span>, for <span class="math inline">\((b-a)(b+a)=b^2-a^2\)</span>. The result aligns with our intuition.</p>
+<p>How about the variance and standard deviation. We use the result that the variance is</p>
+<p><span class="math display">\[
+E(x-\mu)^2 = E(x^2) - \mu^2
+\]</span>
+Here the <span class="math inline">\(E(y)\)</span> is the expectation of <span class="math inline">\(y\)</span>, that is the weighted average computed in the same way as we did for <span class="math inline">\(\mu\)</span>. Intuitively this measure should most likely include the range of the distribution, that is, <span class="math inline">\(b-a\)</span>. In fact we can show that the standard deviation is</p>
+<p><span class="math display">\[
+\sigma = \frac{b-a}{\sqrt{12}}
+\]</span>
+So it is the range scaled by <span class="math inline">\(\sqrt{12}\)</span>. Where on earth did 12 come from?</p>
+<p><span class="math display">\[
+\begin{align}
+  E(x^2) &amp;= \int_a^b x^2f(x)dx \\
+      &amp;= \int_a^b x^2 \left(\frac{1}{b-a}\right) dx \\
+      &amp;= \left(\frac{1}{b-a}\right) \int_a^b x^2\, dx \\
+      &amp;= \left(\frac{1}{b-a}\right) \left. \frac{x^3}{3} \right|_{x=a}^{x=b} \\
+      &amp;= \left(\frac{1}{b-a}\right)\left( \frac{b^3 - a^3}{3}\right) \\
+\end{align}
+\]</span>
+We then combine this result with <span class="math inline">\(\mu^2\)</span> use our cleverness in combining and simplifying polynomials.</p>
+<p><span class="math display">\[
+\begin{align}
+  Var(x) =\sigma^2 &amp;= E(x^2) - [E(x)]^2 \\
+      &amp;= \left(\frac{1}{b-a}\right)\left( \frac{b^3 - a^3}{3}\right) - \frac{(b+a)^2}{4} \\
+      &amp;= \left(\frac{1}{b-a}\right)\left[\frac{4b^3 - 4a^3}{12} - \frac{3(b-a)(b+a)^2}{12}\right] \\
+      &amp;=\frac{(b-a)^2}{12}
+\end{align}
+\]</span></p>
+</div>
+<p><br></p>
+<div id="how-informative-1" class="section level3">
+<h3><span class="header-section-number">16.1.1</span> How informative?</h3>
 </div>
 </div>
-<div id="more-array-work" class="section level2">
-<h2><span class="header-section-number">14.3</span> More Array Work</h2>
-<p>We show off some more array operations in the following statements.</p>
-<pre><code>## [1] 4</code></pre>
-<pre><code>## [1] 4</code></pre>
-<pre><code>## [1] 4 4</code></pre>
-<p>We calculate the number of rows and columns first. We then see that these exactly correspond to the two element vector produced by <code>dim</code>. Next we enter these statements into the console.</p>
-<pre><code>## [1] 3.00 3.75 4.25 4.50</code></pre>
-<pre><code>## [1] 3.00 3.75 4.25 4.50</code></pre>
-<pre><code>## [1] 3.00 3.75 4.25 4.50</code></pre>
-<pre><code>## [1] 3.00 3.75 4.25 4.50</code></pre>
-<p>We also calculate the sums of each row and each column. Alternatively we can use the <code>apply</code> function on the first dimension (rows) and then on the second dimension (columns) of the matrix. Some matrix multiplications follow below.</p>
-<pre><code>##       [,1]  [,2]  [,3]  [,4]
-## [1,] 0.750 0.750 0.812 0.875
-## [2,] 0.375 0.562 0.500 0.500
-## [3,] 0.375 0.500 0.688 0.625
-## [4,] 0.750 0.938 1.125 1.375</code></pre>
-<p>Starting from the inner circle of embedded parentheses we pull every row (the <code>[,col]</code> piece) for columns from the first to the second dimension of the <code>dim()</code> of <code>A.min</code>. We then transpose (row for column) the elements of <code>A.min</code> and cross left multiply in an inner product this transposed matrix with <code>A.sym</code>.</p>
-<p>We have already deployed very useful matrix operation, the inverse. The <code>R</code> function <code>solve()</code> provides the answer to the question: what two matrices, when multiplied by one another, produces the identity matrix? The identity matrix is a matrix of all ones down the diagonal and zeros elsewhere.</p>
-<pre><code>##                       [,1]  [,2]  [,3]  [,4]
-## [1,]  4.952380952380952550 -3.05 -1.14 -1.52
-## [2,] -2.285714285714285587  6.86 -2.29  0.00
-## [3,]  0.000000000000000127 -2.29  6.86 -2.29
-## [4,] -1.142857142857143016 -1.14 -3.43  3.43</code></pre>
-<p>Now we use our inverse with the original matrix we inverted.</p>
-<pre><code>##                      [,1]                  [,2]
-## [1,] 0.999999999999999778  0.000000000000000000
-## [2,] 0.000000000000000222  1.000000000000000222
-## [3,] 0.000000000000000111  0.000000000000000111
-## [4,] 0.000000000000000222 -0.000000000000000444
-##                       [,3]                 [,4]
-## [1,]  0.000000000000000000 0.000000000000000000
-## [2,]  0.000000000000000000 0.000000000000000000
-## [3,]  1.000000000000000000 0.000000000000000444
-## [4,] -0.000000000000000888 1.000000000000000000</code></pre>
+<div id="what-is-normal-1" class="section level2">
+<h2><span class="header-section-number">16.2</span> What is normal?</h2>
+<p>Let’s draw <span class="math inline">\(X_i\)</span> from <span class="math inline">\(1\)</span> to <span class="math inline">\(n\)</span> successes independently from a population where <span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span> are known, then we would discover that the standardized average</p>
+<p><span class="math display">\[
+\frac{\bar{x} - \mu}{\sigma / \sqrt{n}}
+\]</span></p>
+<p>is asymptotically normal with mean 0 and variance 1 (often called normal(0,1)).</p>
+<ul>
+<li><p>This can be interpreted as the idea that we sample enough <span class="math inline">\(X_i\)</span> and <span class="math inline">\(n\)</span> is large enough the average is approximately normal with mean <span class="math inline">\(\mu\)</span> and standard deviation <span class="math inline">\(\sigma / \sqrt{n}\)</span>.</p></li>
+<li><p>This result is also known as the <em>Central Limit Theorem</em> (CLT), a cornerstone of classical statistics.</p></li>
+<li><p>What we will call <strong>normal</strong> is often also called <strong>Gaussian</strong>.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> We will mean a symmetric distribution with <em>mesokurtic</em> “tailedness”, or kurtosis of 3. This implies there are not too many rare outcomes in the tails of the distribution. Using the measure of kurtosis will also mean that there is a defineable (finite) variance. Symmetry means that skewness equals to zero.</p></li>
+</ul>
+<div id="how-can-we-check-this-1" class="section level3">
+<h3><span class="header-section-number">16.2.1</span> How can we check this?</h3>
+<p>Simulation is an excellent way. Now we get our feet good and wet and our hands dirty (always remembering to wash them frequently for 20 seconds or more with soap and water).</p>
+<p>Let’s take the most uninformative distributiom we know, the uniform distribution. Using the example we started this journey with, let’s now call 5 stock brokers for their views on the value of our stock portfolio. We recall that the minimum value is <span class="math inline">\(a=\)</span> $10^{4} and the maximum value is <span class="math inline">\(b=\)</span> $1.510^{4}. Also let’s call them all 1000 times. Of course they might get annoyed with us, but let’s just charge ahead.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">a &lt;-<span class="st"> </span><span class="dv">10000</span> ; b &lt;-<span class="st"> </span><span class="dv">15000</span> ; n &lt;-<span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb1-2" title="2">mu &lt;-<span class="st"> </span>(a <span class="op">+</span><span class="st"> </span>b) <span class="op">/</span><span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb1-3" title="3">sig &lt;-<span class="st"> </span>(b <span class="op">-</span><span class="st"> </span>a) <span class="op">/</span><span class="st"> </span><span class="dv">12</span><span class="op">^</span><span class="fl">0.5</span></a>
+<a class="sourceLine" id="cb1-4" title="4">s_xbar &lt;-<span class="st"> </span>sig <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(n)</a></code></pre></div>
+<p>If your are working in Microsoft Excel you can made good use of the <code>=RANDBETWEEN()</code> function.<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
+<p>Let’s first do this for the binomial distribution, the CLT translates into saying that if <span class="math inline">\(x_n\)</span> are binomial distribution outcomes with parameters <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span> then</p>
+<p><span class="math display">\[
+z = \frac{x_n - np}{\sqrt{np(1-p)}}
+\]</span></p>
+<p>then the standardized <span class="math inline">\(x\)</span>, called <span class="math inline">\(z\)</span>, is approximately <code>Normal(0,1)</code>.</p>
 </div>
-<div id="exercising-the-model" class="section level2">
-<h2><span class="header-section-number">14.4</span> Exercising the model</h2>
-<div id="exercise-1-housing-market-determinants" class="section level3">
-<h3><span class="header-section-number">14.4.1</span> Exercise 1: housing market determinants</h3>
+<div id="lets-investigate-1" class="section level3">
+<h3><span class="header-section-number">16.2.2</span> Let’s investigate</h3>
+<ul>
+<li><p>Create binomial random numbers in Excel using <code>BINOM.INV(n, p, RAND())</code>.</p></li>
+<li><p><code>RAND()</code> is the randomly generated cumulative probability of a successful binomial outcome.</p></li>
+<li><p>Start with just a few trials: <span class="math inline">\(n = 10\)</span> and <span class="math inline">\(p = 0.20\)</span>.</p></li>
+<li><p>Then generate in 1000 separate cells</p></li>
+</ul>
+<p><img src="book-stat-thinking_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Almost bell-shaped. A little lop-sided too… Here are some statistics on our experimental runs.</p>
+<pre><code>## Loading required package: moments</code></pre>
+<pre><code>## Loading required package: knitr</code></pre>
+<pre><code>## Warning: package &#39;knitr&#39; was built under R version 3.6.3</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">mean</th>
+<th align="right">std_dev</th>
+<th align="right">median</th>
+<th align="right">skewness</th>
+<th align="right">kurtosis</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0.0467</td>
+<td align="right">1.0255</td>
+<td align="right">-0.3651</td>
+<td align="right">0.3073</td>
+<td align="right">2.8085</td>
+</tr>
+</tbody>
+</table>
+<p>Almost a “normal” <em>mesokurtotic</em> result of 3.0. A small skewness indicating a little asymmetry.</p>
 </div>
-<div id="exercise-2-risk-driver-model-using-regression-analysis" class="section level3">
-<h3><span class="header-section-number">14.4.2</span> Exercise 2: risk driver model using regression analysis</h3>
-<div id="problem" class="section level4">
-<h4><span class="header-section-number">14.4.2.1</span> Problem</h4>
-<p>We work for a healthcare insurer and our management is interested in understanding the relationship between input admission and outpatient rates as drivers of expenses, payroll, and employment. We gathered a sample of 200 hospitals in a test market in this data set.</p>
+<div id="now-try-this-1" class="section level3">
+<h3><span class="header-section-number">16.2.3</span> Now try this</h3>
+<ul>
+<li><p>Use a lot more than a few trials: <span class="math inline">\(n = 1000\)</span> and <span class="math inline">\(p = 0.20\)</span>.</p></li>
+<li><p>Then generate in 1000 separate cells</p></li>
+</ul>
+<p><img src="book-stat-thinking_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Much more symmetric. Here are some summary statistics.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="right">mean</th>
+<th align="right">std_dev</th>
+<th align="right">median</th>
+<th align="right">skewness</th>
+<th align="right">kurtosis</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0.049</td>
+<td align="right">1.0152</td>
+<td align="right">0.073</td>
+<td align="right">0.0108</td>
+<td align="right">2.9315</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><p>Slightly negatively skewed tail we can eyeball, but very small.</p></li>
+<li><p>Mean is near zero, and median not far from zero too.</p></li>
+<li><p>Standard deviation is nearly 1.</p></li>
+<li><p>Kurtosis is almost on that magic normal mesokurtic number of 3.0.</p></li>
+</ul>
 </div>
-<div id="questions" class="section level4">
-<h4><span class="header-section-number">14.4.2.2</span> Questions</h4>
+</div>
+<div id="standard-normal-too-1" class="section level2">
+<h2><span class="header-section-number">16.3</span> Standard normal too</h2>
+<p>Here is a standard normal distribution, <span class="math inline">\(\mu = 0\)</span>, and <span class="math inline">\(\sigma = 1\)</span>. This is a distribution centered on 0. How is this like the calculated <span class="math inline">\(z\)</span>-score?</p>
+<button onclick="showText(&#39;myDIV1&#39;)">
+show / hide
+</button>
+<div id="myDIV1" style="display:none;">
+<p>We can center any distribution’s outcomes <span class="math inline">\(x\)</span> around zero by simply calculating the deviation of the outcome from the mean of all outcomes. Then, we can standardize the deviations by dividing the deviations by the standard deviation of outcomes. The result is a mean of zero and a standard deviation of 1.</p>
+<p><span class="math display">\[
+z = \frac{x - \mu}{\sigma}
+\]</span>
+In a spread sheet generate 10 outcomes sampled from the uniform distribution drawn from the unit interval <span class="math inline">\((0,1)\)</span>. You can do this by oopening up a fresh new workbook in Excel.</p>
 <ol style="list-style-type: decimal">
-<li>Build a table that explores this data set variable by variable and relationships among variables.</li>
+<li>Put your cursor on cell B3 and type <span class="math inline">\(=rand()\)</span>. Copy and paste this cell down another 9 rows. Label this column <code>x</code>.</li>
+<li>Calculate the mean and standard deviation three columns to the right in cells D3 and D4.</li>
+<li>In column C next to the random outcomes calculate the z score using a formula like <span class="math inline">\(=(B3 - \$D\$3)/\$D\$4\)</span>.</li>
+<li>Copy and paste this cell down next to the outcomes column. Label this new column <code>z</code>.</li>
+<li>Next calculate the mean and standard deviation of the ‘z’ random variable samples.</li>
+<li>Every time you change something on the spread sheet new random numbers are sampled. But what does not change?</li>
 </ol>
-<pre><code>##   hospital beds admissions outpatients births expense
-## 1        1  210       7713       86982    312   56831
-## 2        2  347      16065      149222   1077  127223
-## 3        3  511      23028      222565   1027  157093
-## 4        4  142       4338       36710    355   24462
-## 5        5   40        905       13350    168   13730
-## 6        6  220      15563       88721   3810   93257
-##   payroll  fte
-## 1   22061  792
-## 2   55799 1762
-## 3   61326 2310
-## 4   10503  328
-## 5    6368  181
-## 6   33920 1077</code></pre>
-<pre><code>##     hospital beds admissions outpatients births
-## 195      195   70       2089       24369    387
-## 196      196  334      15696      102641   1946
-## 197      197  190       6395      244254    545
-## 198      198  122        441           0      0
-## 199      199  170       7244      167454    838
-## 200      200   73        352        9714     51
-##     expense payroll  fte
-## 195   17257    7425  216
-## 196  168045   78118 1593
-## 197   79859   33639 1055
-## 198   15321    8878  399
-## 199   58247   25018  834
-## 200    4565    2228  104</code></pre>
-<pre><code>##     hospital          beds        admissions   
-##  Min.   :  1.0   Min.   :   7   Min.   :  111  
-##  1st Qu.: 50.8   1st Qu.:  84   1st Qu.: 1615  
-##  Median :100.5   Median : 160   Median : 4777  
-##  Mean   :100.5   Mean   : 210   Mean   : 6832  
-##  3rd Qu.:150.2   3rd Qu.: 270   3rd Qu.: 9766  
-##  Max.   :200.0   Max.   :1297   Max.   :37375  
-##   outpatients         births        expense      
-##  Min.   :     0   Min.   :   0   Min.   :  2082  
-##  1st Qu.: 27316   1st Qu.:   0   1st Qu.: 20544  
-##  Median : 65329   Median : 480   Median : 43364  
-##  Mean   : 98225   Mean   : 874   Mean   : 67140  
-##  3rd Qu.:123263   3rd Qu.:1309   3rd Qu.: 89898  
-##  Max.   :813369   Max.   :5699   Max.   :367706  
-##     payroll            fte      
-##  Min.   :  1053   Min.   :  50  
-##  1st Qu.:  8693   1st Qu.: 314  
-##  Median : 20740   Median : 590  
-##  Mean   : 30501   Mean   : 862  
-##  3rd Qu.: 40275   3rd Qu.:1095  
-##  Max.   :188865   Max.   :4087</code></pre>
-<p><img src="book-stat-thinking_files/figure-html/unnamed-chunk-92-1.png" width="672" /></p>
-<ol start="2" style="list-style-type: decimal">
-<li>Investigate the influence of admission and outpatient rates on expenses and payroll. First, form these arrays.</li>
-</ol>
-<pre><code>## [1]  56831 127223 157093  24462  13730  93257</code></pre>
-<pre><code>##      1 admissions outpatients
-## [1,] 1       7713       86982
-## [2,] 1      16065      149222
-## [3,] 1      23028      222565
-## [4,] 1       4338       36710
-## [5,] 1        905       13350
-## [6,] 1      15563       88721</code></pre>
-<p>Next, compute the regression coefficients.</p>
-<pre><code>##                  [,1]
-## 1           -118.9178
-## admissions     8.6995
-## outpatients    0.0797</code></pre>
-<p>Finally, compute the regression statistics.</p>
-<pre><code>##              [,1]
-## [1,] 171528065201</code></pre>
-<pre><code>## [1] 200</code></pre>
-<pre><code>## [1] 3</code></pre>
-<pre><code>##       [,1]
-## [1,] 29508</code></pre>
-<ol start="3" style="list-style-type: decimal">
-<li>Use this code to investigate further the relationship among predicted expenses and the drivers, admissions and outpatients.</li>
-</ol>
-<p><img src="book-stat-thinking_files/figure-html/unnamed-chunk-96-1.png" width="672" /></p>
 </div>
-</div>
-<div id="exercise-3-commercial-loan-projection-using-regression" class="section level3">
-<h3><span class="header-section-number">14.4.3</span> Exercise 3: commercial loan projection using regression</h3>
-<div id="purpose-and-problem" class="section level4">
-<h4><span class="header-section-number">14.4.3.1</span> Purpose and problem</h4>
-<p>This project will allow us to practice various <code>R</code> features using live data to support a decision regarding the provision of captive financing to customers at the beginning of this chapter. We will focus on translating regression statistics into <code>R</code>, plotting results, and interpreting ordinary least squares regression outcomes.</p>
-<p>As we researched how to provide captive financing and insurance for our customers we found that we needed to understand the relationships among lending rates and various terms and conditions of typical equipment financing contracts.</p>
-<p>We will focus on one question:</p>
-<blockquote>
-<p><em>What is the influence of terms and conditions on the lending rate of fully committed commercial loans with maturities greater than one year?</em></p>
-</blockquote>
-<p>The data set <code>commloan.csv</code> contains data from the St. Louis Federal Reserve Bank’s <a href="https://fred.stlouisfed.org/categories/32407">FRED</a> website we will use to get some high level insights. The quarterly data extends from the first quarter of 2003 to the second quarter of 2016 and aggregates a survey administered by the St. Louis Fed. There are several time series included. Each is by the time that pricing terms Were set and by commitment, with maturities more than 365 Days from a survey of all commercial banks. Here are the definitions.</p>
+<p>Here is a graph of the z-score you generated above.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">gnorm</span>(<span class="dv">0</span>,<span class="dv">1</span>, <span class="dt">a =</span> <span class="dv">-2</span>, <span class="dt">b =</span> <span class="dv">2</span>, <span class="dt">calcProb =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="book-stat-thinking_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>What is the interpretation of the <span class="math inline">\(-2\)</span> and <span class="math inline">\(+2\)</span></p>
+<button onclick="showText(&#39;myDIV2&#39;)">
+show / hide
+</button>
+<div id="myDIV2" style="display:none;">
+<p>These are z-scores which measure the number of standard deviations an outcome is from zero.</p>
 <ul>
-<li><p>rate: weighted-average effective loan rate in per cent per annum</p>
-<ul>
-<li><p>prepay: per cent of value of loans subject to prepayment penalty per annum</p></li>
-<li><p>maturity: weighted-average maturity/repricing interval in days</p></li>
-<li><p>size: average loan size in thousands USD</p></li>
-<li><p>volume: total value of loans in millions USD</p></li>
-</ul></li>
+<li><p>Minus 2 means the outcome is 2 standard deviations below the mean.</p></li>
+<li><p>Plus 2 means the outcome is 2 standard deviations above the mean.</p></li>
 </ul>
 </div>
+<p>What is probability that an outcome is not 2 standard deviations from the mean?</p>
+<button onclick="showText(&#39;myDIV3&#39;)">
+show / hide
+</button>
+<div id="myDIV3" style="display:none;">
+<p>From the graph, the probability that either <span class="math inline">\(z &gt; 2\)</span> or <span class="math inline">\(z &lt; -2\)</span> is the probability of the union of these two events.</p>
+<p><span class="math display">\[
+Pr[(z &lt; -2) \cup (z &gt; 2)] = Pr(z&lt;-2) + Pr(z&gt;2) = 0.0228 + 0.0228 = 0.0456
+\]</span></p>
 </div>
-<div id="work-flow" class="section level3">
-<h3><span class="header-section-number">14.4.4</span> Work Flow</h3>
+</div>
+<div id="where-do-normal-outcomes-come-from-1" class="section level2">
+<h2><span class="header-section-number">16.4</span> Where do normal outcomes come from?</h2>
+<p>Is anything normal? Normal distributions very naturally come from a very interesting source: sums and averages of random samples of any set of outcomes.</p>
+<p>Suppose we think that the number of students out of a random sample of 15 students from course sections (classes) that voted in last year’s election is 1.2 students/year-class. Lets sample this intensity using the Poisson distribution with <span class="math inline">\(\lambda = 1.2\)</span> 10,000 times. When we do this, we calculate the sums, averages, and variances of each and every of the 10,000 samples. Then we plot. Here’s the result.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">clt_sim</span>(<span class="dv">15</span>,<span class="dt">source=</span><span class="st">&quot;P&quot;</span>,<span class="dt">param1=</span><span class="fl">1.89</span>)</a></code></pre></div>
+<p><img src="book-stat-thinking_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>What do we notice?</p>
+<button onclick="showText(&#39;myDIV4&#39;)">
+show / hide
+</button>
+<div id="myDIV4" style="display:none;">
 <ol style="list-style-type: decimal">
-<li>Prepare the data.</li>
+<li>The original distribution of students is heavily skewed to the right. This is a poisson distribution, that if we interpret as a binomial means that the proportion of voting students is</li>
 </ol>
-<ul>
-<li><p>Visit the <a href="https://fred.stlouisfed.org/categories/32407">FRED</a> website. Include any information on the site to enhance the interpretation of results.</p></li>
-<li><p>Use <code>read.csv</code> to read the data into <code>R</code>. Be sure to set the project’s working directory where the data directory resides. Use <code>na.omit()</code> to clean the data.</p></li>
-<li><p>Assign the data to a variable called <code>x.data</code>. Examine the first and last 5 entries. Run a <code>summary</code> of the data set.</p></li>
-</ul>
-<pre><code>##        date prepaypenalty maturity rate size volume
-## 1  4/1/2003          16.5      124 3.77  449  11406
-## 2  7/1/2003          18.1       70 3.09  356  14586
-## 3 10/1/2003          44.9       48 2.83  532  21022
-## 4  1/1/2004          30.4       87 3.06  602  21472
-## 5  4/1/2004          23.5       68 2.97  600  22359
-## 6  7/1/2004          20.0       80 3.36  593  23780</code></pre>
-<pre><code>##         date prepaypenalty maturity rate size volume
-## 49  4/1/2015          17.8       65 2.47 1151  24620
-## 50  7/1/2015          16.9       76 2.30 1405  30586
-## 51 10/1/2015          11.7       77 2.31 1534  36840
-## 52  1/1/2016          13.6       66 2.43 1317  36316
-## 53  4/1/2016          20.6       93 2.63 1227  24803
-## 54  7/1/2016          14.5       66 2.41 1460  40682</code></pre>
-<pre><code>##        date    prepaypenalty     maturity  
-##  1/1/2004: 1   Min.   : 8.8   Min.   : 40  
-##  1/1/2005: 1   1st Qu.:16.9   1st Qu.: 68  
-##  1/1/2006: 1   Median :20.7   Median : 89  
-##  1/1/2007: 1   Mean   :23.1   Mean   : 95  
-##  1/1/2008: 1   3rd Qu.:29.9   3rd Qu.:112  
-##  1/1/2009: 1   Max.   :51.9   Max.   :396  
-##  (Other) :48                               
-##       rate           size          volume     
-##  Min.   :2.24   Min.   : 356   Min.   :11406  
-##  1st Qu.:2.48   1st Qu.: 640   1st Qu.:15451  
-##  Median :2.83   Median : 824   Median :18670  
-##  Mean   :3.65   Mean   : 882   Mean   :20824  
-##  3rd Qu.:4.20   3rd Qu.:1018   3rd Qu.:24258  
-##  Max.   :7.41   Max.   :1715   Max.   :40682  
-## </code></pre>
-<ul>
-<li>What anomalies appear based on these procedures?</li>
-</ul>
-<ol start="2" style="list-style-type: decimal">
-<li>Explore the data.</li>
-</ol>
-<ul>
-<li>Let’s plot the time series data using this code:</li>
-</ul>
-<p><img src="book-stat-thinking_files/figure-html/unnamed-chunk-99-1.png" width="672" /></p>
-<ul>
-<li><p>Describe the data frame that <code>melt()</code> produces.</p></li>
-<li><p>Let’s load the <code>psych</code> library and produce a scatterplot matrix. Interpret this exploration.
-<img src="book-stat-thinking_files/figure-html/unnamed-chunk-100-1.png" width="672" /></p></li>
-</ul>
+<p><span class="math display">\[
+p = \frac{\lambda}{n} = \frac{1.2}{15} = 0.08
+\]</span>
+2. The sum and the means of each random sample seem to be symmetrical and with a nice, calm kurtosis (maybe a kurtosis = 3.0). In fact this distribution is the normal distribution.</p>
 <ol start="3" style="list-style-type: decimal">
-<li>Analyze the data.</li>
+<li>The distribution of the variance of outcomes is skewed to the right. This distribution is the chi-squared distribution.</li>
 </ol>
-<ul>
-<li>Let’s regress <code>rate</code> on the rest of the variables in <code>x.data</code>. To do this we form a matrix of independent variables (predictor or explanatory variables) in the matrix <code>X</code> and a separate vector <code>y</code> for the dependent (response) variable <code>rate</code>. We recall that the <code>1</code> vector will produce a constant intercept in the regression model.</li>
-</ul>
-<pre><code>## [1] 3.77 3.09 2.83 3.06 2.97 3.36</code></pre>
-<pre><code>##   1 prepaypenalty maturity size volume
-## 1 1          16.5      124  449  11406
-## 2 1          18.1       70  356  14586
-## 3 1          44.9       48  532  21022
-## 4 1          30.4       87  602  21472
-## 5 1          23.5       68  600  22359
-## 6 1          20.0       80  593  23780</code></pre>
-<ul>
-<li><p>Explain the code used to form <code>y</code> and <code>X</code>.</p></li>
-<li><p>Calculate the <span class="math inline">\(\hat{\beta}\)</span> coefficients and interpret their meaning.</p></li>
-</ul>
-<pre><code>##                     [,1]
-## 1              7.7714381
-## prepaypenalty -0.0696900
-## maturity       0.0064000
-## size          -0.0020414
-## volume        -0.0000635</code></pre>
-<ul>
-<li>Calculate actual and predicted <code>rates</code> and plot using this code.</li>
-</ul>
-<p><img src="book-stat-thinking_files/figure-html/unnamed-chunk-103-1.png" width="672" /></p>
-<ul>
-<li><p>Insert explanatory comments into the code chunk to document the work flow for this plot.</p></li>
-<li><p>Interpret the graphs of actual and residual versus predicted values of <code>rate</code>.</p></li>
-<li><p>Calculate the standard error of the residuals, Interpret its meaning.</p></li>
-</ul>
-<pre><code>##      [,1]
-## [1,] 88.6</code></pre>
-<pre><code>## [1] 54</code></pre>
-<pre><code>## [1] 5</code></pre>
-<pre><code>##      [,1]
-## [1,] 1.34</code></pre>
-<ol start="4" style="list-style-type: decimal">
-<li>Interpret and present results.</li>
-</ol>
-<ul>
-<li><p>We will produce an <code>R Markdown</code> document with code chunks to document and interpret our results.</p></li>
-<li><p>The format will introduce the problem to be analyzed, with sections that discuss the data to be used, and which follow the work flow we have defined.</p></li>
-</ul>
+</div>
 
 </div>
 </div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Carl Friedrich Gauss.<a href="normal-distribution-and-more-1.html#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>We can look this up (here)[<a href="https://support.microsoft.com/en-us/office/randbetween-function-4cc7f0d1-87dc-4eb7-987f-a469ab381685" class="uri">https://support.microsoft.com/en-us/office/randbetween-function-4cc7f0d1-87dc-4eb7-987f-a469ab381685</a>] and, with more examples, (here)[<a href="https://www.educba.com/randbetween-in-excel/" class="uri">https://www.educba.com/randbetween-in-excel/</a>].<a href="normal-distribution-and-more-1.html#fnref2" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="simple-linear-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="binary-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="binary-regression.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="quantile-regression.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
-<script src="libs/gitbook/js/app.min.js"></script>
-<script src="libs/gitbook/js/lunr.js"></script>
-<script src="libs/gitbook/js/clipboard.min.js"></script>
-<script src="libs/gitbook/js/plugin-search.js"></script>
-<script src="libs/gitbook/js/plugin-sharing.js"></script>
-<script src="libs/gitbook/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook/js/jquery.highlight.js"></script>
-<script src="libs/gitbook/js/plugin-clipboard.js"></script>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
-"github": false,
-"facebook": true,
+"github": true,
+"facebook": false,
 "twitter": true,
 "linkedin": false,
 "weibo": false,
@@ -843,8 +731,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": null,
-"text": null
+"link": "https://github.com/yihui/bookdown-crc/edit/master/15-normal.Rmd",
+"text": "Edit"
 },
 "history": {
 "link": null,
@@ -854,9 +742,9 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["book-stat-thinking.pdf", "book-stat-thinking.epub"],
 "toc": {
-"collapse": "subsection"
+"collapse": "none"
 }
 });
 });
